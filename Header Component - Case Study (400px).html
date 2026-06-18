@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Header Component — Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:#F2F1EC;}
+  ::selection{background:#E5443B;color:#fff;}
+  @keyframes shimmer{0%{background-position:-300px 0}100%{background-position:300px 0}}
+  @keyframes floatIn{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pulseRing{0%{box-shadow:0 0 0 0 rgba(229,68,59,.45)}70%{box-shadow:0 0 0 12px rgba(229,68,59,0)}100%{box-shadow:0 0 0 0 rgba(229,68,59,0)}}
+  @keyframes dash{to{stroke-dashoffset:0}}
+  .calloutChip{animation:floatIn .6s cubic-bezier(.2,.7,.2,1) both;}
+</style>
+<template id="__bundler_thumbnail" data-bg-color="#16140F"><svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect x="150" y="250" width="900" height="300" rx="28" fill="#ffffff"/><rect x="200" y="300" width="150" height="36" rx="12" fill="#E7E3F4"/><circle cx="218" cy="400" r="15" fill="#2E9E4F"/><rect x="250" y="384" width="430" height="34" rx="8" fill="#15243B"/><rect x="200" y="460" width="120" height="40" rx="10" fill="#DCE2F4"/></svg></template>
+</head>
+<body style="margin:0;background:#F2F1EC;overflow-x:hidden;">
+<div id="__stage" style="width:1180px;transform-origin:top left;">
+<div style="background:#F2F1EC;color:#16140F;font-family:'Schibsted Grotesk',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;width:1180px;min-height:0;">
+
+  <!-- TOP META BAR -->
+  <div style="max-width:1180px;margin:0 auto;padding:22px 32px 0;display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8A877E;">
+    <span>UX / UI &nbsp;·&nbsp; Component Case Study</span>
+    <span>TIBCO Platform &nbsp;·&nbsp; Application Header</span>
+  </div>
+
+  <!-- ============ 00 · HERO ============ -->
+  <header style="max-width:1180px;margin:0 auto;padding:60px 32px 56px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#E5443B;margin-bottom:26px;">00 · THE COMPONENT</div>
+    <h1 style="font-size:58px;line-height:1.0;letter-spacing:-0.035em;font-weight:800;margin:0;max-width:14ch;text-wrap:balance;">One header. Every interaction.</h1>
+    <p style="font-size:18px;line-height:1.55;color:#46443D;max-width:600px;margin:28px 0 0;">A deep dive into the TIBCO application header: its anatomy, its states, and every interaction a user can reach. Everything below is the <strong style="font-weight:600;color:#16140F;">real, shipping component</strong>, embedded live.</p>
+
+    <div style="margin-top:46px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:#8A877E;margin-bottom:12px;">LIVE COMPONENT · TRY THE INFO / LESS TOGGLE ↓</div>
+      <div style="border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 30px 70px -34px rgba(16,24,40,.4),0 2px 6px rgba(16,24,40,.05);border:1px solid #E6E3DB;">
+        <iframe title="TIBCO application header" scrolling="no" title="TIBCO application header (live)" style="display:block;width:100%;height:262px;border:0;background:#fff;" srcdoc="<!DOCTYPE html><html><head><style>
+    .sc-placeholder{background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:rgba(0,0,0,.7);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:rgba(0,0,0,.5);background:rgba(0,0,0,.05);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      section, article, figure, table { break-inside: avoid; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  </style>
+<meta charset=&quot;utf-8&quot;>
+<meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;>
+
+<style>x-dc{display:none!important}</style><style></style><style data-dc-tpl=&quot;1&quot;>
+@font-face {
+  font-family: 'primeicons';
+  font-display: block;
+  src: url(&quot;&quot;) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+.pi { font-family: 'primeicons'; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1; display: inline-block; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.pi:before { backface-visibility: hidden; }
+
+@keyframes hdrDropIn { from { opacity: 0; transform: translateY(-10px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes hdrPop { 0% { opacity: 0; transform: scale(.4); } 55% { opacity: 1; transform: scale(1.18); } 100% { transform: scale(1); } }
+@keyframes hdrInfoIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hdrFadeIn { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hdrPulse { 0% { box-shadow: 0 0 0 0 rgba(39,174,96,.5); } 70% { box-shadow: 0 0 0 7px rgba(39,174,96,0); } 100% { box-shadow: 0 0 0 0 rgba(39,174,96,0); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; } }
+*{box-sizing:border-box;}html,body{margin:0;padding:0;}
+</style></head>
+<body>
+
+<div id=&quot;dc-root&quot;><div class=&quot;sc-host&quot; data-sc-name=&quot;tibco-header&quot;><div style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Helvetica, Arial, sans-serif; color: rgb(51, 65, 85); background: rgb(255, 255, 255);&quot;>
+  <div style=&quot;position: relative; padding: 16px 26px 14px; display: flex; flex-direction: column; gap: 12px; border-bottom: 1px solid rgb(238, 240, 243);&quot;>
+    <div style=&quot;position: absolute; top: 0px; right: 0px; display: flex; align-items: center; gap: 7px; background: rgb(239, 242, 247); border-radius: 0px 0px 0px 12px; padding: 2px 14px; height: 22px; z-index: 30;&quot;>
+      <span style=&quot;font-size: 12px; font-weight: 400; color: rgb(23, 116, 229); white-space: nowrap; cursor: pointer;&quot;>Oregon (us-west-2)</span>
+      <span style=&quot;display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; color: rgb(23, 116, 229);&quot;><svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><path d=&quot;M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z&quot;/><circle cx=&quot;12&quot; cy=&quot;10&quot; r=&quot;3&quot;/></svg></span>
+      <span style=&quot;display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; color: rgb(23, 116, 229);&quot;><svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><path d=&quot;M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z&quot;/><polyline points=&quot;14 2 14 8 20 8&quot;/></svg></span>
+      <span style=&quot;display: inline-flex; align-items: center; gap: 7px; cursor: pointer;&quot;>
+        <svg width=&quot;15&quot; height=&quot;15&quot; viewBox=&quot;0 0 24 24&quot; style=&quot;flex-shrink: 0; display: block;&quot;><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;10.4&quot; fill=&quot;none&quot; stroke=&quot;#0E4F9E&quot; stroke-width=&quot;1.7&quot;></circle><g fill=&quot;#0E4F9E&quot;><circle cx=&quot;12&quot; cy=&quot;9.4&quot; r=&quot;3.4&quot;></circle><circle cx=&quot;12&quot; cy=&quot;20.5&quot; r=&quot;6.4&quot;></circle></g></svg>
+        <span style=&quot;font-size: 12px; font-weight: 400; color: rgb(23, 116, 229); white-space: nowrap;&quot;>Nikhil</span>
+      </span>
+    </div>
+    <div style=&quot;display: flex; align-items: center; gap: 0px;&quot;>
+      <span style=&quot;display: inline-flex; align-items: center; background: rgb(231, 231, 246); color: rgb(91, 91, 138); font-size: 12px; font-weight: 600; padding: 4px 16px 4px 12px; clip-path: polygon(0px 0px, calc(100% - 9px) 0px, 100% 50%, calc(100% - 9px) 100%, 0px 100%); cursor: default;&quot;>DP US WEST</span>
+      <span style=&quot;display: inline-flex; align-items: center; background: rgb(231, 231, 246); color: rgb(91, 91, 138); font-size: 12px; font-weight: 600; margin-left: -5px; padding: 4px 16px 4px 18px; clip-path: polygon(0px 0px, calc(100% - 9px) 0px, 100% 50%, calc(100% - 9px) 100%, 0px 100%, 9px 50%); cursor: default;&quot;>BW5</span>
+    </div>
+    <div style=&quot;display: flex; align-items: flex-start; justify-content: space-between;&quot;>
+      <div style=&quot;flex: 1 1 0%; min-width: 0px;&quot;>
+        <div style=&quot;display: flex; align-items: center; gap: 10px;&quot;>
+          <span style=&quot;width: 10px; height: 10px; border-radius: 50%; background: rgb(39, 174, 96); display: inline-block; animation: 2.4s ease-out 0s infinite normal none running hdrPulse;&quot;></span>
+          <span style=&quot;font-size: 22px; font-weight: 600; color: rgb(51, 65, 85); white-space: nowrap;&quot;>TIBCO BW5 application</span>
+        </div>
+        <div style=&quot;display: flex; align-items: flex-start; gap: 10px; margin-top: 9px;&quot;>
+          <span style=&quot;display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgb(23, 116, 229); color: rgb(23, 116, 229); border-radius: 6px; padding: 3px 9px; font-size: 13px; font-weight: 600; cursor: pointer; flex-shrink: 0; min-width: 64px; justify-content: center;&quot;>less <svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><polyline points=&quot;18 15 12 9 6 15&quot;/></svg></span>
+            <span style=&quot;color: rgb(51, 65, 85); font-size: 14px;&quot;>A sample TIBCO BusinessWorks application demonstrating basic REST binding for process monitoring.</span>
+            <svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;color:rgb(23,116,229);&quot;><path d=&quot;M12 20h9&quot;/><path d=&quot;M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z&quot;/></svg>
+        </div>
+        <div style=&quot;display: flex; flex-wrap: wrap; align-items: center; gap: 12px 0px; margin-top: 14px; font-size: 14px; color: rgb(51, 65, 85);&quot;>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>App instance:&amp;nbsp;</span>Sample App Instance</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Version:&amp;nbsp;</span>11.0.0</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>App space:&amp;nbsp;</span>Tibco BW Space</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;color:rgb(138,150,166);margin-right:7px;&quot;><rect x=&quot;3&quot; y=&quot;3&quot; width=&quot;18&quot; height=&quot;18&quot; rx=&quot;2&quot;/><circle cx=&quot;8.5&quot; cy=&quot;8.5&quot; r=&quot;1.5&quot;/><polyline points=&quot;21 15 16 10 5 21&quot;/></svg><span style=&quot;color: rgb(138, 150, 166);&quot;>Profile:&amp;nbsp;</span>Default Profile</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Rest doc URL:&amp;nbsp;</span>https://example.com/api/docs<svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;color:rgb(23,116,229);margin-left:8px;&quot;><rect x=&quot;9&quot; y=&quot;9&quot; width=&quot;13&quot; height=&quot;13&quot; rx=&quot;2&quot;/><path d=&quot;M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1&quot;/></svg></span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center; gap: 8px;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Job:</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(227, 245, 234); color: rgb(23, 114, 69); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Created 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(220, 230, 243); color: rgb(23, 116, 229); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Running 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(253, 238, 222); color: rgb(196, 113, 28); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Faulted 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(238, 240, 243); color: rgb(107, 119, 133); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Cancelled 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(238, 240, 243); color: rgb(107, 119, 133); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Scheduled 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(238, 240, 243); color: rgb(107, 119, 133); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Pagedout 0</span>
+            </span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center; gap: 10px;&quot;><span style=&quot;color: rgb(51, 65, 85);&quot;>Process Monitor</span><span style=&quot;width: 38px; height: 20px; border-radius: 10px; background: rgb(14, 79, 158); position: relative; flex-shrink: 0;&quot;><span style=&quot;position: absolute; top: 2px; left: 20px; width: 16px; height: 16px; border-radius: 8px; background: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px;&quot;></span></span></span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center; gap: 10px;&quot;><span style=&quot;color: rgb(51, 65, 85);&quot;>Process Instrumentation</span><span style=&quot;width: 38px; height: 20px; border-radius: 10px; background: rgb(14, 79, 158); position: relative; flex-shrink: 0;&quot;><span style=&quot;position: absolute; top: 2px; left: 20px; width: 16px; height: 16px; border-radius: 8px; background: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px;&quot;></span></span></span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Last modified:&amp;nbsp;</span>22 Mar 21, 12:35PM</span>
+          </div>
+      </div>
+      <div style=&quot;display: flex; align-items: center; gap: 20px; color: rgb(14, 79, 158); font-size: 20px; flex-shrink: 0; position: relative;&quot;>
+        <span style=&quot;position: relative; display: inline-flex; cursor: pointer; line-height: 1;&quot;><svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><path d=&quot;M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z&quot;/><line x1=&quot;7&quot; y1=&quot;7&quot; x2=&quot;7.01&quot; y2=&quot;7&quot;/></svg></span>
+        <svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;3&quot;/><path d=&quot;M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z&quot;/></svg>
+        <svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot; stroke=&quot;none&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><circle cx=&quot;12&quot; cy=&quot;5&quot; r=&quot;1.7&quot;/><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;1.7&quot;/><circle cx=&quot;12&quot; cy=&quot;19&quot; r=&quot;1.7&quot;/></svg>
+      </div>
+    </div>
+  </div></div></div></div>
+
+</body></html>"></iframe>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:46px;margin-top:40px;font-family:'JetBrains Mono',monospace;">
+      <div><div style="font-size:30px;font-weight:600;">12</div><div style="font-size:11px;letter-spacing:.1em;color:#8A877E;text-transform:uppercase;margin-top:4px;">Parts</div></div>
+      <div><div style="font-size:30px;font-weight:600;">07</div><div style="font-size:11px;letter-spacing:.1em;color:#8A877E;text-transform:uppercase;margin-top:4px;">Interactions</div></div>
+      <div><div style="font-size:30px;font-weight:600;">02</div><div style="font-size:11px;letter-spacing:.1em;color:#8A877E;text-transform:uppercase;margin-top:4px;">States</div></div>
+    </div>
+  </header>
+
+  <!-- ============ 01 · ANATOMY ============ -->
+  <section style="border-top:1px solid #DEDCD4;background:#16140F;color:#F2F1EC;">
+    <div style="max-width:1180px;margin:0 auto;padding:82px 32px;">
+      <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#FF6B52;">01</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#8E8A80;text-transform:uppercase;">Anatomy</span>
+      </div>
+      <h2 style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px;color:#fff;">Every part has a job</h2>
+      <p style="font-size:18px;color:#B7B3A9;max-width:600px;margin:0 0 44px;">Twelve elements across the context bar, identity row, and expanded panel. The real component up top, broken down by zone below.</p>
+
+      <!-- clean header (no overlay) -->
+      <div style="border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);">
+        <iframe title="TIBCO application header" scrolling="no" title="TIBCO application header" scrolling="no" style="display:block;width:100%;height:262px;border:0;background:#fff;" srcdoc="<!DOCTYPE html><html><head><style>
+    .sc-placeholder{background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:rgba(0,0,0,.7);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:rgba(0,0,0,.5);background:rgba(0,0,0,.05);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      section, article, figure, table { break-inside: avoid; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  </style>
+<meta charset=&quot;utf-8&quot;>
+<meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;>
+
+<style>x-dc{display:none!important}</style><style></style><style data-dc-tpl=&quot;1&quot;>
+@font-face {
+  font-family: 'primeicons';
+  font-display: block;
+  src: url(&quot;&quot;) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+.pi { font-family: 'primeicons'; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1; display: inline-block; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.pi:before { backface-visibility: hidden; }
+
+@keyframes hdrDropIn { from { opacity: 0; transform: translateY(-10px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes hdrPop { 0% { opacity: 0; transform: scale(.4); } 55% { opacity: 1; transform: scale(1.18); } 100% { transform: scale(1); } }
+@keyframes hdrInfoIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hdrFadeIn { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hdrPulse { 0% { box-shadow: 0 0 0 0 rgba(39,174,96,.5); } 70% { box-shadow: 0 0 0 7px rgba(39,174,96,0); } 100% { box-shadow: 0 0 0 0 rgba(39,174,96,0); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; } }
+*{box-sizing:border-box;}html,body{margin:0;padding:0;}
+</style></head>
+<body>
+
+<div id=&quot;dc-root&quot;><div class=&quot;sc-host&quot; data-sc-name=&quot;tibco-header&quot;><div style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Helvetica, Arial, sans-serif; color: rgb(51, 65, 85); background: rgb(255, 255, 255);&quot;>
+  <div style=&quot;position: relative; padding: 16px 26px 14px; display: flex; flex-direction: column; gap: 12px; border-bottom: 1px solid rgb(238, 240, 243);&quot;>
+    <div style=&quot;position: absolute; top: 0px; right: 0px; display: flex; align-items: center; gap: 7px; background: rgb(239, 242, 247); border-radius: 0px 0px 0px 12px; padding: 2px 14px; height: 22px; z-index: 30;&quot;>
+      <span style=&quot;font-size: 12px; font-weight: 400; color: rgb(23, 116, 229); white-space: nowrap; cursor: pointer;&quot;>Oregon (us-west-2)</span>
+      <span style=&quot;display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; color: rgb(23, 116, 229);&quot;><svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><path d=&quot;M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z&quot;/><circle cx=&quot;12&quot; cy=&quot;10&quot; r=&quot;3&quot;/></svg></span>
+      <span style=&quot;display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; color: rgb(23, 116, 229);&quot;><svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><path d=&quot;M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z&quot;/><polyline points=&quot;14 2 14 8 20 8&quot;/></svg></span>
+      <span style=&quot;display: inline-flex; align-items: center; gap: 7px; cursor: pointer;&quot;>
+        <svg width=&quot;15&quot; height=&quot;15&quot; viewBox=&quot;0 0 24 24&quot; style=&quot;flex-shrink: 0; display: block;&quot;><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;10.4&quot; fill=&quot;none&quot; stroke=&quot;#0E4F9E&quot; stroke-width=&quot;1.7&quot;></circle><g fill=&quot;#0E4F9E&quot;><circle cx=&quot;12&quot; cy=&quot;9.4&quot; r=&quot;3.4&quot;></circle><circle cx=&quot;12&quot; cy=&quot;20.5&quot; r=&quot;6.4&quot;></circle></g></svg>
+        <span style=&quot;font-size: 12px; font-weight: 400; color: rgb(23, 116, 229); white-space: nowrap;&quot;>Nikhil</span>
+      </span>
+    </div>
+    <div style=&quot;display: flex; align-items: center; gap: 0px;&quot;>
+      <span style=&quot;display: inline-flex; align-items: center; background: rgb(231, 231, 246); color: rgb(91, 91, 138); font-size: 12px; font-weight: 600; padding: 4px 16px 4px 12px; clip-path: polygon(0px 0px, calc(100% - 9px) 0px, 100% 50%, calc(100% - 9px) 100%, 0px 100%); cursor: default;&quot;>DP US WEST</span>
+      <span style=&quot;display: inline-flex; align-items: center; background: rgb(231, 231, 246); color: rgb(91, 91, 138); font-size: 12px; font-weight: 600; margin-left: -5px; padding: 4px 16px 4px 18px; clip-path: polygon(0px 0px, calc(100% - 9px) 0px, 100% 50%, calc(100% - 9px) 100%, 0px 100%, 9px 50%); cursor: default;&quot;>BW5</span>
+    </div>
+    <div style=&quot;display: flex; align-items: flex-start; justify-content: space-between;&quot;>
+      <div style=&quot;flex: 1 1 0%; min-width: 0px;&quot;>
+        <div style=&quot;display: flex; align-items: center; gap: 10px;&quot;>
+          <span style=&quot;width: 10px; height: 10px; border-radius: 50%; background: rgb(39, 174, 96); display: inline-block; animation: 2.4s ease-out 0s infinite normal none running hdrPulse;&quot;></span>
+          <span style=&quot;font-size: 22px; font-weight: 600; color: rgb(51, 65, 85); white-space: nowrap;&quot;>TIBCO BW5 application</span>
+        </div>
+        <div style=&quot;display: flex; align-items: flex-start; gap: 10px; margin-top: 9px;&quot;>
+          <span style=&quot;display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgb(23, 116, 229); color: rgb(23, 116, 229); border-radius: 6px; padding: 3px 9px; font-size: 13px; font-weight: 600; cursor: pointer; flex-shrink: 0; min-width: 64px; justify-content: center;&quot;>less <svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><polyline points=&quot;18 15 12 9 6 15&quot;/></svg></span>
+            <span style=&quot;color: rgb(51, 65, 85); font-size: 14px;&quot;>A sample TIBCO BusinessWorks application demonstrating basic REST binding for process monitoring.</span>
+            <svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;color:rgb(23,116,229);&quot;><path d=&quot;M12 20h9&quot;/><path d=&quot;M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z&quot;/></svg>
+        </div>
+        <div style=&quot;display: flex; flex-wrap: wrap; align-items: center; gap: 12px 0px; margin-top: 14px; font-size: 14px; color: rgb(51, 65, 85);&quot;>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>App instance:&amp;nbsp;</span>Sample App Instance</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Version:&amp;nbsp;</span>11.0.0</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>App space:&amp;nbsp;</span>Tibco BW Space</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;color:rgb(138,150,166);margin-right:7px;&quot;><rect x=&quot;3&quot; y=&quot;3&quot; width=&quot;18&quot; height=&quot;18&quot; rx=&quot;2&quot;/><circle cx=&quot;8.5&quot; cy=&quot;8.5&quot; r=&quot;1.5&quot;/><polyline points=&quot;21 15 16 10 5 21&quot;/></svg><span style=&quot;color: rgb(138, 150, 166);&quot;>Profile:&amp;nbsp;</span>Default Profile</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Rest doc URL:&amp;nbsp;</span>https://example.com/api/docs<svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;color:rgb(23,116,229);margin-left:8px;&quot;><rect x=&quot;9&quot; y=&quot;9&quot; width=&quot;13&quot; height=&quot;13&quot; rx=&quot;2&quot;/><path d=&quot;M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1&quot;/></svg></span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center; gap: 8px;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Job:</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(227, 245, 234); color: rgb(23, 114, 69); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Created 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(220, 230, 243); color: rgb(23, 116, 229); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Running 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(253, 238, 222); color: rgb(196, 113, 28); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Faulted 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(238, 240, 243); color: rgb(107, 119, 133); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Cancelled 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(238, 240, 243); color: rgb(107, 119, 133); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Scheduled 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(238, 240, 243); color: rgb(107, 119, 133); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Pagedout 0</span>
+            </span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center; gap: 10px;&quot;><span style=&quot;color: rgb(51, 65, 85);&quot;>Process Monitor</span><span style=&quot;width: 38px; height: 20px; border-radius: 10px; background: rgb(14, 79, 158); position: relative; flex-shrink: 0;&quot;><span style=&quot;position: absolute; top: 2px; left: 20px; width: 16px; height: 16px; border-radius: 8px; background: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px;&quot;></span></span></span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center; gap: 10px;&quot;><span style=&quot;color: rgb(51, 65, 85);&quot;>Process Instrumentation</span><span style=&quot;width: 38px; height: 20px; border-radius: 10px; background: rgb(14, 79, 158); position: relative; flex-shrink: 0;&quot;><span style=&quot;position: absolute; top: 2px; left: 20px; width: 16px; height: 16px; border-radius: 8px; background: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px;&quot;></span></span></span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Last modified:&amp;nbsp;</span>22 Mar 21, 12:35PM</span>
+          </div>
+      </div>
+      <div style=&quot;display: flex; align-items: center; gap: 20px; color: rgb(14, 79, 158); font-size: 20px; flex-shrink: 0; position: relative;&quot;>
+        <span style=&quot;position: relative; display: inline-flex; cursor: pointer; line-height: 1;&quot;><svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><path d=&quot;M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z&quot;/><line x1=&quot;7&quot; y1=&quot;7&quot; x2=&quot;7.01&quot; y2=&quot;7&quot;/></svg></span>
+        <svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;3&quot;/><path d=&quot;M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z&quot;/></svg>
+        <svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot; stroke=&quot;none&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><circle cx=&quot;12&quot; cy=&quot;5&quot; r=&quot;1.7&quot;/><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;1.7&quot;/><circle cx=&quot;12&quot; cy=&quot;19&quot; r=&quot;1.7&quot;/></svg>
+      </div>
+    </div>
+  </div></div></div></div>
+
+</body></html>"></iframe>
+      </div>
+
+      <!-- numbered breakdown, grouped by zone -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:48px;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:#FF6B52;border-top:2px solid #2C2A24;padding-top:14px;margin-bottom:20px;">CONTEXT BAR</div>
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="flex:none;width:24px;height:24px;border-radius:7px;background:#E5443B;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;">1</span>
+              <div>
+                <div style="font-size:14.5px;font-weight:600;color:#fff;margin-bottom:3px;">Region selector</div>
+                <div style="font-size:13px;color:#B7B3A9;line-height:1.5;">Scopes everything below to a data-plane location.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="flex:none;width:24px;height:24px;border-radius:7px;background:#E5443B;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;">2</span>
+              <div>
+                <div style="font-size:14.5px;font-weight:600;color:#fff;margin-bottom:3px;">User menu</div>
+                <div style="font-size:13px;color:#B7B3A9;line-height:1.5;">Profile, preferences and sign-out.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:#FF6B52;border-top:2px solid #2C2A24;padding-top:14px;margin-bottom:20px;">IDENTITY</div>
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="flex:none;width:24px;height:24px;border-radius:7px;background:#E5443B;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;">3</span>
+              <div>
+                <div style="font-size:14.5px;font-weight:600;color:#fff;margin-bottom:3px;">Breadcrumb</div>
+                <div style="font-size:13px;color:#B7B3A9;line-height:1.5;">Clickable hierarchy path.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="flex:none;width:24px;height:24px;border-radius:7px;background:#E5443B;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;">4</span>
+              <div>
+                <div style="font-size:14.5px;font-weight:600;color:#fff;margin-bottom:3px;">Status dot</div>
+                <div style="font-size:13px;color:#B7B3A9;line-height:1.5;">Live health of the application.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="flex:none;width:24px;height:24px;border-radius:7px;background:#E5443B;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;">5</span>
+              <div>
+                <div style="font-size:14.5px;font-weight:600;color:#fff;margin-bottom:3px;">Title</div>
+                <div style="font-size:13px;color:#B7B3A9;line-height:1.5;">The application name.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:#FF6B52;border-top:2px solid #2C2A24;padding-top:14px;margin-bottom:20px;">ACTIONS</div>
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="flex:none;width:24px;height:24px;border-radius:7px;background:#E5443B;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;">6</span>
+              <div>
+                <div style="font-size:14.5px;font-weight:600;color:#fff;margin-bottom:3px;">Tag</div>
+                <div style="font-size:13px;color:#B7B3A9;line-height:1.5;">Label and categorize the app.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="flex:none;width:24px;height:24px;border-radius:7px;background:#E5443B;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;">7</span>
+              <div>
+                <div style="font-size:14.5px;font-weight:600;color:#fff;margin-bottom:3px;">Settings</div>
+                <div style="font-size:13px;color:#B7B3A9;line-height:1.5;">App-level configuration.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="flex:none;width:24px;height:24px;border-radius:7px;background:#E5443B;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;">8</span>
+              <div>
+                <div style="font-size:14.5px;font-weight:600;color:#fff;margin-bottom:3px;">Overflow menu</div>
+                <div style="font-size:13px;color:#B7B3A9;line-height:1.5;">The long tail of actions.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:#FF6B52;border-top:2px solid #2C2A24;padding-top:14px;margin-bottom:20px;">DISCLOSURE</div>
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="flex:none;width:24px;height:24px;border-radius:7px;background:#E5443B;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;">9</span>
+              <div>
+                <div style="font-size:14.5px;font-weight:600;color:#fff;margin-bottom:3px;">Info / less toggle</div>
+                <div style="font-size:13px;color:#B7B3A9;line-height:1.5;">Expands or collapses the panel.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="flex:none;width:24px;height:24px;border-radius:7px;background:#E5443B;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;">10</span>
+              <div>
+                <div style="font-size:14.5px;font-weight:600;color:#fff;margin-bottom:3px;">Description</div>
+                <div style="font-size:13px;color:#B7B3A9;line-height:1.5;">Editable inline, in place.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="flex:none;width:24px;height:24px;border-radius:7px;background:#E5443B;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;">11</span>
+              <div>
+                <div style="font-size:14.5px;font-weight:600;color:#fff;margin-bottom:3px;">Metadata rows</div>
+                <div style="font-size:13px;color:#B7B3A9;line-height:1.5;">Instance, version, space, URL, job counts.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="flex:none;width:24px;height:24px;border-radius:7px;background:#E5443B;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;">12</span>
+              <div>
+                <div style="font-size:14.5px;font-weight:600;color:#fff;margin-bottom:3px;">Monitor switches</div>
+                <div style="font-size:13px;color:#B7B3A9;line-height:1.5;">Toggle monitoring & instrumentation.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 · CORE INTERACTION: EXPAND / COLLAPSE ============ -->
+  <section style="border-top:1px solid #DEDCD4;">
+    <div style="max-width:1180px;margin:0 auto;padding:82px 32px;">
+      <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#E5443B;">02</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#8A877E;text-transform:uppercase;">Core Interaction · Progressive Disclosure</span>
+      </div>
+      <h2 style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px;">Info &nbsp;⇄&nbsp; less</h2>
+      <p style="font-size:18px;color:#46443D;max-width:620px;margin:0 0 30px;">The defining interaction. One toggle collapses the header to a calm identity line, or expands it to full context: runtime, metadata and controls.</p>
+
+      <div style="margin-bottom:22px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#8A877E;">SHOWN BELOW: EXPANDED STATE · the live build toggles between the two</div>
+
+      <div style="border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 24px 56px -32px rgba(16,24,40,.35);border:1px solid #E6E3DB;">
+        <iframe title="TIBCO application header" scrolling="no" title="TIBCO header (interactive)" style="display:block;width:100%;height:264px;border:0;background:#fff;" srcdoc="<!DOCTYPE html><html><head><style>
+    .sc-placeholder{background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:rgba(0,0,0,.7);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:rgba(0,0,0,.5);background:rgba(0,0,0,.05);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      section, article, figure, table { break-inside: avoid; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  </style>
+<meta charset=&quot;utf-8&quot;>
+<meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;>
+
+<style>x-dc{display:none!important}</style><style></style><style data-dc-tpl=&quot;1&quot;>
+@font-face {
+  font-family: 'primeicons';
+  font-display: block;
+  src: url(&quot;&quot;) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+.pi { font-family: 'primeicons'; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1; display: inline-block; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.pi:before { backface-visibility: hidden; }
+
+@keyframes hdrDropIn { from { opacity: 0; transform: translateY(-10px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes hdrPop { 0% { opacity: 0; transform: scale(.4); } 55% { opacity: 1; transform: scale(1.18); } 100% { transform: scale(1); } }
+@keyframes hdrInfoIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hdrFadeIn { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hdrPulse { 0% { box-shadow: 0 0 0 0 rgba(39,174,96,.5); } 70% { box-shadow: 0 0 0 7px rgba(39,174,96,0); } 100% { box-shadow: 0 0 0 0 rgba(39,174,96,0); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; } }
+*{box-sizing:border-box;}html,body{margin:0;padding:0;}
+</style></head>
+<body>
+
+<div id=&quot;dc-root&quot;><div class=&quot;sc-host&quot; data-sc-name=&quot;tibco-header&quot;><div style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Helvetica, Arial, sans-serif; color: rgb(51, 65, 85); background: rgb(255, 255, 255);&quot;>
+  <div style=&quot;position: relative; padding: 16px 26px 14px; display: flex; flex-direction: column; gap: 12px; border-bottom: 1px solid rgb(238, 240, 243);&quot;>
+    <div style=&quot;position: absolute; top: 0px; right: 0px; display: flex; align-items: center; gap: 7px; background: rgb(239, 242, 247); border-radius: 0px 0px 0px 12px; padding: 2px 14px; height: 22px; z-index: 30;&quot;>
+      <span style=&quot;font-size: 12px; font-weight: 400; color: rgb(23, 116, 229); white-space: nowrap; cursor: pointer;&quot;>Oregon (us-west-2)</span>
+      <span style=&quot;display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; color: rgb(23, 116, 229);&quot;><svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><path d=&quot;M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z&quot;/><circle cx=&quot;12&quot; cy=&quot;10&quot; r=&quot;3&quot;/></svg></span>
+      <span style=&quot;display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; color: rgb(23, 116, 229);&quot;><svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><path d=&quot;M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z&quot;/><polyline points=&quot;14 2 14 8 20 8&quot;/></svg></span>
+      <span style=&quot;display: inline-flex; align-items: center; gap: 7px; cursor: pointer;&quot;>
+        <svg width=&quot;15&quot; height=&quot;15&quot; viewBox=&quot;0 0 24 24&quot; style=&quot;flex-shrink: 0; display: block;&quot;><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;10.4&quot; fill=&quot;none&quot; stroke=&quot;#0E4F9E&quot; stroke-width=&quot;1.7&quot;></circle><g fill=&quot;#0E4F9E&quot;><circle cx=&quot;12&quot; cy=&quot;9.4&quot; r=&quot;3.4&quot;></circle><circle cx=&quot;12&quot; cy=&quot;20.5&quot; r=&quot;6.4&quot;></circle></g></svg>
+        <span style=&quot;font-size: 12px; font-weight: 400; color: rgb(23, 116, 229); white-space: nowrap;&quot;>Nikhil</span>
+      </span>
+    </div>
+    <div style=&quot;display: flex; align-items: center; gap: 0px;&quot;>
+      <span style=&quot;display: inline-flex; align-items: center; background: rgb(231, 231, 246); color: rgb(91, 91, 138); font-size: 12px; font-weight: 600; padding: 4px 16px 4px 12px; clip-path: polygon(0px 0px, calc(100% - 9px) 0px, 100% 50%, calc(100% - 9px) 100%, 0px 100%); cursor: default;&quot;>DP US WEST</span>
+      <span style=&quot;display: inline-flex; align-items: center; background: rgb(231, 231, 246); color: rgb(91, 91, 138); font-size: 12px; font-weight: 600; margin-left: -5px; padding: 4px 16px 4px 18px; clip-path: polygon(0px 0px, calc(100% - 9px) 0px, 100% 50%, calc(100% - 9px) 100%, 0px 100%, 9px 50%); cursor: default;&quot;>BW5</span>
+    </div>
+    <div style=&quot;display: flex; align-items: flex-start; justify-content: space-between;&quot;>
+      <div style=&quot;flex: 1 1 0%; min-width: 0px;&quot;>
+        <div style=&quot;display: flex; align-items: center; gap: 10px;&quot;>
+          <span style=&quot;width: 10px; height: 10px; border-radius: 50%; background: rgb(39, 174, 96); display: inline-block; animation: 2.4s ease-out 0s infinite normal none running hdrPulse;&quot;></span>
+          <span style=&quot;font-size: 22px; font-weight: 600; color: rgb(51, 65, 85); white-space: nowrap;&quot;>TIBCO BW5 application</span>
+        </div>
+        <div style=&quot;display: flex; align-items: flex-start; gap: 10px; margin-top: 9px;&quot;>
+          <span style=&quot;display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgb(23, 116, 229); color: rgb(23, 116, 229); border-radius: 6px; padding: 3px 9px; font-size: 13px; font-weight: 600; cursor: pointer; flex-shrink: 0; min-width: 64px; justify-content: center;&quot;>less <svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><polyline points=&quot;18 15 12 9 6 15&quot;/></svg></span>
+            <span style=&quot;color: rgb(51, 65, 85); font-size: 14px;&quot;>A sample TIBCO BusinessWorks application demonstrating basic REST binding for process monitoring.</span>
+            <svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;color:rgb(23,116,229);&quot;><path d=&quot;M12 20h9&quot;/><path d=&quot;M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z&quot;/></svg>
+        </div>
+        <div style=&quot;display: flex; flex-wrap: wrap; align-items: center; gap: 12px 0px; margin-top: 14px; font-size: 14px; color: rgb(51, 65, 85);&quot;>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>App instance:&amp;nbsp;</span>Sample App Instance</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Version:&amp;nbsp;</span>11.0.0</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>App space:&amp;nbsp;</span>Tibco BW Space</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;color:rgb(138,150,166);margin-right:7px;&quot;><rect x=&quot;3&quot; y=&quot;3&quot; width=&quot;18&quot; height=&quot;18&quot; rx=&quot;2&quot;/><circle cx=&quot;8.5&quot; cy=&quot;8.5&quot; r=&quot;1.5&quot;/><polyline points=&quot;21 15 16 10 5 21&quot;/></svg><span style=&quot;color: rgb(138, 150, 166);&quot;>Profile:&amp;nbsp;</span>Default Profile</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Rest doc URL:&amp;nbsp;</span>https://example.com/api/docs<svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;color:rgb(23,116,229);margin-left:8px;&quot;><rect x=&quot;9&quot; y=&quot;9&quot; width=&quot;13&quot; height=&quot;13&quot; rx=&quot;2&quot;/><path d=&quot;M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1&quot;/></svg></span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center; gap: 8px;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Job:</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(227, 245, 234); color: rgb(23, 114, 69); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Created 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(220, 230, 243); color: rgb(23, 116, 229); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Running 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(253, 238, 222); color: rgb(196, 113, 28); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Faulted 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(238, 240, 243); color: rgb(107, 119, 133); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Cancelled 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(238, 240, 243); color: rgb(107, 119, 133); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Scheduled 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(238, 240, 243); color: rgb(107, 119, 133); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Pagedout 0</span>
+            </span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center; gap: 10px;&quot;><span style=&quot;color: rgb(51, 65, 85);&quot;>Process Monitor</span><span style=&quot;width: 38px; height: 20px; border-radius: 10px; background: rgb(14, 79, 158); position: relative; flex-shrink: 0;&quot;><span style=&quot;position: absolute; top: 2px; left: 20px; width: 16px; height: 16px; border-radius: 8px; background: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px;&quot;></span></span></span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center; gap: 10px;&quot;><span style=&quot;color: rgb(51, 65, 85);&quot;>Process Instrumentation</span><span style=&quot;width: 38px; height: 20px; border-radius: 10px; background: rgb(14, 79, 158); position: relative; flex-shrink: 0;&quot;><span style=&quot;position: absolute; top: 2px; left: 20px; width: 16px; height: 16px; border-radius: 8px; background: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px;&quot;></span></span></span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Last modified:&amp;nbsp;</span>22 Mar 21, 12:35PM</span>
+          </div>
+      </div>
+      <div style=&quot;display: flex; align-items: center; gap: 20px; color: rgb(14, 79, 158); font-size: 20px; flex-shrink: 0; position: relative;&quot;>
+        <span style=&quot;position: relative; display: inline-flex; cursor: pointer; line-height: 1;&quot;><svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><path d=&quot;M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z&quot;/><line x1=&quot;7&quot; y1=&quot;7&quot; x2=&quot;7.01&quot; y2=&quot;7&quot;/></svg></span>
+        <svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;3&quot;/><path d=&quot;M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z&quot;/></svg>
+        <svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot; stroke=&quot;none&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><circle cx=&quot;12&quot; cy=&quot;5&quot; r=&quot;1.7&quot;/><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;1.7&quot;/><circle cx=&quot;12&quot; cy=&quot;19&quot; r=&quot;1.7&quot;/></svg>
+      </div>
+    </div>
+  </div></div></div></div>
+
+</body></html>"></iframe>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;">
+        <div style="background:#fff;border:1px solid #E4E7EC;border-radius:10px;padding:22px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#8A877E;margin-bottom:10px;">COLLAPSED · “INFO”</div>
+          <p style="font-size:14.5px;color:#46443D;line-height:1.55;margin:0;">Identity only: breadcrumb, status, title, description. The default. Calm, compact, and it gives the screen back to the work.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #E4E7EC;border-radius:10px;padding:22px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#E5443B;margin-bottom:10px;">EXPANDED · “LESS”</div>
+          <p style="font-size:14.5px;color:#46443D;line-height:1.55;margin:0;">Full context on demand: instance, version, space, profile, REST doc URL, job counts and the monitor toggles. One click away, never in the way.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 · INTERACTION CATALOG ============ -->
+  <section style="border-top:1px solid #DEDCD4;background:#EAE8E1;">
+    <div style="max-width:1180px;margin:0 auto;padding:82px 32px;">
+      <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#E5443B;">03</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#8A877E;text-transform:uppercase;">Interaction Catalog</span>
+      </div>
+      <h2 style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px;">Everything you can touch</h2>
+      <p style="font-size:18px;color:#46443D;max-width:620px;margin:0 0 46px;">Seven distinct interactions live in this header. Each is small, predictable, and earns its place.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;">
+        <!-- breadcrumb -->
+        <div style="background:#fff;border:1px solid #E4E7EC;border-radius:11px;padding:22px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:#8A877E;margin-bottom:18px;">01 · BREADCRUMB NAV</div>
+          <div style="display:flex;align-items:center;gap:4px;margin-bottom:20px;font-family:system-ui,sans-serif;">
+            <span style="background:#E7E3F4;color:#54506E;font-size:11px;font-weight:600;padding:3px 12px;clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%);">DP US WEST</span>
+            <span style="background:#E7E3F4;color:#54506E;font-size:11px;font-weight:600;padding:3px 12px;clip-path:polygon(0 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,0 100%,7px 50%);">BW5</span>
+          </div>
+          <h3 style="font-size:16px;font-weight:600;margin:0 0 6px;">Navigate the hierarchy</h3>
+          <p style="font-size:13.5px;color:#6B6760;line-height:1.5;margin:0;">Each chevron chip is a clickable level of the data-plane path. Long labels truncate and reveal in full on hover.</p>
+        </div>
+        <!-- region -->
+        <div style="background:#fff;border:1px solid #E4E7EC;border-radius:11px;padding:22px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:#8A877E;margin-bottom:18px;">02 · REGION SELECTOR</div>
+          <div style="display:flex;align-items:center;gap:7px;margin-bottom:20px;background:#EFF2F7;border-radius:6px;padding:6px 12px;width:fit-content;font-family:system-ui,sans-serif;">
+            <span style="font-size:12.5px;color:#1B5FC4;font-weight:500;">Oregon (us-west-2)</span>
+            <span style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #1B5FC4;display:inline-block;"></span>
+          </div>
+          <h3 style="font-size:16px;font-weight:600;margin:0 0 6px;">Switch region</h3>
+          <p style="font-size:13.5px;color:#6B6760;line-height:1.5;margin:0;">Global context lives top-right. The region dropdown scopes everything below it to a data-plane location.</p>
+        </div>
+        <!-- user -->
+        <div style="background:#fff;border:1px solid #E4E7EC;border-radius:11px;padding:22px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:#8A877E;margin-bottom:18px;">03 · USER MENU</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;font-family:system-ui,sans-serif;">
+            <span style="width:22px;height:22px;border-radius:50%;background:#1B5FC4;color:#fff;font-size:11px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;">N</span>
+            <span style="font-size:13px;color:#3A4250;">Nikhil</span>
+          </div>
+          <h3 style="font-size:16px;font-weight:600;margin:0 0 6px;">Account & session</h3>
+          <p style="font-size:13.5px;color:#6B6760;line-height:1.5;margin:0;">The user menu opens profile, preferences and sign-out. Standard global account affordance.</p>
+        </div>
+        <!-- actions -->
+        <div style="background:#fff;border:1px solid #E4E7EC;border-radius:11px;padding:22px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:#8A877E;margin-bottom:18px;">04 · ACTION CLUSTER</div>
+          <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;color:#1B5FC4;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B5FC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B5FC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <span style="display:inline-flex;flex-direction:column;gap:3px;"><span style="width:4px;height:4px;border-radius:50%;background:#1B5FC4;"></span><span style="width:4px;height:4px;border-radius:50%;background:#1B5FC4;"></span><span style="width:4px;height:4px;border-radius:50%;background:#1B5FC4;"></span></span>
+          </div>
+          <h3 style="font-size:16px;font-weight:600;margin:0 0 6px;">Tag · settings · more</h3>
+          <p style="font-size:13.5px;color:#6B6760;line-height:1.5;margin:0;">App-level actions stay grouped right of the title. The overflow menu holds the long tail without clutter.</p>
+        </div>
+        <!-- editable description -->
+        <div style="background:#fff;border:1px solid #E4E7EC;border-radius:11px;padding:22px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:#8A877E;margin-bottom:18px;">05 · EDITABLE DESCRIPTION</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;font-family:system-ui,sans-serif;">
+            <span style="font-size:12.5px;color:#5C6470;">A sample application…</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1B5FC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>
+          </div>
+          <h3 style="font-size:16px;font-weight:600;margin:0 0 6px;">Edit in place</h3>
+          <p style="font-size:13.5px;color:#6B6760;line-height:1.5;margin:0;">The pencil turns the description into an inline field, to rename context without leaving the screen.</p>
+        </div>
+        <!-- monitor toggles -->
+        <div style="background:#fff;border:1px solid #E4E7EC;border-radius:11px;padding:22px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:#8A877E;margin-bottom:18px;">06 · MONITOR SWITCHES</div>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+            <span style="width:34px;height:20px;border-radius:10px;background:#1B5FC4;position:relative;display:inline-block;"><span style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:#fff;"></span></span>
+            <span style="width:34px;height:20px;border-radius:10px;background:#C7CDD6;position:relative;display:inline-block;"><span style="position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;"></span></span>
+          </div>
+          <h3 style="font-size:16px;font-weight:600;margin:0 0 6px;">Process monitor & instrumentation</h3>
+          <p style="font-size:13.5px;color:#6B6760;line-height:1.5;margin:0;">Two switches in the expanded panel turn live monitoring and instrumentation on or off.</p>
+        </div>
+      </div>
+
+      <!-- seventh, full width -->
+      <div style="background:#16140F;color:#F2F1EC;border-radius:11px;padding:26px 28px;margin-top:22px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:#FF6B52;flex:none;">07 · EXPAND / COLLAPSE</div>
+        <p style="font-size:15px;color:#E7E3D9;line-height:1.5;margin:0;flex:1;min-width:260px;">The toggle that ties them all together: the single control that switches the whole component between its two states. <span style="color:#fff;font-weight:600;">Demonstrated live in section 02.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 · MENUS & OPTIONS ============ -->
+  <section style="border-top:1px solid #DEDCD4;">
+    <div style="max-width:1180px;margin:0 auto;padding:82px 32px;">
+      <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#E5443B;">04</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#8A877E;text-transform:uppercase;">Menus &amp; Options</span>
+      </div>
+      <h2 style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px;">Click to open</h2>
+      <p style="font-size:18px;color:#46443D;max-width:620px;margin:0 0 48px;">Five controls open a menu. Here is exactly what sits inside each: the real options, recreated.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:30px 28px;align-items:start;">
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#8A877E;">REGION SELECTOR</div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #E4E7EC;border-radius:8px;padding:7px 12px;font-size:13px;color:#15243B;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1B5FC4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span style="color:#1B5FC4;">Oregon (us-west-2)</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1B5FC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9AA0A8;">opens ▾</span></div>
+          <div style="background:#fff;border:1px solid #E4E7EC;border-radius:10px;box-shadow:0 16px 36px -18px rgba(16,24,40,.28);overflow:hidden;"><div style="padding:10px 14px 8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9AA0A8;border-bottom:1px solid #EEF0F2;">Change a region</div><div style="display:flex;align-items:center;gap:11px;padding:9px 14px;font-size:13.5px;color:#3A4250;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6470" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span style="flex:1;">Ireland (eu-west-1)</span></div><div style="display:flex;align-items:center;gap:11px;padding:9px 14px;font-size:13.5px;color:#3A4250;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:#F2F6FC;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6470" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span style="flex:1;">Oregon (us-west-2)</span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1B5FC4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#8A877E;">USER MENU</div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #E4E7EC;border-radius:8px;padding:7px 12px;font-size:13px;color:#15243B;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><span style="width:20px;height:20px;border-radius:50%;background:#1B5FC4;color:#fff;font-size:10px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;">N</span><span>Nikhil</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1B5FC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9AA0A8;">opens ▾</span></div>
+          <div style="background:#fff;border:1px solid #E4E7EC;border-radius:10px;box-shadow:0 16px 36px -18px rgba(16,24,40,.28);overflow:hidden;"><div style="padding:13px 14px;border-bottom:1px solid #EEF0F2;"><div style="font-size:13.5px;font-weight:600;color:#15243B;">jondoe<span>@</span>mail.com</div><div style="font-size:12px;color:#9AA0A8;margin-top:2px;">TIBCO® Platform Base</div></div><div style="display:flex;align-items:center;gap:11px;padding:9px 14px;font-size:13.5px;color:#3A4250;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6470" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span style="flex:1;">Sign out</span></div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#8A877E;">TAG</div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #E4E7EC;border-radius:8px;padding:7px 12px;font-size:13px;color:#15243B;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B5FC4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9AA0A8;">tap ▾</span></div>
+          <div style="background:#fff;border:1px solid #E4E7EC;border-radius:10px;box-shadow:0 16px 36px -18px rgba(16,24,40,.28);overflow:hidden;"><div style="display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid #EEF0F2;"><span style="font-size:13.5px;font-weight:600;color:#15243B;">Tags</span><span style="font-size:11px;font-weight:600;color:#5C6470;background:#EEF0F2;border-radius:20px;padding:1px 9px;">0</span></div><div style="padding:16px 14px;font-size:13px;color:#9AA0A8;font-family:system-ui,sans-serif;">No tags assigned</div><div style="display:flex;gap:9px;padding:12px 14px;border-top:1px solid #EEF0F2;"><span style="font-size:12.5px;font-weight:600;color:#1B5FC4;border:1px solid #C6D4EC;border-radius:7px;padding:6px 13px;font-family:system-ui,sans-serif;">Edit tags</span><span style="font-size:12.5px;font-weight:600;color:#fff;background:#1B5FC4;border-radius:7px;padding:6px 13px;font-family:system-ui,sans-serif;">Add tag</span></div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#8A877E;">SETTINGS</div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #E4E7EC;border-radius:8px;padding:7px 12px;font-size:13px;color:#15243B;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1B5FC4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9AA0A8;">tap ▾</span></div>
+          <div style="background:#fff;border:1px solid #E4E7EC;border-radius:10px;box-shadow:0 16px 36px -18px rgba(16,24,40,.28);overflow:hidden;"><div style="display:flex;align-items:center;gap:11px;padding:9px 14px;font-size:13.5px;color:#3A4250;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6470" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg><span style="flex:1;">General Settings</span></div><div style="display:flex;align-items:center;gap:11px;padding:9px 14px;font-size:13.5px;color:#3A4250;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6470" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span style="flex:1;">Notifications</span></div><div style="display:flex;align-items:center;gap:11px;padding:9px 14px;font-size:13.5px;color:#3A4250;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6470" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span style="flex:1;">Access Control</span></div><div style="display:flex;align-items:center;gap:11px;padding:9px 14px;font-size:13.5px;color:#3A4250;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6470" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg><span style="flex:1;">Audit Log</span></div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#8A877E;">OVERFLOW MENU</div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #E4E7EC;border-radius:8px;padding:7px 12px;font-size:13px;color:#15243B;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><span style="display:inline-flex;flex-direction:column;gap:3px;"><span style="width:4px;height:4px;border-radius:50%;background:#1B5FC4;"></span><span style="width:4px;height:4px;border-radius:50%;background:#1B5FC4;"></span><span style="width:4px;height:4px;border-radius:50%;background:#1B5FC4;"></span></span></div><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9AA0A8;">tap ▾</span></div>
+          <div style="background:#fff;border:1px solid #E4E7EC;border-radius:10px;box-shadow:0 16px 36px -18px rgba(16,24,40,.28);overflow:hidden;"><div style="display:flex;align-items:center;gap:11px;padding:9px 14px;font-size:13.5px;color:#3A4250;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6470" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><span style="flex:1;">Set Endpoint Visibility</span></div><div style="display:flex;align-items:center;gap:11px;padding:9px 14px;font-size:13.5px;color:#3A4250;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6470" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg><span style="flex:1;">Restart application</span></div><div style="display:flex;align-items:center;gap:11px;padding:9px 14px;font-size:13.5px;color:#3A4250;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6470" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg><span style="flex:1;">Upgrade Application</span></div><div style="display:flex;align-items:center;gap:11px;padding:9px 14px;font-size:13.5px;color:#3A4250;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6470" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg><span style="flex:1;">Enable Autoscaling</span></div><div style="display:flex;align-items:center;gap:11px;padding:9px 14px;font-size:13.5px;color:#3A4250;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6470" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span style="flex:1;">Enable Execution History</span></div><div style="display:flex;align-items:center;gap:11px;padding:9px 14px;font-size:13.5px;color:#3A4250;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6470" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span style="flex:1;">Enable Service Mesh</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 · INLINE FLOWS ============ -->
+  <section style="border-top:1px solid #DEDCD4;background:#EAE8E1;">
+    <div style="max-width:1180px;margin:0 auto;padding:82px 32px;">
+      <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#E5443B;">05</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#8A877E;text-transform:uppercase;">Inline Flows</span>
+      </div>
+      <h2 style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px;">Edit, copy, toggle in place</h2>
+      <p style="font-size:18px;color:#46443D;max-width:620px;margin:0 0 44px;">Some actions never open a menu or leave the screen. Here is how each resolves inline.</p>
+
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#8A877E;margin-bottom:18px;">EDIT DESCRIPTION · THREE STEPS</div>
+      <div style="display:flex;gap:8px;align-items:stretch;margin-bottom:46px;">
+          <div style="flex:1;min-width:0;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#E5443B;margin-bottom:12px;">1 · RESTING</div>
+            <div style="background:#fff;border:1px solid #E4E7EC;border-radius:10px;padding:18px;min-height:128px;display:flex;align-items:center;"><div style="display:flex;align-items:flex-start;gap:9px;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><span style="font-size:13.5px;color:#5C6470;line-height:1.5;">A sample TIBCO BusinessWorks application demonstrating basic REST binding for process monitoring.</span><span style="flex:none;margin-top:2px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1B5FC4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span></div></div>
+            <p style="font-size:13px;color:#6B6760;line-height:1.5;margin:12px 2px 0;">The description shows a pencil on the right. Tap it to edit.</p>
+          </div>
+<div style="align-self:center;flex:none;color:#B7B0A4;font-size:22px;padding:0 4px;margin-top:18px;">→</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#E5443B;margin-bottom:12px;">2 · EDITING</div>
+            <div style="background:#fff;border:1px solid #E4E7EC;border-radius:10px;padding:18px;min-height:128px;display:flex;align-items:center;"><div style="width:100%;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><div style="border:1.5px solid #1B5FC4;border-radius:8px;padding:9px 11px;font-size:13px;color:#15243B;line-height:1.5;box-shadow:0 0 0 3px rgba(27,95,196,.12);">A sample TIBCO BusinessWorks application demonstrating basic REST binding for process monitoring.<span style="display:inline-block;width:1.5px;height:14px;background:#1B5FC4;vertical-align:-2px;margin-left:1px;"></span></div><div style="display:flex;gap:8px;margin-top:10px;justify-content:flex-end;"><span style="width:30px;height:30px;border-radius:7px;background:#1B5FC4;display:inline-flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><polyline points="20 6 9 17 4 12"/></svg></span><span style="width:30px;height:30px;border-radius:7px;background:#fff;border:1px solid #D5DBE3;display:inline-flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></div></div></div>
+            <p style="font-size:13px;color:#6B6760;line-height:1.5;margin:12px 2px 0;">It becomes an inline field. Type, then confirm (✓) or cancel (✕).</p>
+          </div>
+<div style="align-self:center;flex:none;color:#B7B0A4;font-size:22px;padding:0 4px;margin-top:18px;">→</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#E5443B;margin-bottom:12px;">3 · SAVED</div>
+            <div style="background:#fff;border:1px solid #E4E7EC;border-radius:10px;padding:18px;min-height:128px;display:flex;align-items:center;"><div style="font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;"><div style="font-size:13.5px;color:#15243B;line-height:1.5;">Now monitoring REST traffic in <strong style="font-weight:600;">production</strong>.</div><div style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:11.5px;font-weight:600;color:#1E874B;background:#E7F6ED;border-radius:20px;padding:3px 11px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1E874B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><polyline points="20 6 9 17 4 12"/></svg> Saved</div></div></div>
+            <p style="font-size:13px;color:#6B6760;line-height:1.5;margin:12px 2px 0;">Saved in place. No dialog, no page reload.</p>
+          </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#8A877E;margin-bottom:14px;">COPY · REST DOC URL</div>
+          <div style="background:#fff;border:1px solid #E4E7EC;border-radius:10px;padding:18px;">
+            <div style="display:flex;align-items:center;gap:10px;background:#F5F7FA;border:1px solid #E4E7EC;border-radius:8px;padding:9px 12px;font-family:system-ui,sans-serif;"><span style="flex:1;font-size:13px;color:#1B5FC4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">https://example.com/api/docs</span><span style="flex:none;display:inline-flex;align-items:center;gap:6px;border-left:1px solid #DDE1E6;padding-left:10px;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1B5FC4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span></div>
+            <div style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:11.5px;font-weight:600;color:#1E874B;background:#E7F6ED;border-radius:20px;padding:3px 11px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1E874B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><polyline points="20 6 9 17 4 12"/></svg> Copied to clipboard</div>
+          </div>
+          <p style="font-size:13px;color:#6B6760;line-height:1.5;margin:12px 2px 0;">One tap copies the endpoint. No selecting, no navigating away.</p>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#8A877E;margin-bottom:14px;">TOGGLE · MONITORING</div>
+          <div style="background:#fff;border:1px solid #E4E7EC;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:14px;font-family:system-ui,sans-serif;">
+            <div style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3A4250;"><span style="width:34px;height:20px;border-radius:10px;background:#1B5FC4;position:relative;display:inline-block;flex:none;"><span style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:#fff;"></span></span> Process Monitor</div>
+            <div style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3A4250;"><span style="width:34px;height:20px;border-radius:10px;background:#1B5FC4;position:relative;display:inline-block;flex:none;"><span style="position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:#fff;"></span></span> Process Instrumentation</div>
+          </div>
+          <p style="font-size:13px;color:#6B6760;line-height:1.5;margin:12px 2px 0;">Flip live monitoring and instrumentation on or off, right from the expanded panel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 · IN CONTEXT ============ -->
+  <section style="border-top:1px solid #DEDCD4;">
+    <div style="max-width:1180px;margin:0 auto;padding:82px 32px;">
+      <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#E5443B;">06</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#8A877E;text-transform:uppercase;">In Context</span>
+      </div>
+      <h2 style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px;">Above the work</h2>
+      <p style="font-size:18px;color:#46443D;max-width:620px;margin:0 0 40px;">On the live monitoring screen the header sits above a dense list, diagram and chart. Collapsing it hands real estate straight back to the task.</p>
+
+      <div style="border-radius:14px;overflow:hidden;background:#fff;border:1px solid #DDD9CF;box-shadow:0 18px 44px -28px rgba(0,0,0,.3);">
+        <iframe title="TIBCO application header" scrolling="no" title="TIBCO header (in context)" scrolling="no" style="display:block;width:100%;height:276px;border:0;background:#fff;border-bottom:1px solid #EEF0F2;" srcdoc="<!DOCTYPE html><html><head><style>
+    .sc-placeholder{background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:rgba(0,0,0,.7);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:rgba(0,0,0,.5);background:rgba(0,0,0,.05);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      section, article, figure, table { break-inside: avoid; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  </style>
+<meta charset=&quot;utf-8&quot;>
+<meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;>
+
+<style>x-dc{display:none!important}</style><style></style><style data-dc-tpl=&quot;1&quot;>
+@font-face {
+  font-family: 'primeicons';
+  font-display: block;
+  src: url(&quot;&quot;) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+.pi { font-family: 'primeicons'; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1; display: inline-block; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.pi:before { backface-visibility: hidden; }
+
+@keyframes hdrDropIn { from { opacity: 0; transform: translateY(-10px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes hdrPop { 0% { opacity: 0; transform: scale(.4); } 55% { opacity: 1; transform: scale(1.18); } 100% { transform: scale(1); } }
+@keyframes hdrInfoIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hdrFadeIn { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hdrPulse { 0% { box-shadow: 0 0 0 0 rgba(39,174,96,.5); } 70% { box-shadow: 0 0 0 7px rgba(39,174,96,0); } 100% { box-shadow: 0 0 0 0 rgba(39,174,96,0); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; } }
+*{box-sizing:border-box;}html,body{margin:0;padding:0;}
+</style></head>
+<body>
+
+<div id=&quot;dc-root&quot;><div class=&quot;sc-host&quot; data-sc-name=&quot;tibco-header&quot;><div style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Helvetica, Arial, sans-serif; color: rgb(51, 65, 85); background: rgb(255, 255, 255);&quot;>
+  <div style=&quot;position: relative; padding: 16px 26px 14px; display: flex; flex-direction: column; gap: 12px; border-bottom: 1px solid rgb(238, 240, 243);&quot;>
+    <div style=&quot;position: absolute; top: 0px; right: 0px; display: flex; align-items: center; gap: 7px; background: rgb(239, 242, 247); border-radius: 0px 0px 0px 12px; padding: 2px 14px; height: 22px; z-index: 30;&quot;>
+      <span style=&quot;font-size: 12px; font-weight: 400; color: rgb(23, 116, 229); white-space: nowrap; cursor: pointer;&quot;>Oregon (us-west-2)</span>
+      <span style=&quot;display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; color: rgb(23, 116, 229);&quot;><svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><path d=&quot;M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z&quot;/><circle cx=&quot;12&quot; cy=&quot;10&quot; r=&quot;3&quot;/></svg></span>
+      <span style=&quot;display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; color: rgb(23, 116, 229);&quot;><svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><path d=&quot;M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z&quot;/><polyline points=&quot;14 2 14 8 20 8&quot;/></svg></span>
+      <span style=&quot;display: inline-flex; align-items: center; gap: 7px; cursor: pointer;&quot;>
+        <svg width=&quot;15&quot; height=&quot;15&quot; viewBox=&quot;0 0 24 24&quot; style=&quot;flex-shrink: 0; display: block;&quot;><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;10.4&quot; fill=&quot;none&quot; stroke=&quot;#0E4F9E&quot; stroke-width=&quot;1.7&quot;></circle><g fill=&quot;#0E4F9E&quot;><circle cx=&quot;12&quot; cy=&quot;9.4&quot; r=&quot;3.4&quot;></circle><circle cx=&quot;12&quot; cy=&quot;20.5&quot; r=&quot;6.4&quot;></circle></g></svg>
+        <span style=&quot;font-size: 12px; font-weight: 400; color: rgb(23, 116, 229); white-space: nowrap;&quot;>Nikhil</span>
+      </span>
+    </div>
+    <div style=&quot;display: flex; align-items: center; gap: 0px;&quot;>
+      <span style=&quot;display: inline-flex; align-items: center; background: rgb(231, 231, 246); color: rgb(91, 91, 138); font-size: 12px; font-weight: 600; padding: 4px 16px 4px 12px; clip-path: polygon(0px 0px, calc(100% - 9px) 0px, 100% 50%, calc(100% - 9px) 100%, 0px 100%); cursor: default;&quot;>DP US WEST</span>
+      <span style=&quot;display: inline-flex; align-items: center; background: rgb(231, 231, 246); color: rgb(91, 91, 138); font-size: 12px; font-weight: 600; margin-left: -5px; padding: 4px 16px 4px 18px; clip-path: polygon(0px 0px, calc(100% - 9px) 0px, 100% 50%, calc(100% - 9px) 100%, 0px 100%, 9px 50%); cursor: default;&quot;>BW5</span>
+    </div>
+    <div style=&quot;display: flex; align-items: flex-start; justify-content: space-between;&quot;>
+      <div style=&quot;flex: 1 1 0%; min-width: 0px;&quot;>
+        <div style=&quot;display: flex; align-items: center; gap: 10px;&quot;>
+          <span style=&quot;width: 10px; height: 10px; border-radius: 50%; background: rgb(39, 174, 96); display: inline-block; animation: 2.4s ease-out 0s infinite normal none running hdrPulse;&quot;></span>
+          <span style=&quot;font-size: 22px; font-weight: 600; color: rgb(51, 65, 85); white-space: nowrap;&quot;>TIBCO BW5 application</span>
+        </div>
+        <div style=&quot;display: flex; align-items: flex-start; gap: 10px; margin-top: 9px;&quot;>
+          <span style=&quot;display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgb(23, 116, 229); color: rgb(23, 116, 229); border-radius: 6px; padding: 3px 9px; font-size: 13px; font-weight: 600; cursor: pointer; flex-shrink: 0; min-width: 64px; justify-content: center;&quot;>less <svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><polyline points=&quot;18 15 12 9 6 15&quot;/></svg></span>
+            <span style=&quot;color: rgb(51, 65, 85); font-size: 14px;&quot;>A sample TIBCO BusinessWorks application demonstrating basic REST binding for process monitoring.</span>
+            <svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;color:rgb(23,116,229);&quot;><path d=&quot;M12 20h9&quot;/><path d=&quot;M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z&quot;/></svg>
+        </div>
+        <div style=&quot;display: flex; flex-wrap: wrap; align-items: center; gap: 12px 0px; margin-top: 14px; font-size: 14px; color: rgb(51, 65, 85);&quot;>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>App instance:&amp;nbsp;</span>Sample App Instance</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Version:&amp;nbsp;</span>11.0.0</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>App space:&amp;nbsp;</span>Tibco BW Space</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;color:rgb(138,150,166);margin-right:7px;&quot;><rect x=&quot;3&quot; y=&quot;3&quot; width=&quot;18&quot; height=&quot;18&quot; rx=&quot;2&quot;/><circle cx=&quot;8.5&quot; cy=&quot;8.5&quot; r=&quot;1.5&quot;/><polyline points=&quot;21 15 16 10 5 21&quot;/></svg><span style=&quot;color: rgb(138, 150, 166);&quot;>Profile:&amp;nbsp;</span>Default Profile</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Rest doc URL:&amp;nbsp;</span>https://example.com/api/docs<svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;color:rgb(23,116,229);margin-left:8px;&quot;><rect x=&quot;9&quot; y=&quot;9&quot; width=&quot;13&quot; height=&quot;13&quot; rx=&quot;2&quot;/><path d=&quot;M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1&quot;/></svg></span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center; gap: 8px;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Job:</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(227, 245, 234); color: rgb(23, 114, 69); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Created 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(220, 230, 243); color: rgb(23, 116, 229); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Running 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(253, 238, 222); color: rgb(196, 113, 28); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Faulted 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(238, 240, 243); color: rgb(107, 119, 133); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Cancelled 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(238, 240, 243); color: rgb(107, 119, 133); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Scheduled 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(238, 240, 243); color: rgb(107, 119, 133); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Pagedout 0</span>
+            </span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center; gap: 10px;&quot;><span style=&quot;color: rgb(51, 65, 85);&quot;>Process Monitor</span><span style=&quot;width: 38px; height: 20px; border-radius: 10px; background: rgb(14, 79, 158); position: relative; flex-shrink: 0;&quot;><span style=&quot;position: absolute; top: 2px; left: 20px; width: 16px; height: 16px; border-radius: 8px; background: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px;&quot;></span></span></span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center; gap: 10px;&quot;><span style=&quot;color: rgb(51, 65, 85);&quot;>Process Instrumentation</span><span style=&quot;width: 38px; height: 20px; border-radius: 10px; background: rgb(14, 79, 158); position: relative; flex-shrink: 0;&quot;><span style=&quot;position: absolute; top: 2px; left: 20px; width: 16px; height: 16px; border-radius: 8px; background: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px;&quot;></span></span></span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Last modified:&amp;nbsp;</span>22 Mar 21, 12:35PM</span>
+          </div>
+      </div>
+      <div style=&quot;display: flex; align-items: center; gap: 20px; color: rgb(14, 79, 158); font-size: 20px; flex-shrink: 0; position: relative;&quot;>
+        <span style=&quot;position: relative; display: inline-flex; cursor: pointer; line-height: 1;&quot;><svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><path d=&quot;M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z&quot;/><line x1=&quot;7&quot; y1=&quot;7&quot; x2=&quot;7.01&quot; y2=&quot;7&quot;/></svg></span>
+        <svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;3&quot;/><path d=&quot;M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z&quot;/></svg>
+        <svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot; stroke=&quot;none&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><circle cx=&quot;12&quot; cy=&quot;5&quot; r=&quot;1.7&quot;/><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;1.7&quot;/><circle cx=&quot;12&quot; cy=&quot;19&quot; r=&quot;1.7&quot;/></svg>
+      </div>
+    </div>
+  </div></div></div></div>
+
+</body></html>"></iframe>
+        <!-- mock body -->
+        <div style="padding:16px 20px;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><span style="font-size:13px;font-weight:700;color:#16140F;">Process Monitoring</span><span style="font-size:11px;color:#6B7280;border:1px solid #E3E5E8;border-radius:5px;padding:2px 9px;">Success ⌄</span><span style="font-size:11px;color:#6B7280;border:1px solid #E3E5E8;border-radius:5px;padding:2px 9px;">All Engines ⌄</span><span style="font-size:11px;color:#fff;background:#1B4FD6;border-radius:5px;padding:2px 11px;margin-left:auto;">Apply</span></div>
+          <div style="display:flex;gap:14px;">
+            <div style="flex:1.1;display:flex;flex-direction:column;gap:9px;">
+              <div style="height:18px;border:1px solid #EEF0F2;border-radius:5px;"></div>
+              <div style="display:flex;align-items:center;gap:8px;"><span style="width:11px;height:11px;border-radius:50%;background:#2E9E4F;flex:none;"></span><div style="height:9px;border-radius:4px;background:#E3E6EA;flex:1;"></div><div style="height:8px;width:38px;border-radius:4px;background:#EEF0F2;"></div></div>
+              <div style="display:flex;align-items:center;gap:8px;"><span style="width:11px;height:11px;border-radius:50%;background:#2E9E4F;flex:none;"></span><div style="height:9px;border-radius:4px;background:#E3E6EA;flex:1;"></div><div style="height:8px;width:38px;border-radius:4px;background:#EEF0F2;"></div></div>
+              <div style="display:flex;align-items:center;gap:8px;"><span style="width:11px;height:11px;border-radius:50%;background:#2E9E4F;flex:none;"></span><div style="height:9px;border-radius:4px;background:#E3E6EA;flex:1;"></div><div style="height:8px;width:38px;border-radius:4px;background:#EEF0F2;"></div></div>
+              <div style="display:flex;align-items:center;gap:8px;"><span style="width:11px;height:11px;border-radius:50%;background:#2E9E4F;flex:none;"></span><div style="height:9px;border-radius:4px;background:#E3E6EA;flex:1;"></div><div style="height:8px;width:38px;border-radius:4px;background:#EEF0F2;"></div></div>
+            </div>
+            <div style="flex:1.3;display:flex;flex-direction:column;gap:9px;">
+              <div style="height:120px;border:1px solid #EEF0F2;border-radius:6px;background:repeating-linear-gradient(135deg,#F5F6F8 0 7px,#FAFBFC 7px 14px);position:relative;"><span style="position:absolute;left:9px;top:7px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#B0B4BA;">process diagram</span></div>
+              <div style="height:70px;border:1px solid #EEF0F2;border-radius:6px;background-image:radial-gradient(38% 120% at 33% 118%, rgba(34,160,90,.5), transparent 60%),radial-gradient(42% 135% at 60% 122%, rgba(43,111,219,.48), transparent 58%);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:18px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#E5443B;">↑ Expanded above the work</span>
+        <span style="font-size:14px;color:#6B6760;">Full context on show; collapsing to “info” hands every shed row back to the monitoring list.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 · COMPONENT MODEL ============ -->
+  <section style="border-top:1px solid #DEDCD4;background:#16140F;color:#F2F1EC;">
+    <div style="max-width:1180px;margin:0 auto;padding:82px 32px;">
+      <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#FF6B52;">07</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#8E8A80;text-transform:uppercase;">Component Model</span>
+      </div>
+      <h2 style="font-size:32px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px;color:#fff;">Composed from functions</h2>
+      <p style="font-size:18px;color:#B7B3A9;max-width:600px;margin:0 0 44px;">The visible anatomy maps one-to-one to the code. The metadata panel only mounts when expanded.</p>
+
+      <div style="background:#0E0D0A;border:1px solid #2C2A24;border-radius:12px;padding:30px 34px;font-family:'JetBrains Mono',monospace;font-size:14.5px;line-height:2;overflow-x:auto;">
+        <div><span style="color:#8E8A80;">&lt;</span><span style="color:#FF6B52;">AppHeader</span> <span style="color:#9DB6F0;">state</span><span style="color:#8E8A80;">=</span><span style="color:#9BD8A0;">{collapsed | expanded}</span><span style="color:#8E8A80;">&gt;</span></div>
+        <div style="color:#CFCBC1;">├─ <span style="color:#8E8A80;">&lt;</span><span style="color:#FF6B52;">ContextBar</span><span style="color:#8E8A80;">&gt;</span> <span style="color:#605C53;">// RegionSelector · UserMenu</span></div>
+        <div style="color:#CFCBC1;">├─ <span style="color:#8E8A80;">&lt;</span><span style="color:#FF6B52;">Breadcrumb</span> <span style="color:#8E8A80;">/&gt;</span> <span style="color:#605C53;">// chevron hierarchy chips</span></div>
+        <div style="color:#CFCBC1;">├─ <span style="color:#8E8A80;">&lt;</span><span style="color:#FF6B52;">TitleRow</span><span style="color:#8E8A80;">&gt;</span> <span style="color:#605C53;">// StatusDot · Title · Actions</span></div>
+        <div style="color:#CFCBC1;">├─ <span style="color:#8E8A80;">&lt;</span><span style="color:#FF6B52;">DescriptionRow</span><span style="color:#8E8A80;">&gt;</span> <span style="color:#605C53;">// InfoToggle · EditableText</span></div>
+        <div style="color:#CFCBC1;">└─ <span style="color:#8E8A80;">&lt;</span><span style="color:#FF6B52;">MetadataPanel</span> <span style="color:#9DBEF0;">visible</span><span style="color:#8E8A80;">=</span><span style="color:#9BD8A0;">{isExpanded}</span><span style="color:#8E8A80;">&gt;</span></div>
+        <div style="color:#CFCBC1;padding-left:22px;">├─ <span style="color:#8E8A80;">&lt;</span><span style="color:#FF6B52;">MetaField</span> <span style="color:#8E8A80;">/&gt;</span> <span style="color:#605C53;">// instance · version · space · profile</span></div>
+        <div style="color:#CFCBC1;padding-left:22px;">├─ <span style="color:#8E8A80;">&lt;</span><span style="color:#FF6B52;">JobStatusGroup</span> <span style="color:#8E8A80;">/&gt;</span> <span style="color:#605C53;">// created · running · faulted…</span></div>
+        <div style="color:#CFCBC1;padding-left:22px;">└─ <span style="color:#8E8A80;">&lt;</span><span style="color:#FF6B52;">ToggleGroup</span> <span style="color:#8E8A80;">/&gt;</span> <span style="color:#605C53;">// monitor · instrumentation</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 · FINALE (FULL WIDTH, ANIMATED) ============ -->
+  <section style="border-top:1px solid #DEDCD4;background:#16140F;color:#F2F1EC;overflow:hidden;">
+    <div style="max-width:1180px;margin:0 auto;padding:90px 32px 40px;text-align:center;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#FF6B52;margin-bottom:22px;">08 · THE COMPONENT, LIVE</div>
+      <h2 style="font-size:40px;font-weight:800;letter-spacing:-.02em;line-height:1.02;margin:0 0 14px;color:#fff;">Small parts, one coherent header.</h2>
+      <p style="font-size:18px;color:#B7B3A9;margin:0 auto;max-width:560px;">Watch it cycle through both states: the same component, every interaction, full width.</p>
+    </div>
+
+    <!-- full-bleed animated header -->
+    <div style="padding:0 24px 30px;">
+      <div style="max-width:1320px;margin:0 auto;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 40px 90px -40px rgba(0,0,0,.7);">
+        <iframe title="TIBCO application header" scrolling="no" title="TIBCO header (finale)" style="display:block;width:100%;height:280px;border:0;background:#fff;" srcdoc="<!DOCTYPE html><html><head><style>
+    .sc-placeholder{background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:rgba(0,0,0,.7);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:rgba(0,0,0,.5);background:rgba(0,0,0,.05);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      section, article, figure, table { break-inside: avoid; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  </style>
+<meta charset=&quot;utf-8&quot;>
+<meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;>
+
+<style>x-dc{display:none!important}</style><style></style><style data-dc-tpl=&quot;1&quot;>
+@font-face {
+  font-family: 'primeicons';
+  font-display: block;
+  src: url(&quot;&quot;) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+.pi { font-family: 'primeicons'; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1; display: inline-block; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.pi:before { backface-visibility: hidden; }
+
+@keyframes hdrDropIn { from { opacity: 0; transform: translateY(-10px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes hdrPop { 0% { opacity: 0; transform: scale(.4); } 55% { opacity: 1; transform: scale(1.18); } 100% { transform: scale(1); } }
+@keyframes hdrInfoIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hdrFadeIn { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hdrPulse { 0% { box-shadow: 0 0 0 0 rgba(39,174,96,.5); } 70% { box-shadow: 0 0 0 7px rgba(39,174,96,0); } 100% { box-shadow: 0 0 0 0 rgba(39,174,96,0); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; } }
+*{box-sizing:border-box;}html,body{margin:0;padding:0;}
+</style></head>
+<body>
+
+<div id=&quot;dc-root&quot;><div class=&quot;sc-host&quot; data-sc-name=&quot;tibco-header&quot;><div style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Helvetica, Arial, sans-serif; color: rgb(51, 65, 85); background: rgb(255, 255, 255);&quot;>
+  <div style=&quot;position: relative; padding: 16px 26px 14px; display: flex; flex-direction: column; gap: 12px; border-bottom: 1px solid rgb(238, 240, 243);&quot;>
+    <div style=&quot;position: absolute; top: 0px; right: 0px; display: flex; align-items: center; gap: 7px; background: rgb(239, 242, 247); border-radius: 0px 0px 0px 12px; padding: 2px 14px; height: 22px; z-index: 30;&quot;>
+      <span style=&quot;font-size: 12px; font-weight: 400; color: rgb(23, 116, 229); white-space: nowrap; cursor: pointer;&quot;>Oregon (us-west-2)</span>
+      <span style=&quot;display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; color: rgb(23, 116, 229);&quot;><svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><path d=&quot;M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z&quot;/><circle cx=&quot;12&quot; cy=&quot;10&quot; r=&quot;3&quot;/></svg></span>
+      <span style=&quot;display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; color: rgb(23, 116, 229);&quot;><svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><path d=&quot;M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z&quot;/><polyline points=&quot;14 2 14 8 20 8&quot;/></svg></span>
+      <span style=&quot;display: inline-flex; align-items: center; gap: 7px; cursor: pointer;&quot;>
+        <svg width=&quot;15&quot; height=&quot;15&quot; viewBox=&quot;0 0 24 24&quot; style=&quot;flex-shrink: 0; display: block;&quot;><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;10.4&quot; fill=&quot;none&quot; stroke=&quot;#0E4F9E&quot; stroke-width=&quot;1.7&quot;></circle><g fill=&quot;#0E4F9E&quot;><circle cx=&quot;12&quot; cy=&quot;9.4&quot; r=&quot;3.4&quot;></circle><circle cx=&quot;12&quot; cy=&quot;20.5&quot; r=&quot;6.4&quot;></circle></g></svg>
+        <span style=&quot;font-size: 12px; font-weight: 400; color: rgb(23, 116, 229); white-space: nowrap;&quot;>Nikhil</span>
+      </span>
+    </div>
+    <div style=&quot;display: flex; align-items: center; gap: 0px;&quot;>
+      <span style=&quot;display: inline-flex; align-items: center; background: rgb(231, 231, 246); color: rgb(91, 91, 138); font-size: 12px; font-weight: 600; padding: 4px 16px 4px 12px; clip-path: polygon(0px 0px, calc(100% - 9px) 0px, 100% 50%, calc(100% - 9px) 100%, 0px 100%); cursor: default;&quot;>DP US WEST</span>
+      <span style=&quot;display: inline-flex; align-items: center; background: rgb(231, 231, 246); color: rgb(91, 91, 138); font-size: 12px; font-weight: 600; margin-left: -5px; padding: 4px 16px 4px 18px; clip-path: polygon(0px 0px, calc(100% - 9px) 0px, 100% 50%, calc(100% - 9px) 100%, 0px 100%, 9px 50%); cursor: default;&quot;>BW5</span>
+    </div>
+    <div style=&quot;display: flex; align-items: flex-start; justify-content: space-between;&quot;>
+      <div style=&quot;flex: 1 1 0%; min-width: 0px;&quot;>
+        <div style=&quot;display: flex; align-items: center; gap: 10px;&quot;>
+          <span style=&quot;width: 10px; height: 10px; border-radius: 50%; background: rgb(39, 174, 96); display: inline-block; animation: 2.4s ease-out 0s infinite normal none running hdrPulse;&quot;></span>
+          <span style=&quot;font-size: 22px; font-weight: 600; color: rgb(51, 65, 85); white-space: nowrap;&quot;>TIBCO BW5 application</span>
+        </div>
+        <div style=&quot;display: flex; align-items: flex-start; gap: 10px; margin-top: 9px;&quot;>
+          <span style=&quot;display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgb(23, 116, 229); color: rgb(23, 116, 229); border-radius: 6px; padding: 3px 9px; font-size: 13px; font-weight: 600; cursor: pointer; flex-shrink: 0; min-width: 64px; justify-content: center;&quot;>less <svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><polyline points=&quot;18 15 12 9 6 15&quot;/></svg></span>
+            <span style=&quot;color: rgb(51, 65, 85); font-size: 14px;&quot;>A sample TIBCO BusinessWorks application demonstrating basic REST binding for process monitoring.</span>
+            <svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;color:rgb(23,116,229);&quot;><path d=&quot;M12 20h9&quot;/><path d=&quot;M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z&quot;/></svg>
+        </div>
+        <div style=&quot;display: flex; flex-wrap: wrap; align-items: center; gap: 12px 0px; margin-top: 14px; font-size: 14px; color: rgb(51, 65, 85);&quot;>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>App instance:&amp;nbsp;</span>Sample App Instance</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Version:&amp;nbsp;</span>11.0.0</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>App space:&amp;nbsp;</span>Tibco BW Space</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;color:rgb(138,150,166);margin-right:7px;&quot;><rect x=&quot;3&quot; y=&quot;3&quot; width=&quot;18&quot; height=&quot;18&quot; rx=&quot;2&quot;/><circle cx=&quot;8.5&quot; cy=&quot;8.5&quot; r=&quot;1.5&quot;/><polyline points=&quot;21 15 16 10 5 21&quot;/></svg><span style=&quot;color: rgb(138, 150, 166);&quot;>Profile:&amp;nbsp;</span>Default Profile</span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Rest doc URL:&amp;nbsp;</span>https://example.com/api/docs<svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;color:rgb(23,116,229);margin-left:8px;&quot;><rect x=&quot;9&quot; y=&quot;9&quot; width=&quot;13&quot; height=&quot;13&quot; rx=&quot;2&quot;/><path d=&quot;M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1&quot;/></svg></span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center; gap: 8px;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Job:</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(227, 245, 234); color: rgb(23, 114, 69); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Created 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(220, 230, 243); color: rgb(23, 116, 229); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Running 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(253, 238, 222); color: rgb(196, 113, 28); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Faulted 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(238, 240, 243); color: rgb(107, 119, 133); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Cancelled 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(238, 240, 243); color: rgb(107, 119, 133); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Scheduled 0</span>
+              <span style=&quot;display: inline-flex; align-items: center; background: rgb(238, 240, 243); color: rgb(107, 119, 133); border-radius: 4px; padding: 3px 10px; font-size: 13px;&quot;>Pagedout 0</span>
+            </span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center; gap: 10px;&quot;><span style=&quot;color: rgb(51, 65, 85);&quot;>Process Monitor</span><span style=&quot;width: 38px; height: 20px; border-radius: 10px; background: rgb(14, 79, 158); position: relative; flex-shrink: 0;&quot;><span style=&quot;position: absolute; top: 2px; left: 20px; width: 16px; height: 16px; border-radius: 8px; background: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px;&quot;></span></span></span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center; gap: 10px;&quot;><span style=&quot;color: rgb(51, 65, 85);&quot;>Process Instrumentation</span><span style=&quot;width: 38px; height: 20px; border-radius: 10px; background: rgb(14, 79, 158); position: relative; flex-shrink: 0;&quot;><span style=&quot;position: absolute; top: 2px; left: 20px; width: 16px; height: 16px; border-radius: 8px; background: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px;&quot;></span></span></span>
+            <span style=&quot;color: rgb(212, 218, 225); margin: 0px 14px;&quot;>|</span>
+            <span style=&quot;display: inline-flex; align-items: center;&quot;><span style=&quot;color: rgb(138, 150, 166);&quot;>Last modified:&amp;nbsp;</span>22 Mar 21, 12:35PM</span>
+          </div>
+      </div>
+      <div style=&quot;display: flex; align-items: center; gap: 20px; color: rgb(14, 79, 158); font-size: 20px; flex-shrink: 0; position: relative;&quot;>
+        <span style=&quot;position: relative; display: inline-flex; cursor: pointer; line-height: 1;&quot;><svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><path d=&quot;M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z&quot;/><line x1=&quot;7&quot; y1=&quot;7&quot; x2=&quot;7.01&quot; y2=&quot;7&quot;/></svg></span>
+        <svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;3&quot;/><path d=&quot;M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z&quot;/></svg>
+        <svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot; stroke=&quot;none&quot; style=&quot;flex-shrink:0;display:inline-block;vertical-align:middle;&quot;><circle cx=&quot;12&quot; cy=&quot;5&quot; r=&quot;1.7&quot;/><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;1.7&quot;/><circle cx=&quot;12&quot; cy=&quot;19&quot; r=&quot;1.7&quot;/></svg>
+      </div>
+    </div>
+  </div></div></div></div>
+
+</body></html>"></iframe>
+      </div>
+    </div>
+
+    <!-- animated interaction chips -->
+    <div style="max-width:1180px;margin:0 auto;padding:18px 32px 96px;">
+      <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
+                  <span class="calloutChip" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:#E7E3D9;background:#26241E;border:1px solid #34312A;border-radius:30px;padding:9px 18px;animation-delay:0s;">BREADCRUMB NAV</span>
+          <span class="calloutChip" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:#E7E3D9;background:#26241E;border:1px solid #34312A;border-radius:30px;padding:9px 18px;animation-delay:.1s;">REGION SELECTOR</span>
+          <span class="calloutChip" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:#E7E3D9;background:#26241E;border:1px solid #34312A;border-radius:30px;padding:9px 18px;animation-delay:.2s;">USER MENU</span>
+          <span class="calloutChip" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:#E7E3D9;background:#26241E;border:1px solid #34312A;border-radius:30px;padding:9px 18px;animation-delay:.3s;">ACTION CLUSTER</span>
+          <span class="calloutChip" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:#E7E3D9;background:#26241E;border:1px solid #34312A;border-radius:30px;padding:9px 18px;animation-delay:.4s;">EDITABLE DESCRIPTION</span>
+          <span class="calloutChip" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:#E7E3D9;background:#26241E;border:1px solid #34312A;border-radius:30px;padding:9px 18px;animation-delay:.5s;">MONITOR SWITCHES</span>
+          <span class="calloutChip" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:#E7E3D9;background:#26241E;border:1px solid #34312A;border-radius:30px;padding:9px 18px;animation-delay:.6s;">EXPAND / COLLAPSE</span>
+      </div>
+      <div style="text-align:center;margin-top:46px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#605C53;">THANK YOU · QUESTIONS WELCOME</div>
+    </div>
+  </section>
+
+</div>
+</div>
+<script>(function(){var DW=1180,TARGET=400;var st=document.getElementById("__stage");function fit(){var avail=document.documentElement.clientWidth;var w=Math.min(avail,TARGET);var s=w/DW;st.style.transform="scale("+s+")";st.style.marginLeft=Math.max(0,(avail-w)/2)+"px";document.body.style.height=(st.scrollHeight*s)+"px";}window.addEventListener("resize",fit);window.addEventListener("load",fit);fit();setTimeout(fit,400);setTimeout(fit,1200);})();</script>
+</body>
+</html>
