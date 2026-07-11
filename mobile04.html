@@ -17,6 +17,30 @@
       This page requires JavaScript to display.
     </div>
   </noscript>
+
+  <script>
+  /* Auto-height reporter: tells the parent Framer page how tall this content is */
+  (function () {
+    var last = 0;
+    function send() {
+      var h = Math.max(
+        document.documentElement.scrollHeight,
+        document.body ? document.body.scrollHeight : 0
+      );
+      if (h > 0 && h !== last) {
+        last = h;
+        parent.postMessage({ type: "embed-height", height: h }, "*");
+      }
+    }
+    if (window.ResizeObserver) {
+      new ResizeObserver(send).observe(document.documentElement);
+      if (document.body) new ResizeObserver(send).observe(document.body);
+    }
+    window.addEventListener("load", send);
+    document.addEventListener("DOMContentLoaded", send);
+    setInterval(send, 1000); /* safety net for late JS hydration */
+  })();
+  </script>
 </head>
 <body>
   <div id="__bundler_thumbnail">
