@@ -199,7 +199,7 @@
     .process,.pgrid,.notes{grid-template-columns:repeat(2,1fr)}
   }
 </style>
-<script>(function(){var last=0;function send(){var h=Math.max(document.documentElement.scrollHeight,document.body?document.body.scrollHeight:0);if(h>0&&h!==last){last=h;parent.postMessage({type:"embed-height",height:h},"*")}}if(window.ResizeObserver){new ResizeObserver(send).observe(document.documentElement)}window.addEventListener("load",send);setInterval(send,1000)})();</script>
+<script>(function(){var last=0;function send(){var el=document.body;if(!el)return;var h=Math.ceil(el.getBoundingClientRect().height);if(h>0&&h!==last){last=h;parent.postMessage({type:"embed-height",height:h},"*")}}function init(){if(window.ResizeObserver&&document.body){new ResizeObserver(send).observe(document.body)}send()}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init)}else{init()}window.addEventListener("load",send);setInterval(send,1000)})();</script>
 </head>
 <body>
 
