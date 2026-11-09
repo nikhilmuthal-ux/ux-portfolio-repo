@@ -1961,6 +1961,10 @@
 
   /* when the Framer embed hosts the bar, hide the copy inside the iframe */
   html.host-nav .topbar { display: none !important; }
+
+  /* every screen grid: titles only, no subtitles */
+  .pgrid .pcap-d { display: none !important; }
+  .pgrid .pcard { gap: 14px; }
 </style>
 <script>(function(){var last=0;function send(){var el=document.body;if(!el)return;var h=Math.ceil(el.getBoundingClientRect().height);if(h>0&&h!==last){last=h;parent.postMessage({type:"embed-height",height:h},"*")}}function init(){if(window.ResizeObserver&&document.body){new ResizeObserver(send).observe(document.body)}send()}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init)}else{init()}window.addEventListener("load",send);setInterval(send,1000)})();</script>
 </head>
