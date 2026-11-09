@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script>if(window.parent!==window)document.documentElement.classList.add('in-embed');</script><style>.in-embed .cover{height:min(56.25vw,820px)!important;min-height:460px!important}.in-embed .topbar{display:none!important}</style>
+<html lang="en"><head><script>if(window.parent!==window)document.documentElement.classList.add('in-embed');</script><style>.in-embed .cover{height:min(56.25vw,820px)!important;min-height:460px!important}.in-embed:not(.has-vp) .topbar{display:none!important}.in-embed .topbar{position:absolute!important;top:0!important;left:0;right:0;will-change:transform}@media (min-width:1340px){.in-embed .topbar{right:auto}}</style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Block colours, ink</title>
@@ -3871,7 +3871,7 @@
 </div>
 
 <script>(function(){
-  var links=[].slice.call(document.querySelectorAll('.topbar-links a'));
+  if(document.documentElement.classList.contains('in-embed')) return; var links=[].slice.call(document.querySelectorAll('.topbar-links a'));
   var ids=links.map(function(a){ return a.getAttribute('href').slice(1); });
   function mark(){
     var best=0;
@@ -3886,7 +3886,7 @@
   mark();
 })();</script>
 <script>(function(){
-  var bar=document.getElementById('topbar');
+  if(document.documentElement.classList.contains('in-embed')) return; var bar=document.getElementById('topbar');
   var cover=document.querySelector('.cover');
   function toggle(){
     var past = cover ? cover.getBoundingClientRect().bottom <= 40 : scrollY > 200;
@@ -3898,4 +3898,32 @@
 })();</script>
 
 
+<script>(function(){
+  if(window.parent===window) return;
+  var root=document.documentElement, bar=document.getElementById('topbar'); if(!bar) return;
+  var cover=document.querySelector('.cover'), rail=window.matchMedia('(min-width:1340px)');
+  var links=[].slice.call(bar.querySelectorAll('.topbar-links a'));
+  var vp=null;
+  function docY(el){ return el.getBoundingClientRect().top; }
+  function update(){
+    if(!vp) return;
+    root.classList.add('has-vp');
+    var h=vp.bottom-vp.top;
+    bar.style.transform='translateY('+vp.top+'px)';
+    bar.style.height=rail.matches? h+'px' : '';
+    var past = cover ? (docY(cover)+cover.offsetHeight) <= vp.top+40 : vp.top>200;
+    bar.classList.toggle('show', past);
+    var best=0;
+    links.forEach(function(a,i){ var el=document.getElementById(a.getAttribute('href').slice(1)); if(el && docY(el)-vp.top<=140) best=i; });
+    links.forEach(function(a,i){ a.classList.toggle('on', i===best); });
+  }
+  window.addEventListener('message',function(e){ var d=e.data; if(d&&d.type==='embed-viewport'&&isFinite(d.top)){ vp={top:d.top,bottom:d.bottom}; update(); } });
+  bar.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="#"]'); if(!a) return;
+    var el=document.getElementById(a.getAttribute('href').slice(1)); if(!el) return;
+    e.preventDefault();
+    var offset = rail.matches ? 24 : (bar.offsetHeight+16);
+    parent.postMessage({type:'embed-scroll-to', y: Math.max(0, docY(el)-offset)}, '*');
+  });
+})();</script>
 </body></html>
