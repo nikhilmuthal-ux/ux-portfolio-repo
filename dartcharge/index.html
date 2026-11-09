@@ -1958,6 +1958,9 @@
 
   /* the dark prototype band closes the page: no empty strip below it */
   .page, .csx .page { padding-bottom: 0 !important; }
+
+  /* when the Framer embed hosts the bar, hide the copy inside the iframe */
+  html.host-nav .topbar { display: none !important; }
 </style>
 <script>(function(){var last=0;function send(){var el=document.body;if(!el)return;var h=Math.ceil(el.getBoundingClientRect().height);if(h>0&&h!==last){last=h;parent.postMessage({type:"embed-height",height:h},"*")}}function init(){if(window.ResizeObserver&&document.body){new ResizeObserver(send).observe(document.body)}send()}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init)}else{init()}window.addEventListener("load",send);setInterval(send,1000)})();</script>
 </head>
@@ -4235,7 +4238,10 @@
   addEventListener('resize',update);
   /* the parent (Framer AutoHeightEmbed) posts {type:"embed-scroll", offset} as it scrolls */
   addEventListener('message',function(e){
-    var d=e.data; if(d && d.type==='embed-viewport' && typeof d.top==='number'){ d={type:'embed-scroll',offset:d.top}; } if(d && d.type==='embed-scroll' && typeof d.offset==='number'){ if(!embed){ embed=true; document.documentElement.classList.add('parent-scroll'); } off=d.offset; update(); }
+    var d=e.data;
+    /* the Framer embed draws the bar itself, outside the iframe, so it never shakes */
+    if(d && d.type==='embed-nav-ack'){ if(!hostNav){ hostNav=true; document.documentElement.classList.add('host-nav'); } return; }
+    if(d && d.type==='embed-viewport' && typeof d.top==='number'){ d={type:'embed-scroll',offset:d.top}; } if(d && d.type==='embed-scroll' && typeof d.offset==='number'){ if(!embed){ embed=true; document.documentElement.classList.add('parent-scroll'); } off=d.offset; update(); }
   });
   {
     /* in page jumps: ask the parent to scroll, since the iframe itself never scrolls */
@@ -4247,6 +4253,16 @@
       });
     });
   }
+  var hostNav=false, lastSent='';
+  function sendNav(){
+    if(!embed || window.parent===window) return;
+    var items=links.map(function(a,i){ var el=document.getElementById(ids[i]); return { label:a.textContent.trim(), y: el ? Math.round(el.getBoundingClientRect().top - (embed?-0:0)) : 0 }; });
+    var msg={ type:'embed-nav', brand:(document.querySelector('.topbar-home')||{}).textContent||'', coverBottom: cover ? Math.round(cover.getBoundingClientRect().top + cover.offsetHeight) : 0, items: items };
+    var key=JSON.stringify(msg); if(key===lastSent) return; lastSent=key; parent.postMessage(msg,'*');
+  }
+  setInterval(function(){ lastSent=''; sendNav(); },2000);
+  addEventListener('load',sendNav); addEventListener('resize',sendNav);
+  addEventListener('message',function(e){ if(e.data && e.data.type==='embed-viewport') sendNav(); });
   update();
 })();</script>
 
