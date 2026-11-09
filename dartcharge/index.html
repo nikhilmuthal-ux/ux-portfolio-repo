@@ -1955,6 +1955,9 @@
   /* lightest ground: give white cards a hairline so they still separate */
   body:not(#_) .page .tt-m, body:not(#_) .page .rf-card, body:not(#_) .page .jt, body:not(#_) .page .dt-card, body:not(#_) .page .tt { border-color: #ECE7DC !important; }
 
+
+  /* the dark prototype band closes the page: no empty strip below it */
+  .page, .csx .page { padding-bottom: 0 !important; }
 </style>
 <script>(function(){var last=0;function send(){var el=document.body;if(!el)return;var h=Math.ceil(el.getBoundingClientRect().height);if(h>0&&h!==last){last=h;parent.postMessage({type:"embed-height",height:h},"*")}}function init(){if(window.ResizeObserver&&document.body){new ResizeObserver(send).observe(document.body)}send()}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init)}else{init()}window.addEventListener("load",send);setInterval(send,1000)})();</script>
 </head>
@@ -4232,7 +4235,7 @@
   addEventListener('resize',update);
   /* the parent (Framer AutoHeightEmbed) posts {type:"embed-scroll", offset} as it scrolls */
   addEventListener('message',function(e){
-    var d=e.data; if(d && d.type==='embed-scroll' && typeof d.offset==='number'){ if(!embed){ embed=true; document.documentElement.classList.add('parent-scroll'); } off=d.offset; update(); }
+    var d=e.data; if(d && d.type==='embed-viewport' && typeof d.top==='number'){ d={type:'embed-scroll',offset:d.top}; } if(d && d.type==='embed-scroll' && typeof d.offset==='number'){ if(!embed){ embed=true; document.documentElement.classList.add('parent-scroll'); } off=d.offset; update(); }
   });
   {
     /* in page jumps: ask the parent to scroll, since the iframe itself never scrolls */
@@ -4240,7 +4243,7 @@
       a.addEventListener('click',function(ev){
         var el=document.getElementById(a.getAttribute('href').slice(1)); if(!el || !embed) return;
         ev.preventDefault();
-        parent.postMessage({type:'embed-scrollto', top: el.getBoundingClientRect().top + off - 62},'*');
+        var y=el.getBoundingClientRect().top - 62; parent.postMessage({type:'embed-scrollto', top: y},'*'); parent.postMessage({type:'embed-scroll-to', y: y},'*');
       });
     });
   }
