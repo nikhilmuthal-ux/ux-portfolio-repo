@@ -1,0 +1,109 @@
+<script>
+(function () {
+  var CORRECT_PASSWORD = "nm@391992"; // your password
+  var REMEMBER_HOURS = 12; // after one correct password, every project stays open in this browser for this long
+  var STORAGE_KEY = "nm_quiet_corner_unlocked";
+  var LOGO_URL = "https://framerusercontent.com/images/HH3lGkjaYRgSldsXgJfx3zShUt8.png?scale-down-to=256"; // your logo
+  var unlockedInMemory = false;
+  var gate = null, styleInjected = false;
+
+  // Only individual case studies are locked. The /project list stays open.
+  function isLockedPage() { return /^\/project\/[^\/?#]+/.test(location.pathname); }
+
+  function isUnlocked() {
+    if (unlockedInMemory) return true;
+    try {
+      var t = parseInt(localStorage.getItem(STORAGE_KEY) || "0", 10);
+      return t > 0 && Date.now() - t < REMEMBER_HOURS * 3600 * 1000;
+    } catch (e) { return false; }
+  }
+  function rememberUnlock() {
+    unlockedInMemory = true;
+    try { localStorage.setItem(STORAGE_KEY, String(Date.now())); } catch (e) {}
+  }
+
+  function injectStyleOnce() {
+    if (styleInjected) return;
+    styleInjected = true;
+    var style = document.createElement("style");
+    style.textContent = "\n.pw-gate{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;margin:0!important;z-index:2147483647!important;overflow:hidden;animation:pw-in .5s ease-out}\n@keyframes pw-in{from{opacity:0}to{opacity:1}}\n.pw-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box}\n#pw-form{position:relative;box-sizing:border-box}\n#pw-form.pw-shake{animation:pw-shake .4s ease}\n@keyframes pw-shake{0%,100%{translate:0}20%,60%{translate:-6px}40%,80%{translate:6px}}\n#pw-input{outline:none}\n\n.pw-gate{background:rgba(255,255,255,.06)!important;backdrop-filter:blur(7px) saturate(1.2);-webkit-backdrop-filter:blur(7px) saturate(1.2);clip-path:circle(150% at 50% 50%);transition:clip-path 1s cubic-bezier(.65,0,.35,1)}\n.pw-gate.pw-open{clip-path:circle(0% at 50% 50%)}\n#pw-form{width:300px;padding:30px 24px 24px;border-radius:12px;background:linear-gradient(160deg,rgba(255,255,255,.62),rgba(255,255,255,.38));border:1px solid rgba(255,255,255,.8);box-shadow:0 30px 80px rgba(30,30,60,.18),inset 0 1px 0 rgba(255,255,255,.9);display:flex;flex-direction:column;align-items:center;gap:12px;font-family:Inter,Arial,sans-serif;animation:pw-rise .6s cubic-bezier(.2,.8,.2,1)}\n@keyframes pw-rise{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}\n.pw-logo{width:42px;height:42px;border-radius:50%;box-shadow:0 6px 18px rgba(0,0,0,.22)}\n.pw-title{font-family:Georgia,serif;font-size:20px;color:#1f1d1a;margin-top:4px}\n.pw-sub{font-size:11px;letter-spacing:.3px;color:rgba(31,29,26,.6);margin-top:-6px}\n.pw-pill{margin-top:10px;width:100%;display:flex;align-items:center;gap:6px;padding:4px 4px 4px 12px;border-radius:8px;background:rgba(255,255,255,.75);border:1px solid rgba(0,0,0,.08);box-sizing:border-box;transition:box-shadow .25s}\n.pw-pill:focus-within{box-shadow:0 0 0 4px rgba(92,122,74,.18)}\n#pw-input{flex:1;border:none;background:transparent;font-size:13px;color:#1f1d1a;min-width:0}\n#pw-submit{width:28px;height:28px;border-radius:6px;border:none;background:#1f1d1a;color:#fff;font-size:14px;line-height:1;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .2s}\n#pw-submit:hover{transform:translateX(2px)}\n#pw-error{font-size:12px;color:#a8654f}\n.pw-back{position:absolute;top:12px;left:14px;font-size:11px;color:rgba(31,29,26,.55);text-decoration:none;transition:color .2s}\n.pw-back:hover{color:#1f1d1a}\n";
+    document.head.appendChild(style);
+  }
+
+  function buildGate() {
+    lockScroll();
+    if (gate) return;
+    injectStyleOnce();
+    gate = document.createElement("div");
+    gate.className = "pw-gate";
+    document.documentElement.appendChild(gate);
+
+    var wrap = document.createElement("div");
+    wrap.className = "pw-wrap";
+    wrap.innerHTML = "<form id=\"pw-form\"><a class=\"pw-back\" href=\"/project\">&#8592; All projects</a><img class=\"pw-logo\" src=\"{ICON}\" alt=\"\" onerror=\"this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><circle cx=%2750%27 cy=%2750%27 r=%2750%27 fill=%27black%27/><g fill=%27white%27><polygon points=%2735,30 44,27 41,70 32,73%27/><polygon points=%2749,30 58,27 55,70 46,73%27/><polygon points=%2763,30 72,27 69,70 60,73%27/></g></svg>'\"/><div class=\"pw-title\">A Quiet Corner</div><div class=\"pw-sub\">Selected work, shared by invitation</div><div class=\"pw-pill\"><input id=\"pw-input\" type=\"password\" placeholder=\"Password\" autocomplete=\"off\" aria-label=\"Password\"/><button id=\"pw-submit\" type=\"submit\" aria-label=\"Unlock\">&#8594;</button></div><div id=\"pw-error\" style=\"display:none\">Not quite, try again</div></form>".replace("{ICON}", LOGO_URL);
+    gate.appendChild(wrap);
+
+    var input = document.getElementById("pw-input");
+    input.addEventListener("input", function () { input.classList.toggle("pw-filled", input.value.length > 0); });
+    setTimeout(function () { try { input.focus(); } catch (e) {} }, 300);
+    var form = document.getElementById("pw-form");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (input.value === CORRECT_PASSWORD) {
+        rememberUnlock();
+        gate.classList.add("pw-open");
+        setTimeout(destroyGate, 1050);
+      } else {
+        document.getElementById("pw-error").style.display = "block";
+        input.value = ""; input.classList.remove("pw-filled");
+        form.classList.remove("pw-shake"); void form.offsetWidth; form.classList.add("pw-shake");
+      }
+    });
+  }
+  // While the gate is open, the page behind it must not scroll (including the Lenis smooth scroll).
+  var scrollLocked = false, savedOverflow = null;
+  var SCROLL_KEYS = { " ": 1, "PageUp": 1, "PageDown": 1, "End": 1, "Home": 1, "ArrowUp": 1, "ArrowDown": 1 };
+  function blockScroll(e) {
+    if (e.type === "keydown") {
+      if (!SCROLL_KEYS[e.key] || (e.target && e.target.id === "pw-input")) return;
+    }
+    e.preventDefault();
+    e.stopImmediatePropagation();
+  }
+  function lockScroll() {
+    if (scrollLocked) return;
+    scrollLocked = true;
+    savedOverflow = [document.documentElement.style.overflow, document.body ? document.body.style.overflow : ""];
+    document.documentElement.style.overflow = "hidden";
+    if (document.body) document.body.style.overflow = "hidden";
+    document.documentElement.classList.add("lenis-stopped");
+    try { if (window.lenis && window.lenis.stop) window.lenis.stop(); } catch (e) {}
+    window.addEventListener("wheel", blockScroll, { capture: true, passive: false });
+    window.addEventListener("touchmove", blockScroll, { capture: true, passive: false });
+    window.addEventListener("keydown", blockScroll, { capture: true });
+  }
+  function unlockScroll() {
+    if (!scrollLocked) return;
+    scrollLocked = false;
+    document.documentElement.style.overflow = savedOverflow ? savedOverflow[0] : "";
+    if (document.body) document.body.style.overflow = savedOverflow ? savedOverflow[1] : "";
+    document.documentElement.classList.remove("lenis-stopped");
+    try { if (window.lenis && window.lenis.start) window.lenis.start(); } catch (e) {}
+    window.removeEventListener("wheel", blockScroll, { capture: true });
+    window.removeEventListener("touchmove", blockScroll, { capture: true });
+    window.removeEventListener("keydown", blockScroll, { capture: true });
+  }
+
+  function destroyGate() { unlockScroll(); if (!gate) return; gate.remove(); gate = null; }
+  function updateGate() {
+    if (!isLockedPage() || isUnlocked()) { destroyGate(); return; }
+    buildGate();
+  }
+  updateGate();
+  ["pushState", "replaceState"].forEach(function (type) {
+    var orig = history[type];
+    history[type] = function () { var rv = orig.apply(this, arguments); updateGate(); return rv; };
+  });
+  window.addEventListener("popstate", updateGate);
+})();
+</script>

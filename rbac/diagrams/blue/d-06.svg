@@ -1,0 +1,112 @@
+<svg viewBox="0 30 1680 1105" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" xmlns:c2pa="http://c2pa.org/manifest">
+      <defs>
+        <marker id="arr" markerWidth="10" markerHeight="10" refX="8.5" refY="4.5" orient="auto">
+          <path d="M0.5,0.5 L9,4.5 L0.5,8.5 L3,4.5 Z" fill="#B4C2D6"></path>
+        </marker>
+        <filter id="softsh" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#14213D" flood-opacity="0.07"></feDropShadow>
+        </filter>
+        <pattern id="dotgrid" width="26" height="26" patternUnits="userSpaceOnUse">
+          <circle cx="1.2" cy="1.2" r="1.2" fill="#EEF2F8"></circle>
+        </pattern>
+      </defs>
+      <rect x="0" y="30" width="1680" height="1105" fill="#FFFFFF"></rect>
+      <rect x="0" y="30" width="1680" height="1105" fill="url(#dotgrid)"></rect>
+
+      <path d="M840,104 L840,121" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <path d="M757,210 L494,210 Q480,210 480,224 L480,332" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <path d="M923,210 L1186,210 Q1200,210 1200,224 L1200,332" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <path d="M1200,404 L1200,418" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <path d="M1124,500 L1079,500 Q1065,500 1065,514 L1065,590" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <path d="M1276,500 L1441,500 Q1455,500 1455,514 L1455,590" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <path d="M480,404 L480,754" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <path d="M1040,664 L1040,700 Q1040,714 1026,714 L560,714 Q546,714 546,728 L546,754" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <path d="M1090,664 L1090,754" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <path d="M1455,664 L1455,700 Q1455,714 1441,714 L1264,714 Q1250,714 1250,728 L1250,754" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <path d="M440,828 L440,858 Q440,872 454,872 L776,872 Q790,872 790,886 L790,894" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <path d="M1170,828 L1170,858 Q1170,872 1156,872 L904,872 Q890,872 890,886 L890,894" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <path d="M840,968 L840,990" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+      <path d="M270,990 L1410,990" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+      <path d="M270,990 L270,1034" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <path d="M650,990 L650,1034" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <path d="M1030,990 L1030,1034" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <path d="M1410,990 L1410,1034" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <circle cx="840" cy="990" r="3.5" fill="#B4C2D6"></circle>
+
+      <rect x="740" y="60" width="200" height="44" rx="10" fill="#14213D"></rect>
+      <text x="840" y="87" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">User identity</text>
+
+      <rect x="781" y="151" width="118" height="118" rx="10" fill="#FFF1EE" transform="rotate(45 840 210)"></rect>
+      <text x="840" y="205" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">Account</text>
+      <text x="840" y="224" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">type?</text>
+
+      <rect x="582" y="200.5" width="56" height="19" rx="10" fill="#E6EFFE"></rect>
+      <text x="610" y="213.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#2563EB" text-anchor="middle">TIBCO</text>
+      <rect x="1011" y="200.5" width="88" height="19" rx="10" fill="#E6EFFE"></rect>
+      <text x="1055" y="213.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#2563EB" text-anchor="middle">Corporate</text>
+
+    
+  <path d="M1505,234 L1505,358 Q1505,372 1491,372 L1346,372" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <rect x="1443" y="286.5" width="124" height="19" rx="10" fill="#F5F8FC"></rect>
+  <text x="1505" y="299.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#2563EB" text-anchor="middle">WIPED · RE-MAPPED</text>
+
+  <rect x="1370" y="150" width="270" height="84" rx="10" fill="#E6EFFE"></rect>
+  <text x="1505" y="176" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#2563EB" text-anchor="middle">Legacy on-prem users</text>
+  <text x="1505" y="196" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Old data centers · desktop apps</text>
+  <text x="1505" y="213" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Legacy logins abandoned</text>
+
+  <rect x="340" y="340" width="280" height="64" rx="10" fill="#F5F8FC"></rect>
+      <text x="480" y="366.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#2563EB" text-anchor="middle">TIBCO account</text>
+      <text x="480" y="386.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Valid on SaaS only</text>
+
+      <rect x="1060" y="340" width="280" height="64" rx="10" fill="#F5F8FC"></rect>
+      <text x="1200" y="366.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#2563EB" text-anchor="middle">Corporate account</text>
+      <text x="1200" y="386.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Valid on both platforms</text>
+
+      <rect x="1146" y="446" width="108" height="108" rx="10" fill="#FFF1EE" transform="rotate(45 1200 500)"></rect>
+      <text x="1200" y="495" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">Identity</text>
+      <text x="1200" y="514" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">bridge?</text>
+
+      <rect x="1040" y="530.5" width="50" height="19" rx="10" fill="#E6EFFE"></rect>
+      <text x="1065" y="543.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#2563EB" text-anchor="middle">SAML</text>
+      <rect x="1332" y="490.5" width="50" height="19" rx="10" fill="#E6EFFE"></rect>
+      <text x="1357" y="503.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#2563EB" text-anchor="middle">LDAP</text>
+
+      <rect x="940" y="600" width="250" height="64" rx="10" fill="#F5F8FC"></rect>
+      <text x="1065" y="626.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#2563EB" text-anchor="middle">SAML bridge</text>
+      <text x="1065" y="646.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Okta / Entra ID · federated</text>
+
+      <rect x="1330" y="600" width="250" height="64" rx="10" fill="#F5F8FC"></rect>
+      <text x="1455" y="626.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#2563EB" text-anchor="middle">LDAP bridge</text>
+      <text x="1455" y="646.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Directory lookup · in-network</text>
+
+      <text x="500" y="580" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#64748B">Email invite path</text>
+
+      <rect x="280" y="760" width="320" height="68" rx="10" fill="#FFF1EE"></rect>
+      <text x="440" y="788.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#14213D" text-anchor="middle">TIBCO SaaS</text>
+      <text x="440" y="808.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Outbound cloud federation</text>
+
+      <rect x="1000" y="760" width="340" height="68" rx="10" fill="#FFF1EE"></rect>
+      <text x="1170" y="788.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#14213D" text-anchor="middle">TIBCO self-hosted</text>
+      <text x="1170" y="808.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">In-network LAN · default IdP</text>
+
+      <rect x="690" y="900" width="300" height="68" rx="10" fill="#E6EFFE"></rect>
+      <text x="840" y="928.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#2563EB" text-anchor="middle">Unified RBAC engine</text>
+      <text x="840" y="948.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Same roles on both platforms</text>
+
+      <rect x="120" y="1040" width="300" height="64" rx="10" fill="#F5F8FC"></rect>
+      <text x="270" y="1066.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Owner</text>
+      <text x="270" y="1086.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Full control plane access</text>
+
+      <rect x="500" y="1040" width="300" height="64" rx="10" fill="#F5F8FC"></rect>
+      <text x="650" y="1066.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Data plane manager</text>
+      <text x="650" y="1086.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Manage data planes</text>
+
+      <rect x="880" y="1040" width="300" height="64" rx="10" fill="#F5F8FC"></rect>
+      <text x="1030" y="1066.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Capability manager</text>
+      <text x="1030" y="1086.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Capabilities &amp; namespaces</text>
+
+      <rect x="1260" y="1040" width="300" height="64" rx="10" fill="#F5F8FC"></rect>
+      <text x="1410" y="1066.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Viewer</text>
+      <text x="1410" y="1086.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Read-only visibility</text>
+    <metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTo1OTg1ZDcxOC1iNTZhLTRjNzEtOWVmNy00OTQ3YjVmMmMzNzEAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaIXDa2a0wknIV29LcacI+YkAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDoyZWYwYTBhMC03ZDk5LTQyZDItYWVjOS00MTJhNzFmOGUzYzNscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoH56zeukHDJCzeeP583yG+QAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggQ0SXoM9TugXlkF7Bp7i4la2zn30suV2v56qkGlOBd26kZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaAmZDv17oz+ADQMweQwnpM4AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYILM9Ywd6XXIvIRfs5K9qkSocSRVMGY5qTh1LkSIt6aBKZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GTCxZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjU5ODVkNzE4LWI1NmEtNGM3MS05ZWY3LTQ5NDdiNWYyYzM3MS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjUyZTY2MjZmLTc2NDItNGY0ZS05NDBmLTk0NjQ4ZjVmODQ5YnJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCBDRJegz1O6BeWQXsGnuLiVrbOffSy5Xa/nqqQaU4F3bqJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggd97mgR1WXRgjvXsZJAZgSTzSuLtzMiugKghQHVGNfqGiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggmRp/0A0RZOuFtCmCOKomp0r81sNwL7m92aj0a3a8Hwh0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQMcnr5LN4N8Cq6V78GdRfVflp2LVnAIryILvJFwGJdEnPTwNUr+geXo6g/vrAsTypyYtgZtPA8yYx3AJFU32Frg=</c2pa:manifest></metadata></svg>

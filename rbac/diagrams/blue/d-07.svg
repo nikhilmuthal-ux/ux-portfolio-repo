@@ -1,0 +1,250 @@
+<svg viewBox="0 140 1680 3400" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" xmlns:c2pa="http://c2pa.org/manifest">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8.5" refY="4.5" orient="auto">
+      <path d="M0.5,0.5 L9,4.5 L0.5,8.5 L3,4.5 Z" fill="#B4C2D6"></path>
+    </marker>
+    <filter id="softsh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#14213D" flood-opacity="0.07"></feDropShadow>
+    </filter>
+    <pattern id="dotgrid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="#EEF2F8"></circle>
+    </pattern>
+  </defs>
+<rect x="0" y="0" width="1680" height="3540" fill="#FFFFFF"></rect>
+<rect x="0" y="0" width="1680" height="3540" fill="url(#dotgrid)"></rect>
+  <g>
+    <circle cx="110" cy="490" r="20" fill="#14213D"></circle>
+    <text x="110" y="495" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="13" fill="#FFFFFF" text-anchor="middle">01</text>
+    <text x="142" y="495" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12" fill="#14213D">ADD USERS</text>
+  </g>
+  <g>
+    <circle cx="110" cy="878" r="20" fill="#14213D"></circle>
+    <text x="110" y="883" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="13" fill="#FFFFFF" text-anchor="middle">02</text>
+    <text x="142" y="883" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12" fill="#14213D">ASSIGN PERMISSION</text>
+  </g>
+  <g>
+    <circle cx="110" cy="2912" r="20" fill="#14213D"></circle>
+    <text x="110" y="2917" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="13" fill="#FFFFFF" text-anchor="middle">03</text>
+    <text x="142" y="2917" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12" fill="#14213D">PREVIEW &amp; SEND</text>
+  </g>
+  <path d="M800,230 L800,270" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M800,344 L800,384" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M800,430 L800,459" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M717,548 L304,548 Q290,548 290,562 L290,644" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M717,548 L644,548 Q630,548 630,562 L630,644" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M883,548 L956,548 Q970,548 970,562 L970,644" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M883,548 L1296,548 Q1310,548 1310,562 L1310,644" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M290,734 L290,784 Q290,798 304,798 L610,798" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M630,734 L630,764" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M970,734 L970,764" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1310,734 L1310,784 Q1310,798 1296,798 L990,798" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M800,824 L800,836" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M712,930 L324,930 Q310,930 310,944 L310,1074" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M888,930 L1056,930 Q1070,930 1070,944 L1070,1074" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M310,1132 L310,1174" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M310,1248 L310,2832 Q310,2846 324,2846 L794,2846" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1070,1132 L1070,1147" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M991,1230 L654,1230 Q640,1230 640,1244 L640,1374" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1070,1309 L1070,1374" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1149,1230 L1436,1230 Q1450,1230 1450,1244 L1450,1374" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M640,1444 L640,1486" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M640,1556 L640,1588" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M640,1744 L640,1792" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M564,1668 L494,1668 Q480,1668 480,1682 L480,2580" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+  <path d="M640,1860 L640,2580" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+  <path d="M1070,1444 L1070,1486" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1070,1544 L1070,1576" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M982,1668 L894,1668 Q880,1668 880,1682 L880,2580" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+  <path d="M1070,1756 L1070,1802" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1070,1876 L1070,1900" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M994,1980 L934,1980 Q920,1980 920,1994 L920,2182 Q920,2196 934,2196 L1064,2196" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+  <path d="M1070,2056 L1070,2102" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1070,2176 L1070,2216" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1070,2398 L1070,2444" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1158,2310 L1226,2310 Q1240,2310 1240,2324 L1240,2580" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+  <path d="M1070,2514 L1070,2582" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1450,1444 L1450,1486" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1450,1544 L1450,1590" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1450,1660 L1450,1692" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1374,1772 L1344,1772 Q1330,1772 1330,1786 L1330,1894" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1526,1772 L1546,1772 Q1560,1772 1560,1786 L1560,1894" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1330,1988 L1330,2486 Q1330,2500 1344,2500 L1446,2500" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+  <path d="M1560,1988 L1560,2486 Q1560,2500 1546,2500 L1454,2500" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+  <path d="M1450,2500 L1450,2566 Q1450,2580 1436,2580 L1074,2580" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+  <path d="M480,2580 L1066,2580" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+  <path d="M1070,2580 L1070,2586" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+  <path d="M1162,2680 L1626,2680 Q1640,2680 1640,2666 L1640,1244 Q1640,1230 1626,1230 L1157,1230" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" stroke-dasharray="1 8" marker-end="url(#arr)"></path>
+  <path d="M717,3060 L70,3060 Q56,3060 56,3046 L56,944 Q56,930 70,930 L704,930" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" stroke-dasharray="1 8" marker-end="url(#arr)"></path>
+  <path d="M1070,2772 L1070,2806 Q1070,2820 1056,2820 L814,2820 Q800,2820 800,2834 L800,2876" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M800,2948 L800,2971" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M800,3143 L800,3194" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M800,3244 L800,3274" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+  <path d="M470,3274 L1130,3274" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+  <path d="M470,3274 L470,3294" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M800,3274 L800,3294" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <path d="M1130,3274 L1130,3294" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <circle cx="800" cy="3274" r="3.5" fill="#B4C2D6"></circle>
+  <path d="M470,3384 L470,3404" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+  <path d="M1130,3384 L1130,3404" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+  <path d="M470,3404 L1130,3404" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round"></path>
+  <path d="M800,3384 L800,3418" fill="none" stroke="#B4C2D6" stroke-width="1.75" stroke-linecap="round" marker-end="url(#arr)"></path>
+  <circle cx="800" cy="3404" r="3.5" fill="#B4C2D6"></circle>
+  <circle cx="1070" cy="2196" r="3.5" fill="#B4C2D6"></circle>
+  <circle cx="1070" cy="2580" r="3.5" fill="#B4C2D6"></circle>
+  <circle cx="800" cy="2846" r="3.5" fill="#B4C2D6"></circle>
+  <rect x="504.4" y="1658.5" width="31.2" height="19" rx="10" fill="#FFF1EE"></rect>
+  <text x="520" y="1671.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#14213D" text-anchor="middle">No</text>
+  <rect x="657.1" y="1762.5" width="37.8" height="19" rx="10" fill="#FFF1EE"></rect>
+  <text x="676" y="1775.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#14213D" text-anchor="middle">Yes</text>
+  <rect x="911.1" y="1658.5" width="37.8" height="19" rx="10" fill="#E6EFFE"></rect>
+  <text x="930" y="1671.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#2563EB" text-anchor="middle">Yes</text>
+  <rect x="1088.4" y="1772.5" width="31.2" height="19" rx="10" fill="#E6EFFE"></rect>
+  <text x="1104" y="1785.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#2563EB" text-anchor="middle">No</text>
+  <rect x="936.1" y="1970.5" width="37.8" height="19" rx="10" fill="#E6EFFE"></rect>
+  <text x="955" y="1983.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#2563EB" text-anchor="middle">Yes</text>
+  <rect x="1088.4" y="2070.5" width="31.2" height="19" rx="10" fill="#E6EFFE"></rect>
+  <text x="1104" y="2083.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#2563EB" text-anchor="middle">No</text>
+  <rect x="1085.1" y="2412.5" width="37.8" height="19" rx="10" fill="#E6EFFE"></rect>
+  <text x="1104" y="2425.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#2563EB" text-anchor="middle">Yes</text>
+  <rect x="1184.4" y="2300.5" width="31.2" height="19" rx="10" fill="#E6EFFE"></rect>
+  <text x="1200" y="2313.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#2563EB" text-anchor="middle">No</text>
+  <rect x="1301.2" y="1826.5" width="57.6" height="19" rx="10" fill="#F5F8FC"></rect>
+  <text x="1330" y="1839.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#2563EB" text-anchor="middle">Entity</text>
+  <rect x="1524.6" y="1826.5" width="70.8" height="19" rx="10" fill="#F5F8FC"></rect>
+  <text x="1560" y="1839.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#2563EB" text-anchor="middle">Instance</text>
+  <rect x="1211.1" y="2670.5" width="37.8" height="19" rx="10" fill="#FFF1EE"></rect>
+  <text x="1230" y="2683.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#52607A" text-anchor="middle">Yes</text>
+  <rect x="919.4" y="2810.5" width="31.2" height="19" rx="10" fill="#FFF1EE"></rect>
+  <text x="935" y="2823.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#52607A" text-anchor="middle">No</text>
+  <rect x="781.1" y="3160.5" width="37.8" height="19" rx="10" fill="#FFF1EE"></rect>
+  <text x="800" y="3173.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#52607A" text-anchor="middle">Yes</text>
+  <rect x="361.5" y="3050.5" width="117" height="19" rx="10" fill="#FFF1EE"></rect>
+  <text x="420" y="3063.5" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#52607A" text-anchor="middle">No · edit</text>
+  <text x="1630" y="2664" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.3" fill="#64748B" text-anchor="end">Assign more</text>
+  <rect x="700" y="190" width="200" height="40" rx="10" fill="#14213D"></rect>
+  <text x="800" y="215" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">User Management</text>
+  <rect x="650" y="276" width="300" height="68" rx="10" fill="#F5F8FC"></rect>
+  <text x="800" y="305.9" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Permissions list</text>
+  <text x="800" y="323.74" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Users · Groups · Teams</text>
+  <rect x="696" y="390" width="208" height="40" rx="10" fill="#14213D"></rect>
+  <text x="800" y="415" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">Add Permission</text>
+  <rect x="741" y="489" width="118" height="118" rx="10" fill="#FFF1EE" transform="rotate(45 800 548)"></rect>
+  <text x="800" y="542.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">Identity</text>
+  <text x="800" y="561.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">source?</text>
+  <text x="902" y="505" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#64748B">Options depend on hosting</text>
+  <text x="902" y="520" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#64748B">SaaS · self-hosted</text>
+  <rect x="175" y="650" width="230" height="84" rx="10" fill="#F5F8FC"></rect>
+  <text x="290" y="676" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#14213D" text-anchor="middle">TIBCO account</text>
+  <text x="290" y="696" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">SaaS only · email invite</text>
+  <text x="290" y="713" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Pending until accepted</text>
+  <rect x="515" y="650" width="230" height="84" rx="10" fill="#F5F8FC"></rect>
+  <text x="630" y="676" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#14213D" text-anchor="middle">SAML corporate IdP</text>
+  <text x="630" y="696" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">SaaS &amp; self-hosted · pre-provision</text>
+  <text x="630" y="713" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Active on first SSO</text>
+  <rect x="855" y="650" width="230" height="84" rx="10" fill="#F5F8FC"></rect>
+  <text x="970" y="676" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#14213D" text-anchor="middle">LDAP directory</text>
+  <text x="970" y="696" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Self-hosted · users &amp; groups</text>
+  <text x="970" y="713" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Active immediately</text>
+  <rect x="1195" y="650" width="230" height="84" rx="10" fill="#E6EFFE"></rect>
+  <text x="1310" y="676" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#2563EB" text-anchor="middle">Default IdP</text>
+  <text x="1310" y="696" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Self-hosted · local credentials</text>
+  <text x="1310" y="713" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Break-glass · admin only</text>
+  <rect x="616" y="770" width="368" height="54" rx="10" fill="#F5F8FC"></rect>
+  <text x="800" y="794" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Identify users — input adapts per source</text>
+  <text x="800" y="812" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Email chips · NameID · directory search · username + password</text>
+  <rect x="738" y="868" width="124" height="124" rx="10" fill="#FFF1EE" transform="rotate(45 800 930)"></rect>
+  <text x="800" y="924.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">Assign permission</text>
+  <text x="800" y="943.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">at which scope?</text>
+  <rect x="194" y="1076" width="232" height="56" rx="10" fill="#F5F8FC"></rect>
+  <text x="310" y="1108.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#14213D" text-anchor="middle">Control Plane level</text>
+  <rect x="155" y="1176" width="310" height="72" rx="10" fill="#F5F8FC"></rect>
+  <text x="310" y="1207.9" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Select role</text>
+  <text x="310" y="1225.74" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10.5" fill="#52607A" text-anchor="middle">Owner · Data plane manager · Capability manager · Viewer</text>
+  <rect x="964" y="1076" width="212" height="56" rx="10" fill="#F5F8FC"></rect>
+  <text x="1070" y="1108.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#14213D" text-anchor="middle">Resource level</text>
+  <rect x="1014" y="1174" width="112" height="112" rx="10" fill="#FFF1EE" transform="rotate(45 1070 1230)"></rect>
+  <text x="1070" y="1224.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">Resource</text>
+  <text x="1070" y="1243.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">category?</text>
+  <rect x="524" y="1380" width="232" height="64" rx="10" fill="#FFF1EE"></rect>
+  <text x="640" y="1406.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#14213D" text-anchor="middle">DataPlane</text>
+  <text x="640" y="1426.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#14213D" text-anchor="middle">Management</text>
+  <rect x="530" y="1492" width="220" height="64" rx="10" fill="#FFF1EE"></rect>
+  <text x="640" y="1518.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Select specific</text>
+  <text x="640" y="1538.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">data planes</text>
+  <rect x="586" y="1614" width="108" height="108" rx="10" fill="#FFF1EE" transform="rotate(45 640 1668)"></rect>
+  <text x="640" y="1662.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">All current &amp;</text>
+  <text x="640" y="1681.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">future?</text>
+  <rect x="525" y="1796" width="230" height="64" rx="10" fill="#FFF1EE"></rect>
+  <text x="640" y="1822.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Auto include future</text>
+  <text x="640" y="1842.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">data planes</text>
+  <rect x="948" y="1380" width="244" height="64" rx="10" fill="#F5F8FC"></rect>
+  <text x="1070" y="1406.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#2563EB" text-anchor="middle">Kubernetes Capability</text>
+  <text x="1070" y="1426.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#2563EB" text-anchor="middle">Management</text>
+  <rect x="962" y="1492" width="216" height="52" rx="10" fill="#F5F8FC"></rect>
+  <text x="1070" y="1522.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Select data plane</text>
+  <rect x="1007" y="1605" width="126" height="126" rx="10" fill="#E6EFFE" transform="rotate(45 1070 1668)"></rect>
+  <text x="1070" y="1653.18" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">All current &amp; future</text>
+  <text x="1070" y="1672.18" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">capabilities &amp;</text>
+  <text x="1070" y="1691.18" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">namespaces?</text>
+  <rect x="944" y="1808" width="252" height="68" rx="10" fill="#F5F8FC"></rect>
+  <text x="1070" y="1837.9" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Pick capability tab</text>
+  <text x="1070" y="1855.74" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">BWCE · Flogo · BW5CE · Dev Hub</text>
+  <rect x="1015" y="1925" width="110" height="110" rx="10" fill="#E6EFFE" transform="rotate(45 1070 1980)"></rect>
+  <text x="1070" y="1974.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">All current &amp; future</text>
+  <text x="1070" y="1993.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">namespaces?</text>
+  <rect x="944" y="2108" width="252" height="68" rx="10" fill="#F5F8FC"></rect>
+  <text x="1070" y="2137.9" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Select namespaces</text>
+  <text x="1070" y="2155.74" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Search · Select all · Unselect all</text>
+  <rect x="1007" y="2247" width="126" height="126" rx="10" fill="#E6EFFE" transform="rotate(45 1070 2310)"></rect>
+  <text x="1070" y="2295.18" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">Apply to all current</text>
+  <text x="1070" y="2314.18" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">&amp; future</text>
+  <text x="1070" y="2333.18" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">capabilities?</text>
+  <rect x="944" y="2450" width="252" height="64" rx="10" fill="#F5F8FC"></rect>
+  <text x="1070" y="2476.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Namespace permission applies</text>
+  <text x="1070" y="2496.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">to all future capabilities</text>
+  <rect x="1328" y="1380" width="244" height="64" rx="10" fill="#E6EFFE"></rect>
+  <text x="1450" y="1406.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#2563EB" text-anchor="middle">On Prem Product</text>
+  <text x="1450" y="1426.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#2563EB" text-anchor="middle">Management</text>
+  <rect x="1342" y="1492" width="216" height="52" rx="10" fill="#E6EFFE"></rect>
+  <text x="1450" y="1522.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Select data plane</text>
+  <rect x="1338" y="1596" width="224" height="64" rx="10" fill="#E6EFFE"></rect>
+  <text x="1450" y="1623.9" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Pick product</text>
+  <text x="1450" y="1641.74" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">BW 5 · BW 6 · EMS</text>
+  <rect x="1396" y="1718" width="108" height="108" rx="10" fill="#F5F8FC" transform="rotate(45 1450 1772)"></rect>
+  <text x="1450" y="1766.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">Permission</text>
+  <text x="1450" y="1785.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">model?</text>
+  <rect x="1224" y="1900" width="212" height="88" rx="10" fill="#E6EFFE"></rect>
+  <text x="1330" y="1931.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#2563EB" text-anchor="middle">Entity based</text>
+  <text x="1330" y="1949.24" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Read / Write on Domains,</text>
+  <text x="1330" y="1966.24" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Machines, Agents, Installations</text>
+  <rect x="1454" y="1900" width="212" height="88" rx="10" fill="#E6EFFE"></rect>
+  <text x="1560" y="1931.4" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#2563EB" text-anchor="middle">Instance based</text>
+  <text x="1560" y="1949.24" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Network → Domain →</text>
+  <text x="1560" y="1966.24" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">AppSpace → AppNode</text>
+  <text x="1560" y="2014" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.2" fill="#64748B" text-anchor="middle">Child can override parent</text>
+  <rect x="1004" y="2614" width="132" height="132" rx="10" fill="#FFF1EE" transform="rotate(45 1070 2680)"></rect>
+  <text x="1070" y="2674.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">Add another</text>
+  <text x="1070" y="2693.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">permission?</text>
+  <rect x="650" y="2880" width="300" height="68" rx="10" fill="#F5F8FC"></rect>
+  <text x="800" y="2909.9" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#14213D" text-anchor="middle">Preview</text>
+  <text x="800" y="2927.74" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Review users &amp; assigned permissions</text>
+  <rect x="741" y="3001" width="118" height="118" rx="10" fill="#FFF1EE" transform="rotate(45 800 3060)"></rect>
+  <text x="800" y="3054.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">Satisfied with</text>
+  <text x="800" y="3073.68" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#14213D" text-anchor="middle">the setup?</text>
+  <rect x="694" y="3200" width="212" height="44" rx="10" fill="#14213D"></rect>
+  <text x="800" y="3227" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">Confirm &amp; add users</text>
+  <rect x="320" y="3300" width="300" height="84" rx="10" fill="#F5F8FC"></rect>
+  <text x="470" y="3326" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#14213D" text-anchor="middle">Invitation sent</text>
+  <text x="470" y="3346" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">TIBCO account · email delivered</text>
+  <text x="470" y="3363" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Record: pending until accepted</text>
+  <rect x="650" y="3300" width="300" height="84" rx="10" fill="#F5F8FC"></rect>
+  <text x="800" y="3326" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#14213D" text-anchor="middle">Users added</text>
+  <text x="800" y="3346" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">SAML · active on first SSO</text>
+  <text x="800" y="3363" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">LDAP · active immediately</text>
+  <rect x="980" y="3300" width="300" height="84" rx="10" fill="#E6EFFE"></rect>
+  <text x="1130" y="3326" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#2563EB" text-anchor="middle">Credentials issued</text>
+  <text x="1130" y="3346" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Default IdP · initial password table</text>
+  <text x="1130" y="3363" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52607A" text-anchor="middle">Record: active · forced reset at login</text>
+  <rect x="705" y="3424" width="190" height="44" rx="10" fill="#14213D"></rect>
+  <text x="800" y="3451" font-family="Plus Jakarta Sans, Archivo, Helvetica, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">View users</text>
+<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpmZWQyNmYzYi03NmQ5LTRjZDEtODllNi1lYmU0ZTU2ZWJiNzkAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaAOAlvg7zqkBsudBi0sgyTgAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo2MzBmMjMzNy03NWRiLTQxNGItODM2My00MjMxZWFmNGZhNjBscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNohFeE8qBJLEr+2LT0B4WUrwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggz2eiyEw+VKtHKPvSXD+Um2KLoGRruixXDoOcqQ6LTcukZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaNDEyumlrmiTdBYkK0jepx0AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIGniAsRmu8p02g6B8Cgg7Fvk2xd+prmlp9hxLS3/4RdzZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GYfAZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmZlZDI2ZjNiLTc2ZDktNGNkMS04OWU2LWViZTRlNTZlYmI3OS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmNkNGNhYTNhLWM5OGEtNGUyMC04MDQxLTBkNGRlMDI2OTJkMXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCDPZ6LITD5Uq0co+9JcP5SbYougZGu6LFcOg5ypDotNy6JjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFgggmo+aaoqPc33ychiWQg4mPfsCRW54uKJmzoUJMnXwvWiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggMSMeIl+jR1QdO6QoBHHiGQ4GEd7t6VVDzfbhZmc/m3R0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQKUIMmOZqDtRPBcpS0i2haSI05b3AQRTGDd8vW7g+aDOElp5XBDn9wwmfqJfW3Rxq4xZFSjrHLISrSELFb++/18=</c2pa:manifest></metadata></svg>
