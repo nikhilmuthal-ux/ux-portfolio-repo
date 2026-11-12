@@ -4,7 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>From Domain Islands to One Platform · RBAC Case Study · Nikhil Muthal</title>
+<script src="./support.js"></script>
+<script src="clickable/rbac-bundle.js"></script>
+<style>.rbac-full{position:fixed!important;left:0!important;top:0!important;width:100vw!important;max-width:none!important;height:100vh!important;z-index:2147483000!important;border-radius:0!important;margin:0!important;border:0!important}.rbac-full [data-rbac-host]{transform:none!important;width:100%!important;height:100%!important}#rbac-close{position:fixed;top:14px;right:18px;z-index:2147483001;display:none;font:600 14px system-ui,sans-serif;padding:9px 16px;border-radius:999px;border:0;background:#14213D;color:#fff;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)}</style>
+<script>(function(){
+  function build(name,hash){var R=window.__rbac,p=R&&R.pages[name];if(!p)return '<p style="font:14px system-ui;padding:24px">Screen not found.</p>';
+    var src=JSON.stringify(p).replace(/<\//g,'<\\/').replace(/<!--/g,'<\\u0021--');var inj='<script>window.__rbacHash='+JSON.stringify(hash||'')+';window.__rbacSrc='+src+';(function(){var of=window.fetch;window.fetch=function(u){var s=String(u&&u.url||u);if(/^about:/.test(s)||s===String(location.href))return Promise.resolve(new Response(window.__rbacSrc,{headers:{"Content-Type":"text/html"}}));return of.apply(this,arguments);};})();<\/script><style>'+R.css+'</style><script>'+R.js+'<\/script><script>'+R.router+'<\/script>';
+    return p.replace('<!--RBAC-RUNTIME-->',function(){return inj;});}
+  window.__rbacOpen=function(frame,name,hash){if(frame)frame.srcdoc=build(name,hash);};
+  function scan(){if(!window.__rbac)return;var hs=document.querySelectorAll('[data-rbac-host]');for(var i=0;i<hs.length;i++){var h=hs[i];if(h.querySelector('iframe')||(h.closest&&h.closest('x-dc')))continue;var now=Date.now();if(!h.__rbacSeen){h.__rbacSeen=now;continue;}if(now-h.__rbacSeen<600)continue;var f=document.createElement('iframe');f.title=h.getAttribute('data-rbac-title')||'Clickable prototype';f.style.cssText='display:block;width:100%;height:100%;border:0';f.srcdoc=build(h.getAttribute('data-rbac-host'),'');h.appendChild(f);}}
+  var full=null,btn=null;
+  function closeFull(){if(full){full.classList.remove('rbac-full');full=null;}if(btn)btn.style.display='none';document.documentElement.style.overflow='';}
+  document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('[data-rbac-full]'):null;if(!a)return;e.preventDefault();
+    var p=a.closest('p'),fr=p&&p.previousElementSibling;if(!fr||!fr.querySelector('[data-rbac-host]'))return;if(window.self!==window.top){window.open('flow.html#'+fr.querySelector('[data-rbac-host]').getAttribute('data-rbac-host'),'_blank');return;}closeFull();full=fr;fr.classList.add('rbac-full');document.documentElement.style.overflow='hidden';
+    if(!btn){btn=document.createElement('button');btn.id='rbac-close';btn.type='button';btn.textContent='Close full screen';btn.addEventListener('click',closeFull);document.body.appendChild(btn);}btn.style.display='block';},true);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeFull();});
+  if(typeof MutationObserver==='function')new MutationObserver(scan).observe(document.documentElement,{childList:true,subtree:true});
+  document.addEventListener('DOMContentLoaded',scan);setInterval(scan,300);scan();
+})();</script>
 
+</head>
+<body>
+<x-dc>
+<helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
@@ -31,7 +53,7 @@ body{margin:0;background:#F5F8FC;-webkit-font-smoothing:antialiased}
 .label{font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#52607A;margin:0 0 8px}
 .label-blue{color:#1D4ED8}
 .label-coral{color:#C2452D}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}.tbl.grid-tbl td{vertical-align:middle;line-height:1.2;padding-top:12px;padding-bottom:12px}.grid-tbl td.no::before{vertical-align:middle}.grid-tbl td:first-child{white-space:nowrap;font-weight:600;color:#14213D}.grid-tbl th{font-size:11px}.grid-tbl td.yes,.grid-tbl td.no{font-size:0;text-align:center}.grid-tbl td.yes::before{content:"\2713";display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#EFF4FF;border:1px solid #BFD3FA;color:#1D4ED8;font-size:12px;font-weight:800}.grid-tbl td.no::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#E3E9F2}.grid-tbl .rc-owner{background:#FDE8DC;color:#8A3410;border-color:#F8C9B4}.grid-tbl .rc-dpm{background:#D6EAFB;color:#003E89;border-color:#B4D3F5}.grid-tbl .rc-cm{background:#E6F4EC;color:#155C33;border-color:#C3E3CF}.grid-tbl .rc-viewer{background:#F1F5F9;color:#334155;border-color:#DCE3EC}.grid-tbl .role-chip{display:inline-block;border-width:1px;border-style:solid;border-radius:8px;padding:5px 11px;font-size:12.5px;font-weight:700;white-space:nowrap}.grid-tbl tbody tr.grp td{border-top:1px solid #DCE5F3}.impact-grid{grid-template-columns:repeat(6,1fr)}.impact-grid>.card{grid-column:span 2}.impact-grid>.card:nth-child(n+4){grid-column:span 3}@media (max-width:860px){.impact-grid{grid-template-columns:1fr}.impact-grid>.card,.impact-grid>.card:nth-child(n+4){grid-column:auto}}
 .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
 .grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
 .chapter{padding:72px 0 8px;scroll-margin-top:64px}
@@ -58,6 +80,18 @@ body{margin:0;background:#F5F8FC;-webkit-font-smoothing:antialiased}
 .tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
 .tag-blue{background:#DBEAFE;color:#1D4ED8}
 .tag-coral{background:#FFE1DA;color:#A93A25}
+details.drawer{border:1px solid #E3E9F2;border-radius:14px;background:#FFFFFF;margin:18px 0 28px;box-shadow:0 1px 2px rgba(20,33,61,.04);transition:border-color .15s,box-shadow .15s}
+details.drawer:hover{border-color:#BFD3FA;box-shadow:0 4px 14px rgba(20,33,61,.06)}
+details.drawer>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:16px;padding:16px 20px}
+details.drawer>summary::-webkit-details-marker{display:none}
+details.drawer>summary>span{flex:1}
+details.drawer>summary::after{content:"";flex:none;width:34px;height:34px;border-radius:50%;border:1px solid #DCE5F3;background:#FFFFFF url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%232563EB%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M6%209l6%206%206-6%22/%3E%3C/svg%3E") center/16px no-repeat;transition:transform .2s,background-color .15s,border-color .15s}
+details.drawer:hover>summary::after{background-color:#EFF4FF;border-color:#BFD3FA}
+details.drawer[open]>summary::after{content:"";transform:rotate(180deg)}
+.drawer-t{display:flex;align-items:center;gap:8px;font-weight:700;color:#14213D;font-size:15px}
+.drawer-n{font-size:12px;font-weight:700;color:#1D4ED8;background:#EFF4FF;border-radius:999px;padding:3px 9px}
+.drawer-s{display:block;font-size:13px;font-weight:400;color:#52607A;margin-top:3px}
+.drawer-b{padding:18px 20px 20px;border-top:1px solid #EEF2F8}
 .tag-grey{background:#EEF2F8;color:#52607A}
 figure{margin:28px 0 36px}
 figure .frame{background:#FFFFFF;border:1px solid #E3E9F2;border-radius:18px;padding:12px;box-shadow:0 1px 2px rgba(20,33,61,.04),0 12px 32px rgba(20,33,61,.06)}
@@ -104,11 +138,7 @@ details .inner{padding:0 22px 22px}
   .chapter{padding-top:52px}
 }
 </style>
-
-<style>html,body{margin:0;padding:0;max-width:100%;overflow-x:clip}</style>
-</head>
-<body>
-
+</helmet>
 
 <div class="cs">
 
@@ -124,7 +154,7 @@ details .inner{padding:0 22px 22px}
 <span class="pill">Enterprise SaaS</span>
 </div>
 <h1 style="font-size:clamp(40px,6vw,72px);line-height:1.02;letter-spacing:-.035em;font-weight:800;margin:0 0 22px;max-width:15ch">From Domain Islands to <span style="color:#2563EB">One Platform</span></h1>
-<p style="font-size:clamp(18px,2vw,22px);line-height:1.5;color:#33415C;max-width:44ch;margin:0 0 32px">For one release cycle I worked on a deceptively small question inside TIBCO Control Plane: who is allowed to do what? Three product generations had answered it three different ways. This is how I brought them into one model.</p>
+<p style="font-size:clamp(18px,2vw,22px);line-height:1.5;color:#33415C;max-width:44ch;margin:0 0 32px">One question inside TIBCO Control Plane: who can do what? Three product generations answered it three ways. Two of us brought them into one model.</p>
 <div class="grid4" style="max-width:680px">
 <div><div class="label">Role</div><div style="font-weight:700">Product Designer</div></div>
 <div><div class="label">Team</div><div style="font-weight:700">2 Product Designers</div></div>
@@ -139,8 +169,8 @@ details .inner{padding:0 22px 22px}
 <div style="display:grid;gap:12px">
 <div><div style="display:flex;justify-content:space-between;font-size:13.5px;font-weight:700;margin-bottom:6px"><span>Owner</span><span style="color:#52607A;font-weight:600">Full administration</span></div><div style="height:12px;border-radius:999px;background:linear-gradient(90deg,#1D4ED8,#3B82F6);width:100%"></div></div>
 <div><div style="display:flex;justify-content:space-between;font-size:13.5px;font-weight:700;margin-bottom:6px"><span>Data Plane Manager</span><span style="color:#52607A;font-weight:600">Scoped admin</span></div><div style="height:12px;border-radius:999px;background:linear-gradient(90deg,#2563EB,#60A5FA);width:78%"></div></div>
-<div><div style="display:flex;justify-content:space-between;font-size:13.5px;font-weight:700;margin-bottom:6px"><span>Capability Manager</span><span style="color:#52607A;font-weight:600">View &amp; request</span></div><div style="height:12px;border-radius:999px;background:linear-gradient(90deg,#3B82F6,#93C5FD);width:56%"></div></div>
-<div><div style="display:flex;justify-content:space-between;font-size:13.5px;font-weight:700;margin-bottom:6px"><span>Entity Viewer</span><span style="color:#52607A;font-weight:600">View only</span></div><div style="height:12px;border-radius:999px;background:linear-gradient(90deg,#F97362,#FFB4A6);width:34%"></div></div>
+<div><div style="display:flex;justify-content:space-between;font-size:13.5px;font-weight:700;margin-bottom:6px"><span>Capability Manager</span><span style="color:#52607A;font-weight:600">Capabilities &amp; apps</span></div><div style="height:12px;border-radius:999px;background:linear-gradient(90deg,#3B82F6,#93C5FD);width:56%"></div></div>
+<div><div style="display:flex;justify-content:space-between;font-size:13.5px;font-weight:700;margin-bottom:6px"><span>Viewer</span><span style="color:#52607A;font-weight:600">View only</span></div><div style="height:12px;border-radius:999px;background:linear-gradient(90deg,#F97362,#FFB4A6);width:34%"></div></div>
 </div>
 <div style="margin-top:20px;padding-top:16px;border-top:1px solid #E3E9F2;font-size:14px;color:#52607A">Fewer roles <span style="color:#F97362;font-weight:800">×</span> precise scopes</div>
 </div>
@@ -150,7 +180,7 @@ details .inner{padding:0 22px 22px}
 <div class="grid3" style="margin-top:56px">
 <div class="card"><div class="stat">3 <span class="arr">→</span> 1</div><div style="color:#33415C;font-weight:600">User managements unified into one model</div></div>
 <div class="card"><div class="stat">8 <span class="arr">→</span> 4</div><div style="color:#33415C;font-weight:600">Legacy roles consolidated, verified in the QA grid</div></div>
-<div class="card"><div class="stat">20 <span class="arr">→</span> 1</div><div style="color:#33415C;font-weight:600">Data planes one shared model replaces</div></div>
+<div class="card"><div class="stat">6 clicks</div><div style="color:#33415C;font-weight:600">To give a person access, measured in the prototype</div></div>
 </div>
 </div>
 </header>
@@ -159,14 +189,9 @@ details .inner{padding:0 22px 22px}
 <div class="nav">
 <nav aria-label="Case study chapters">
 <ul class="nav-list">
-<li><a class="nav-link on" href="#ch1" data-target="ch1"><span class="n">01</span><span>Overview</span></a></li>
-<li><a class="nav-link" href="#ch2" data-target="ch2"><span class="n">02</span><span>Context &amp; problem</span></a></li>
-<li><a class="nav-link" href="#ch3" data-target="ch3"><span class="n">03</span><span>Research</span></a></li>
-<li><a class="nav-link" href="#ch4" data-target="ch4"><span class="n">04</span><span>Shaping the model</span></a></li>
-<li><a class="nav-link" href="#ch5" data-target="ch5"><span class="n">05</span><span>The solution</span></a></li>
-<li><a class="nav-link" href="#ch6" data-target="ch6"><span class="n">06</span><span>Impact &amp; next steps</span></a></li>
-<li><a class="nav-link" href="#ch7" data-target="ch7"><span class="n">07</span><span>Reflection</span></a></li>
-
+<sc-for list="{{ nav }}" as="item" hint-placeholder-count="8">
+<li><a class="nav-link {{ item.cls }}" href="#{{ item.id }}"><span class="n">{{ item.n }}</span><span>{{ item.label }}</span></a></li>
+</sc-for>
 </ul>
 </nav>
 </div>
@@ -183,39 +208,22 @@ details .inner{padding:0 22px 22px}
 <div class="grid3">
 <div class="card">
 <div class="label label-coral">The problem</div>
-<p style="margin:0">Every TIBCO product used to manage its own users. Control Plane v1 brought identity into one place, but its permissions stopped at the data plane. Customers ended up running one data plane per team just to keep teams apart.</p>
+<p style="margin:0">Permissions stopped at the data plane. To keep teams apart, customers ran <strong>one data plane per team</strong>.</p>
 </div>
 <div class="card">
-<div class="label label-blue">What I did</div>
-<p style="margin:0">I studied how the older products handled access, catalogued every permission and tested the existing roles cell by cell. That led to four roles, with namespaces for Kubernetes and Read or Write per entity for on prem.</p>
+<div class="label label-blue">What we did</div>
+<p style="margin:0">Studied three generations of access control and tested every role. Result: <strong>four roles</strong>, scoped down to a namespace or a single instance.</p>
 </div>
 <div class="card">
 <div class="label" style="color:#14213D">The outcome</div>
-<p style="margin:0">Teams can share one data plane through permissions instead of paying for a copy each, and BW5, BW6 and EMS now live in the same model as everything else.</p>
+<p style="margin:0">Teams can <strong>share one data plane</strong>, and on prem joins the same model. Giving a person access takes 6 clicks.</p>
 </div>
 </div>
 
 <div class="card" style="margin-top:20px">
-<div class="label label-blue" style="margin-bottom:16px">My contribution</div>
-<div class="grid2">
-<div>
-<div style="font-weight:700;margin-bottom:10px">I led</div>
-<ul class="list">
-<li>The legacy study of BW5, BW6 and Control Plane v1</li>
-<li>The permission catalogue and the QA visibility grid</li>
-<li>The card sort and the 8 to 4 role consolidation</li>
-<li>The containment model of where authority lives</li>
-</ul>
-</div>
-<div>
-<div style="font-weight:700;margin-bottom:10px">I co-designed, with one other product designer</div>
-<ul class="list coral">
-<li>The namespace and BW6 access assignment flows</li>
-<li>The user invite flows across identity sources</li>
-<li>The key screens and the end to end prototype</li>
-</ul>
-</div>
-</div>
+<div class="label label-blue" style="margin-bottom:12px">The team</div>
+<p style="margin:0 0 14px">Two product designers, working together end to end. We shared every part of the work, from the legacy study to the final prototype.</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px"><span class="tag tag-blue">Legacy study</span><span class="tag tag-blue">Permission catalogue</span><span class="tag tag-blue">QA grid</span><span class="tag tag-blue">Card sort</span><span class="tag tag-blue">Role model</span><span class="tag tag-blue">Containment model</span><span class="tag tag-coral">Assignment flows</span><span class="tag tag-coral">Invite flows</span><span class="tag tag-coral">Screens</span><span class="tag tag-coral">Prototype</span></div>
 </div>
 </section>
 
@@ -223,7 +231,7 @@ details .inner{padding:0 22px 22px}
 <section id="ch2" data-ch="ch2" class="chapter">
 <div class="ch-num">02</div>
 <h2 class="ch-title">Context &amp; problem</h2>
-<p class="ch-lede">Access control at TIBCO went through three generations. Each one fixed the flaw of the one before, and the newest one left a gap that was costing customers money.</p>
+<p class="ch-lede">Three generations of access control, each fixing the last one's flaw. The newest left a gap that cost customers money.</p>
 
 <div class="grid3">
 <div class="card" style="border-top:4px solid #B4C2D6">
@@ -242,7 +250,7 @@ details .inner{padding:0 22px 22px}
 <div class="label">Act 3 · Unified redesign</div>
 <h3 style="font-size:20px;margin-bottom:10px">The containment era</h3>
 <p style="font-size:15px">Keep v1's readable roles and add the precision it was missing: namespaces for Kubernetes, entity level access on prem.</p>
-<span class="tag tag-coral">My work</span>
+<span class="tag tag-coral">Our work</span>
 </div>
 </div>
 
@@ -250,22 +258,17 @@ details .inner{padding:0 22px 22px}
 <div class="prose"><p>v1 stopped one level short of isolation. A missing permission level was forcing customers into an infrastructure workaround.</p></div>
 
 <div class="label" style="margin-bottom:12px">The v1 permission chain</div>
-<div class="flow">
-<div class="step"><div class="k">Subscription</div><div class="v">Owner</div></div>
-<div class="step"><div class="k">Data Plane</div><div class="v">Data Plane Manager scope</div></div>
-<div class="step"><div class="k">Capability</div><div class="v">BWCE · Flogo · BW5CE</div></div>
-<div class="step hot"><div class="k" style="color:#A93A25">ALL applications</div><div class="v">No boundary below the capability</div></div>
-</div>
+<figure style="margin:0"><div class="frame" style="padding:16px"><picture><source media="(max-width:640px)" srcset="diagrams/blue/d-v1chain-m.svg"><img src="diagrams/blue/d-v1chain.svg" alt="The v1 permission chain: Subscription with the Owner, then Data Plane with Data Plane Manager scope, then Capability (BWCE, Flogo, BW5CE), then everything inside, with no boundary below the capability." loading="lazy"></picture></div></figure>
 
 <div class="grid3" style="margin-top:28px">
-<div class="card"><div class="stat" style="font-size:30px">No isolation</div><p style="margin:0;font-size:15px">Teams sharing a data plane could see and modify each other's applications.</p></div>
-<div class="card"><div class="stat" style="font-size:30px">20 for 20</div><p style="margin:0;font-size:15px">The only workaround was one data plane per team: 20 data planes for 20 teams.</p></div>
+<div class="card"><div class="stat" style="font-size:30px">No isolation</div><p style="margin:0;font-size:15px">Teams sharing a data plane could see and change each other's work.</p></div>
+<div class="card"><div class="stat" style="font-size:30px">One per team</div><p style="margin:0;font-size:15px">The only workaround was a separate data plane for every team, so the count grew with each new team.</p></div>
 <div class="card"><div class="stat" style="font-size:30px">Rising cost</div><p style="margin:0;font-size:15px">Each data plane carries its own provisioning, monitoring and admin burden.</p></div>
 </div>
 
 <div class="dark" style="margin-top:36px">
 <div class="label" style="color:#FFB4A6">Problem statement</div>
-<p style="font-size:clamp(19px,2.2vw,23px);line-height:1.5;color:#FFFFFF;font-weight:600;margin:0">Extend the permission model below the data plane so multiple teams can safely share one data plane, and bring the on prem products into the same model, without making roles too broad or setup too detailed.</p>
+<p style="font-size:clamp(19px,2.2vw,23px);line-height:1.5;color:#FFFFFF;font-weight:600;margin:0">Extend permissions below the data plane so teams can safely share one, and bring on prem products into the same model, without broad roles or fiddly setup.</p>
 </div>
 
 <h3 class="sub">Constraints that shaped everything</h3>
@@ -279,37 +282,35 @@ details .inner{padding:0 22px 22px}
 
 <h3 class="sub">The whole idea, in one picture</h3>
 <div class="prose"><p>Control Plane owns the platform tasks: users, groups, teams, permissions, identity. Beneath it, two worlds carry the resource tasks. RBAC is simply their sum.</p></div>
-<figure><div class="frame" style="padding:24px"><img src="diagrams/blue/d-01.svg" alt="The Control Plane holds both data plane types: Kubernetes data planes with BWCE, BW5CE, Flogo and DevHub, and on-prem data planes running BW5, BW6 and EMS. The Control Plane carries the platform tasks; the two worlds carry resource tasks; RBAC is their sum."></div><figcaption><b>Fig 01</b>Both worlds, one user management.</figcaption></figure>
-<figure><div class="frame" style="padding:24px"><img src="diagrams/blue/d-02.svg" alt="A timeline in three states. Phase 1 at launch: Control Plane holds only Kubernetes data planes. Phase 2: on-prem data planes onboard and resource-based permission arrives. Now: both sit inside one RBAC boundary."></div><figcaption><b>Fig 02</b>Kubernetes alone at launch, on prem arrives in phase 2, and the RBAC boundary is drawn around both now.</figcaption></figure>
+<figure><div class="frame" style="padding:24px"><img src="diagrams/blue/d-01-flow.svg" alt="The Control Plane holds both data plane types: Kubernetes data planes with BWCE, BW5CE, Flogo and DevHub, and on-prem data planes running BW5, BW6 and EMS. The Control Plane carries the platform tasks; the two worlds carry resource tasks; RBAC is their sum."></div><figcaption><b>Fig 01</b>Both worlds, one user management.</figcaption></figure>
+<figure><div class="frame" style="padding:24px"><img src="diagrams/blue/d-02-flow.svg" alt="A timeline in three states. Phase 1 at launch: Control Plane holds only Kubernetes data planes. Phase 2: resource based permission arrives on Kubernetes. Now: on prem data planes join, and both sit inside one RBAC boundary."></div><figcaption><b>Fig 02</b>Phase 1, Kubernetes only. Phase 2, resource permissions on Kubernetes. Now, on prem joins and everything sits in one RBAC model.</figcaption></figure>
 </section>
 
 <!-- 03 Research -->
 <section id="ch3" data-ch="ch3" class="chapter">
 <div class="ch-num">03</div>
 <h2 class="ch-title">Research without direct users</h2>
-<p class="ch-lede">The new model didn't exist yet, so there was nobody to interview and no analytics to read. I leaned on the system itself instead, in three steps.</p>
+<p class="ch-lede">The new model didn't exist yet, so there were no users to interview and no analytics. We studied the system itself, in three steps.</p>
 
-<div class="grid3" style="margin-bottom:12px">
-<div class="card" style="padding:22px"><span class="tag tag-blue">Step 1</span><div style="font-weight:700;margin:10px 0 6px">Legacy study</div><p style="margin:0;font-size:15px">Mapped which failure mode each generation reacted against, to test every proposal.</p></div>
-<div class="card" style="padding:22px"><span class="tag tag-blue">Step 2</span><div style="font-weight:700;margin:10px 0 6px">Permission catalogue</div><p style="margin:0;font-size:15px">Every controllable action, from registering a data plane to configuring SSO.</p></div>
-<div class="card" style="padding:22px"><span class="tag tag-blue">Step 3</span><div style="font-weight:700;margin:10px 0 6px">QA visibility grid</div><p style="margin:0;font-size:15px">Verified v1 behaviour cell by cell, role against role.</p></div>
-</div>
-
-<h3 class="sub">Step 1 · The legacy study</h3>
-<div class="prose"><p>Before designing the destination, I studied the departure point: BW5 Administrator, the BW6 Admin UI and Control Plane v1, through documentation and direct use of live environments.</p></div>
+<div class="tblwrap" style="margin-bottom:8px"><table class="tbl"><thead><tr><th>Step</th><th>What we did</th><th>What it showed</th><th>Proof</th></tr></thead><tbody>
+<tr><td><span class="tag tag-blue">1</span> <strong>Legacy study</strong></td><td>Used BW5, BW6 and Control Plane v1 hands on, with their docs</td><td>Each generation failed the opposite way: too flexible to read, then too coarse to isolate teams</td><td>Fig 03, Fig 04</td></tr>
+<tr><td><span class="tag tag-blue">2</span> <strong>Permission catalogue</strong></td><td>Listed every controllable action, from registering a data plane to setting up SSO</td><td>Authority was already two tiered: permissions over people, and permissions over infrastructure</td><td>Four findings</td></tr>
+<tr><td><span class="tag tag-blue">3</span> <strong>QA grid</strong></td><td>Tested every v1 role against every other, cell by cell</td><td>Eight roles were doing the work of four</td><td>The grid below</td></tr>
+</tbody></table></div><h3 class="sub">Step 1 · The legacy study</h3><div class="prose"><p>Two generations, two opposite failures. BW5 could express anything and nobody could read it; v1 was readable but stopped at the data plane.</p></div><div class="grid2"><figure style="margin:8px 0 0"><div class="frame"><img src="assets/fig-01.png" alt="TIBCO Administrator, Edit Role: Permissions tab, the full domain as a resource tree crossed against Read, Write, and Administer checkbox columns." loading="lazy"></div><figcaption><b>Fig 03</b>Edit Role: the whole domain as a resource tree, crossed with Read, Write and Administer checkboxes.</figcaption></figure><figure style="margin:8px 0 0"><div class="frame"><img src="assets/fig-09.png" alt="Control Plane v1, Add users wizard, Assign Permissions step: fixed permission list on the left, data plane scope checkboxes on the right." loading="lazy"></div><figcaption><b>Fig 04</b>The v1 assignment wizard: fixed permission vocabulary on the left, scope on the right, and a Preview step the Act 1 matrix never had.</figcaption></figure></div><details class="drawer"><summary><span><span class="drawer-t">The legacy study artifacts<span class="drawer-n">5 items</span></span><span class="drawer-s">BW5 and BW6 details, BW6 screens, v1 comparison, Kubernetes mapping, role inventory</span></span></summary><div class="drawer-b">
+<div class="prose"><p>We started with where we were: BW5 Administrator, the BW6 Admin UI and Control Plane v1, through their docs and live environments.</p></div>
 <div class="label label-blue" style="margin:28px 0 10px">BW5 Administrator · every domain an island</div>
-<div class="prose"><p>Classic BusinessWorks was administered per domain, each a self contained security realm with its own user store, roles and access control lists.</p></div>
+<div class="prose"><p>Classic BusinessWorks ran per domain, each its own security realm with its own users, roles and access lists.</p></div>
 <div class="grid2">
-<figure style="margin:8px 0 0"><div class="frame"><img src="assets/fig-01.png" alt="TIBCO Administrator, Edit Role: Permissions tab, the full domain as a resource tree crossed against Read, Write, and Administer checkbox columns." loading="lazy"></div><figcaption><b>Fig 03</b>Edit Role: the whole domain as a resource tree, crossed with Read, Write and Administer checkboxes.</figcaption></figure>
-<figure style="margin:8px 0 0"><div class="frame"><img src="assets/fig-02.png" alt="TIBCO Administrator, Edit User, Permissions tab: Super User Yes; the entire authorization matrix rendered checked and locked." loading="lazy"></div><figcaption><b>Fig 04</b>Super User: every box checked and locked. A bypass of the matrix, not an entry in it.</figcaption></figure>
+
+<figure style="margin:8px 0 0"><div class="frame"><img src="assets/fig-02.png" alt="TIBCO Administrator, Edit User, Permissions tab: Super User Yes; the entire authorization matrix rendered checked and locked." loading="lazy"></div><figcaption><b>Fig 05</b>Super User: every box checked and locked. A bypass of the matrix, not an entry in it.</figcaption></figure>
 </div>
 <div class="coralsoft" style="margin-top:28px">
-<div class="label label-coral">What I took from it</div>
-<p style="margin:0;color:#14213D;font-weight:600">Unlimited flexibility makes a system that can express anything and that nobody can read. Answering "who can touch app X?" meant opening dialogs one by one.</p>
+<div class="label label-coral">What we took from it</div>
+<p style="margin:0;color:#14213D;font-weight:600">Unlimited flexibility makes a system nobody can read. Answering "who can touch app X?" meant opening dialogs one by one.</p>
 </div>
 
 <div class="label label-blue" style="margin:44px 0 10px">BW6 Admin UI · named roles, still an island</div>
-<div class="prose"><p>The BW6 Admin UI introduced three fixed roles and an entity versus instance split, an idea the redesign later inherits. But the grant mechanics still leaked complexity.</p></div>
+<div class="prose"><p>BW6 added three fixed roles and an entity versus instance split, an idea the redesign keeps. Granting access was still complicated.</p></div>
 <div class="tblwrap"><table class="tbl">
 <thead><tr><th>Role</th><th>Permission</th><th>What it allows</th></tr></thead>
 <tbody>
@@ -338,7 +339,7 @@ details .inner{padding:0 22px 22px}
 
 
 <div class="label label-blue" style="margin:44px 0 10px">Control Plane v1 · identity unified, permissions too coarse</div>
-<div class="prose"><p>The platform replaced the domain centric world with a platform centric one. The deepest change: granularity moved from verbs to scopes.</p></div>
+<div class="prose"><p>v1 swapped domains for a platform. The deepest change: precision moved from verbs to scopes.</p></div>
 <div class="tblwrap"><table class="tbl">
 <thead><tr><th>Dimension</th><th>Administrator 5.x</th><th>Control Plane v1</th></tr></thead>
 <tbody>
@@ -347,7 +348,7 @@ details .inner{padding:0 22px 22px}
 <tr><td>Authorization</td><td>Read / Write / Administer ACLs per resource</td><td>Fixed permissions scoped to data planes</td></tr>
 <tr><td>Highest privilege</td><td>Super User, a bypass</td><td>Owner, a visible permission</td></tr>
 </tbody></table></div>
-<figure><div class="frame"><img src="assets/fig-09.png" alt="Control Plane v1, Add users wizard, Assign Permissions step: fixed permission list on the left, data plane scope checkboxes on the right." loading="lazy"></div><figcaption><b>Fig 05</b>The v1 assignment wizard: fixed permission vocabulary on the left, scope on the right, and a Preview step the Act 1 matrix never had.</figcaption></figure>
+
 <div class="grid2">
 <div class="soft">
 <div class="label label-blue">What v1 gained</div>
@@ -377,9 +378,9 @@ details .inner{padding:0 22px 22px}
 <tr><td>cluster admin</td><td>Unrestricted cluster wide access</td><td>Owner</td></tr>
 <tr><td>admin</td><td>Full CRUD within a namespace</td><td>Data Plane Manager + Capability Manager</td></tr>
 <tr><td>edit</td><td>Read/write, no RBAC changes</td><td>Application Manager</td></tr>
-<tr><td>view</td><td>Read only</td><td>Application Viewer, View Permissions</td></tr>
+<tr><td>view</td><td>Read only</td><td>Application Viewer, Permission Viewer</td></tr>
 </tbody></table></div>
-<div class="soft" style="margin-top:16px;padding:18px 20px;border-radius:14px"><p style="margin:0;font-size:15px;color:#14213D">The irony: the Kubernetes roles v1 borrowed are namespace scoped by design. v1 raised the boundary to the data plane, and the level it dropped is exactly where team isolation lives.</p></div>
+<div class="soft" style="margin-top:16px;padding:18px 20px;border-radius:14px"><p style="margin:0;font-size:15px;color:#14213D">The irony: v1 borrowed Kubernetes roles, which are namespace scoped by design, then raised the boundary to the data plane. The level it dropped is exactly where team isolation lives.</p></div>
 </div>
 
 <div class="card" style="margin-top:28px">
@@ -405,121 +406,72 @@ details .inner{padding:0 22px 22px}
 <p style="margin:0;font-size:14.5px">A private store with permissions per destination, granted directly to users.</p>
 </div>
 </div>
-</div>
+</div></div></details>
 
 
-<h3 class="sub">Step 2 · What the permission catalogue revealed</h3>
+<h3 class="sub">Step 2 · The permission catalogue</h3><div class="prose"><p>Every controllable action in one list. The headline: <strong>authority was already two tiered</strong>, people on one side and infrastructure on the other, and only the second can be scoped.</p></div><details class="drawer"><summary><span><span class="drawer-t">All four catalogue findings<span class="drawer-n">4 findings</span></span><span class="drawer-s">Two tiers, a hidden hierarchy, one role in both worlds, and the dependency trap</span></span></summary><div class="drawer-b">
 <div class="grid2">
 <div class="card"><div class="stat" style="font-size:28px;color:#2563EB">01</div><p style="margin:0"><strong>Authority was already two tiered.</strong> Control Plane permissions manage people; resource permissions manage infrastructure, and only the second can be scoped.</p></div>
-<div class="card"><div class="stat" style="font-size:28px;color:#2563EB">02</div><p style="margin:0"><strong>The exceptions hinted at a hierarchy.</strong> "Team Admin manages everyone except Owners and IdP Managers" is really a containment diagram written as a sentence.</p></div>
+<div class="card"><div class="stat" style="font-size:28px;color:#2563EB">02</div><p style="margin:0"><strong>The exceptions hinted at a hierarchy.</strong> "Admin manages everyone except Owners and IdP Managers" is really a containment diagram written as a sentence.</p></div>
 <div class="card"><div class="stat" style="font-size:28px;color:#2563EB">03</div><p style="margin:0"><strong>One permission covers both worlds.</strong> Data Plane Manager is identical everywhere; below it Kubernetes uses roles and on prem uses a matrix.</p></div>
 <div class="card"><div class="stat" style="font-size:28px;color:#2563EB">04</div><p style="margin:0"><strong>Dependencies were a trap.</strong> Real people need combinations of permissions, so assigning them had to feel like one decision, not four.</p></div>
-</div>
+</div></div></details>
 
 <h3 class="sub">Step 3 · Verifying v1 cell by cell</h3>
-<div class="prose"><p>I went through the QA worksheet slowly, every role against every other. A tick means the row role can see the column role's permissions. Some rows turned out to be almost identical, and that made the case for fewer roles before anyone had to argue it in a meeting.</p></div>
+<div class="prose"><p>Every role against every other. A tick means the row role can see the column role's permissions; a grey dot means it can't. Nearly identical rows made the case for fewer roles before any meeting.</p></div>
 <div class="tblwrap"><table class="tbl grid-tbl">
-<thead><tr><th>Role sees →</th><th>O</th><th>A</th><th>Pv</th><th>IdP</th><th>DPM</th><th>Cap</th><th>App</th><th>EV</th></tr></thead>
+<thead><tr><th>v1 role sees →</th><th title="Owner">Owner</th><th title="Admin">Admin</th><th title="Permission Viewer">Perm. Viewer</th><th title="IdP Manager">IdP Mgr</th><th title="Data Plane Manager">DP Mgr</th><th title="Capability Manager">Cap. Mgr</th><th title="Application Manager">App Mgr</th><th title="Application Viewer">App Viewer</th><th style="text-align:left">Became</th></tr></thead>
 <tbody>
-<tr><td>Owner</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-<tr><td>Admin</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-<tr><td>Permission Viewer</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-<tr><td>IdP Manager</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-<tr><td>Data Plane Manager</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-<tr><td>Capability Manager</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-<tr><td>Application Manager</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-<tr><td>Entity Viewer</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td></tr>
+<tr><td>Owner</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td style="text-align:left;white-space:nowrap"><span class="role-chip rc-owner">Owner</span></td></tr>
+<tr><td>Admin</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td style="text-align:left;white-space:nowrap"><span class="role-chip rc-owner">Owner</span></td></tr>
+<tr><td>Permission Viewer</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td style="text-align:left;white-space:nowrap"><span class="role-chip rc-dpm">Data Plane Manager</span></td></tr>
+<tr><td>IdP Manager</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td style="text-align:left;white-space:nowrap"><span class="role-chip rc-owner">Owner</span></td></tr>
+<tr><td>Data Plane Manager</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td style="text-align:left;white-space:nowrap"><span class="role-chip rc-dpm">Data Plane Manager</span></td></tr>
+<tr><td>Capability Manager</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td style="text-align:left;white-space:nowrap"><span class="role-chip rc-cm">Capability Manager</span></td></tr>
+<tr><td>Application Manager</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td style="text-align:left;white-space:nowrap"><span class="role-chip rc-cm">Capability Manager</span></td></tr>
+<tr><td>Application Viewer</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td style="text-align:left;white-space:nowrap"><span class="role-chip rc-viewer">Viewer</span></td></tr>
 </tbody></table></div>
 <div class="soft">
 <div class="label label-blue">What the grid revealed</div>
-<p style="margin:0;color:#14213D">Owner, Admin and IdP Manager behaved alike at the top. Permission Viewer and Data Plane Manager had identical rows. Capability and Application Manager overlapped. <strong>Eight roles were really doing the work of four.</strong></p>
+<p style="margin:0;color:#14213D">Owner, Admin and IdP Manager acted alike at the top, so they became Owner. Permission Viewer and Data Plane Manager had identical rows, so they became Data Plane Manager. Capability and Application Manager overlapped, so they became Capability Manager. <strong>Eight roles were doing the work of four.</strong></p>
 </div>
+<div style="margin:24px 0"><div class="label label-blue" style="margin-bottom:10px">Evidence from the field: what the old way cost</div><div class="tblwrap"><table class="tbl"><thead><tr><th>Where</th><th>What happened</th><th>What it cost</th></tr></thead><tbody><tr><td><strong>Control Plane v1</strong></td><td>One data plane per team was the only way to keep teams apart.</td><td>As many data planes as teams, each with its own provisioning, monitoring and admin.</td></tr><tr><td><strong>One customer</strong></td><td>Many teams needed to share one data plane without seeing each other's work.</td><td>Not possible in v1.</td></tr><tr><td><strong>BW5 Administrator</strong></td><td>"Who can touch app X?" meant opening dialogs one by one.</td><td>Every access audit done by hand.</td></tr><tr><td><strong>BW6 Admin UI</strong></td><td>Seeing one instance needed its parent granted too; creators could not view their own AppSpace.</td><td>Extra grants for simple tasks.</td></tr><tr><td><strong>v1 QA grid</strong></td><td>Eight roles, several with near identical rows.</td><td>Twice the choices for the same work.</td></tr></tbody></table></div></div>
 </section>
 
 <!-- 04 Shaping the model -->
 <section id="ch4" data-ch="ch4" class="chapter">
 <div class="ch-num">04</div>
 <h2 class="ch-title">Shaping the model</h2>
-<p class="ch-lede">Three things turned the research into a structure: a card sort in two rounds, a round of pushback, and a diagram of where authority lives.</p>
+<p class="ch-lede">Three steps turned research into structure: a two-round card sort, a round of pushback, and a diagram of where authority lives.</p>
 
 <h3 class="sub" style="margin-top:0 !important">Card sorting legacy tasks into the platform</h3>
-<div class="prose"><p>I ran the sort in two rounds. <strong>Round 1, open sort:</strong> 5 internal participants grouped permission and access tasks into categories of their own. Seven clear groups emerged, and on prem and BW6 items consistently stood apart.</p></div>
-<figure style="margin:20px 0 28px"><div class="frame"><img src="assets/card-sort-board.png" alt="Card sorting board titled Card Sorting, Permission and Access. Sticky notes grouped into seven columns: Platform Tasks, Users and Groups, Permissions at domain level, Applications, Data and Storage, Configuration, and On-Prem / BW6 instance and domain. A side panel lists insights and next steps." loading="lazy"></div><figcaption><b>Fig 06</b>The card sorting session: 5 internal participants grouped permission and access tasks into seven categories. On prem and BW6 items formed a distinct group of their own.</figcaption></figure>
-<div class="prose"><p><strong>Round 2, mapping:</strong> with the groups understood, I turned 21 legacy tasks from BW5, BW6 and EMS into cards and placed each against the existing platform roles, with an open pile for anything that did not fit.</p></div>
-<div class="card" style="margin-top:8px">
-<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin-bottom:6px">
-<div><div class="label label-blue">Card sort · Results ledger</div><h3 style="font-size:20px">Where every legacy capability lands</h3></div>
-<span class="tag tag-blue">21 cards · 3 products</span>
-</div>
-<p style="font-size:15px;margin:0 0 20px">21 legacy tasks from BW5 Administrator, BW6 Admin UI and EMS, sorted against the eight platform roles.</p>
-
-<div class="grid4" style="margin-bottom:24px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:32px;align-items:start;margin:16px 0 28px"><div><div class="prose" style="margin-bottom:14px"><p>We ran the sort in two rounds. <strong>Round 1, open sort:</strong> 5 internal participants made their own groups. Seven emerged, and on prem and BW6 items always stood apart.</p></div>
+<div class="prose"><p><strong>Round 2, mapping:</strong> 21 legacy tasks from BW5, BW6 and EMS, each placed against the existing roles, with an open pile for misfits.</p></div><div class="soft" style="margin-top:18px"><div class="label label-blue" style="margin-bottom:10px">What the board showed</div><ul class="list" style="margin:0"><li>Cards settled into <strong>seven clear categories</strong>.</li><li><strong>Permissions and Configuration</strong> were often grouped together.</li><li><strong>On prem and BW6</strong> items always formed a group of their own.</li><li><strong>Users and Groups</strong> and <strong>Platform tasks</strong> came out as the core, highest priority areas.</li></ul></div></div><figure style="margin:0"><a class="frame" href="assets/card-sort-board.png" target="_blank" rel="noopener" style="display:block;cursor:zoom-in"><img src="assets/card-sort-board.png" alt="Card sorting board titled Card Sorting, Permission and Access. Sticky notes grouped into seven columns: Platform Tasks, Users and Groups, Permissions at domain level, Applications, Data and Storage, Configuration, and On-Prem / BW6 instance and domain. A side panel lists insights and next steps." loading="lazy"></a><figcaption><b>Fig 06</b>The card sort: 5 internal participants, seven categories. On prem and BW6 items formed their own group. Click to view full size.</figcaption></figure></div>
+<div class="card" style="margin-top:8px"><div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin-bottom:6px"><div><div class="label label-blue">Card sort · Results ledger</div><h3 style="font-size:20px">Where every legacy capability lands</h3></div><span class="tag tag-blue">21 cards · 3 products</span></div><p style="font-size:15px;margin:0 0 20px">21 legacy tasks, sorted against the eight platform roles.</p><div class="grid4" style="margin-bottom:20px">
 <div style="background:#F5F8FC;border:1px solid #E3E9F2;border-radius:14px;padding:18px"><div class="stat" style="font-size:34px">21</div><div style="font-weight:600;color:#52607A;font-size:14px">Cards sorted</div></div>
 <div style="background:#EFF4FF;border:1px solid #DBEAFE;border-radius:14px;padding:18px"><div class="stat" style="font-size:34px;color:#2563EB">11</div><div style="font-weight:600;color:#52607A;font-size:14px">Landed in a role</div></div>
 <div style="background:#FFF1EE;border:1px solid #FFD9D1;border-radius:14px;padding:18px"><div class="stat" style="font-size:34px;color:#C2452D">7</div><div style="font-weight:600;color:#52607A;font-size:14px">Need a decision</div></div>
 <div style="background:#F5F8FC;border:1px solid #E3E9F2;border-radius:14px;padding:18px"><div class="stat" style="font-size:34px;color:#64748B">3</div><div style="font-weight:600;color:#52607A;font-size:14px">Retired to the IdP</div></div>
-</div>
-
-<div class="label" style="margin-bottom:12px">Role coverage</div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px 32px;margin-bottom:28px">
-<div style="display:grid;grid-template-columns:150px minmax(0,1fr) 20px;gap:10px;align-items:center;font-size:14px"><span>Application Manager</span><span style="height:8px;border-radius:999px;background:#EEF2F8"><span style="display:block;height:8px;border-radius:999px;background:#2563EB;width:100%"></span></span><strong>3</strong></div>
-<div style="display:grid;grid-template-columns:150px minmax(0,1fr) 20px;gap:10px;align-items:center;font-size:14px"><span>Owner</span><span style="height:8px;border-radius:999px;background:#EEF2F8"><span style="display:block;height:8px;border-radius:999px;background:#2563EB;width:66%"></span></span><strong>2</strong></div>
-<div style="display:grid;grid-template-columns:150px minmax(0,1fr) 20px;gap:10px;align-items:center;font-size:14px"><span>Application Viewer</span><span style="height:8px;border-radius:999px;background:#EEF2F8"><span style="display:block;height:8px;border-radius:999px;background:#2563EB;width:66%"></span></span><strong>2</strong></div>
-<div style="display:grid;grid-template-columns:150px minmax(0,1fr) 20px;gap:10px;align-items:center;font-size:14px"><span>Data Plane Manager</span><span style="height:8px;border-radius:999px;background:#EEF2F8"><span style="display:block;height:8px;border-radius:999px;background:#2563EB;width:66%"></span></span><strong>2</strong></div>
-<div style="display:grid;grid-template-columns:150px minmax(0,1fr) 20px;gap:10px;align-items:center;font-size:14px"><span>IdP Manager</span><span style="height:8px;border-radius:999px;background:#EEF2F8"><span style="display:block;height:8px;border-radius:999px;background:#2563EB;width:33%"></span></span><strong>1</strong></div>
-<div style="display:grid;grid-template-columns:150px minmax(0,1fr) 20px;gap:10px;align-items:center;font-size:14px"><span>View Permissions</span><span style="height:8px;border-radius:999px;background:#EEF2F8"><span style="display:block;height:8px;border-radius:999px;background:#2563EB;width:33%"></span></span><strong>1</strong></div>
-<div style="display:grid;grid-template-columns:150px minmax(0,1fr) 20px;gap:10px;align-items:center;font-size:14px;color:#64748B"><span>Team Admin</span><span style="height:8px;border-radius:999px;background:#EEF2F8"></span><strong style="color:#64748B">0</strong></div>
-<div style="display:grid;grid-template-columns:150px minmax(0,1fr) 20px;gap:10px;align-items:center;font-size:14px;color:#64748B"><span>Capability Manager</span><span style="height:8px;border-radius:999px;background:#EEF2F8"></span><strong style="color:#64748B">0</strong></div>
-</div>
-
-<div class="tblwrap" style="margin:0"><table class="tbl">
-<thead><tr><th>Legacy task</th><th>Lands in</th><th>Status</th></tr></thead>
-<tbody>
-<tr><td colspan="3" style="background:#F5F8FC;color:#1D4ED8;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase">BW5 Administrator · 10 cards</td></tr>
-<tr><td>Add &amp; remove domain users</td><td>Owner</td><td><span class="tag tag-blue">Mapped</span></td></tr>
-<tr><td>Audit: who can touch app X?</td><td>View Permissions</td><td><span class="tag tag-blue">Mapped</span></td></tr>
-<tr><td>Configure LDAP integration</td><td>IdP Manager</td><td><span class="tag tag-blue">Mapped</span></td></tr>
-<tr><td>Register a machine</td><td>Data Plane Manager</td><td><span class="tag tag-blue">Mapped</span></td></tr>
-<tr><td>Deploy an application (EAR)</td><td>Application Manager</td><td><span class="tag tag-blue">Mapped</span></td></tr>
-<tr><td>Start / stop an application</td><td>Application Manager</td><td><span class="tag tag-blue">Mapped</span></td></tr>
-<tr><td>View domain monitoring console</td><td>Application Viewer</td><td><span class="tag tag-blue">Mapped</span></td></tr>
-<tr><td>Read on app A, write on app B</td><td style="color:#52607A">Per app grants are finer than any single role</td><td><span class="tag tag-coral">Needs decision</span></td></tr>
-<tr><td>Reset a user's password</td><td style="color:#52607A">Handled by the IdP</td><td><span class="tag tag-grey">Retired</span></td></tr>
-<tr><td>Set password policy (XML)</td><td style="color:#52607A">Handled by the IdP</td><td><span class="tag tag-grey">Retired</span></td></tr>
-<tr><td colspan="3" style="background:#F5F8FC;color:#1D4ED8;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase">BW6 Admin UI · 8 cards</td></tr>
-<tr><td>Assign roles to users</td><td>Owner</td><td><span class="tag tag-blue">Mapped</span></td></tr>
-<tr><td>Register a bwagent</td><td>Data Plane Manager</td><td><span class="tag tag-blue">Mapped</span></td></tr>
-<tr><td>Deploy an archive</td><td>Application Manager</td><td><span class="tag tag-blue">Mapped</span></td></tr>
-<tr><td>View deployed applications</td><td>Application Viewer</td><td><span class="tag tag-blue">Mapped</span></td></tr>
-<tr><td>Create an AppSpace</td><td style="color:#52607A">Container concept has no cloud equivalent yet</td><td><span class="tag tag-coral">Needs decision</span></td></tr>
-<tr><td>Start / stop an AppNode</td><td style="color:#52607A">Runtime level control, sits between two roles</td><td><span class="tag tag-coral">Needs decision</span></td></tr>
-<tr><td>Back up a domain</td><td style="color:#52607A">Platform operated in the new model; confirm</td><td><span class="tag tag-coral">Needs decision</span></td></tr>
-<tr><td>View only domain d1</td><td style="color:#52607A">Scoping, not a role; needs a separate mechanism</td><td><span class="tag tag-coral">Needs decision</span></td></tr>
-<tr><td colspan="3" style="background:#F5F8FC;color:#1D4ED8;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase">EMS · 3 cards</td></tr>
-<tr><td>Create a queue</td><td style="color:#52607A">Messaging objects are resources, not admin roles</td><td><span class="tag tag-coral">Needs decision</span></td></tr>
-<tr><td>Browse a topic</td><td style="color:#52607A">Read access to a resource instance, not a role</td><td><span class="tag tag-coral">Needs decision</span></td></tr>
-<tr><td>Sync users into EMS store</td><td style="color:#52607A">Handled by the IdP</td><td><span class="tag tag-grey">Retired</span></td></tr>
-</tbody></table></div>
-</div>
+</div><details class="drawer"><summary><span><span class="drawer-t">Where all 21 cards landed<span class="drawer-n">21 cards</span></span><span class="drawer-s">Every legacy task by product and the role it mapped to</span></span></summary><div class="drawer-b"><div class="tblwrap"><table class="tbl"><thead><tr><th>Lands in</th><th>BW5 Administrator · 10</th><th>BW6 Admin UI · 8</th><th>EMS · 3</th><th style="text-align:right">Cards</th></tr></thead><tbody><tr><td><span class="tag tag-blue">Owner</span></td><td>Add and remove domain users</td><td>Assign roles to users</td><td><span style="color:#A0AEC0">None</span></td><td style="text-align:right;font-weight:700">2</td></tr><tr><td><span class="tag tag-blue">Application Manager</span></td><td>Deploy an application (EAR)<br>Start and stop an application</td><td>Deploy an archive</td><td><span style="color:#A0AEC0">None</span></td><td style="text-align:right;font-weight:700">3</td></tr><tr><td><span class="tag tag-blue">Application Viewer</span></td><td>View the domain monitoring console</td><td>View deployed applications</td><td><span style="color:#A0AEC0">None</span></td><td style="text-align:right;font-weight:700">2</td></tr><tr><td><span class="tag tag-blue">Data Plane Manager</span></td><td>Register a machine</td><td>Register a bwagent</td><td><span style="color:#A0AEC0">None</span></td><td style="text-align:right;font-weight:700">2</td></tr><tr><td><span class="tag tag-blue">IdP Manager</span></td><td>Configure LDAP integration</td><td><span style="color:#A0AEC0">None</span></td><td><span style="color:#A0AEC0">None</span></td><td style="text-align:right;font-weight:700">1</td></tr><tr><td><span class="tag tag-blue">Permission Viewer</span></td><td>Audit: who can touch app X?</td><td><span style="color:#A0AEC0">None</span></td><td><span style="color:#A0AEC0">None</span></td><td style="text-align:right;font-weight:700">1</td></tr><tr><td><span class="tag" style="background:#EEF1F6;color:#52607A">Admin, Capability Manager</span></td><td colspan="3" style="color:#52607A">No card landed here directly. Admin later folded into Owner, and Capability Manager absorbed Application Manager.</td><td style="text-align:right;font-weight:700">0</td></tr><tr><td><span class="tag tag-coral">Needs a decision</span></td><td>Read on app A, write on app B</td><td>Create an AppSpace<br>Start and stop an AppNode<br>Back up a domain<br>View only domain d1</td><td>Create a queue<br>Browse a topic</td><td style="text-align:right;font-weight:700">7</td></tr><tr><td><span class="tag" style="background:#EEF1F6;color:#52607A">Retired to the IdP</span></td><td>Reset a user's password<br>Set password policy (XML)</td><td><span style="color:#A0AEC0">None</span></td><td>Sync users into the EMS store</td><td style="text-align:right;font-weight:700">3</td></tr></tbody></table></div></div></details></div>
 <div class="coralsoft" style="margin-top:20px">
 <div class="label label-coral">The finding that mattered</div>
-<p style="margin:0;color:#14213D;font-weight:600">Six of the seven open cards weren't missing roles at all. They were about scope: one domain, app A versus app B, a queue, a topic. No role could hold them, which is why on prem access became a scoped grant next to the roles instead of another role.</p>
+<p style="margin:0;color:#14213D;font-weight:600">Six of the seven open cards weren't missing roles. They were about scope: one domain, app A versus app B, a queue, a topic. So on prem access became a scoped grant beside the roles, not another role.</p>
 </div>
-<div class="tblwrap" style="margin-top:24px"><table class="tbl">
-<thead><tr><th>Open card</th><th>Product</th><th>Resolved as</th></tr></thead>
+<details class="drawer"><summary><span><span class="drawer-t">How the 7 open cards were resolved<span class="drawer-n">7 cards</span></span><span class="drawer-s">Each became a place plus a role, or stayed platform operated</span></span></summary><div class="drawer-b"><div class="tblwrap" ><table class="tbl">
+<thead><tr><th>Open card</th><th>Product</th><th>Resolved as: place + role</th></tr></thead>
 <tbody>
-<tr><td>Read on app A, write on app B</td><td>BW5</td><td><span class="tag tag-blue">Instance · R/W</span></td></tr>
-<tr><td>View only domain d1</td><td>BW6</td><td><span class="tag tag-blue">Instance · Read</span></td></tr>
-<tr><td>Start / stop an AppNode</td><td>BW6</td><td><span class="tag tag-blue">Instance · Write</span></td></tr>
-<tr><td>Create an AppSpace</td><td>BW6</td><td><span class="tag tag-coral">Entity · Write</span></td></tr>
-<tr><td>Create a queue</td><td>EMS</td><td><span class="tag tag-coral">Entity · Write</span></td></tr>
-<tr><td>Browse a topic</td><td>EMS</td><td><span class="tag tag-blue">Instance · Read</span></td></tr>
+<tr><td>Read on app A, write on app B</td><td>BW5</td><td><span class="tag tag-blue">Instance + role</span></td></tr>
+<tr><td>View only domain d1</td><td>BW6</td><td><span class="tag tag-blue">Instance + Viewer</span></td></tr>
+<tr><td>Start / stop an AppNode</td><td>BW6</td><td><span class="tag tag-blue">Instance + Capability Manager</span></td></tr>
+<tr><td>Create an AppSpace</td><td>BW6</td><td><span class="tag tag-coral">Entity + Capability Manager</span></td></tr>
+<tr><td>Create a queue</td><td>EMS</td><td><span class="tag tag-coral">Entity + Capability Manager</span></td></tr>
+<tr><td>Browse a topic</td><td>EMS</td><td><span class="tag tag-blue">Instance + Viewer</span></td></tr>
 <tr><td>Back up a domain</td><td>BW6</td><td><span class="tag tag-grey">Platform operated</span></td></tr>
-</tbody></table></div>
-<figure><div class="frame" style="padding:24px"><img src="diagrams/blue/d-03.svg" alt="The extended role map after on-prem onboarding. Data Plane Manager covers on-prem data plane tasks; Product Permissions, a scoped grant rather than a role, carries Read and Write into Domains, Machines, Agents and Installations."></div><figcaption><b>Fig 07</b>The role set unchanged, and one new kind of thing beside it: Product Permissions.</figcaption></figure>
+</tbody></table></div></div></details>
+<figure><div class="frame" style="padding:24px"><img src="diagrams/blue/d-03-flow.svg" alt="On prem tasks follow the role: Data Plane Manager runs on prem data planes, Capability Manager modifies Domains, Machines, Agents and Installations, Viewer views them. Product Permissions only pick where: a product, an entity type or an instance."></div><figcaption><b>Fig 07</b>The four roles stay as they are, with one new kind of thing beside it: Product Permissions. They only pick where on prem; the role decides what, Read for a Viewer and Write for a Capability Manager.</figcaption></figure>
 
 <h3 class="sub">The pushback: "Why not just two roles?"</h3>
-<div class="prose"><p>My first proposal had six personas. The first reaction from stakeholders was that it was too complex: why not just Admin and User? It was a fair challenge, so instead of defending six, I tested both ends against how scoping actually works.</p></div>
+<div class="prose"><p>Our first proposal had six roles. Stakeholders called it too complex: why not just Admin and User? A fair challenge, so we tested both ends against how scoping actually works.</p></div>
 <div class="grid3">
 <div class="card">
 <div class="label">Two roles</div>
@@ -527,59 +479,21 @@ details .inner{padding:0 22px 22px}
 </div>
 <div class="card">
 <div class="label">Six roles</div>
-<p style="margin:0;font-size:15px">Capability and Application Manager overlapped in practice, and the QA grid agreed. Six things to explain on day one, with no evidence it was worth it.</p>
+<p style="margin:0;font-size:15px">Capability and Application Manager overlapped, and the QA grid agreed. Six roles to explain on day one, with no proof they were worth it.</p>
 </div>
 <div class="card" style="border:2px solid #2563EB;box-shadow:0 0 0 4px #DBEAFE">
 <div class="label label-blue">Where we landed: four</div>
-<p style="margin:0;font-size:15px">Owner, Data Plane Manager, Capability Manager, Entity Viewer. Scope does the fine grained work that extra roles would otherwise do.</p>
-<p style="margin:10px 0 0;font-size:13.5px;color:#52607A">Honestly, four came from reasoning with stakeholders, not from user testing. It's first on my list to validate.</p>
+<p style="margin:0;font-size:15px">Owner, Data Plane Manager, Capability Manager, Viewer. Scope does the fine grained work that extra roles would otherwise do.</p>
+<p style="margin:10px 0 0;font-size:13.5px;color:#52607A">Four came from reasoning with stakeholders, not user testing. It's first on our list to validate.</p>
 </div>
 </div>
 
 <h3 class="sub">The containment model</h3>
-<div class="prose"><p>Before drawing any screens, I drew this. If you get access at any level, you see everything below it, never above and never sideways.</p></div>
-<figure style="margin:20px 0 8px">
-<div role="img" aria-label="Containment diagram. Subscription (Owner) contains Team (Owner at team scope), which contains Data Plane (Data Plane Manager). Inside the data plane, the Kubernetes branch nests Capability, then Namespace, then Application. The on prem branch nests Product, then Entity type, then Instance with Read or Write, the finest scope." style="background:#FFFFFF;border:1px solid #E3E9F2;border-radius:24px;padding:16px;box-shadow:0 1px 2px rgba(20,33,61,.04),0 12px 32px rgba(20,33,61,.06)">
-<div style="border:2px solid #14213D;border-radius:18px;padding:18px 18px 18px;background:#F5F8FC">
-<div style="display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;margin-bottom:14px"><span style="font-weight:800;font-size:18px">Subscription</span><span style="font-size:14px;color:#52607A">Owner</span></div>
-<div style="border:1.5px solid #93B4F8;border-radius:16px;padding:16px;background:#FFFFFF">
-<div style="display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;margin-bottom:14px"><span style="font-weight:800;font-size:17px">Team</span><span style="font-size:14px;color:#52607A">Owner, granted at team scope</span></div>
-<div style="border:1.5px solid #C7D7FB;border-radius:14px;padding:16px;background:#F8FAFF">
-<div style="display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;margin-bottom:16px"><span style="font-weight:800;font-size:16px">Data Plane</span><span style="font-size:14px;color:#52607A">Data Plane Manager, same for all types</span></div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px">
-
-<div>
-<div class="label label-blue" style="margin-bottom:10px">If Kubernetes</div>
-<div style="border:1.5px solid #BFDBFE;border-radius:12px;padding:14px;background:#FFFFFF">
-<div style="display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline;margin-bottom:12px"><span style="font-weight:700">Capability</span><span style="font-size:13px;color:#52607A">BWCE / Flogo / BW5CE / Dev Hub</span></div>
-<div style="border:1.5px solid #93B4F8;border-radius:10px;padding:12px;background:#EFF4FF">
-<div style="display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline;margin-bottom:10px"><span style="font-weight:700">Namespace</span><span style="font-size:13px;color:#52607A">one marked Primary</span><span class="tag tag-blue" style="font-size:11px">Team isolation</span></div>
-<div style="border:1.5px solid #2563EB;border-radius:8px;padding:12px;background:#DBEAFE;display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline"><span style="font-weight:700">Application</span><span style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#1D4ED8">Scope</span></div>
-</div>
-</div>
-</div>
-
-<div>
-<div class="label label-coral" style="margin-bottom:10px">If on prem</div>
-<div style="border:1.5px solid #FFD9D1;border-radius:12px;padding:14px;background:#FFFFFF">
-<div style="display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline;margin-bottom:12px"><span style="font-weight:700">Product</span><span style="font-size:13px;color:#52607A">BW5 / BW6 / EMS</span></div>
-<div style="border:1.5px solid #FFB4A6;border-radius:10px;padding:12px;background:#FFF6F4">
-<div style="display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline;margin-bottom:10px"><span style="font-weight:700">Entity type</span><span style="font-size:13px;color:#52607A">Domains / Machines / Agents / Installations</span></div>
-<div style="border:1.5px solid #F97362;border-radius:8px;padding:12px;background:#FFE1DA;display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline"><span style="font-weight:700">Instance</span><span style="font-size:13px;color:#33415C">Read / Write</span><span style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#A93A25">Finest scope</span></div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-</div>
-</div>
-</div>
-<figcaption><b>Fig 08</b>Where authority lives, from subscription down to a single instance.</figcaption>
-</figure>
+<div class="prose"><p>Before any screens, we drew this. Access at any level shows everything below it, never above, never sideways.</p></div>
+<figure><div class="frame" style="padding:20px"><img src="diagrams/blue/d-08-flow.svg" alt="Containment model: Subscription with Owner; Teams group people; Data Plane with Data Plane Manager; inside Kubernetes: capability, namespace for team isolation, application; inside on prem: product, entity type, instance, the finest scope, where the role decides Read or Write. Access covers everything below, never above, never sideways." loading="lazy"></div><figcaption><b>Fig 08</b>Where authority lives, from subscription down to a single instance.</figcaption></figure>
 <div class="soft" style="margin-top:24px">
-<div class="label label-blue">It got tested sooner than I expected</div>
-<p style="margin:0;color:#14213D">Midway through, a new requirement arrived: several teams per subscription, invisible to each other. The model absorbed it by adding one level, Team, and no new role. Teams not seeing each other came for free from the "never sideways" rule, so I didn't have to patch anything.</p>
+<div class="label label-blue">It got tested sooner than we expected</div>
+<p style="margin:0;color:#14213D">Midway, a new requirement arrived: several teams per subscription, invisible to each other. The model absorbed it with Teams, groups whose grants flow to their members, and no new role. "Never sideways" already kept teams apart.</p>
 </div>
 </section>
 
@@ -587,7 +501,7 @@ details .inner{padding:0 22px 22px}
 <section id="ch5" data-ch="ch5" class="chapter">
 <div class="ch-num">05</div>
 <h2 class="ch-title">The solution</h2>
-<p class="ch-lede">Four roles, each seeing its own level and everything below it. People request access from the level above, and grants come back down.</p>
+<p class="ch-lede">Four roles, each seeing its level and everything below. Requests go up a level; grants come back down.</p>
 
 <div class="grid4">
 <div class="card" style="padding:22px;border-top:4px solid #1D4ED8">
@@ -601,143 +515,71 @@ details .inner{padding:0 22px 22px}
 <p style="font-size:14.5px;margin:0">The Owner's mirror, minus SSO, only on assigned data planes.</p>
 </div>
 <div class="card" style="padding:22px;border-top:4px solid #93C5FD">
-<div class="label label-blue">View &amp; request</div>
+<div class="label label-blue">Capabilities &amp; apps</div>
 <h3 style="font-size:19px;margin-bottom:8px">Capability Manager</h3>
-<p style="font-size:14.5px;margin:0">Sets up capabilities and runs the apps on them. Raises permission requests.</p>
+<p style="font-size:14.5px;margin:0">Sets up capabilities and runs the apps on them. Asks the level above for more.</p>
 </div>
 <div class="card" style="padding:22px;border-top:4px solid #F97362">
 <div class="label label-coral">View only</div>
-<h3 style="font-size:19px;margin-bottom:8px">Entity Viewer</h3>
+<h3 style="font-size:19px;margin-bottom:8px">Viewer</h3>
 <p style="font-size:14.5px;margin:0">Sees within scope, never changes anything.</p>
 </div>
 </div>
-<figure><div class="frame" style="padding:24px"><img src="diagrams/blue/d-04.svg" alt="The final role and functionality mapping. Four platform level permission boxes map one to one onto the four roles: full administration to Owner, scoped administration to Data Plane Manager, view and request to Capability Manager, and view only to Entity Viewer."></div><figcaption><b>Fig 09</b>The Role × Functionality matrix: the whole system on one page.</figcaption></figure>
+<figure><div class="frame" style="padding:24px"><img src="diagrams/blue/d-04-flow.svg" alt="The final role and functionality mapping. Four platform level permission boxes map one to one onto the four roles: full administration to Owner, scoped administration to Data Plane Manager, view and request to Capability Manager, and view only to Viewer."></div><figcaption><b>Fig 09</b>The Role × Functionality matrix: the whole system on one page.</figcaption></figure>
 
-<h3 class="sub">Where the precision lives</h3>
-<div class="grid3">
-<div class="soft"><div class="label label-blue">Kubernetes path</div><p style="margin:0;font-size:15px;color:#14213D">Granted per data plane, capability, namespace or application. It covers everything below, never anything beside.</p></div>
-<div class="coralsoft"><div class="label label-coral">On prem path</div><p style="margin:0;font-size:15px;color:#14213D">Product Permissions in BW5, BW6 and EMS: per entity type or named instance, as Read or Write.</p></div>
-<div class="card"><div class="label">Standing rules</div><p style="margin:0;font-size:15px">"All current and future" at any level writes a grant once and keeps it true as the estate grows.</p></div>
-</div>
+<h3 class="sub">Two worlds, one way to give access</h3><div class="prose"><p>Many teams needed to share a data plane without seeing each other's work, while BW5, BW6 and EMS joined the platform. One screen serves both, so admins learn it once.</p></div><div class="soft" style="margin:16px 0 20px"><div class="label label-blue">How we explain it outside the team</div><p style="margin:0;color:#14213D">A data plane is an <strong>office building</strong>. Admins could only hand out a key to the whole building, so a team wanting privacy rented its own. We added <strong>keys for single floors</strong> (namespaces).</p></div><div class="tblwrap"><table class="tbl"><thead><tr><th style="width:120px"></th><th><span class="tag tag-blue">Kubernetes</span></th><th><span class="tag tag-coral">On prem · BW5, BW6, EMS</span></th></tr></thead><tbody><tr><td style="white-space:nowrap"><strong>The problem</strong></td><td>Anyone managing apps on a shared data plane could see and change every team's apps.</td><td>BW6 nests like folders and names repeat, so "all AppSpaces" and "this AppSpace" blur.</td></tr><tr><td style="white-space:nowrap"><strong>Our fix</strong></td><td>Add the team's own space, the namespace, to the access screen admins already know.</td><td>Show the same folder tree. The admin ticks what to <strong>include</strong>; the role decides view or change.</td></tr><tr><td style="white-space:nowrap"><strong>Granted at</strong></td><td>Data plane, capability, namespace or application. It covers everything below, never anything beside.</td><td>Product, entity type or a named instance.</td></tr><tr><td style="white-space:nowrap"><strong>Example</strong></td><td>A team gets Capability Manager on its namespace: it deploys there and can't see the team next door.</td><td>Domain D1 › AppSpace1 <span class="tag tag-coral">Included</span>: the AppNodes inside are covered too.</td></tr></tbody></table></div><p style="margin:14px 0 0;font-size:14.5px;color:#33415C"><strong>Standing rules:</strong> "All current and future" at any level writes a grant once and keeps it true as the estate grows.</p><details class="drawer"><summary><span><span class="drawer-t">Small rules that keep it simple<span class="drawer-n">8 rules</span></span><span class="drawer-s">Place before role, reasons on greyed out buttons, full path names, no "everything except" rules</span></span></summary><div class="drawer-b"><div class="grid2"><div><div class="label label-blue" style="margin-bottom:8px">Kubernetes</div><ul class="list"><li>You pick the place first, then the role, so only roles that make sense there show up.</li><li>It's one checklist screen, so you can tick many spaces at once.</li><li>Greyed out buttons say why you can't do something, instead of disappearing.</li><li>Whole teams come in through company groups, not one person at a time.</li></ul></div><div><div class="label label-coral" style="margin-bottom:8px">On prem</div><ul class="list coral"><li>We listed every kind of access request and agreed what each meant before drawing a screen.</li><li>Names always show their full path, like "D1 › AppSpace1".</li><li>You can see the folders above yours so you know where you are, but you can't open them.</li><li>There are no "everything except X" rules, so checking someone's access is simple addition.</li></ul></div></div></div></details>
 
-<h3 class="sub">Two worlds, one simple way to give access</h3>
-<div class="prose"><p>One customer had 20+ teams that needed to share one data plane without seeing each other's work. At the same time, BW6 had to join the platform. We designed both so an admin learns one screen and uses it everywhere.</p></div>
-
-<div class="soft" style="margin-bottom:24px">
-<div class="label label-blue">How I explain it to people outside the team</div>
-<p style="margin:0;color:#14213D">Think of a data plane as an <strong>office building</strong>. Before, admins could only hand out a key to the whole building, so a team that wanted privacy had to rent a building of its own. We added <strong>keys for single floors</strong> (namespaces). Now many teams share one building, and each team only opens its own floor.</p>
-</div>
-
-<div class="grid2">
-<div class="card">
-<span class="tag tag-blue">Kubernetes · Namespaces</span>
-<h3 style="font-size:19px;margin:14px 0 14px">Give each team its own floor</h3>
-<div class="label label-coral" style="margin-bottom:4px">The problem</div>
-<p style="font-size:15px">Anyone allowed to manage apps on a shared data plane could see and change every team's apps. The only way to keep teams apart was a separate data plane per team, which is slow and expensive.</p>
-<div class="label label-blue" style="margin-bottom:4px">Our fix</div>
-<p style="font-size:15px">Add one more level, the team's own space, to the access screen admins already know. No new roles, nothing to relearn.</p>
-<div class="label" style="margin-bottom:10px">How an admin gives access</div>
-<div style="display:grid;gap:8px;margin-bottom:20px">
-<div style="display:flex;gap:10px;align-items:center;font-size:14.5px"><span class="lv" style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:8px;background:#DBEAFE;color:#1D4ED8;font-size:12px;font-weight:800;flex:none">1</span>Pick a person or a whole team</div>
-<div style="display:flex;gap:10px;align-items:center;font-size:14.5px"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:8px;background:#DBEAFE;color:#1D4ED8;font-size:12px;font-weight:800;flex:none">2</span>Pick the data plane</div>
-<div style="display:flex;gap:10px;align-items:center;font-size:14.5px"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:8px;background:#DBEAFE;color:#1D4ED8;font-size:12px;font-weight:800;flex:none">3</span>Tick the spaces they can manage or only view</div>
-<div style="display:flex;gap:10px;align-items:center;font-size:14.5px"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:8px;background:#DBEAFE;color:#1D4ED8;font-size:12px;font-weight:800;flex:none">4</span>Read a plain summary, then save</div>
-</div>
-<div class="label" style="margin-bottom:10px">Small rules that keep it simple</div>
-<ul class="list">
-<li>You pick the place first, then the role, so only roles that make sense there show up.</li>
-<li>It's one checklist screen, so you can tick many spaces at once.</li>
-<li>Greyed out buttons say why you can't do something, instead of disappearing.</li>
-<li>Whole teams come in through company groups, not one person at a time.</li>
-</ul>
-</div>
-
-<div class="card">
-<span class="tag tag-coral">On prem · BW6</span>
-<h3 style="font-size:19px;margin:14px 0 14px">Show access as a folder tree</h3>
-<div class="label label-coral" style="margin-bottom:4px">The problem</div>
-<p style="font-size:15px">BW6 organizes things like folders inside folders: domains hold AppSpaces, which hold AppNodes. Names repeat, so "AppSpace1" can mean several things, and "all AppSpaces" vs "this one AppSpace" is easy to mix up.</p>
-<div class="label label-blue" style="margin-bottom:4px">Our fix</div>
-<p style="font-size:15px">The access screen shows that same folder tree. At any level, the admin ticks <strong>Read</strong> (can view) or <strong>Write</strong> (can change).</p>
-<div class="label" style="margin-bottom:10px">Example</div>
-<div style="background:#F5F8FC;border:1px solid #E3E9F2;border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:14.5px;line-height:1.9">
-<div>Domain D1</div>
-<div style="padding-left:18px">› AppSpace1 <span class="tag tag-coral" style="margin-left:6px">Write</span></div>
-<div style="padding-left:36px;color:#52607A">› AppNodes inside it are covered too</div>
-</div>
-<div class="label" style="margin-bottom:10px">Small rules that keep it simple</div>
-<ul class="list coral">
-<li>We listed every kind of access request and agreed what each meant before drawing a screen.</li>
-<li>Names always show their full path, like "D1 › AppSpace1".</li>
-<li>You can see the folders above yours so you know where you are, but you can't open them.</li>
-<li>There are no "everything except X" rules, so checking someone's access is simple addition.</li>
-</ul>
-</div>
-</div>
-
-<div class="coralsoft" style="margin-top:20px">
-<div class="label label-coral">An example</div>
-<p style="margin:0;color:#14213D">A team gets <strong>Manager</strong> on its own space in a shared data plane. They can deploy and update their apps there, they can't see the team next door, and they still see the data plane's name so they know where they are. If they try something outside their rights, the button is already greyed out with the reason.</p>
-</div>
 
 <h3 class="sub">Inviting users</h3>
-<div class="prose"><p>Two hosting models and four sign in methods, each with its own invite and activation. The sign in part varies a lot, but giving permissions doesn't vary at all. So the invite screen adapts to the source, and every path ends at the same "assign roles" step.</p></div>
-<figure><div class="frame" style="padding:20px"><img src="diagrams/blue/d-06.svg" alt="Map of invite paths: TIBCO account, SAML, LDAP and Default IdP, across SaaS and self-hosted, all converging on one RBAC engine with four roles."></div><figcaption><b>Fig 10</b>What varies: every path converges on one engine.</figcaption></figure>
+<div class="prose"><p>Two hosting models and four sign in methods, each with its own invite. Sign in varies a lot; giving permissions doesn't. So the invite screen adapts to the source, and every path ends in the same permission wizard.</p></div>
+<figure><div class="frame" style="padding:20px"><img src="diagrams/blue/d-06-final.svg" alt="Invite paths: TIBCO account, corporate SAML IdP and corporate LDAP directory, across TIBCO SaaS and self-hosted with its default IdP, all ending in one permission wizard and the same four roles."></div><figcaption><b>Fig 10</b>Sign in varies by source. Every path ends in the same wizard and the same four roles.</figcaption></figure>
 
+<h3 class="sub">Information architecture: what changed</h3><div class="prose"><p>Control Plane v1 assigned access in three steps: Users, Permissions with scope, and Preview. The redesign uses four, one decision each, so Where can rule out roles before Role is asked. Starting from a person, a team or a data plane fills a step in, and Whole organization skips Role, so most paths still take three.</p></div><figure><div class="frame" style="padding:20px"><img src="diagrams/blue/d-ia-flow.svg" alt="Assigning access before and now. Before, three steps: Users, Permissions with scope, Preview. Now four: Who, Where, Role, Review, with four entry points and a Whole organization shortcut that skips Role."></div><figcaption><b>Fig 11</b>Three steps became four, but entry points and the Owner shortcut keep most paths at three.</figcaption></figure><div class="prose"><p>The navigation changed with it. Each role sees only the areas it can act on:</p></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Area</th><th>Owner</th><th>Data Plane Manager</th><th>Capability Manager</th><th>Viewer</th></tr></thead><tbody><tr><td><strong>User management: Users</strong></td><td>Yes</td><td>Their data planes</td><td style="color:#A0AEC0">No</td><td style="color:#A0AEC0">No</td></tr><tr><td><strong>User management: Teams</strong></td><td>Yes</td><td>Their data planes</td><td style="color:#A0AEC0">No</td><td style="color:#A0AEC0">No</td></tr><tr><td><strong>User management: IdP Groups, Configure SSO, OAuth</strong></td><td>Yes</td><td style="color:#A0AEC0">No</td><td style="color:#A0AEC0">No</td><td style="color:#A0AEC0">No</td></tr><tr><td><strong>Requests to review</strong></td><td>All</td><td>Their data planes</td><td style="color:#A0AEC0">No</td><td style="color:#A0AEC0">No</td></tr><tr><td><strong>My access (account menu)</strong></td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr><tr><td><strong>My requests</strong></td><td>No, requests come to them</td><td>Yes, to an Owner</td><td>Yes, to their Data Plane Manager</td><td>Yes, to their Data Plane Manager</td></tr></tbody></table></div>
 <h3 class="sub">Key flows and decisions</h3>
-<div class="prose"><p>Four everyday jobs an admin does, what each screen does in simple words, and the one design decision behind it.</p></div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px">
-
-<div class="card">
-<div class="label label-blue">Flow 01 · Giving someone access</div>
-<h3 style="font-size:19px;margin-bottom:10px">Choose where, then what they can do</h3>
-<p style="font-size:15px">The admin first picks the place (a server, out of 100+, with search), then picks the role. Before saving, the screen reads the change back in plain words so nothing is granted by mistake.</p>
-<div style="background:#EFF4FF;border-radius:12px;padding:12px 14px"><div class="label label-blue" style="margin-bottom:4px">Key decision</div><div style="font-size:14.5px;color:#14213D;font-weight:600">Place first, role second. You only see roles that exist there, so wrong combinations can't happen.</div></div>
-</div>
-
-<div class="card">
-<div class="label label-blue">Flow 02 · Checking who has access</div>
-<h3 style="font-size:19px;margin-bottom:10px">One screen, two ways to look</h3>
-<p style="font-size:15px">Admins ask two questions: "what can this person do?" and "who can touch this server?". One switch flips the same screen between both. In the old product, the second question meant opening every item one by one.</p>
-<div style="background:#EFF4FF;border-radius:12px;padding:12px 14px"><div class="label label-blue" style="margin-bottom:4px">Key decision</div><div style="font-size:14.5px;color:#14213D;font-weight:600">View by person or by resource, with one toggle.</div></div>
-</div>
-
-<div class="card">
-<div class="label label-coral">Flow 03 · What each person sees</div>
-<h3 style="font-size:19px;margin-bottom:10px">You only see what's yours</h3>
-<p style="font-size:15px">Someone who manages one server sees a product that looks like it holds only that server. Other teams' servers are not greyed out; they are simply not there, so nobody even learns they exist.</p>
-<div style="background:#FFF1EE;border-radius:12px;padding:12px 14px"><div class="label label-coral" style="margin-bottom:4px">Key decision</div><div style="font-size:14.5px;color:#14213D;font-weight:600">Other teams' things are hidden completely. Greyed out buttons are only for actions inside your own space.</div></div>
-</div>
-
-<div class="card">
-<div class="label label-coral">Flow 04 · Running a team</div>
-<h3 style="font-size:19px;margin-bottom:10px">Team leads manage their team, nothing more</h3>
-<p style="font-size:15px">A team lead can add people to their team and give them access within it. Company wide settings, like Single Sign On setup and subscription wide permissions, simply don't appear for them.</p>
-<div style="background:#FFF1EE;border-radius:12px;padding:12px 14px"><div class="label label-coral" style="margin-bottom:4px">Key decision</div><div style="font-size:14.5px;color:#14213D;font-weight:600">Hand out responsibility without handing out extra power.</div></div>
-</div>
-
-</div>
+<div class="prose"><p>Four everyday admin jobs, what each screen does, and the decision behind it.</p></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:18px"><div class="card" style="padding:22px 24px;display:flex;flex-direction:column"><div class="label label-blue">Flow 01 · Giving someone access</div><h3 style="font-size:18px;margin:10px 0 6px">Choose where, then the role</h3><p style="font-size:14.5px;margin:0 0 14px;color:#33415C">Pick the place (search across every place), then the role. The screen reads the change back before saving.</p><div style="margin-top:auto;padding-top:12px;border-top:1px solid #EEF2F8;font-size:14px;color:#14213D"><span style="font-size:11px;font-weight:800;letter-spacing:.12em;color:#1D4ED8;margin-right:8px">DECISION</span><strong>Only roles that fit the place are offered, so wrong combinations can't happen.</strong></div></div><div class="card" style="padding:22px 24px;display:flex;flex-direction:column"><div class="label label-blue">Flow 02 · Checking who has access</div><h3 style="font-size:18px;margin:10px 0 6px">One person, every grant</h3><p style="font-size:14.5px;margin:0 0 14px;color:#33415C">Each person's page lists every grant with its place, role and source.</p><div style="margin-top:auto;padding-top:12px;border-top:1px solid #EEF2F8;font-size:14px;color:#14213D"><span style="font-size:11px;font-weight:800;letter-spacing:.12em;color:#1D4ED8;margin-right:8px">DECISION</span><strong>Every grant shows where it came from, and changes only there.</strong></div></div><div class="card" style="padding:22px 24px;display:flex;flex-direction:column"><div class="label label-coral">Flow 03 · What each person sees</div><h3 style="font-size:18px;margin:10px 0 6px">You only see what's yours</h3><p style="font-size:14.5px;margin:0 0 14px;color:#33415C">Someone managing one data plane sees a product that holds only that data plane.</p><div style="margin-top:auto;padding-top:12px;border-top:1px solid #EEF2F8;font-size:14px;color:#14213D"><span style="font-size:11px;font-weight:800;letter-spacing:.12em;color:#C2452D;margin-right:8px">DECISION</span><strong>Other teams' things are hidden, not greyed out.</strong></div></div><div class="card" style="padding:22px 24px;display:flex;flex-direction:column"><div class="label label-coral">Flow 04 · Delegating access</div><h3 style="font-size:18px;margin:10px 0 6px">Data Plane Managers run their own patch</h3><p style="font-size:14.5px;margin:0 0 14px;color:#33415C">The Owner's pages, filtered to their data planes. No SSO or organization settings.</p><div style="margin-top:auto;padding-top:12px;border-top:1px solid #EEF2F8;font-size:14px;color:#14213D"><span style="font-size:11px;font-weight:800;letter-spacing:.12em;color:#C2452D;margin-right:8px">DECISION</span><strong>Hand out responsibility without handing out extra power.</strong></div></div></div>
 <figure>
-<div class="frame" style="padding:20px"><img src="diagrams/blue/d-07.svg" alt="User flow: an Owner adding users and assigning permissions. Step one branches on identity source, step two on scope then resource category, step three is the mandatory Preview, ending in one of three confirmations." loading="lazy"></div>
-<figcaption><b>Fig 11</b>The Owner's add users flow, from identity source to scope, Preview and confirmation. Saving records an access change event as an audit record.</figcaption>
+<div class="frame" style="padding:20px"><img src="diagrams/blue/d-07-final.svg" alt="User flow for giving access in four steps: Who, with four identity sources; Where, with Whole organization skipping to Review or specific places across three capability tabs; Role, offering only roles that fit; Review, then Assign, ending in an invitation, active access or a team update." loading="lazy"></div>
+<figcaption><b>Fig 12</b>Giving access, end to end: who, where, role, review. Entry points fill a step in, Whole organization skips Role, and every save is recorded as an audit event.</figcaption>
 </figure>
+</section>
+
+<!-- 06 Screens and prototype -->
+<section id="ch8" data-ch="ch8" class="chapter">
+<div class="ch-num">06</div>
+<h2 class="ch-title">Screens &amp; prototype</h2>
+<p class="ch-lede">The model, built: sixteen screens across an admin's three jobs, then the whole thing as a working prototype.</p>
+<h3 class="sub" style="margin-top:0 !important">Giving access</h3><div class="prose"><p>Four steps, one job each: who, where, what role, and a review before saving. The access summary stays visible throughout.</p></div><figure><div class="frame"><img src="assets/redesign/r02-add-users.png" alt="Add permission step 1: choosing TIBCO SSO, LDAP, SAML IdP or an existing team, with email chips and one invalid address flagged." loading="lazy"></div><figcaption><b>Screen 01</b>Who gets access. One entry point for every identity source. Emails become chips and are checked as you type.</figcaption></figure><figure><div class="frame"><img src="assets/redesign/r04-resource-access.png" alt="Add permission step 2: a choice between specific places and the whole organization, then tabs for DataPlane Management, Kubernetes capabilities and on prem products, where each place is only included or not." loading="lazy"></div><figcaption><b>Screen 02</b>Where they will work. First, specific places or the whole organization. Then one tab per capability, where a place is simply included. What they can do comes from the role.</figcaption></figure><figure><div class="frame"><img src="assets/redesign/r11-whole-organization.png" alt="Where it applies with Whole organization chosen: a note says only the Owner role applies here." loading="lazy"></div><figcaption><b>Screen 03</b>Whole organization, said out loud. It is the only way to get Owner, so the role step is skipped and Review comes next.</figcaption></figure><figure><div class="frame"><img src="assets/redesign/r12-onprem-places.png" alt="On prem products tab: a tree of on prem data planes and products, and instances ticked under Include, inherited ticks shown in grey." loading="lazy"></div><figcaption><b>Screen 04</b>On prem, places only. A product tree with one Include column; ticks below a parent come in grey, and the role decides read or write later.</figcaption></figure><figure><div class="frame"><img src="assets/redesign/r03-role.png" alt="Add permission step 3: four role cards, each listing what it can and cannot do. Owner is turned off because specific places were picked." loading="lazy"></div><figcaption><b>Screen 05</b>The role. Four plain roles compared by outcome. Roles that don't fit the places stay visible but off, with the reason. Specific places offer Data Plane Manager, Capability Manager and Viewer.</figcaption></figure><figure><div class="frame"><img src="assets/redesign/r05-review.png" alt="Add permission step 4: review of users, role and resource access with edit links." loading="lazy"></div><figcaption><b>Screen 06</b>Review before granting. Everything the people will be able to do, on one page, with a way back to each step.</figcaption></figure><h3 class="sub">Checking and changing access</h3><div class="prose"><p>Access is never finished. These pages show who can do what, and make removing access as clear as granting it.</p></div><figure><div class="frame"><img src="assets/redesign/r01-permissions.png" alt="Permissions list with tabs for Users, IdP Groups, Teams and Requests, and a user table with row actions." loading="lazy"></div><figcaption><b>Screen 07</b>The permissions list. Every row opens that person; row menus offer view access, change role, resend invite and remove access, with a confirmation.</figcaption></figure><figure><div class="frame"><img src="assets/redesign/r06-user-access.png" alt="User access page for Daniel Kim with each grant marked Direct or From a team." loading="lazy"></div><figcaption><b>Screen 08</b>One person, every grant. Direct grants change here; team grants link to the team. Removing all access asks first and offers Undo.</figcaption></figure><figure><div class="frame"><img src="assets/redesign/r13-teams.png" alt="Teams list with Engineering Dept, Security and Legal, their members, Control Plane role and resource access." loading="lazy"></div><figcaption><b>Screen 09</b>Teams. Access given to a team flows to its members and sub teams, so one grant covers many people.</figcaption></figure><figure><div class="frame"><img src="assets/redesign/r14-team-detail.png" alt="Engineering Dept team page with its permissions, each marked Direct or From Technology." loading="lazy"></div><figcaption><b>Screen 10</b>One team, every grant. Inherited rows show their source and change only there. Manage permissions opens the wizard with the team filled in.</figcaption></figure><figure><div class="frame"><img src="assets/redesign/r07-access-requests.png" alt="Access requests with reasons, current access, and Approve or Decline." loading="lazy"></div><figcaption><b>Screen 11</b>Access requests. People ask from their own page; the reviewer sees the reason and what the person has today.</figcaption></figure><h3 class="sub">What each role sees</h3><div class="prose"><p>One product, four roles. Reach for an action you lack and the screen says why and who can help.</p></div><figure><div class="frame"><img src="assets/redesign/r08-who-sees-what.png" alt="Table comparing Owner, Data Plane Manager, Capability Manager and Viewer across eight abilities." loading="lazy"></div><figcaption><b>Screen 12</b>Who sees what. Each column links to a guided scenario for that role.</figcaption></figure><figure><div class="frame"><img src="assets/redesign/r16-dpm-scenario.png" alt="Data Plane Manager scenario: Daniel gives the Payments team access, and User management shows only people on his data planes." loading="lazy"></div><figcaption><b>Screen 13</b>The Owner's mirror, scoped. A Data Plane Manager gives access on his own data planes; he sees only those people, and SSO isn't in his menu.</figcaption></figure><figure><div class="frame"><img src="assets/redesign/r15-my-access-dpm.png" alt="My access for Daniel Kim, Data Plane Manager: his data planes, what his role can do, and Ask for this links for what it cannot." loading="lazy"></div><figcaption><b>Screen 14</b>My access, as a Data Plane Manager: where the role applies, where each grant came from, and what's missing, with a way to ask.</figcaption></figure><figure><div class="frame"><img src="assets/redesign/r09-viewer-scenario.png" alt="Viewer scenario: Restart turned off with the reason, and a button to ask the data plane manager." loading="lazy"></div><figcaption><b>Screen 15</b>A Viewer at the moment of need. Restart is visible but off, with the reason and one click to ask for help.</figcaption></figure><figure><div class="frame"><img src="assets/redesign/r10-request-access.png" alt="Request access dialog with role, data planes, duration and reason." loading="lazy"></div><figcaption><b>Screen 16</b>Asking for more. A request is a role, a scope, a duration and a reason, with a summary of who reviews it.</figcaption></figure><h3 class="sub">Every flow, clickable</h3><div class="prose"><p>Five ways into one working prototype. Links between screens work, so any flow leads into the others.</p></div><div class="card" style="margin:28px 0 12px"><span class="tag tag-blue">Prototype flow 01</span><h3 style="font-size:20px;margin:14px 0 8px">Giving access, end to end</h3><p style="font-size:15px">The add permission wizard as an Owner uses it.</p><div style="background:#EFF4FF;border-radius:12px;padding:12px 14px"><div class="label label-blue" style="margin-bottom:4px">Try</div><div style="font-size:14.5px;color:#14213D;font-weight:600">Press Add permission, use Add 3 sample users and remove the invalid address, pick where they will work, then a role, then Assign. Pick Whole organization and Role is skipped: Owner is the only option. Open a person or a team first and the wizard starts with who already filled in.</div></div></div><div class="frame" style="background:#FFFFFF;border:1px solid #E3E9F2;border-radius:18px;overflow:hidden;width:1080px;max-width:100%;height:750px;box-shadow:0 1px 2px rgba(20,33,61,.04),0 12px 32px rgba(20,33,61,.06)"><div data-rbac-host="Prototype" data-rbac-title="Clickable prototype: Giving access, end to end" style="width:1440px;height:1000px;transform:scale(.75);transform-origin:0 0;background:#F7F8FA"></div></div><p style="margin:10px 0 0;font-size:13.5px;color:#52607A">Shown at 75 percent. <a href="#" data-rbac-full="1">Open full screen</a></p><div class="card" style="margin:28px 0 12px"><span class="tag tag-blue">Prototype flow 02</span><h3 style="font-size:20px;margin:14px 0 8px">Checking and changing one person</h3><p style="font-size:15px">The permissions list is where everything after the grant starts.</p><div style="background:#EFF4FF;border-radius:12px;padding:12px 14px"><div class="label label-blue" style="margin-bottom:4px">Try</div><div style="font-size:14.5px;color:#14213D;font-weight:600">Open Daniel Kim, change his role, remove a direct grant. Back on the list, try a row menu, then open the Requests tab and approve one.</div></div></div><div class="frame" style="background:#FFFFFF;border:1px solid #E3E9F2;border-radius:18px;overflow:hidden;width:1080px;max-width:100%;height:750px;box-shadow:0 1px 2px rgba(20,33,61,.04),0 12px 32px rgba(20,33,61,.06)"><div data-rbac-host="Main" data-rbac-title="Clickable prototype: Checking and changing one person" style="width:1440px;height:1000px;transform:scale(.75);transform-origin:0 0;background:#F7F8FA"></div></div><p style="margin:10px 0 0;font-size:13.5px;color:#52607A">Shown at 75 percent. <a href="#" data-rbac-full="1">Open full screen</a></p><div class="card" style="margin:28px 0 12px"><span class="tag tag-blue">Prototype flow 03</span><h3 style="font-size:20px;margin:14px 0 8px">Teams and inherited access</h3><p style="font-size:15px">Teams carry access for groups of people, labelled From that team on each person.</p><div style="background:#EFF4FF;border-radius:12px;padding:12px 14px"><div class="label label-blue" style="margin-bottom:4px">Try</div><div style="font-size:14.5px;color:#14213D;font-weight:600">Create a team, then open Engineering Dept, edit its details and add members.</div></div></div><div class="frame" style="background:#FFFFFF;border:1px solid #E3E9F2;border-radius:18px;overflow:hidden;width:1080px;max-width:100%;height:750px;box-shadow:0 1px 2px rgba(20,33,61,.04),0 12px 32px rgba(20,33,61,.06)"><div data-rbac-host="Teams" data-rbac-title="Clickable prototype: Teams and inherited access" style="width:1440px;height:1000px;transform:scale(.75);transform-origin:0 0;background:#F7F8FA"></div></div><p style="margin:10px 0 0;font-size:13.5px;color:#52607A">Shown at 75 percent. <a href="#" data-rbac-full="1">Open full screen</a></p><div class="card" style="margin:28px 0 12px"><span class="tag tag-blue">Prototype flow 04</span><h3 style="font-size:20px;margin:14px 0 8px">Four roles, four views</h3><p style="font-size:15px">The same product as each role sees it, with a guided scenario for every role.</p><div style="background:#EFF4FF;border-radius:12px;padding:12px 14px"><div class="label label-blue" style="margin-bottom:4px">Try</div><div style="font-size:14.5px;color:#14213D;font-weight:600">Pick a role at the top of the table, then step through its scenario.</div></div></div><div class="frame" style="background:#FFFFFF;border:1px solid #E3E9F2;border-radius:18px;overflow:hidden;width:1080px;max-width:100%;height:750px;box-shadow:0 1px 2px rgba(20,33,61,.04),0 12px 32px rgba(20,33,61,.06)"><div data-rbac-host="RoleMatrix" data-rbac-title="Clickable prototype: Four roles, four views" style="width:1440px;height:1000px;transform:scale(.75);transform-origin:0 0;background:#F7F8FA"></div></div><p style="margin:10px 0 0;font-size:13.5px;color:#52607A">Shown at 75 percent. <a href="#" data-rbac-full="1">Open full screen</a></p><div class="card" style="margin:28px 0 12px"><span class="tag tag-blue">Prototype flow 05</span><h3 style="font-size:20px;margin:14px 0 8px">My access and asking for more</h3><p style="font-size:15px">Every role has a page showing its own access and where it comes from.</p><div style="background:#EFF4FF;border-radius:12px;padding:12px 14px"><div class="label label-blue" style="margin-bottom:4px">Try</div><div style="font-size:14.5px;color:#14213D;font-weight:600">As Priya, press Ask for this next to Restart, scale or deploy apps, send the request, then open My requests.</div></div></div><div class="frame" style="background:#FFFFFF;border:1px solid #E3E9F2;border-radius:18px;overflow:hidden;width:1080px;max-width:100%;height:750px;box-shadow:0 1px 2px rgba(20,33,61,.04),0 12px 32px rgba(20,33,61,.06)"><div data-rbac-host="MyAccess-Viewer" data-rbac-title="Clickable prototype: My access and asking for more" style="width:1440px;height:1000px;transform:scale(.75);transform-origin:0 0;background:#F7F8FA"></div></div><p style="margin:10px 0 0;font-size:13.5px;color:#52607A">Shown at 75 percent. <a href="#" data-rbac-full="1">Open full screen</a></p><h3 class="sub">What we tried and left behind</h3><div class="prose"><p>Ideas we dropped, and what replaced them.</p></div><div class="tblwrap"><table class="tbl"><thead><tr><th>What we tried</th><th>Why it failed</th><th>What replaced it</th></tr></thead><tbody><tr><td>One table for all access</td><td>Data planes, namespaces and on prem products in one list hid what was granted.</td><td>One tab per capability, with a live access summary</td></tr><tr><td>Picking instances one by one</td><td>Most admins grant by type, and every new namespace meant granting again.</td><td>All instances, including future ones, or specific ones</td></tr><tr><td>An X to leave the wizard</td><td>An X reads as closing a pop up, not discarding work.</td><td>A Cancel button in the footer</td></tr><tr><td>Four footer buttons</td><td>Cancel and Skip looked alike but did opposite things.</td><td>Cancel, Previous and one main action</td></tr><tr><td>Page title inside the app header</td><td>Blurred where navigation ends and the page begins.</td><td>A header with only breadcrumb, region, help and profile</td></tr></tbody></table></div><div class="grid2" style="margin-top:8px"><div class="card"><div class="label label-blue" style="margin-bottom:12px">Trade-offs chosen on purpose</div><ul class="list"><li><strong>Four roles, no custom roles.</strong> Each extra role makes the picker and audit harder to read.</li><li><strong>Role says what, scope says where.</strong> Every grant names a place.</li><li><strong>Every grant shows its source.</strong> Direct or From a team, so access is changed where it comes from.</li><li><strong>Destructive actions confirm.</strong> Removing all access offers Undo.</li></ul></div><div class="card"><div class="label" style="margin-bottom:12px">Out of scope</div><ul class="list coral"><li><strong>IdP Groups, SSO and OAuth:</strong> unchanged; set up once by a few people.</li><li><strong>Custom roles:</strong> can follow if usage asks for them.</li><li><strong>Full audit view:</strong> requests log who granted what; the audit log is its own project.</li></ul></div></div><h3 class="sub">Checked in the prototype</h3><div class="prose"><p>Before user sessions, we ran four everyday tasks through the prototype and counted every click. Our own walkthrough, not user testing, but every number is repeatable above.</p></div>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Task</th><th>Starts from</th><th>Clicks</th><th>Result</th></tr></thead><tbody>
+<tr><td>Give Daniel Capability Manager on one data plane</td><td>His access page</td><td><strong>6</strong></td><td>Done. Who is already filled in.</td></tr>
+<tr><td>Give a whole team Viewer on one data plane</td><td>The team page</td><td><strong>6</strong></td><td>Done. Every member inherits it.</td></tr>
+<tr><td>Invite a new person as Data Plane Manager</td><td>The permissions list</td><td><strong>7</strong> plus typing the email</td><td>Done, with a review before saving.</td></tr>
+<tr><td>As a Viewer, ask for permission to restart an app</td><td>My access</td><td><strong>2</strong> plus a reason</td><td>Request sent and shown as pending.</td></tr>
+</tbody></table></div>
+<div class="coralsoft" style="margin-top:20px"><div class="label label-coral">What the walkthrough caught, and what changed</div><ul class="list" style="margin:0">
+<li><strong>Read and Write sat in the Where step,</strong> mixing where with what. Now that step only picks places; the role decides the rest.</li>
+<li><strong>Owner appeared only when nothing was picked,</strong> a hidden rule. Now Whole organization is an explicit choice, and the only one that offers Owner.</li>
+<li><strong>Data Plane Manager needed one particular tab.</strong> Now any place, Kubernetes or on prem, makes it available.</li>
+<li><strong>Every grant started from a blank wizard.</strong> Now starting from a person, a team or a data plane fills in that step.</li>
+</ul></div>
 </section>
 
 <!-- 06 Validation -->
 <section id="ch6" data-ch="ch6" class="chapter">
-<div class="ch-num">06</div>
+<div class="ch-num">07</div>
 <h2 class="ch-title">Impact &amp; next steps</h2>
-<p class="ch-lede">The model hasn't launched, so I don't have usage numbers, and I'd rather not invent any. Here's what has already changed.</p>
+<p class="ch-lede">The model hasn't launched, so there are no usage numbers, and we won't invent any. What has already changed:</p>
 
-<div class="grid2">
+<div class="grid2 impact-grid">
 <div class="card"><span class="tag tag-blue">Product</span><h3 style="font-size:19px;margin:12px 0 8px">Became a formal requirement</h3><p style="margin:0;font-size:15px">Namespace level access is now defined in a product requirements document, with this UX work as its design workstream.</p></div>
 <div class="card"><span class="tag tag-blue">Alignment</span><h3 style="font-size:19px;margin:12px 0 8px">Stakeholders agreed on four roles</h3><p style="margin:0;font-size:15px">The "why not just two roles?" pushback ended in a shared decision: four roles, with scope doing the fine grained work.</p></div>
+<div class="card"><span class="tag tag-blue">Design</span><h3 style="font-size:19px;margin:12px 0 8px">6 clicks to give a person access</h3><p style="margin:0;font-size:15px">Measured in the prototype, from the person's page. Wrong role and place combinations are ruled out before saving.</p></div>
 <div class="card"><span class="tag tag-blue">Product</span><h3 style="font-size:19px;margin:12px 0 8px">Audit trail added to scope</h3><p style="margin:0;font-size:15px">Stakeholder mapping surfaced the auditor's needs, and access change events became first class audit records.</p></div>
 <div class="card"><span class="tag tag-coral">Recognition</span><h3 style="font-size:19px;margin:12px 0 8px">Spot Award from Coforge</h3><p style="margin:0;font-size:15px">Recognised for the TIBCO project work.</p></div>
 </div>
 
 <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:48px 0 6px"><h3 class="sub" style="margin:0 !important">What comes next</h3><span class="tag tag-coral">Planned</span></div>
-<div class="prose"><p>Here's how I plan to measure whether it worked.</p></div>
+<div class="prose"><p>Here's how we plan to measure whether it worked.</p></div>
 <div class="grid2">
 <div class="soft">
 <div class="label label-blue">Metrics to watch after launch</div>
@@ -745,12 +587,12 @@ details .inner{padding:0 22px 22px}
 <li><strong>Data planes per account.</strong> The strongest signal: accounts should consolidate toward fewer, shared data planes.</li>
 <li>Support tickets tagged "access issue"</li>
 <li>Time to first successful grant</li>
-<li>Ratio of custom scope grants to role only grants</li>
+<li>Share of grants scoped below the data plane</li>
 </ul>
 </div>
 <div class="card">
 <div class="label">Research plan</div>
-<p style="font-size:15px">Task based usability sessions with 5 platform or team admins on the assignment flow.</p>
+<p style="font-size:15px">Task based sessions with 5 platform or team admins on the four walkthrough tasks, timed in Control Plane v1 too as the baseline.</p>
 <ul class="list">
 <li>Does the four role model reduce friction, or does a Manager role do too many jobs?</li>
 <li>Is scope first easy to learn when most cloud consoles go role first?</li>
@@ -761,12 +603,13 @@ details .inner{padding:0 22px 22px}
 
 <!-- 07 Reflection -->
 <section id="ch7" data-ch="ch7" class="chapter" style="padding-bottom:72px">
-<div class="ch-num">07</div>
+<div class="ch-num">08</div>
 <h2 class="ch-title">Reflection</h2>
 <div class="prose">
-<p>Studying two generations of shipped access control before designing the third changed how I worked. It wasn't background reading. Every proposal could be checked against two known failures: does this bring back the unreadable matrix, or the coarseness that multiplied data planes?</p>
-<p>If I did it again, I'd push harder for even two or three conversations with platform admins before settling the role count. I believe the reasoning behind four, but belief isn't evidence.</p>
-<p>What I'd keep: drawing where authority lives before drawing any screens. Almost every hard question in this project was answered by that diagram before it reached a design review.</p>
+<p>The work was shared; these notes are my own.</p>
+<p>Studying the shipped generations before designing the next one changed how I worked. Every proposal was checked against two known failures: the unreadable matrix, and the coarseness that multiplied data planes.</p>
+<p>Next time, I'd push for even two or three conversations with platform admins before settling the role count. I believe in four, but belief isn't evidence.</p>
+<p>What I'd keep: drawing where authority lives before any screen. That diagram answered almost every hard question before design review.</p>
 </div>
 <div class="dark" style="margin-top:32px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between">
 <div>
@@ -775,7 +618,7 @@ details .inner{padding:0 22px 22px}
 </div>
 <div style="display:flex;gap:28px;flex-wrap:wrap">
 <div><div style="font-size:30px;font-weight:800;color:#FFFFFF">8 <span style="color:#FF9B8C">→</span> 4</div><div style="font-size:13px;color:#D6E2FF">roles</div></div>
-<div><div style="font-size:30px;font-weight:800;color:#FFFFFF">20 <span style="color:#FF9B8C">→</span> 1</div><div style="font-size:13px;color:#D6E2FF">data planes</div></div>
+<div><div style="font-size:30px;font-weight:800;color:#FFFFFF">3 <span style="color:#FF9B8C">→</span> 1</div><div style="font-size:13px;color:#D6E2FF">user managements</div></div>
 </div>
 </div>
 </section>
@@ -787,15 +630,49 @@ details .inner{padding:0 22px 22px}
 
 
 </div>
-
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { active: 'ch1' };
+  }
+  componentDidMount() {
+    try {
+      const els = Array.prototype.slice.call(document.querySelectorAll('[data-ch]'));
+      if (!els.length || typeof IntersectionObserver === 'undefined') return;
+      this.io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) this.setState({ active: e.target.getAttribute('data-ch') });
+        });
+      }, { rootMargin: '-25% 0px -65% 0px' });
+      els.forEach((el) => this.io.observe(el));
+    } catch (err) {}
+  }
+  componentWillUnmount() {
+    try { if (this.io) this.io.disconnect(); } catch (err) {}
+  }
+  renderVals() {
+    const items = [
+      ['ch1', '01', 'Overview'],
+      ['ch2', '02', 'Context & problem'],
+      ['ch3', '03', 'Research'],
+      ['ch4', '04', 'Shaping the model'],
+      ['ch5', '05', 'The solution'],
+      ['ch8', '06', 'Screens & prototype'],
+      ['ch6', '07', 'Impact & next steps'],
+      ['ch7', '08', 'Reflection']
+    ];
+    const active = (this.state && this.state.active) || 'ch1';
+    return {
+      nav: items.map(([id, n, label]) => ({ id, n, label, cls: id === active ? 'on' : '' }))
+    };
+  }
+}
+</script>
 <script>
-(function(){
-var links=document.querySelectorAll('.nav-link');
-links.forEach(function(l){l.addEventListener('click',function(e){var t=document.getElementById(l.getAttribute('data-target'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
-if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id=e.target.id;links.forEach(function(l){l.classList.toggle('on',l.getAttribute('data-target')===id)});}})},{rootMargin:'-25% 0px -65% 0px'});document.querySelectorAll('[data-ch]').forEach(function(x){io.observe(x)});}
-var last=0;function send(){var el=document.body;if(!el)return;var h=Math.ceil(el.getBoundingClientRect().height);if(h>0&&h!==last){last=h;parent.postMessage({type:"embed-height",height:h},"*")}}
-if(window.ResizeObserver&&document.body){new ResizeObserver(send).observe(document.body)}window.addEventListener('load',send);setInterval(send,1000);send();
-})();
+(function(){var last=0;function send(){var el=document.querySelector(".cs")||document.body;if(!el)return;var h=Math.ceil(el.getBoundingClientRect().height);if(h>0&&h!==last){last=h;try{parent.postMessage({type:"embed-height",height:h},"*")}catch(e){}}}
+if(window.ResizeObserver){var go=function(){if(document.body)new ResizeObserver(send).observe(document.body)};if(document.body)go();else document.addEventListener('DOMContentLoaded',go)}window.addEventListener('load',send);setInterval(send,1000);})();
 </script>
 </body>
 </html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RBAC prototype · Nikhil Muthal</title>
+<style>html,body{margin:0;height:100%;background:#F7F8FA}iframe{display:block;width:100%;height:100%;border:0}</style>
+<script src="clickable/rbac-bundle.js"></script></head><body>
+<script>(function(){
+  function build(name,hash){var R=window.__rbac,p=R&&R.pages[name];if(!p)return '<p style="font:14px system-ui;padding:24px">Screen not found.</p>';
+    var src=JSON.stringify(p).replace(/<\//g,'<\\/').replace(/<!--/g,'<\\u0021--');var inj='<script>window.__rbacHash='+JSON.stringify(hash||'')+';window.__rbacSrc='+src+';(function(){var of=window.fetch;window.fetch=function(u){var s=String(u&&u.url||u);if(/^about:/.test(s)||s===String(location.href))return Promise.resolve(new Response(window.__rbacSrc,{headers:{"Content-Type":"text/html"}}));return of.apply(this,arguments);};})();<\/script><style>'+R.css+'</style><script>'+R.js+'<\/script><script>'+R.router+'<\/script>';
+    return p.replace('<!--RBAC-RUNTIME-->',function(){return inj;});}
+  window.__rbacOpen=function(frame,name,hash){if(frame)frame.srcdoc=build(name,hash);};
+  var f=document.createElement('iframe');f.title='Clickable prototype';document.body.appendChild(f);
+  var name=(location.hash||'').slice(1)||'Prototype';f.srcdoc=build(name,'');
+})();</script></body></html>
