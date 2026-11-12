@@ -680,14 +680,14 @@ if(window.ResizeObserver){var go=function(){if(document.body)new ResizeObserver(
 (function(){
 if(window.parent===window) return;
 var embed=false,lastSent='';
-var CH=[['ch1','Overview'],['ch2','Context'],['ch3','Research'],['ch4','Model'],['ch5','Solution'],['ch8','Screens'],['ch6','Impact'],['ch7','Reflection']];
-var THEME={bg:'rgba(255,255,255,0.94)',border:'#E3E9F2',text:'#14213D',muted:'#52607A',activeBg:'#EFF4FF',activeText:'#1D4ED8',font:'"Plus Jakarta Sans", Inter, system-ui, sans-serif',progress:'linear-gradient(90deg,#2563EB,#93B4F5)'};
+var CH=[['ch1','01','Overview','Overview'],['ch2','02','Context & problem','Context'],['ch3','03','Research','Research'],['ch4','04','Shaping the model','Model'],['ch5','05','The solution','Solution'],['ch8','06','Screens & prototype','Screens'],['ch6','07','Impact & next steps','Impact'],['ch7','08','Reflection','Reflection']];
+var THEME={hideBrand:true,maxWidth:1240,padX:32,height:58,itemPad:'8px 14px',fontSize:14,fullFrom:1180,bg:'rgba(245,248,252,0.96)',border:'#E3E9F2',text:'#14213D',muted:'#52607A',num:'#94A3B8',activeBg:'#FFFFFF',activeBorder:'#BFDBFE',activeText:'#1D4ED8',font:'"Plus Jakarta Sans", Inter, system-ui, sans-serif',progress:'linear-gradient(90deg,#2563EB,#93B4F5)'};
 function sendNav(){
   if(!embed) return;
-  var items=[];CH.forEach(function(c){var el=document.getElementById(c[0]);if(el)items.push({label:c[1],y:Math.round(el.getBoundingClientRect().top)});});
+  var items=[];CH.forEach(function(c){var el=document.getElementById(c[0]);if(el)items.push({n:c[1],label:c[2],short:c[3],y:Math.round(el.getBoundingClientRect().top)});});
   if(!items.length) return;
   var nav=document.querySelector('.nav');
-  var msg={type:'embed-nav',brand:'User Management',coverBottom:nav?Math.round(nav.getBoundingClientRect().bottom):0,items:items,theme:THEME};
+  var msg={type:'embed-nav',brand:'User Management',coverBottom:nav?Math.round(nav.getBoundingClientRect().top)+40:0,items:items,theme:THEME};
   var key=JSON.stringify(msg);if(key===lastSent)return;lastSent=key;parent.postMessage(msg,'*');
 }
 addEventListener('message',function(e){var d=e.data;if(!d||e.source!==window.parent)return;
