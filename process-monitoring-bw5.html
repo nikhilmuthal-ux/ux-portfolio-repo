@@ -577,5 +577,27 @@ if(window.ResizeObserver){new ResizeObserver(send).observe(document.body)}window
 if(window.parent!==window){document.addEventListener("click",function(ev){var a=ev.target&&ev.target.closest?ev.target.closest('.chapters a'):null;if(!a)return;var el=document.getElementById((a.getAttribute("href")||"").slice(1));if(!el)return;ev.preventDefault();try{parent.postMessage({type:"embed-scroll-to",y:el.getBoundingClientRect().top-62},"*")}catch(e){}},true);}
 })();
 </script>
+<script>
+/* Inside the Framer AutoHeightEmbed the iframe never scrolls, so the sticky chapter bar can't stick.
+   Hand the chapter list to the host page, which draws a fixed bar outside the iframe. */
+(function(){
+if(window.parent===window) return;
+var embed=false,lastSent='';
+var CH=[['overview','01','Overview','Overview'],['context','02','Context and problem','Context'],['research','03','How I worked','Process'],['shaping','04','Shaping the solution','Shaping'],['solution','05','The solution','Solution'],['impact','06','Impact','Impact'],['walkthrough','07','Prototype','Prototype'],['reflection','08','Reflection','Reflection']];
+var THEME={hideBrand:true,maxWidth:1080,padX:24,height:58,itemPad:'7px 14px',fontSize:13.5,fullFrom:1100,bg:'rgba(245,248,247,0.96)',border:'#D4E2E1',text:'#0F4C4D',muted:'#52607A',num:'#A0BAB8',activeBg:'#FFFFFF',activeBorder:'#C3DAD8',activeText:'#0B3A3B',font:'"Plus Jakarta Sans", Inter, system-ui, sans-serif',progress:'linear-gradient(90deg,#0F4C4D,#F4A976)'};
+function sendNav(){
+  if(!embed) return;
+  var items=[];CH.forEach(function(c){var el=document.getElementById(c[0]);if(el)items.push({n:c[1],label:c[2],short:c[3],y:Math.round(el.getBoundingClientRect().top)});});
+  if(!items.length) return;
+  var nav=document.querySelector('.chapters');
+  var msg={type:'embed-nav',brand:'Process Monitoring',coverBottom:nav?Math.round(nav.getBoundingClientRect().top)+40:0,items:items,theme:THEME};
+  var key=JSON.stringify(msg);if(key===lastSent)return;lastSent=key;parent.postMessage(msg,'*');
+}
+addEventListener('message',function(e){var d=e.data;if(!d||e.source!==window.parent)return;
+  if(d.type==='embed-viewport'){if(!embed){embed=true;document.documentElement.classList.add('in-embed');}sendNav();}});
+setInterval(function(){lastSent='';sendNav();},2000);
+addEventListener('resize',sendNav);
+})();
+</script>
 </body>
 </html>
