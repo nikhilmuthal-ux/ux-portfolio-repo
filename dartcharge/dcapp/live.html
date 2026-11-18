@@ -1,0 +1,1029 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Dart Charge app prototype</title>
+<script>window.__resources={"https://unpkg.com/react@18.3.1/umd/react.production.min.js":new URL("assets/react.production.min.js",location.href).href,"https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":new URL("assets/react-dom.production.min.js",location.href).href};</script>
+<script src="assets/runtime.js"></script>
+<style>html,body{margin:0;background:#fff;overflow:hidden}</style>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#2878b8}a:hover{color:#1d5d91}
+.ph{position:relative;width:402px;height:874px;overflow:hidden;background:#ffffff;font-family:'Open Sans',system-ui,sans-serif;color:#111;-webkit-font-smoothing:antialiased}
+.ph *{box-sizing:border-box}
+.scr{position:absolute;left:0;top:0;width:402px;height:874px;background:#ffffff;overflow-x:hidden;scrollbar-width:none}
+.scr::-webkit-scrollbar{display:none}
+.hdr{position:sticky;top:0;z-index:5;height:116px;background:#ffffff;border-bottom:1px solid #c8c8c8;box-shadow:0 2px 3px rgba(0,0,0,0.12)}
+.hdr-t{position:absolute;top:70px;margin:0;font-size:16.9px;font-weight:600;line-height:28px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#111}
+.back{position:absolute;left:16px;top:62px;width:45px;height:45px;border-radius:50%;border:1px solid #dcdcdc;background:#ffffff;box-shadow:0 3px 8px rgba(0,0,0,0.10);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.content{padding:24px 20px 24px 20px}
+.q{margin:0;font-size:16px;font-weight:600;line-height:1.3;color:#111}
+.body{color:#111;line-height:1.4;font-size:15px}
+.bl{margin:0;color:#111;line-height:1.35}
+.bl li{padding-left:6px}
+.field{display:block}
+.flabel{display:block;font-size:11.3px;color:#444;margin-bottom:6px}
+.frow{display:flex;align-items:center;border-bottom:1px solid #111}
+.inp{flex:1;min-width:0;height:44px;border:0;outline:none;background:transparent;font-family:inherit;font-size:15.5px;color:#111;padding:0}
+.inp::placeholder{color:#444;opacity:1}
+.help{margin:10px 0 0 0;font-size:15px;color:#111;line-height:1.4}
+.btn{display:block;width:100%;height:44px;border:0;border-radius:2px;color:#ffffff;font-family:inherit;font-size:13.5px;font-weight:600;letter-spacing:3.2px;cursor:pointer;padding:0;transition:background .15s}
+.obtn{display:block;width:100%;height:44px;border:1.5px solid #0f2d5b;border-radius:2px;background:#ffffff;color:#0f2d5b;font-family:inherit;font-size:13.5px;font-weight:600;letter-spacing:3.2px;cursor:pointer;padding:0}
+.card{background:#ffffff;box-shadow:0 2px 6px rgba(0,0,0,0.14)}
+.hrow{display:flex;align-items:center;gap:12px;width:100%;padding:14px 4px 14px 14px;border:0;background:transparent;text-align:left;cursor:pointer;font-family:inherit}
+.hcirc{width:60px;height:60px;border-radius:50%;background:#dddddd;display:flex;align-items:center;justify-content:center}
+.htitle{font-size:15.6px;font-weight:600;color:#515151;line-height:1.3}
+.hsub{font-size:11.6px;font-style:italic;color:#555;line-height:1.3}
+.lrow{display:flex;align-items:center;justify-content:space-between;width:100%;height:55px;padding:0 14px 0 10px;border:0;background:#ffffff;box-shadow:0 2px 5px rgba(0,0,0,0.12);font-family:inherit;font-size:14.4px;color:#111;text-align:left;cursor:pointer}
+.trow{display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid #555}
+.tlabel{font-size:14px;font-weight:600}
+.tg{position:relative;width:63px;height:28px;border-radius:14px;border:0;padding:0;cursor:pointer;flex:none;transition:background .2s}
+.knob{position:absolute;left:2px;top:2px;width:38px;height:24px;border-radius:12px;background:#ffffff;border:1px solid #bdbdbd;transition:transform .2s}
+.radio-row{display:flex;align-items:flex-start;gap:20px;width:100%;border:0;background:transparent;padding:0;text-align:left;cursor:pointer;font-family:inherit;color:#111}
+.rad{width:24px;height:24px;border-radius:50%;border:2.2px solid #0f2d5b;display:flex;align-items:center;justify-content:center;flex:none;margin-top:-2px}
+.dot{width:13px;height:13px;border-radius:50%;background:#0f2d5b}
+.rlabel{font-size:14.5px;font-weight:600}
+.chk{width:24px;height:24px;border-radius:5px;border:2.2px solid #0f2d5b;display:flex;align-items:center;justify-content:center;flex:none;margin-top:4px}
+.ib{width:40px;height:40px;border:0;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex:none}
+.eye{width:40px;height:40px;border:0;background:transparent;display:flex;align-items:center;justify-content:flex-end;cursor:pointer;padding:0}
+.ptxt{border:0;background:transparent;font-family:Helvetica,Arial,sans-serif;font-size:16.5px;font-weight:500;color:#111;cursor:pointer;padding:8px}
+</style>
+</helmet>
+<div class="ph">
+<sc-if value="{{s.home}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: hidden">
+<img src="assets/hero.jpg" alt="" style="position: absolute; left: 0; top: 0; width: 402px; height: 437px; object-fit: cover">
+<div style="position: absolute; left: 0; top: 437px; width: 402px; height: 437px; background: #ffffff"></div>
+<div class="card" style="position: absolute; left: 15px; top: 219px; width: 372px; padding: 8px 0 44px 0; box-sizing: border-box">
+<button class="hrow" onClick="{{go.pay}}">
+<span style="width: 60px; display: flex; justify-content: center; flex: none"><span class="hcirc"><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 6.2A4 4 0 0 0 9 8v4.5c0 3-1 5-3 6.5h12M6.5 13h8" fill="none" stroke="#0f2d5b" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></span>
+<span style="display: flex; flex-direction: column; gap: 10px; flex: 1; padding-right: 8px">
+<span class="htitle">Pay for crossings without an account.</span>
+<span class="hsub">Click here to search using your number plate</span>
+</span>
+</button>
+<div style="height: 1px; background: #e0e0e0; margin: 0 14px 0 30px"></div>
+<button class="hrow" onClick="{{go.ca_start}}">
+<span style="width: 60px; display: flex; justify-content: center; flex: none"><span class="hcirc"><svg width="30" height="32" viewBox="0 0 24 26" aria-hidden="true"><circle cx="12" cy="8" r="5.2" fill="none" stroke="#0f2d5b" stroke-width="2.2"></circle><path d="M2.5 24v-2.5a5 5 0 0 1 5-5h9a5 5 0 0 1 5 5V24z" fill="none" stroke="#0f2d5b" stroke-width="2.2" stroke-linejoin="round"></path></svg></span></span>
+<span style="display: flex; flex-direction: column; gap: 10px; flex: 1; padding-right: 8px">
+<span class="htitle">Setup a Dart Charge account</span>
+<span class="hsub">Click here to register your number plate and create an automatic top up account</span>
+</span>
+</button>
+<div style="height: 1px; background: #e0e0e0; margin: 0 14px 0 30px"></div>
+<button class="hrow" onClick="{{go.check}}">
+<span style="width: 60px; display: flex; justify-content: center; flex: none"><span class="hcirc"><svg width="32" height="24" viewBox="0 0 32 24" aria-hidden="true"><path d="M7 2.5h18l3.2 7.5H3.8z" fill="#0f2d5b"></path><path d="M9 4.5h14l2 4.5H7z" fill="#dddddd"></path><rect x="1.5" y="9" width="29" height="9" rx="2" fill="#0f2d5b"></rect><circle cx="7" cy="13.5" r="2" fill="#dddddd"></circle><circle cx="25" cy="13.5" r="2" fill="#dddddd"></circle><rect x="4" y="17" width="5" height="5" rx="1" fill="#0f2d5b"></rect><rect x="23" y="17" width="5" height="5" rx="1" fill="#0f2d5b"></rect></svg></span></span>
+<span style="display: flex; flex-direction: column; gap: 10px; flex: 1; padding-right: 8px">
+<span class="htitle">Check which crossings you&#39;ve paid for</span>
+<span class="hsub">Click here to search using your number plate</span>
+</span>
+</button>
+<div style="height: 1px; background: #e0e0e0; margin: 0 14px 0 30px"></div>
+<button class="hrow" onClick="{{go.notif}}">
+<span style="width: 60px; display: flex; justify-content: center; flex: none"><span class="hcirc"><svg width="22" height="40" viewBox="0 0 22 40" aria-hidden="true"><rect x="1" y="1" width="20" height="38" rx="3.5" fill="#0f2d5b"></rect><rect x="3" y="5" width="16" height="27" fill="#dddddd"></rect><circle cx="11" cy="35.5" r="1.6" fill="#dddddd"></circle></svg></span></span>
+<span style="display: flex; flex-direction: column; gap: 10px; flex: 1; padding-right: 8px">
+<span class="htitle">Receive Notifications without an account</span>
+<span class="hsub">Click here to enable notifications when you cross</span>
+</span>
+</button>
+<div style="height: 1px; background: #e0e0e0; margin: 0 14px 0 30px"></div>
+<button class="hrow" onClick="{{noop}}">
+<span style="width: 60px; display: flex; justify-content: center; flex: none"><img src="assets/pcn.png" alt="" style="width: 46px; height: 40px; object-fit: contain"></span>
+<span style="display: flex; flex-direction: column; gap: 10px; flex: 1; padding-right: 8px">
+<span class="htitle">Resolve a penalty charge notice (PCN)</span>
+<span class="hsub">Click here to pay a penalty charge or challenge a PCN</span>
+</span>
+</button>
+<div style="height: 1px; background: #e0e0e0; margin: 0 14px 0 30px"></div>
+</div>
+<div style="position: absolute; left: 20px; top: 704px; width: 362px; display: flex; flex-direction: column; gap: 20px">
+<button class="btn" style="background: #002e5f" onClick="{{go.signin}}">SIGN IN</button>
+<button class="obtn" onClick="{{go.forms}}">DART CHARGE FORMS AND GUIDANCE</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.pay}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Pay For Crossings</h1>
+</div><div class="content">
+<h2 class="q" style="margin-top: 6px; padding-left: 5px">Pay for crossings without an account.</h2>
+<p class="body" style="margin: 22px 0 8px 5px">You can:</p>
+<ul class="bl" style="font-size: 13.5px; padding-left: 30px"><li style="margin-bottom: 4px">pay for crossings you&#39;ve made since yesterday</li><li style="margin-bottom: 4px">pay for future crossings</li><li style="margin-bottom: 4px">future payments are valid for 12 months from the date of purchase</li></ul>
+<h2 class="q" style="margin-top: 22px; padding-left: 5px; font-size: 15.5px">What is the Vehicle Registration (number plate) of the vehicle?</h2>
+<div style="padding-left: 5px; margin-top: 28px">
+<div class="field">
+
+<div class="frow">
+<input class="inp" type="text" placeholder="" aria-label="Vehicle registration" value="{{v.payVrn}}" onChange="{{on.payVrn}}">
+
+</div>
+</div>
+<p class="help" style="">For example, CU57ABC</p>
+<button class="btn" style="background: {{b.payVrn.bg}}; margin-top: 24px" onClick="{{b.payVrn.go}}">CONTINUE</button>
+</div></div>
+</div>
+</sc-if>
+<sc-if value="{{s.check}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 72px; right: 8px; text-align: left">Check which crossings you&#39;ve paid for</h1>
+</div><div class="content">
+<p class="body" style="font-size: 13.5px; margin: 4px 0 0 0">After you’ve made a one-off payment, you can check which crossings you’ve paid for.<br>Please note it can take up to one day for your payment to be matched to crossings</p>
+<div style="margin-top: 40px"><div class="field">
+<sc-if value="{{has.payRef}}" hint-placeholder-val="{{false}}"><span class="flabel">Payment reference number</span></sc-if>
+<div class="frow">
+<input class="inp" type="text" placeholder="Payment reference number" aria-label="Payment reference number" value="{{v.payRef}}" onChange="{{on.payRef}}">
+
+</div>
+</div>
+<p class="help" style="font-size: 13px">For example, HD542321725 or 1-898008009</p></div>
+<ul class="bl" style="font-size: 14.5px; padding-left: 26px; margin-top: 30px; list-style: none">
+<li style="text-indent: -12px; margin-bottom: 6px">• If you paid by web, mobile app or phone this is the &#39;HD or 1-&#39; number</li>
+<li style="text-indent: -12px">• If you&#39;ve paid through Payzone this is the &#39;TXN&#39; number</li>
+</ul>
+<div style="margin-top: 36px"><div class="field">
+<sc-if value="{{has.chkVrn}}" hint-placeholder-val="{{false}}"><span class="flabel">Vehicle Registration (number plate)</span></sc-if>
+<div class="frow">
+<input class="inp" type="text" placeholder="Vehicle Registration (number plate)" aria-label="Vehicle Registration (number plate)" value="{{v.chkVrn}}" onChange="{{on.chkVrn}}">
+
+</div>
+</div>
+<p class="help" style="font-size: 13px">For example, CU57 ABC</p></div>
+<button class="btn" style="background: {{b.check.bg}}; margin-top: 28px" onClick="{{b.check.go}}">CONTINUE</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.notif}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 72px; right: 8px; text-align: left">Register To Receive Notifications</h1>
+</div><div class="content">
+<p class="body" style="font-size: 13.5px; margin: 6px 0 0 0">Register to receive reminders from Dart Charge after you cross to help ensure you never miss another payment.</p>
+<h2 style="margin: 22px 0 0 0; font-family: Helvetica, Arial, sans-serif; font-weight: 400; font-size: 17px; color: #111">Location Permission Required (OPT IN)</h2>
+<p class="body" style="font-size: 13.5px; margin: 18px 0 0 0">To send crossing reminders, this app needs to access your device&#39;s location data, even when the app is closed or not in use.</p>
+<p class="body" style="font-size: 13.5px; margin: 18px 0 0 0">Your location data is used to detect crossings and provide reminders. It is not shared and is only used for this feature.</p>
+<p class="body" style="font-size: 13.5px; margin: 18px 0 0 0">If you enable Geo Location, you agree the app can use your location data for this feature.</p>
+<p class="body" style="font-size: 13.5px; margin: 18px 0 0 0">After enabling Geo location below, select <b>Always</b> when prompted to help ensure you receive the reminder.</p>
+<p class="body" style="font-size: 13.5px; margin: 18px 0 0 0; font-weight: 700; padding-right: 80px">Regardless of reminders, crossing charges remain payable.</p>
+<div class="trow" style="margin-top: 22px"><span class="tlabel">Geo Location Enabled</span><button class="tg" role="switch" aria-checked="{{t.geo}}" aria-label="Geo Location Enabled" onClick="{{tog.geo}}" style="background: {{tbg.geo}}"><span class="knob" style="transform: translateX({{tx.geo}})"></span></button></div>
+<p class="body" style="font-size: 13.5px; margin: 50px 0 0 0">To receive the reminders you will need to enable notifications in the Settings of your phone and also below.</p>
+<div class="trow" style="margin-top: 30px"><span class="tlabel">Push Notifications</span><button class="tg" role="switch" aria-checked="{{t.push}}" aria-label="Push Notifications" onClick="{{tog.push}}" style="background: {{tbg.push}}"><span class="knob" style="transform: translateX({{tx.push}})"></span></button></div>
+<button class="btn" style="background: {{b.notif.bg}}; margin-top: 30px; margin-bottom: 30px" onClick="{{b.notif.go}}">CONTINUE</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.signin}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: hidden">
+<div style="position: absolute; left: 0; top: 62px; width: 402px; height: 170px; overflow: hidden">
+<img src="assets/signin_hero.jpg" alt="" style="width: 402px; height: 170px; object-fit: cover; display: block">
+<button aria-label="Back" onClick="{{back}}" style="position: absolute; left: 12px; top: 26px; width: 44px; height: 44px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 style="position: absolute; left: 20px; top: 116px; margin: 0; color: #fff; font-size: 24px; font-weight: 700">Sign In</h1>
+</div>
+<div style="position: absolute; left: 20px; top: 270px; width: 362px">
+<div class="field">
+<sc-if value="{{has.siEmail}}" hint-placeholder-val="{{false}}"><span class="flabel">Email address</span></sc-if>
+<div class="frow">
+<input class="inp" type="email" placeholder="Email address" aria-label="Email address" value="{{v.siEmail}}" onChange="{{on.siEmail}}">
+
+</div>
+</div>
+<p class="help" style="font-size: 11.4px; margin-top: 4px">This will be the same as the credentials you use to login on the website</p>
+<div style="margin-top: 36px"><div class="field">
+<sc-if value="{{has.siPwd}}" hint-placeholder-val="{{false}}"><span class="flabel">Password</span></sc-if>
+<div class="frow">
+<input class="inp" type="{{ptype.siPwd}}" placeholder="Password" aria-label="Password" value="{{v.siPwd}}" onChange="{{on.siPwd}}">
+<button class="eye" aria-label="Show password" onClick="{{eyeT.siPwd}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" fill="none" stroke="#222" stroke-width="2.4"></path><circle cx="12" cy="12" r="3.4" fill="#222"></circle><path d="M4 21L20 3" stroke="#fff" stroke-width="4"></path><path d="M4 21L20 3" stroke="#222" stroke-width="2.4" stroke-linecap="round"></path></svg></button>
+</div>
+</div>
+</div>
+<div style="display: flex; justify-content: flex-end; margin-top: 22px"><a href="#" style="color: #2878b8; font-weight: 600; font-size: 15px; text-decoration: none">Forgot password?</a></div>
+<button class="btn" style="background: {{b.signin.bg}}; margin-top: 30px" onClick="{{b.signin.go}}">SIGN IN</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.forms}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 72px; right: 8px; text-align: left">Dart Charge Forms and Guidance</h1>
+</div><div class="content">
+<div style="display: flex; flex-direction: column; gap: 10px; margin-top: 4px"><button class="lrow" onClick="{{go.about}}">About This Service<span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button><button class="lrow" onClick="{{go.contact}}">Contact Dart Charge<span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button><a class="lrow" href="https://www.gov.uk/pay-dartford-crossing-charge" target="_blank" rel="noopener" style="text-decoration: none">Understanding Charges and Fines<span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a><button class="lrow" onClick="{{go.terms}}">Terms &amp; Conditions<span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button><button class="lrow" onClick="{{go.other}}">Other Ways To Pay Your Charge<span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button><button class="lrow" onClick="{{go.tps}}">Third Party Software<span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button><a class="lrow" href="https://www.gov.uk/help/accessibility-statement" target="_blank" rel="noopener" style="text-decoration: none">Accessibility Statement<span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a><a class="lrow" href="https://nationalhighways.co.uk/" target="_blank" rel="noopener" style="padding-left: 12px; text-decoration: none"><span style="display: flex; align-items: center; gap: 12px"><img src="assets/nh.png" alt="National Highways" style="height: 54px; width: auto"><span style="color: #2c5f9e; text-decoration: underline; font-size: 14.5px">Dart Charge FAQs</span></span><span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a></div>
+<button class="obtn" style="margin-top: 44px; text-decoration: underline" onClick="{{go.survey}}">FEEDBACK TO IMPROVE THE SERVICE</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_start}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content">
+<div style="padding-left: 11px">
+<h2 class="q" style="margin-top: 6px">Before you start</h2>
+<p class="body" style="font-size: 16px; margin: 10px 0 14px 0">You’ll need to have:</p>
+<ul class="bl" style="font-size: 16px; padding-left: 16px"><li style="margin-bottom: 6px">an email address to receive a code</li><li style="margin-bottom: 6px">a phone number</li><li style="margin-bottom: 6px">the vehicle registration (number plate) you want to add to the account</li><li style="margin-bottom: 6px">a valid debit card or credit card</li></ul>
+<button class="btn" style="background: #0f2d5b; margin-top: 14px" onClick="{{go.ca_name}}">CREATE ACCOUNT</button>
+</div></div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_type}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Type of Account</h1>
+</div><div class="content">
+<h2 class="q" style="margin-top: 10px; padding-left: 5px">Which type of account are you registering for?</h2>
+<div style="display: flex; flex-direction: column; gap: 34px; margin-top: 40px">
+<button class="radio-row" onClick="{{pickAcct.personal}}" aria-pressed="{{acct.personal}}">
+<span class="rad"><sc-if value="{{acct.personal}}" hint-placeholder-val="{{false}}"><span class="dot"></span></sc-if></span>
+<span style="display: flex; flex-direction: column; flex: 1; "><span class="rlabel">Personal Account</span><p class="body" style="margin: 6px 0 0 0">If you live in Dartford or Thurrock, your postcode may qualify for the Local Resident Discount Scheme (LRDS).</p></span>
+</button>
+</div>
+<button class="btn" style="background: #0f2d5b; margin-top: 34px" onClick="{{go.ca_name}}">CONTINUE</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_name}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content">
+<h2 class="q" style="margin-top: 10px">What is your name?</h2>
+<div style="margin-top: 40px"><div class="field">
+<sc-if value="{{has.first}}" hint-placeholder-val="{{false}}"><span class="flabel">Primary account holder&#39;s first name</span></sc-if>
+<div class="frow">
+<input class="inp" type="text" placeholder="Primary account holder&#39;s first name" aria-label="Primary account holder&#39;s first name" value="{{v.first}}" onChange="{{on.first}}">
+
+</div>
+</div>
+</div>
+<div style="margin-top: 32px"><div class="field">
+<sc-if value="{{has.last}}" hint-placeholder-val="{{false}}"><span class="flabel">Primary account holder&#39;s last name</span></sc-if>
+<div class="frow">
+<input class="inp" type="text" placeholder="Primary account holder&#39;s last name" aria-label="Primary account holder&#39;s last name" value="{{v.last}}" onChange="{{on.last}}">
+
+</div>
+</div>
+</div>
+<button class="btn" style="background: {{b.name.bg}}; margin-top: 38px" onClick="{{b.name.go}}">CONTINUE</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_post}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content">
+<h2 class="q" style="margin-top: 10px">What is your address?</h2>
+<div style="margin-top: 40px"><div class="field">
+<sc-if value="{{has.post}}" hint-placeholder-val="{{false}}"><span class="flabel">Postcode</span></sc-if>
+<div class="frow">
+<input class="inp" type="text" placeholder="Postcode" aria-label="Postcode" value="{{v.post}}" onChange="{{on.post}}">
+
+</div>
+</div>
+<p class="help" style="font-size: 15.5px; margin-top: 12px">This should be the address were the vehicle is registered.</p></div>
+<button class="btn" style="background: {{b.post.bg}}; margin-top: 20px" onClick="{{b.post.go}}">FIND ADDRESS</button>
+<button class="obtn" style="margin-top: 20px" onClick="{{go.ca_manual}}">ENTER ADDRESS MANUALLY</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_found}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content" style="padding: 0 12px; display: flex; flex-direction: column; height: 758px; box-sizing: border-box">
+<h2 class="q" style="margin-top: 14px">{{foundCount}}</h2>
+<p class="body" style="font-size: 16px; margin: 14px 0 18px 0">Select your address</p>
+<button class="card" onClick="{{pickAddr}}" aria-pressed="{{addrSel}}" style="display: flex; align-items: center; gap: 20px; padding: 10px 20px; margin: 0 5px; border: 0; cursor: pointer; text-align: left; font: inherit">
+<span class="rad"><sc-if value="{{addrSel}}" hint-placeholder-val="{{false}}"><span class="dot"></span></sc-if></span>
+<span style="color: #0f2d5b; font-size: 15px">{{foundAddr}}</span>
+</button>
+<div style="flex: 1"></div>
+<p class="body" style="font-size: 15px; margin: 0 0 20px 0">If you don’t see your address you can enter it manually.</p>
+<button class="btn" style="background: {{b.found.bg}}; " onClick="{{b.found.go}}">CONTINUE</button>
+<button class="obtn" style="margin-top: 20px; margin-bottom: 26px" onClick="{{go.ca_manual}}">ENTER ADDRESS MANUALLY</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_manual}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content">
+<h2 class="q" style="margin-top: 10px">What is your address?</h2>
+<div style="margin-top: 40px"><div class="field">
+<sc-if value="{{has.street}}" hint-placeholder-val="{{false}}"><span class="flabel">Building Number and Street</span></sc-if>
+<div class="frow">
+<input class="inp" type="text" placeholder="Building Number and Street" aria-label="Building Number and Street" value="{{v.street}}" onChange="{{on.street}}">
+
+</div>
+</div>
+<p class="help" style="font-size: 15.5px; margin-top: 12px">For example 46, Flat 2a or Rose Cottage</p></div>
+<div style="margin-top: 36px"><div class="field">
+<sc-if value="{{has.line2}}" hint-placeholder-val="{{false}}"><span class="flabel">Address line 2 (optional)</span></sc-if>
+<div class="frow">
+<input class="inp" type="text" placeholder="Address line 2 (optional)" aria-label="Address line 2 (optional)" value="{{v.line2}}" onChange="{{on.line2}}">
+
+</div>
+</div>
+</div>
+<div style="margin-top: 32px"><div class="field">
+<sc-if value="{{has.town}}" hint-placeholder-val="{{false}}"><span class="flabel">Town or City</span></sc-if>
+<div class="frow">
+<input class="inp" type="text" placeholder="Town or City" aria-label="Town or City" value="{{v.town}}" onChange="{{on.town}}">
+
+</div>
+</div>
+</div>
+<div style="margin-top: 32px"><div class="field">
+<sc-if value="{{has.mpost}}" hint-placeholder-val="{{false}}"><span class="flabel">Postcode</span></sc-if>
+<div class="frow">
+<input class="inp" type="text" placeholder="Postcode" aria-label="Postcode" value="{{v.mpost}}" onChange="{{on.mpost}}">
+
+</div>
+</div>
+</div>
+<div style="margin-top: 32px"><div class="field">
+<sc-if value="{{has.country}}" hint-placeholder-val="{{false}}"><span class="flabel">Country</span></sc-if>
+<div class="frow">
+<input class="inp" type="text" placeholder="Country" aria-label="Country" value="{{v.country}}" onChange="{{on.country}}">
+
+</div>
+</div>
+</div>
+<button class="btn" style="background: {{b.manual.bg}}; margin-top: 38px; margin-bottom: 30px" onClick="{{b.manual.go}}">CONTINUE</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_plan}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content">
+<h2 class="q" style="margin-top: 6px">What type of account would you like?</h2>
+<div style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px">
+<button class="card" onClick="{{pickPlan.prepay}}" style="display: block; width: 100%; padding: 16px 18px 6px 18px; border: 0; text-align: left; cursor: pointer; font: inherit; box-sizing: border-box">
+<span style="display: flex; justify-content: space-between; align-items: center"><span style="font-size: 17px; font-weight: 600; color: #111">Pre-pay</span><span style="padding-right: 6px"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></span>
+<ul class="bl"  style="font-size: 15px; padding-left: 32px; margin-top: 18px"><li style="margin-bottom: 8px">Pay a minimum of £15 to open the account</li><li style="margin-bottom: 8px">Suitable for frequent users</li><li style="margin-bottom: 8px">Get a discount of up to 20% with each crossing</li><li style="margin-bottom: 8px">Payments for crossings will automatically be taken from your account balance</li><li style="margin-bottom: 8px">Your account gets topped up automatically when your balance is low</li></ul>
+</button>
+<button class="card" onClick="{{pickPlan.payg}}" style="display: block; width: 100%; padding: 16px 18px 6px 18px; border: 0; text-align: left; cursor: pointer; font: inherit; box-sizing: border-box">
+<span style="display: flex; justify-content: space-between; align-items: center"><span style="font-size: 17px; font-weight: 600; color: #111">Pay as you go</span><span style="padding-right: 6px"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></span>
+<ul class="bl"  style="font-size: 15px; padding-left: 32px; margin-top: 18px"><li style="margin-bottom: 8px">No initial payment required</li><li style="margin-bottom: 8px">Suitable for occasional users</li><li style="margin-bottom: 8px">Your payment gets taken automatically after your crossing</li><li style="margin-bottom: 8px">No discount</li></ul>
+</button>
+</div>
+<button class="obtn" style="margin-top: 20px; margin-bottom: 30px" onClick="{{noop}}">CROSSING CHARGES PER ACCOUNT</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_email}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content">
+<h2 class="q" style="margin-top: 6px">What is your email address?</h2>
+<div style="margin-top: 40px"><div class="field">
+<sc-if value="{{has.email}}" hint-placeholder-val="{{false}}"><span class="flabel">Email address</span></sc-if>
+<div class="frow">
+<input class="inp" type="email" placeholder="Email address" aria-label="Email address" value="{{v.email}}" onChange="{{on.email}}">
+
+</div>
+</div>
+<p class="help" style="font-size: 15.5px; margin-top: 12px">This will be your username when you log in to your account.</p></div>
+<button class="btn" style="background: {{b.email.bg}}; margin-top: 22px" onClick="{{b.email.go}}">CONTINUE</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_code}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content">
+<div style="padding-left: 6px; padding-right: 6px">
+<h2 class="q" style="margin-top: 14px">Check your email for a security code.</h2>
+<p class="body" style="font-size: 13.5px; margin: 10px 0 0 0">We’ve sent an email to {{maskedEmail}}</p>
+<div style="margin-top: 40px"><div class="field">
+<sc-if value="{{has.code}}" hint-placeholder-val="{{false}}"><span class="flabel">6 Digit Security Code</span></sc-if>
+<div class="frow">
+<input class="inp" type="tel" placeholder="6 Digit Security Code" aria-label="6 Digit Security Code" value="{{v.code}}" onChange="{{on.code}}">
+
+</div>
+</div>
+</div>
+<p class="body" style="font-size: 13.5px; margin: 18px 0 0 0">Check the email for 6-digit security code. This code will expire after 15 minutes.</p>
+<p class="body" style="font-size: 13.5px; margin: 18px 0 0 0">Your email might take a few minutes to arrive. If you do not get an email check your spam folder.</p>
+<p class="body" style="font-size: 13.5px; margin: 18px 0 0 0">If you did not get a code, or it has expired, select resend security code.</p>
+<button class="btn" style="background: {{b.code.bg}}; margin-top: 22px" onClick="{{b.code.go}}">CONTINUE</button>
+<button class="obtn" style="margin-top: 17px" onClick="{{noop}}">RESEND SECURITY CODE</button>
+</div></div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_pwd}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content">
+<h2 class="q" style="margin-top: 20px">Create a new password</h2>
+<div style="margin-top: 44px"><div class="field">
+<sc-if value="{{has.pwd}}" hint-placeholder-val="{{false}}"><span class="flabel">Enter Password</span></sc-if>
+<div class="frow">
+<input class="inp" type="{{ptype.pwd}}" placeholder="Enter Password" aria-label="Enter Password" value="{{v.pwd}}" onChange="{{on.pwd}}">
+<button class="eye" aria-label="Show password" onClick="{{eyeT.pwd}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" fill="none" stroke="#222" stroke-width="2.4"></path><circle cx="12" cy="12" r="3.4" fill="#222"></circle><path d="M4 21L20 3" stroke="#fff" stroke-width="4"></path><path d="M4 21L20 3" stroke="#222" stroke-width="2.4" stroke-linecap="round"></path></svg></button>
+</div>
+</div>
+</div>
+<div style="margin-top: 36px"><div class="field">
+<sc-if value="{{has.pwd2}}" hint-placeholder-val="{{false}}"><span class="flabel">Confirm New Password</span></sc-if>
+<div class="frow">
+<input class="inp" type="{{ptype.pwd2}}" placeholder="Confirm New Password" aria-label="Confirm New Password" value="{{v.pwd2}}" onChange="{{on.pwd2}}">
+<button class="eye" aria-label="Show password" onClick="{{eyeT.pwd2}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" fill="none" stroke="#222" stroke-width="2.4"></path><circle cx="12" cy="12" r="3.4" fill="#222"></circle><path d="M4 21L20 3" stroke="#fff" stroke-width="4"></path><path d="M4 21L20 3" stroke="#222" stroke-width="2.4" stroke-linecap="round"></path></svg></button>
+</div>
+</div>
+</div>
+<button class="btn" style="background: {{b.pwd.bg}}; margin-top: 24px" onClick="{{b.pwd.go}}">CONTINUE</button>
+<p class="body" style="font-size: 14.5px; font-weight: 600; margin: 28px 0 12px 0">Your password must:</p>
+<ul class="bl" style="font-size: 14.5px; padding-left: 25px"><li style="margin-bottom: 6px">be at least 8 characters long</li><li style="margin-bottom: 6px">contain at least one upper case letter (A-Z)</li><li style="margin-bottom: 6px">contain at least one lower case letter (a-z)</li><li style="margin-bottom: 6px">contain at least one number (0-9)</li></ul>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_sms}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content">
+<h2 class="q" style="margin-top: 6px; padding-right: 70px">Would you like to receive communications about your account by text message?</h2>
+<div style="display: flex; align-items: center; gap: 16px; margin-top: 12px">
+<p class="body" style="font-size: 13.5px; margin: 0; flex: 1">This will be in addition to receiving notifications by email.</p>
+<span style="margin-right: -10px"><button class="tg" role="switch" aria-checked="{{t.sms}}" aria-label="Text message communications" onClick="{{tog.sms}}" style="background: {{tbg.sms}}"><span class="knob" style="transform: translateX({{tx.sms}})"></span></button></span>
+</div>
+<p class="body" style="font-size: 13.5px; margin: 26px 70px 0 0">Example Notifications: Low balance, auto top-up, card/direct debit expiry, payment failure, local resident account notifications, etc.</p>
+<button class="btn" style="background: #0f2d5b; margin-top: 32px" onClick="{{go.ca_2fa}}">CONTINUE</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_2fa}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content">
+<h2 class="q" style="margin-top: 2px">Would you like to opt in to two-step verification?</h2>
+<p class="body" style="font-size: 13.5px; margin: 14px 0 0 0">This will make access to your account more secure.</p>
+<div class="trow" style="margin-top: 24px; border: 0"><span class="tlabel" style="font-size: 14.5px">Two Factor Verification</span><button class="tg" role="switch" aria-checked="{{t.tfa}}" aria-label="Two Factor Verification" onClick="{{tog.tfa}}" style="background: {{tbg.tfa}}"><span class="knob" style="transform: translateX({{tx.tfa}})"></span></button></div>
+<button class="btn" style="background: #0f2d5b; margin-top: 24px" onClick="{{go.ca_phone}}">CONTINUE</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_phone}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content">
+<h2 class="q" style="margin-top: 10px">What is your phone number?</h2>
+<div class="field" style="margin-top: 26px">
+<span class="flabel">Country Code</span>
+<div class="frow"><select class="inp" aria-label="Country Code" style="color: #111; appearance: none; -webkit-appearance: none; background: transparent"><option>United Kingdom (+44)</option><option>Ireland (+353)</option><option>France (+33)</option></select></div>
+</div>
+<div style="margin-top: 32px"><div class="field">
+<sc-if value="{{has.tel}}" hint-placeholder-val="{{false}}"><span class="flabel">Telephone number</span></sc-if>
+<div class="frow">
+<input class="inp" type="tel" placeholder="Telephone number" aria-label="Telephone number" value="{{v.tel}}" onChange="{{on.tel}}">
+
+</div>
+</div>
+</div>
+<button class="btn" style="background: {{b.tel.bg}}; margin-top: 58px" onClick="{{b.tel.go}}">CONTINUE</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_vrn}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content">
+<div style="padding-left: 5px">
+<h2 class="q" style="margin-top: 14px; font-size: 15.5px">What is the Vehicle Registration (number plate) of the vehicle?</h2>
+<div style="margin-top: 40px"><div class="field">
+
+<div class="frow">
+<input class="inp" type="text" placeholder="" aria-label="Vehicle registration" value="{{v.vrn}}" onChange="{{on.vrn}}">
+
+</div>
+</div>
+<p class="help" style="">For example, CU57ABC</p></div>
+<button class="btn" style="background: {{b.vrn.bg}}; margin-top: 24px" onClick="{{b.vrn.go}}">CONTINUE</button>
+</div></div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_vehicle}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content">
+<h2 class="q" style="margin-top: 10px">We need more information about your vehicle</h2>
+<div class="card" style="display: flex; align-items: center; padding: 14px 20px 14px 10px; margin-top: 14px">
+<div style="flex: 1"><p style="margin: 0; font-weight: 600; font-size: 14.5px">Vehicle Registration (number plate)</p><p style="margin: 8px 0 0 0; font-size: 15px">{{plate}}</p></div>
+<button class="ib" aria-label="Edit vehicle registration" onClick="{{go.ca_vrn}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#111"></path></svg></button>
+</div>
+<button class="field" onClick="{{openPicker}}" style="margin-top: 38px; display: block; width: 100%; background: transparent; border: 0; padding: 0; text-align: left; cursor: pointer; font: inherit">
+<sc-if value="{{has.vtype}}" hint-placeholder-val="{{false}}"><span class="flabel">Type of vehicle</span></sc-if>
+<span class="frow" style="display: flex; align-items: center"><span class="inp" style="color: {{vtypeColor}}; display: flex; align-items: center; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis">{{vtypeLabel}}</span><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8l8 8 8-8" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+</button>
+<div style="margin-top: 32px"><div class="field">
+<sc-if value="{{has.make}}" hint-placeholder-val="{{false}}"><span class="flabel">Make</span></sc-if>
+<div class="frow">
+<input class="inp" type="text" placeholder="Make" aria-label="Make" value="{{v.make}}" onChange="{{on.make}}">
+
+</div>
+</div>
+</div>
+<div style="margin-top: 32px"><div class="field">
+<sc-if value="{{has.model}}" hint-placeholder-val="{{false}}"><span class="flabel">Model</span></sc-if>
+<div class="frow">
+<input class="inp" type="text" placeholder="Model" aria-label="Model" value="{{v.model}}" onChange="{{on.model}}">
+
+</div>
+</div>
+</div>
+<div style="margin-top: 32px"><div class="field">
+<sc-if value="{{has.colour}}" hint-placeholder-val="{{false}}"><span class="flabel">Colour</span></sc-if>
+<div class="frow">
+<input class="inp" type="text" placeholder="Colour" aria-label="Colour" value="{{v.colour}}" onChange="{{on.colour}}">
+
+</div>
+</div>
+</div>
+<h3 class="q" style="margin: 22px 0 14px 0">Country of Registration</h3>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<button class="radio-row" onClick="{{pickCtry.uk}}" aria-pressed="{{ctry.uk}}">
+<span class="rad"><sc-if value="{{ctry.uk}}" hint-placeholder-val="{{false}}"><span class="dot"></span></sc-if></span>
+<span style="display: flex; flex-direction: column; flex: 1; "><span class="rlabel">In the UK</span></span>
+</button>
+<button class="radio-row" onClick="{{pickCtry.out}}" aria-pressed="{{ctry.out}}">
+<span class="rad"><sc-if value="{{ctry.out}}" hint-placeholder-val="{{false}}"><span class="dot"></span></sc-if></span>
+<span style="display: flex; flex-direction: column; flex: 1; "><span class="rlabel">Outside the UK</span></span>
+</button>
+</div>
+<button class="radio-row" onClick="{{tog.confirm}}" aria-pressed="{{t.confirm}}" style="margin-top: 26px; gap: 16px; padding-left: 4px">
+<span class="chk"><sc-if value="{{t.confirm}}" hint-placeholder-val="{{false}}"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#0f2d5b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if></span>
+<span class="body" style="font-size: 16px">I confirm that the vehicle information provided is correct.</span>
+</button>
+<button class="btn" style="background: {{b.vehicle.bg}}; margin-top: 22px; margin-bottom: 40px" onClick="{{b.vehicle.go}}">CONTINUE</button></div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_vehicles}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content" style="display: flex; flex-direction: column; height: 758px; box-sizing: border-box">
+<h2 class="q" style="margin-top: 2px">You’re adding 1 vehicle</h2>
+<div class="card" style="display: flex; align-items: center; height: 86px; padding: 0 16px 0 20px; margin-top: 16px; margin-left: -1px; margin-right: -1px">
+<span style="flex: 1; font-size: 16px; font-weight: 600">{{plate}}</span>
+<button class="ib" aria-label="Remove vehicle" onClick="{{go.ca_vrn}}" style="margin-right: 18px"><svg width="22" height="24" viewBox="0 0 22 24" aria-hidden="true"><rect x="2" y="2" width="18" height="2.4" fill="#111"></rect><rect x="8" y="0" width="6" height="2.4" fill="#111"></rect><path d="M4 6h14v17H4z" fill="#111"></path><rect x="7.2" y="8.5" width="1.6" height="12" fill="#fff"></rect><rect x="10.2" y="8.5" width="1.6" height="12" fill="#fff"></rect><rect x="13.2" y="8.5" width="1.6" height="12" fill="#fff"></rect></svg></button>
+<button class="ib" aria-label="Edit vehicle" onClick="{{go.ca_vehicle}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#111"></path></svg></button>
+</div>
+<div style="flex: 1"></div>
+<button class="btn" style="background: #0f2d5b; " onClick="{{go.ca_review}}">CONTINUE</button>
+<button class="obtn" style="margin-top: 12px; margin-bottom: 140px" onClick="{{go.ca_vrn}}">ADD ANOTHER VEHICLE</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_review}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content">
+<h2 class="q" style="margin-top: 10px">Check your answers before making a payment.</h2>
+<h3 class="q" style="margin: 22px 0 14px 0">Personal Details</h3>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div class="card" style="display: flex; align-items: center; padding: 18px 20px 18px 10px">
+<div style="flex: 1"><p style="margin: 0 0 8px 0; font-weight: 600; font-size: 15.5px">Full name</p><p style="margin: 0; font-size: 15px; white-space: pre-line; line-height: 1.6">{{r.name}}</p></div>
+<button class="ib" aria-label="Edit Full name" onClick="{{go.ca_name}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#111"></path></svg></button>
+</div>
+<div class="card" style="display: flex; align-items: center; padding: 18px 20px 18px 10px">
+<div style="flex: 1"><p style="margin: 0 0 8px 0; font-weight: 600; font-size: 15.5px">Address</p><p style="margin: 0; font-size: 15px; white-space: pre-line; line-height: 1.6">{{r.addr}}</p></div>
+<button class="ib" aria-label="Edit Address" onClick="{{go.ca_post}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#111"></path></svg></button>
+</div>
+<div class="card" style="display: flex; align-items: center; padding: 18px 20px 18px 10px">
+<div style="flex: 1"><p style="margin: 0 0 8px 0; font-weight: 600; font-size: 15.5px">Email address</p><p style="margin: 0; font-size: 15px; white-space: pre-line; line-height: 1.6">{{r.email}}</p></div>
+<button class="ib" aria-label="Edit Email address" onClick="{{go.ca_email}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#111"></path></svg></button>
+</div>
+<div class="card" style="display: flex; align-items: center; padding: 18px 20px 18px 10px">
+<div style="flex: 1"><p style="margin: 0 0 8px 0; font-weight: 600; font-size: 15.5px">Telephone number</p><p style="margin: 0; font-size: 15px; white-space: pre-line; line-height: 1.6">{{r.tel}}</p></div>
+<button class="ib" aria-label="Edit Telephone number" onClick="{{go.ca_phone}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#111"></path></svg></button>
+</div>
+</div>
+<h3 class="q" style="margin: 22px 0 14px 0">Account Details</h3>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div class="card" style="display: flex; align-items: center; padding: 18px 20px 18px 10px">
+<div style="flex: 1"><p style="margin: 0; font-size: 15px; white-space: pre-line; line-height: 1.6">{{r.plan}}</p></div>
+<button class="ib" aria-label="Edit plan" onClick="{{go.ca_plan}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#111"></path></svg></button>
+</div>
+<div class="card" style="display: flex; align-items: center; padding: 18px 20px 18px 10px">
+<div style="flex: 1"><p style="margin: 0 0 8px 0; font-weight: 600; font-size: 15.5px">Text message communications</p><p style="margin: 0; font-size: 15px; white-space: pre-line; line-height: 1.6">{{r.sms}}</p></div>
+<button class="ib" aria-label="Edit Text message communications" onClick="{{go.ca_sms}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#111"></path></svg></button>
+</div>
+<div class="card" style="display: flex; align-items: center; padding: 18px 20px 18px 10px">
+<div style="flex: 1"><p style="margin: 0 0 8px 0; font-weight: 600; font-size: 15.5px">Two-step verification</p><p style="margin: 0; font-size: 15px; white-space: pre-line; line-height: 1.6">{{r.tfa}}</p></div>
+<button class="ib" aria-label="Edit Two-step verification" onClick="{{go.ca_2fa}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#111"></path></svg></button>
+</div>
+</div>
+<h3 class="q" style="margin: 22px 0 14px 0">Vehicle Details</h3>
+<div class="card" style="display: flex; align-items: center; padding: 18px 20px 18px 10px">
+<div style="flex: 1"><p style="margin: 0 0 8px 0; font-weight: 600; font-size: 15.5px">Vehicle Registration (number plate)</p><p style="margin: 0; font-size: 15px; white-space: pre-line; line-height: 1.6">{{plate}}</p></div>
+<button class="ib" aria-label="Edit Vehicle Registration (number plate)" onClick="{{go.ca_vehicles}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#111"></path></svg></button>
+</div>
+<button class="btn" style="background: #0f2d5b; margin-top: 28px; margin-bottom: 40px" onClick="{{go.ca_topup}}">CONTINUE</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.ca_topup}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Create an Account</h1>
+</div><div class="content">
+<h2 class="q" style="margin-top: 2px">What are your top-up and low balance amounts?</h2>
+<h3 class="q" style="margin: 22px 0 0 0">Your low balance threshold</h3>
+<p class="body" style="font-size: 14px; margin: 12px 0 0 0">If your balance falls below this amount, we’ll top it up</p>
+<div style="margin-top: 36px"><div class="field">
+<sc-if value="{{has.low}}" hint-placeholder-val="{{false}}"><span class="flabel">Low balance threshold</span></sc-if>
+<div class="frow">
+<input class="inp" type="text" placeholder="Low balance threshold" aria-label="Low balance threshold" value="{{v.low}}" onChange="{{on.low}}">
+
+</div>
+</div>
+<p class="help" style="font-size: 13.4px; color: #666; margin-top: 16px">Minimum amount £5.60</p></div>
+<h3 class="q" style="margin: 40px 0 0 0">Your top-up amount</h3>
+<p class="body" style="font-size: 14px; margin: 12px 0 0 0">We&#39;ll automatically top-up your account with this amount</p>
+<div style="margin-top: 36px"><div class="field">
+<sc-if value="{{has.topup}}" hint-placeholder-val="{{false}}"><span class="flabel">Top-up amount</span></sc-if>
+<div class="frow">
+<input class="inp" type="text" placeholder="Top-up amount" aria-label="Top-up amount" value="{{v.topup}}" onChange="{{on.topup}}">
+
+</div>
+</div>
+<p class="help" style="font-size: 13.4px; color: #666; margin-top: 16px">Minimum amount £15.00</p></div>
+<button class="btn" style="background: {{b.topup.bg}}; margin-top: 20px" onClick="{{b.topup.go}}">CONTINUE</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.about}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">About This Service</h1>
+</div><div class="content">
+<h2 class="q" style="font-size: 17px; margin-top: 6px">Use the service to</h2>
+<ul class="bl"  style="font-size: 15.5px; padding-left: 16px"><li style="margin-bottom: 4px">pay for the crossing</li><li style="margin-bottom: 4px">sign in or set up a Dart Charge account</li><li style="margin-bottom: 4px">register to receive notifications when you cross</li><li style="margin-bottom: 4px">check which crossings you&#39;ve paid for</li></ul>
+<div style="display: flex; align-items: center; gap: 18px; margin-top: 48px">
+<img src="assets/warn.png" alt="Important" style="width: 58px; height: 58px; flex: none; margin-left: 2px">
+<p style="margin: 0; font-size: 16.8px; font-weight: 700; color: #6f6f6f; line-height: 1.3">You must pay the Dart Charge by midnight the day after you cross, otherwise you may get a fine (Penalty Charge Notice).</p>
+</div>
+<p style="margin: 26px 0 0 0"><a href="https://www.gov.uk/pay-dartford-crossing-charge" target="_blank" rel="noopener" style="color: #2c6a9e; font-weight: 600; font-size: 15.5px">Learn more about Dartford Crossing &amp; Dart Charge</a></p>
+<p class="body" style="font-size: 15.5px; margin: 60px 0 0 0">DartCharge v1.3</p>
+<p class="body" style="font-size: 15.5px; margin: 20px 0 0 0">©2024 Conduent, Inc. All Rights Reserved.</p>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.contact}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Contact Dart Charge</h1>
+</div><div class="content">
+<div style="padding-left: 20px">
+<h2 class="q" style="font-size: 16.5px; margin-top: 4px">Dart Charge Contact Centre</h2>
+<p class="body" style="font-size: 15px; margin: 22px 0 0 0; line-height: 1.2">Telephone: 0300 300 0120<br>Textphone: 18001 0300 300 0120<br>Everyday: 8am to 8pm</p>
+<p style="margin: 22px 0 0 0"><a href="https://www.gov.uk/call-charges" target="_blank" rel="noopener" style="color: #3b82e0; text-decoration: underline; font-size: 15px">Find out about call charges</a></p>
+<h2 class="q" style="font-size: 16.5px; margin-top: 24px">Contact the Dart Charge team</h2>
+<p class="body" style="font-size: 15px; margin: 24px 0 18px 0">Get in touch about:</p>
+<ul class="bl" style="font-size: 15px; padding-left: 13px"><li style="margin-bottom: 3px">charges</li><li style="margin-bottom: 3px">fines (Penalty Charge Notice)</li><li style="margin-bottom: 3px">refunds</li><li style="margin-bottom: 3px">Dart Charge accounts</li><li style="margin-bottom: 3px">complaints</li><li style="margin-bottom: 3px">general enquiries</li></ul>
+</div>
+<button class="obtn" style="margin-top: 48px; background: #0f2d5b; color: #ffffff; border-color: #0f2d5b" onClick="{{noop}}">GET IN TOUCH</button>
+<button class="obtn" style="margin-top: 20px" onClick="{{noop}}">CHECK ENQUIRY STATUS</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.terms}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 72px; right: 8px; text-align: left">Dart Charges Terms and Conditions</h1>
+</div><div class="content"><div style="display: flex; flex-direction: column; gap: 10px; margin-top: 4px"><a class="lrow" href="https://www.gov.uk/government/publications/dart-charge-general-terms-and-conditions" target="_blank" rel="noopener" style="text-decoration: none">Dart Charge general terms and conditions<span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a><a class="lrow" href="https://www.gov.uk/government/publications/dart-charge-privacy-policy" target="_blank" rel="noopener" style="text-decoration: none">Dart Charge privacy policy<span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a><a class="lrow" href="https://www.gov.uk/government/publications/terms-and-conditions-for-pay-as-you-go" target="_blank" rel="noopener" style="text-decoration: none">Terms and conditions for PAYG<span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a></div></div>
+</div>
+</sc-if>
+<sc-if value="{{s.other}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Other Ways To Pay</h1>
+</div><div class="content">
+<p class="body" style="font-size: 15px; margin: 2px 50px 0 0">Using this mobile app is the quickest way to pay your charges.</p>
+<p class="body" style="font-size: 15px; margin: 20px 0 10px 0">Or you can:</p>
+<ul class="bl" style="font-size: 15px; padding-left: 10px; list-style: none; line-height: 1.35">
+<li style="text-indent: -10px; margin-bottom: 6px">• pay with cash at a <a href="https://www.payzone.co.uk/" target="_blank" rel="noopener" style="color: #3b82e0; text-decoration: underline">PayZone Store</a></li>
+<li style="text-indent: -10px">• pay or set up an account through <a href="https://www.gov.uk/pay-dartford-crossing-charge" target="_blank" rel="noopener" style="color: #3b82e0; text-decoration: underline">the Dart Charge website</a></li>
+</ul>
+<div style="display: flex; align-items: center; gap: 18px; margin-top: 56px">
+<img src="assets/warn.png" alt="Important" style="width: 58px; height: 58px; flex: none; margin-left: 2px">
+<p style="margin: 0; font-size: 16.8px; font-weight: 700; color: #6f6f6f; line-height: 1.3">You must pay the Dart Charge by midnight the day after you cross, otherwise you may get a fine (Penalty Charge Notice).</p>
+</div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.tps}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Third Party Software</h1>
+</div><div class="content">
+<div style="padding-left: 5px; color: #444">
+<p style="margin: 2px 0 0 0; font-size: 14.5px; line-height: 1.4; color: #444">The following open source software components are used under the MIT License. See https://opensource.org/ licenses/MIT for more details</p>
+<p style="margin: 20px 0 16px 0; font-size: 14.5px; color: #444">App v1.3 (15)</p>
+<ul class="bl" style="color: #444; font-size: 15px; padding-left: 13px"><li style="margin-bottom: 1px">Alamofire</li><li style="margin-bottom: 1px">IQKeyboardManagerSwift</li><li style="margin-bottom: 1px">SwiftKeychainWrapper</li><li style="margin-bottom: 1px">ReachabilitySwift</li><li style="margin-bottom: 1px">DropDown</li><li style="margin-bottom: 1px">SwiftLint</li><li style="margin-bottom: 1px">AEPAnalytics</li><li style="margin-bottom: 1px">AEPCore</li><li style="margin-bottom: 1px">AEPIdentity</li><li style="margin-bottom: 1px">AEPSignal</li><li style="margin-bottom: 1px">AEPLifecycle</li><li style="margin-bottom: 1px">AEPUserProfile</li><li style="margin-bottom: 1px">AEPAssurance</li><li style="margin-bottom: 1px">AEPEdge</li><li style="margin-bottom: 1px">AEPEdgeIdentity</li><li style="margin-bottom: 1px">AEPEdgeConsent</li><li style="margin-bottom: 1px">Firebase/Core</li><li style="margin-bottom: 1px">Firebase/Messaging</li><li style="margin-bottom: 1px">Firebase/Crashlytics</li></ul>
+</div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.pay_qty}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Pay For Crossings</h1>
+</div>
+<div class="content">
+<label class="q" for="qty" style="display: block; margin-top: 10px">Number of crossings</label>
+<div class="frow" style="margin-top: 10px"><input class="inp" id="qty" type="number" inputmode="numeric" min="1" value="{{v.qty}}" onChange="{{on.qty}}"></div>
+<h2 class="q" style="margin-top: 22px; font-size: 15.5px">Payment amount for a Car, motorhome or minibus with 9 or less seats</h2>
+<p class="body" style="margin: 12px 0 0 0; font-size: 16px">£3.50</p>
+<h2 class="q" style="margin-top: 28px">Total amount</h2>
+<p class="body" style="margin: 12px 0 0 0; font-size: 16px">{{payTotal}}</p>
+<h2 class="q" style="margin-top: 50px">What is a crossing?</h2>
+<ul class="bl" style="font-size: 14.5px; padding-left: 16px"><li style="margin-bottom: 6px">To determine how many crossings to buy, a crossing is a single journey over the bridge (Southbound) or through the tunnel (Northbound).</li><li style="margin-bottom: 6px">A return trip is 2 crossings.</li><li style="margin-bottom: 6px">Payments for future crossings are valid up to 12 months or till they are used.</li></ul>
+<button class="btn" style="background: #0f2d5b; margin-top: 22px" onClick="{{go.pay_review}}">CONTINUE</button>
+<button class="obtn" style="margin-top: 10px" onClick="{{goHome}}">BACK TO MAIN MENU</button>
+</div>
+</div>
+<sc-if value="{{alertOpen}}" hint-placeholder-val="{{false}}">
+<div style="position: absolute; inset: 0; background: rgba(0,0,0,0.2); z-index: 30">
+<div role="alertdialog" aria-labelledby="pa-t" style="position: absolute; left: 41px; top: 286px; width: 320px; padding: 22px 16px 16px 16px; border-radius: 34px; background: rgba(242,242,244,0.97); box-shadow: 0 10px 40px rgba(0,0,0,0.18); font-family: -apple-system, system-ui, sans-serif; box-sizing: border-box">
+<h2 id="pa-t" style="margin: 0 14px; font-size: 17px; font-weight: 600; color: #111">Pay For Crossings</h2>
+<p style="margin: 6px 14px 0 14px; font-size: 15px; line-height: 1.3; color: #111">Use this option to pay for crossings that you made since yesterday or for any crossings you plan to make in the future.<br><br>Do not use this option if you are late in paying for your crossings. Late payments will be used for future crossings - you may receive a fine (Penalty Charge Notice) for any late payment.</p>
+<button onClick="{{closeAlert}}" style="display: block; width: 100%; height: 48px; margin-top: 20px; border: 0; border-radius: 24px; background: #dcdde1; color: #2a7cf6; font: inherit; font-size: 17px; font-weight: 500; cursor: pointer">Continue</button>
+</div>
+</div>
+</sc-if>
+</sc-if>
+<sc-if value="{{s.pay_review}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">Pay For Crossings</h1>
+</div>
+<div class="content">
+<h2 class="q" style="margin-top: 6px">Check your answers before paying</h2>
+<div style="display: flex; flex-direction: column; gap: 10px; margin-top: 14px">
+<div class="card" style="display: flex; align-items: center; padding: 18px 20px 18px 10px">
+<div style="flex: 1"><p style="margin: 0 0 8px 0; font-weight: 600; font-size: 15.5px">Vehicle Registration (number plate)</p><p style="margin: 0; font-size: 15px">{{payPlate}}</p></div><button class="ib" aria-label="Edit Vehicle Registration (number plate)" onClick="{{go.pay}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#111"></path></svg></button>
+</div>
+<div class="card" style="display: flex; align-items: center; padding: 18px 20px 18px 10px">
+<div style="flex: 1"><p style="margin: 0 0 8px 0; font-weight: 600; font-size: 15.5px">Additional Crossings</p><p style="margin: 0; font-size: 15px">{{v.qty}}</p></div><button class="ib" aria-label="Edit Additional Crossings" onClick="{{go.pay_qty}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#111"></path></svg></button>
+</div>
+<div class="card" style="display: flex; align-items: center; padding: 18px 20px 18px 10px">
+<div style="flex: 1"><p style="margin: 0 0 8px 0; font-weight: 600; font-size: 15.5px">Total Payment Amount</p><p style="margin: 0; font-size: 15px">{{payTotal}}</p></div>
+</div>
+<div class="card" style="display: flex; align-items: center; padding: 18px 20px 18px 10px">
+<div style="flex: 1"><p style="margin: 0 0 8px 0; font-weight: 600; font-size: 15.5px">Email</p><p style="margin: 0; font-size: 15px">n@mail.com</p></div><button class="ib" aria-label="Edit Email" onClick="{{go.pay_review}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#111"></path></svg></button>
+</div>
+<div class="card" style="display: flex; align-items: center; padding: 18px 20px 18px 10px">
+<div style="flex: 1"><p style="margin: 0 0 8px 0; font-weight: 600; font-size: 15.5px">Mobile Number</p><p style="margin: 0; font-size: 15px">+44 7700900123</p></div><button class="ib" aria-label="Edit Mobile Number" onClick="{{go.pay_review}}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#111"></path></svg></button>
+</div>
+</div>
+<button class="btn" style="background: #0f2d5b; margin-top: 40px" onClick="{{noop}}">PAY WITH CARD</button>
+<button onClick="{{noop}}" style="display: block; width: 100%; height: 44px; margin-top: 10px; border: 0; border-radius: 2px; background: #000; color: #fff; font-family: -apple-system, system-ui, sans-serif; font-size: 19px; font-weight: 600; cursor: pointer">Pay with Apple Pay</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.survey}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto; font-family: Helvetica Neue, Arial, sans-serif">
+<button onClick="{{back}}" style="position: absolute; left: 12px; top: 30px; border: 0; background: transparent; font-family: -apple-system, system-ui, sans-serif; font-size: 12px; font-weight: 600; color: #111; cursor: pointer; padding: 4px">◀ Dart Charge</button>
+<div style="padding: 150px 24px 40px 24px; color: #2b2f3a">
+<h1 style="margin: 0; font-size: 25px; line-height: 1.2; font-weight: 700">What were you trying to do on the app today?</h1>
+<div style="padding-left: 22px; margin-top: 36px">
+<p style="margin: 0 0 14px 0; font-size: 17px; font-weight: 700; color: #3d4a7a">Check all that apply *</p>
+<div style="display: flex; flex-direction: column; gap: 12px"><button class="sv-cb" role="checkbox" aria-checked="{{t.s1}}" onClick="{{tog.s1}}"><span class="sv-box"><sc-if value="{{t.s1}}" hint-placeholder-val="{{false}}"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#2b2f3a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if></span><span>Pay for a crossing</span></button><button class="sv-cb" role="checkbox" aria-checked="{{t.s2}}" onClick="{{tog.s2}}"><span class="sv-box"><sc-if value="{{t.s2}}" hint-placeholder-val="{{false}}"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#2b2f3a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if></span><span>Create an account</span></button><button class="sv-cb" role="checkbox" aria-checked="{{t.s3}}" onClick="{{tog.s3}}"><span class="sv-box"><sc-if value="{{t.s3}}" hint-placeholder-val="{{false}}"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#2b2f3a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if></span><span>Change something in my account</span></button><button class="sv-cb" role="checkbox" aria-checked="{{t.s4}}" onClick="{{tog.s4}}"><span class="sv-box"><sc-if value="{{t.s4}}" hint-placeholder-val="{{false}}"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#2b2f3a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if></span><span>Other</span></button></div>
+<p style="margin: 18px 0 0 0; font-size: 15px; font-weight: 700; line-height: 1.5; color: #111">Please do not include any personal information in your responses.<br>If you would like to be contacted in the future about improvements to Dart Charge, you may enter your preferred contact details at the end of the survey.</p>
+<textarea aria-label="Your response" style="display: block; width: 100%; height: 72px; margin-top: 4px; border: 2px solid #868b91; font: inherit; font-size: 15px; padding: 8px; box-sizing: border-box; resize: none"></textarea>
+<p style="margin: 6px 0 0 0; font-size: 12.5px; color: #111">Please enter no more than 4,000 characters.</p>
+<div style="display: flex; justify-content: flex-end; margin-top: 34px"><button onClick="{{noop}}" style="width: 124px; height: 40px; border: 0; background: #2f6f43; box-shadow: 0 2px 0 #111; color: #fff; font: inherit; font-size: 19px; cursor: pointer">continue</button></div>
+</div>
+</div>
+</div>
+</sc-if>
+<style>.sv-cb{display:flex;align-items:center;gap:16px;border:0;background:transparent;padding:4px 0;font:inherit;font-size:16px;color:#2b2f3a;cursor:pointer;text-align:left}.sv-box{width:22px;height:22px;border:2.5px solid #2b2f3a;border-radius:5px;display:flex;align-items:center;justify-content:center;flex:none}</style>
+<sc-if value="{{s.dash}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div style="position: relative; height: 330px; overflow: hidden"><img src="assets/hero.jpg" alt="" style="position: absolute; left: 0; top: -40px; width: 402px; height: 437px; object-fit: cover"></div>
+<button aria-label="My account" onClick="{{go.myacct}}" style="position: absolute; right: 14px; top: 58px; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.7); background: rgba(15,45,91,0.35); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0"><svg width="22" height="22" viewBox="0 0 24 26" aria-hidden="true"><circle cx="12" cy="8" r="5" fill="none" stroke="#fff" stroke-width="2.2"></circle><path d="M2.5 24v-2a5 5 0 0 1 5-5h9a5 5 0 0 1 5 5v2" fill="none" stroke="#fff" stroke-width="2.2"></path></svg></button>
+<h1 class="vh" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Account dashboard</h1>
+<div style="position: relative; margin: -150px 20px 0 20px">
+<div class="card" style="padding: 16px 14px 16px 14px; border-radius: 6px">
+<div style="display: flex; align-items: center; justify-content: space-between"><span style="font-size: 14px; color: #555">Account Balance</span><span style="font-size: 38px; font-weight: 500; color: #2a7f78; letter-spacing: -0.5px">£20.00</span></div>
+<div style="display: flex; justify-content: space-between; margin-top: 18px; font-size: 14px; color: #555"><span>Account Number</span><span style="color: #333">100318576</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 14px; color: #333"><span style="font-weight: 500">Account Status</span><span style="display: inline-block; padding: 3px 10px; border-radius: 4px; background: #7aa84a; color: #1f3d10; font-size: 14px; font-weight: 600">Open</span></div>
+<button class="btn" style="background: #0f2d5b; margin-top: 18px; height: 44px; letter-spacing: 0.5px" onClick="{{noop}}">+ TOP UP</button>
+</div>
+<div style="display: flex; gap: 8px; margin-top: 10px">
+<div class="card" style="flex: 1; padding: 14px 6px; text-align: center; min-height: 64px; display: flex; flex-direction: column; justify-content: center; gap: 8px"><span style="font-size: 17px; font-weight: 500; color: #111">£15.00</span><span style="font-size: 12px; color: #555; line-height: 1.3">Top-up amount</span></div>
+<div class="card" style="flex: 1; padding: 14px 6px; text-align: center; min-height: 64px; display: flex; flex-direction: column; justify-content: center; gap: 8px"><span style="font-size: 17px; font-weight: 500; color: #111">£5.60</span><span style="font-size: 12px; color: #555; line-height: 1.3">Low Balance Threshold</span></div>
+<div class="card" style="flex: 1; padding: 14px 6px; text-align: center; min-height: 64px; display: flex; flex-direction: column; justify-content: center; gap: 8px"><span style="font-size: 14px; font-weight: 500; color: #111">Auto-Pay</span><span style="font-size: 12px; color: #555; line-height: 1.3">Top-Up Method</span></div>
+</div>
+<div class="card" style="display: flex; align-items: center; gap: 18px; padding: 12px 16px; margin-top: 10px"><span style="font-size: 18px; font-weight: 800; font-style: italic; color: #1a1f71; letter-spacing: -0.5px">VISA</span><span style="font-size: 14px; color: #111">****1091</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 18px"><h2 style="margin: 0; font-size: 15px; font-weight: 500; color: #111">Recent Transactions</h2><button onClick="{{noop}}" style="border: 0; background: transparent; padding: 8px 0; font: inherit; font-size: 14.5px; color: #6b4b8a; cursor: pointer">View All</button></div>
+<div style="display: flex; flex-direction: column; gap: 10px; margin-top: 6px; padding-bottom: 30px">
+<button class="card" onClick="{{noop}}" style="display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 10px 12px 12px; border: 0; border-left: 4px solid #7aa84a; text-align: left; cursor: pointer; font: inherit">
+<span style="width: 26px; height: 26px; border-radius: 50%; background: #7aa84a; color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none" aria-hidden="true">£</span>
+<span style="flex: 1; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 14.5px; color: #333">Top Up</span><span style="font-size: 13px; color: #555">Balance</span></span>
+<span style="display: flex; flex-direction: column; gap: 4px; text-align: right"><span style="font-size: 14.5px; font-weight: 600; color: #3f7d20">+£15.00</span><span style="font-size: 13px; color: #333">£20.00</span></span>
+<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#9a9a9a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+<button class="card" onClick="{{noop}}" style="display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 10px 12px 12px; border: 0; border-left: 4px solid #7aa84a; text-align: left; cursor: pointer; font: inherit">
+<span style="width: 26px; height: 26px; border-radius: 50%; background: #7aa84a; color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none" aria-hidden="true">£</span>
+<span style="flex: 1; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 14.5px; color: #333">Top Up</span><span style="font-size: 13px; color: #555">Balance</span></span>
+<span style="display: flex; flex-direction: column; gap: 4px; text-align: right"><span style="font-size: 14.5px; font-weight: 600; color: #3f7d20">+£15.00</span><span style="font-size: 13px; color: #333">£5.00</span></span>
+<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#9a9a9a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{s.myacct}}" hint-placeholder-val="{{false}}">
+<div class="scr" style="overflow-y: auto">
+<div class="hdr">
+<button class="back" aria-label="Back" onClick="{{back}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<h1 class="hdr-t" style="left: 70px; right: 70px; text-align: center">My Account</h1>
+</div>
+<div class="content">
+<div style="display: flex; align-items: center; gap: 16px; margin-top: 4px">
+<span aria-hidden="true" style="width: 70px; height: 70px; border-radius: 50%; background: #3a87c0; color: #fff; font-size: 26px; display: flex; align-items: center; justify-content: center; flex: none">JS</span>
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 16px; font-weight: 600">John Smith</span><span style="font-size: 13.5px; color: #555">Account Number <span style="color: #333">100318576</span></span><span style="font-size: 13.5px; color: #555; display: flex; align-items: center; gap: 8px">Account Status <span style="display: inline-block; padding: 2px 10px; border-radius: 4px; background: #7aa84a; color: #1f3d10; font-size: 14px; font-weight: 600">Open</span></span></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; margin-top: 24px"><button class="card" onClick="{{noop}}" style="display: flex; align-items: center; gap: 18px; width: 100%; min-height: 52px; padding: 0 14px 0 16px; border: 0; text-align: left; cursor: pointer; font: inherit; "><span style="width: 26px; display: flex; justify-content: center; flex: none"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#0f2d5b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H5a1.5 1.5 0 0 0-1.5 1.5v13A1.5 1.5 0 0 0 5 20h13a1.5 1.5 0 0 0 1.5-1.5V13"></path><path d="M17.5 3.5l3 3L12 15H9v-3z"></path></svg></span><span style="flex: 1; font-size: 15.5px; color: #111">Profile Management</span><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#9a9a9a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><button class="card" onClick="{{noop}}" style="display: flex; align-items: center; gap: 18px; width: 100%; min-height: 52px; padding: 0 14px 0 16px; border: 0; text-align: left; cursor: pointer; font: inherit; "><span style="width: 26px; display: flex; justify-content: center; flex: none"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#0f2d5b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1.5"></rect><path d="M3 6l9 7 9-7"></path><path d="M3 19l7-6M21 19l-7-6"></path></svg></span><span style="flex: 1; font-size: 15.5px; color: #111">Communication Preferences</span><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#9a9a9a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><button class="card" onClick="{{noop}}" style="display: flex; align-items: center; gap: 18px; width: 100%; min-height: 52px; padding: 0 14px 0 16px; border: 0; text-align: left; cursor: pointer; font: inherit; "><span style="width: 26px; display: flex; justify-content: center; flex: none"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#0f2d5b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M14.5 8.3A2.6 2.6 0 0 0 10 10v2.5c0 1.6-.6 2.7-1.6 3.5h7M8.8 12.5h4.4"></path></svg></span><span style="flex: 1; font-size: 15.5px; color: #111">Payment Management</span><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#9a9a9a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><button class="card" onClick="{{noop}}" style="display: flex; align-items: center; gap: 18px; width: 100%; min-height: 52px; padding: 0 14px 0 16px; border: 0; text-align: left; cursor: pointer; font: inherit; "><span style="width: 26px; display: flex; justify-content: center; flex: none"><svg width="26" height="20" viewBox="0 0 32 24" aria-hidden="true"><path d="M7 2.5h18l3.2 7.5H3.8z" fill="#0f2d5b"></path><path d="M9 4.5h14l2 4.5H7z" fill="#ffffff"></path><rect x="1.5" y="9" width="29" height="9" rx="2" fill="#0f2d5b"></rect><circle cx="7" cy="13.5" r="2" fill="#ffffff"></circle><circle cx="25" cy="13.5" r="2" fill="#ffffff"></circle><rect x="4" y="17" width="5" height="5" rx="1" fill="#0f2d5b"></rect><rect x="23" y="17" width="5" height="5" rx="1" fill="#0f2d5b"></rect></svg></span><span style="flex: 1; font-size: 15.5px; color: #111">Vehicle Management</span><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#9a9a9a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><button class="card" onClick="{{go.contact}}" style="display: flex; align-items: center; gap: 18px; width: 100%; min-height: 52px; padding: 0 14px 0 16px; border: 0; text-align: left; cursor: pointer; font: inherit; "><span style="width: 26px; display: flex; justify-content: center; flex: none"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#0f2d5b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="4"></circle><path d="M3 20c0-3.5 3-6 7-6s7 2.5 7 6z"></path><path d="M18 7h3M18 10h3M18 13h2"></path></svg></span><span style="flex: 1; font-size: 15.5px; color: #111">Contact Us</span><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#9a9a9a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><button class="card" onClick="{{noop}}" style="display: flex; align-items: center; gap: 18px; width: 100%; min-height: 52px; padding: 0 14px 0 16px; border: 0; text-align: left; cursor: pointer; font: inherit; "><span style="width: 26px; display: flex; justify-content: center; flex: none"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#0f2d5b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9 8.5l6 7M15 8.5l-6 7"></path></svg></span><span style="flex: 1; font-size: 15.5px; color: #111">Close Account</span><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#9a9a9a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><button class="card" onClick="{{goHome}}" style="display: flex; align-items: center; gap: 18px; width: 100%; min-height: 52px; padding: 0 14px 0 16px; border: 0; text-align: left; cursor: pointer; font: inherit; "><span style="width: 26px; display: flex; justify-content: center; flex: none"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#0f2d5b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h5v16h-5"></path><path d="M10 12H3M6.5 8.5L3 12l3.5 3.5"></path></svg></span><span style="flex: 1; font-size: 15.5px; color: #111">Sign Out</span><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#9a9a9a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{pickerOpen}}" hint-placeholder-val="{{false}}">
+<div style="position: absolute; left: 0; top: 0; width: 402px; height: 874px; z-index: 20">
+<button aria-label="Close picker" onClick="{{closePicker}}" style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: transparent; cursor: default"></button>
+<div style="position: absolute; left: 0; bottom: 0; width: 402px; height: 240px; background: #ffffff; box-shadow: 0 -1px 0 rgba(0,0,0,0.08)">
+<div style="display: flex; justify-content: space-between; padding: 0 22px 0 22px; height: 52px; align-items: center">
+<button class="ptxt" onClick="{{closePicker}}">CANCEL</button>
+<button class="ptxt" onClick="{{donePicker}}">DONE</button>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; padding: 70px 8px 0 8px; gap: 2px">
+<sc-for list="{{vtypes}}" as="o" hint-placeholder-count="4">
+<button onClick="{{o.pick}}" style="width: 100%; border: 0; border-radius: 14px; padding: 2px 6px; font: inherit; font-size: 16px; cursor: pointer; background: {{o.bg}}; color: {{o.color}}">{{o.label}}</button>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"start":{"editor":null},"$preview":{"width":402,"height":874}}'>
+
+const NAVY = '#0f2d5b', OFF = '#6b809c';
+const VT = ['Motorcycle, moped or quad bike', 'Car, motorhome or minibus with 9 or less seats', 'Bus, coach, van or other goods vehicle with 2 axles', 'Vehicle with more than 2 axles'];
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    const __s = new URLSearchParams(location.search).get('s') || undefined;
+    this.state = { stack: __s ? ['home', __s] : ['home'], f: { qty: '1' }, t: {}, alert: false, show: {}, acct: 'personal', plan: 'prepay', ctry: '', addrSel: false, picker: false, pickIdx: 1, vtype: -1 };
+  }
+  go(id) { this.setState({ stack: this.state.stack.concat([id]), picker: false, alert: id === 'pay_qty' && this.state.stack[this.state.stack.length - 1] === 'pay' }); }
+  renderVals() {
+    const st = this.state, f = st.f;
+    const cur = st.stack[st.stack.length - 1];
+    const val = (k) => (f[k] || '');
+    const filled = (k) => val(k).trim().length > 0;
+    const screens = ['home','pay','check','notif','signin','forms','ca_start','ca_type','ca_name','ca_post','ca_found','ca_manual','ca_plan','ca_email','ca_code','ca_pwd','ca_sms','ca_2fa','ca_phone','ca_vrn','ca_vehicle','ca_vehicles','ca_review','ca_topup','about','contact','terms','other','tps','pay_qty','pay_review','survey','dash','myacct'];
+    const s = {}; screens.forEach((x) => { s[x] = x === cur; });
+    const go = {}; screens.forEach((x) => { go[x] = () => this.go(x); });
+    const keys = ['payVrn','payRef','chkVrn','siEmail','siPwd','first','last','post','street','line2','town','mpost','country','email','code','pwd','pwd2','tel','vrn','make','model','colour','low','topup','qty'];
+    const v = {}, on = {}, has = {}, ptype = {}, eyeT = {};
+    keys.forEach((k) => {
+      v[k] = val(k);
+      has[k] = filled(k);
+      on[k] = (e) => { const x = e.target.value; this.setState({ f: Object.assign({}, this.state.f, { [k]: x }) }); };
+      ptype[k] = st.show[k] ? 'text' : 'password';
+      eyeT[k] = () => this.setState({ show: Object.assign({}, this.state.show, { [k]: !this.state.show[k] }) });
+    });
+    has.vtype = st.vtype >= 0;
+    const mk = (ok, target) => ({ bg: ok ? NAVY : OFF, go: ok && target ? () => this.go(target) : () => {} });
+    const pwdOk = val('pwd').length >= 8 && /[A-Z]/.test(val('pwd')) && /[a-z]/.test(val('pwd')) && /[0-9]/.test(val('pwd')) && val('pwd') === val('pwd2');
+    const b = {
+      payVrn: mk(filled('payVrn'), 'pay_qty'),
+      check: mk(filled('payRef') && filled('chkVrn'), null),
+      notif: mk(st.t.geo || st.t.push, null),
+      signin: mk(filled('siEmail') && filled('siPwd'), 'dash'),
+      name: mk(filled('first') && filled('last'), 'ca_post'),
+      post: mk(filled('post'), 'ca_found'),
+      found: mk(st.addrSel, 'ca_plan'),
+      manual: mk(filled('street') && filled('town') && filled('mpost') && filled('country'), 'ca_plan'),
+      email: mk(/.+@.+\..+/.test(val('email')), 'ca_code'),
+      code: mk(/^\d{6}$/.test(val('code').trim()), 'ca_pwd'),
+      pwd: mk(pwdOk, 'ca_sms'),
+      tel: mk(filled('tel'), 'ca_vrn'),
+      vrn: mk(filled('vrn'), 'ca_vehicle'),
+      vehicle: mk(st.vtype >= 0 && !!st.ctry && !!st.t.confirm, 'ca_vehicles'),
+      topup: mk(filled('low') && filled('topup'), null),
+    };
+    const tkeys = ['geo','push','sms','tfa','confirm','s1','s2','s3','s4'];
+    const t = {}, tog = {}, tbg = {}, tx = {};
+    tkeys.forEach((k) => {
+      t[k] = !!st.t[k];
+      tog[k] = () => this.setState({ t: Object.assign({}, this.state.t, { [k]: !this.state.t[k] }) });
+      tbg[k] = st.t[k] ? NAVY : '#c5c5c7';
+      tx[k] = st.t[k] ? '21px' : '0px';
+    });
+    const em = val('email').trim();
+    let masked = 'l***********@e******.com';
+    if (em.includes('@')) {
+      const [u, d] = em.split('@'); const dp = d.split('.');
+      masked = u[0] + '*'.repeat(Math.max(u.length - 1, 3)) + '@' + (dp[0][0] || '') + '*'.repeat(Math.max(dp[0].length - 1, 3)) + '.' + dp.slice(1).join('.');
+    }
+    const pc = (val('post').trim() || 'SW1A 1AA').toUpperCase();
+    const plate = (val('vrn') || 'SW1A1AA').replace(/\s+/g, '').toUpperCase();
+    const addr = st.stack.includes('ca_manual') && filled('street')
+      ? [val('street'), val('line2'), val('town'), val('mpost').toUpperCase(), val('country')].filter((x) => x.trim()).join('\n')
+      : 'London\n' + pc + '\nUnited Kingdom';
+    const vtypes = VT.map((label, i) => ({ label, pick: () => this.setState({ pickIdx: i }), bg: i === st.pickIdx ? '#eeeeee' : 'transparent', color: i === st.pickIdx ? '#111' : '#a8a8a8' }));
+    return {
+      s, go, v, on, has, ptype, eyeT, b, t, tog, tbg, tx,
+      payPlate: (val('payVrn') || 'CU57ABC').replace(/\s+/g, '').toUpperCase(),
+      payTotal: '£' + (Math.max(parseInt(val('qty'), 10) || 0, 0) * 3.5).toFixed(2),
+      alertOpen: !!st.alert && cur === 'pay_qty',
+      closeAlert: () => this.setState({ alert: false }),
+      goHome: () => this.setState({ stack: ['home'], alert: false }),
+      back: () => { const k = this.state.stack; if (k.length > 1) this.setState({ stack: k.slice(0, -1), picker: false }); },
+      noop: () => {},
+      acct: { personal: st.acct === 'personal', business: st.acct === 'business' },
+      pickAcct: { personal: () => this.setState({ acct: 'personal' }), business: () => this.setState({ acct: 'business' }) },
+      pickPlan: { prepay: () => { this.setState({ plan: 'prepay' }); this.go('ca_email'); }, payg: () => { this.setState({ plan: 'payg' }); this.go('ca_email'); } },
+      ctry: { uk: st.ctry === 'uk', out: st.ctry === 'out' },
+      pickCtry: { uk: () => this.setState({ ctry: 'uk' }), out: () => this.setState({ ctry: 'out' }) },
+      foundCount: '1 Addresses Found',
+      foundAddr: 'London, ' + pc,
+      addrSel: st.addrSel,
+      pickAddr: () => this.setState({ addrSel: !this.state.addrSel }),
+      maskedEmail: masked,
+      plate,
+      vtypeLabel: st.vtype >= 0 ? VT[st.vtype] : 'Type of vehicle',
+      vtypeColor: st.vtype >= 0 ? '#111' : '#444',
+      pickerOpen: st.picker && cur === 'ca_vehicle',
+      openPicker: () => this.setState({ picker: true, pickIdx: this.state.vtype >= 0 ? this.state.vtype : 1 }),
+      closePicker: () => this.setState({ picker: false }),
+      donePicker: () => this.setState({ picker: false, vtype: this.state.pickIdx }),
+      vtypes,
+      r: {
+        name: ((val('first') + ' ' + val('last')).trim()) || 'Lauren Tanner',
+        addr,
+        email: em || 'lauren.tanner@example.com',
+        tel: '+44 ' + (val('tel').trim() || '7700900123'),
+        acct: st.acct === 'business' ? 'Business' : 'Personal',
+        plan: st.plan === 'payg' ? 'Pay as you go' : 'Pre-pay',
+        sms: st.t.sms ? 'Yes' : 'No',
+        tfa: st.t.tfa ? 'Yes' : 'No',
+      },
+    };
+  }
+}
+
+</script>
+</body>
+</html>
