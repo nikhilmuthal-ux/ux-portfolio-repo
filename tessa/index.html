@@ -366,6 +366,14 @@ p{margin:0}
   .pull{margin-top:56px}
   .reflect{padding:100px 0 80px}
 }
+
+/* shared case study scale: same widths, spacing and sizes across all case studies */
+.wrap{max-width:1104px!important;padding-left:48px!important;padding-right:48px!important;box-sizing:border-box}
+.h1{font-size:clamp(40px,5vw,52px)!important;line-height:1.05!important}
+.h2{font-size:clamp(28px,3.2vw,34px)!important;line-height:1.18!important}
+
+@media (max-width:900px){.wrap{padding-left:32px!important;padding-right:32px!important}}
+@media (max-width:680px){.wrap{padding-left:20px!important;padding-right:20px!important}.section{padding-top:88px!important}}
 </style>
 <script>(function(){var last=0;function send(){var el=document.body;if(!el)return;var h=Math.ceil(el.getBoundingClientRect().height);if(h>0&&h!==last){last=h;parent.postMessage({type:"embed-height",height:h},"*")}}function init(){if(window.ResizeObserver&&document.body){new ResizeObserver(send).observe(document.body)}send()}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init)}else{init()}window.addEventListener("load",send);setInterval(send,1000)})();</script>
 </head>

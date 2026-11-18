@@ -221,6 +221,16 @@ details .inner{padding:0 22px 22px}
   .dark{padding:28px}
   .chapter{padding-top:52px}
 }
+
+/* shared case study scale: same widths, spacing and sizes across all case studies */
+.content{max-width:1008px!important}
+.chapter{padding-top:112px!important;padding-bottom:8px!important}
+h1{font-size:clamp(40px,5vw,52px)!important;line-height:1.05!important}
+.ch-title{font-size:clamp(28px,3.2vw,34px)!important;line-height:1.18!important}
+h3.sub{font-size:20px!important}
+
+
+@media (max-width:680px){.chapter{padding-top:80px!important}}
 </style>
 </helmet>
 
@@ -755,7 +765,7 @@ if(window.ResizeObserver){var go=function(){if(document.body)new ResizeObserver(
 if(window.parent===window) return;
 var embed=false,lastSent='';
 var CH=[['ch1','01','Overview','Overview'],['ch2','02','Context & problem','Context'],['ch3','03','Research','Research'],['ch4','04','Shaping the model','Model'],['ch5','05','The solution','Solution'],['ch8','06','Screens & prototype','Screens'],['ch6','07','Impact & next steps','Impact'],['ch7','08','Reflection','Reflection']];
-var THEME={hideBrand:true,maxWidth:1240,padX:32,height:58,itemPad:'8px 14px',fontSize:14,fullFrom:1180,bg:'rgba(245,248,252,0.96)',border:'#E3E9F2',text:'#14213D',muted:'#52607A',num:'#94A3B8',activeBg:'#FFFFFF',activeBorder:'#BFDBFE',activeText:'#1D4ED8',font:'"Plus Jakarta Sans", Inter, system-ui, sans-serif',progress:'linear-gradient(90deg,#2563EB,#93B4F5)'};
+var THEME={hideBrand:true,maxWidth:1104,padX:48,height:58,itemPad:'8px 14px',fontSize:14,fullFrom:1180,bg:'rgba(245,248,252,0.96)',border:'#E3E9F2',text:'#14213D',muted:'#52607A',num:'#94A3B8',activeBg:'#FFFFFF',activeBorder:'#BFDBFE',activeText:'#1D4ED8',font:'"Plus Jakarta Sans", Inter, system-ui, sans-serif',progress:'linear-gradient(90deg,#2563EB,#93B4F5)'};
 function sendNav(){
   if(!embed) return;
   var items=[];CH.forEach(function(c){var el=document.getElementById(c[0]);if(el)items.push({n:c[1],label:c[2],short:c[3],y:Math.round(el.getBoundingClientRect().top)});});

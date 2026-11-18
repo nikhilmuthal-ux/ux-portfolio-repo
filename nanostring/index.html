@@ -67,6 +67,17 @@ a{color:#0B5F75}a:hover{color:#0B2A36}
 html.in-embed .cs-nav{display:none}
 .lb[hidden]{display:none}
 html.in-embed .cs{min-height:0 !important}
+
+/* shared case study scale: same widths, spacing and sizes across all case studies */
+.wrap{max-width:1104px!important;padding-left:48px!important;padding-right:48px!important;box-sizing:border-box}
+.chap{padding-top:120px!important}
+.hero-h1{font-size:clamp(40px,5vw,52px)!important;line-height:1.05!important}
+.h2{font-size:clamp(28px,3.2vw,34px)!important;line-height:1.18!important}
+.h3{font-size:20px!important;line-height:1.3!important}
+.lbl{font-size:12px!important}
+
+@media (max-width:900px){.wrap{padding-left:32px!important;padding-right:32px!important}}
+@media (max-width:680px){.wrap{padding-left:20px!important;padding-right:20px!important}.chap{padding-top:88px!important}}
 </style>
 </head>
 <body>
@@ -296,7 +307,7 @@ if(window.ResizeObserver){var go=function(){if(document.body)new ResizeObserver(
 if(window.parent===window) return;
 var embed=false,lastSent='';
 var CH=[['context','01','The product','Product'],['access','02','Access','Access'],['store','03','Store','Store'],['visualise','04','Visualise','Visualise'],['collaborate','05','Collaborate','Collaborate'],['system','06','Design system','System'],['handoff','07','Handoff','Handoff'],['today','08','Looking back','Looking back']];
-var THEME={hideBrand:true,maxWidth:1040,padX:40,height:58,itemPad:'8px 14px',fontSize:14,fullFrom:1180,bg:'rgba(244,249,251,0.96)',border:'#E3E9F2',text:'#14213D',muted:'#52607A',num:'#94A3B8',activeBg:'#FFFFFF',activeBorder:'#9CCFDD',activeText:'#0B5F75',font:'"Plus Jakarta Sans", Inter, system-ui, sans-serif',progress:'linear-gradient(90deg,#0E7490,#84CC16)'};
+var THEME={hideBrand:true,maxWidth:1104,padX:48,height:58,itemPad:'8px 14px',fontSize:14,fullFrom:1180,bg:'rgba(244,249,251,0.96)',border:'#E3E9F2',text:'#14213D',muted:'#52607A',num:'#94A3B8',activeBg:'#FFFFFF',activeBorder:'#9CCFDD',activeText:'#0B5F75',font:'"Plus Jakarta Sans", Inter, system-ui, sans-serif',progress:'linear-gradient(90deg,#0E7490,#84CC16)'};
 function sendNav(){
   if(!embed) return;
   var items=[];CH.forEach(function(c){var el=document.getElementById(c[0]);if(el)items.push({n:c[1],label:c[2],short:c[3],y:Math.round(el.getBoundingClientRect().top)});});
