@@ -1098,10 +1098,55 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
 .stoc .st-app{margin-left:auto;padding:4px 12px!important;border:1px solid var(--line)!important;border-radius:999px;background:var(--surface)}
 .stoc .st-app.cur{background:#13233F;color:#fff!important;border-color:#13233F!important}
 .fphone::after{border-color:#5A6170!important}
+
+.rqs{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.rqs>div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.rqs span{display:block;font-family:var(--mono);font-size:11px;color:var(--ink3)}
+.rqs b{display:block;font-weight:600;font-size:15px;color:var(--bad);margin:4px 0 8px}
+.acc .rqs ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.45}
+.acc .rqs li{margin-bottom:6px}
+@media (max-width:860px){.rqs{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.rqs{grid-template-columns:1fr}}
+
+/* live on the app store */
+.live{padding-top:120px}
+.lv-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:36px 0 28px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.lv-stats div{padding:22px 24px 22px 0}
+.lv-stats div+div{padding-left:24px;border-left:1px solid var(--line)}
+.lv-stats b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(40px,5vw,60px);line-height:1;color:var(--ink);letter-spacing:-.02em}
+.lv-stats span{display:block;margin-top:8px;color:var(--ink2);font-size:15px}
+.lv-fig{margin:0;border-radius:18px;overflow:hidden;background:#1d1d1f;box-shadow:0 18px 50px -24px rgba(19,35,63,.45)}
+.lv-fig img{display:block;width:100%;height:auto}
+.lv-fig figcaption{background:var(--surface);color:var(--ink3);font-size:13px;padding:10px 16px;border-top:1px solid var(--line)}
+.lv-fig2{margin-top:22px}
+.live .o-sub{margin-top:56px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.lv-rev{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.lr{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.lr-s{color:var(--accent);letter-spacing:2px;font-size:15px}
+.lr q{font-family:var(--serif);font-size:19px;line-height:1.4;color:var(--ink);quotes:"\201C" "\201D"}
+.lr p{margin:auto 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:15px;color:var(--ink2);line-height:1.5}
+.lr p b{display:block;color:var(--ink);margin-bottom:2px}
+.lr-warn p b{color:#B3412F}
+@media (max-width:820px){.lv-stats{grid-template-columns:1fr}.lv-stats div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}.lv-rev{grid-template-columns:1fr}}
+
+/* merged research sub-blocks */
+.rsub{margin-top:28px;padding-top:22px;border-top:1px dashed var(--line);scroll-margin-top:90px}
+.rsub-h{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin:0 0 12px}
+.acc summary.rsum small{color:var(--ink2)}
+
+/* live section motion */
+@media (prefers-reduced-motion:no-preference){
+.lv-stats.in>div,.lv-rev.in .lr{animation:up .7s cubic-bezier(.2,.7,.2,1) both}
+.lv-stats.in>div:nth-child(2),.lv-rev.in .lr:nth-child(2){animation-delay:.1s}
+.lv-stats.in>div:nth-child(3),.lv-rev.in .lr:nth-child(3){animation-delay:.2s}
+.lv-rev.in .lr-s{animation:fade .6s ease both;animation-delay:inherit}
+.lv-fig.in img{animation:lvz 1s cubic-bezier(.2,.7,.2,1) both}
+@keyframes lvz{from{opacity:.4;transform:scale(1.03)}to{opacity:1;transform:none}}
+}
 </style>
 </head>
 <body>
-<nav class="stoc" id="stoc" aria-label="In this story"><div class="wrap"><a href="#context">Context</a><a href="#research">Research</a><a href="#reframe">Reframe</a><a href="#final">Final design</a><a href="#decisions">Decisions</a><a href="#tradeoffs">Trade offs</a><a href="#outcome">Outcome</a><a href="#reflection">Looking back</a><a href="#appendix" class="st-app">Research in full</a></div></nav>
+<nav class="stoc" id="stoc" aria-label="In this story"><div class="wrap"><a href="#context">Context</a><a href="#research">Research</a><a href="#reframe">Reframe</a><a href="#final">Final design</a><a href="#decisions">Decisions</a><a href="#tradeoffs">Trade offs</a><a href="#outcome">Outcome</a><a href="#live">Live</a><a href="#reflection">Looking back</a><a href="#appendix" class="st-app">Research in full</a></div></nav>
 
 
 <!-- HERO -->
@@ -1223,7 +1268,7 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
         </div>
         <div class="pd"><div><span>On screen</span><ol class="ann"><li data-n="1">Paying comes first, with the deadline as its hint.</li><li data-n="2">Setting up an account is its own path.</li><li data-n="3">Checking a payment needs no sign in.</li><li data-n="4">Sign in sits at the bottom, for people who already have an account.</li></ol></div>
         </div>
-        <div class="ev-row"><details class="evd" open><summary><span class="evd-k">Evidence</span><em>5 sources</em></summary><p class="evs"><a class="ev" href="#r-social">Social media · complaint 1</a><a class="ev" href="#r-ut">Usability task 02</a><a class="ev" href="#r-heur">Heuristic · log in before paying</a><a class="ev" href="#r-gap">Gaps 01, 02</a><a class="ev" href="#r-per">Persona · Sian</a></p></details><span class="pts"><span class="pts-k">Answers</span><a class="fpc" href="#r-fp" title="No booth, no barrier, drivers do not know they must pay">01</a><a class="fpc" href="#r-fp" title="“Did I already pay?” has no answer">04</a><a class="fpc" href="#r-fp" title="Fake payment websites take the search traffic">05</a></span></div></div>
+        <div class="ev-row"><details class="evd" open><summary><span class="evd-k">Evidence</span><em>8 sources</em></summary><p class="evs"><a class="ev" href="#r-social">Social media · complaint 1</a><a class="ev" href="#r-ut">Usability task 02</a><a class="ev" href="#r-heur">Heuristic · log in before paying</a><a class="ev" href="#r-gap">Gaps 01, 02</a><a class="ev" href="#r-per">Persona · Sian</a><a class="ev" href="#r-comp">Competitive analysis</a><a class="ev" href="#r-int">Interviews</a><a class="ev" href="#r-jm">Journey map</a></p></details><span class="pts"><span class="pts-k">Answers</span><a class="fpc" href="#r-fp" title="No booth, no barrier, drivers do not know they must pay">01</a><a class="fpc" href="#r-fp" title="“Did I already pay?” has no answer">04</a><a class="fpc" href="#r-fp" title="Fake payment websites take the search traffic">05</a></span></div></div>
       </div>
       <div><div class="vs" role="group" aria-label="Compare"><button type="button" class="on" data-v="after">Final design</button><button type="button" data-v="before">As shipped</button></div><div class="anno"><div class="fphone"><iframe data-src="DCFINAL" title="Final design, start screen" tabindex="-1"></iframe></div><div class="fphone vs-live"><iframe data-src="DCLIVE" title="Start screen as shipped" tabindex="-1"></iframe></div><span class="mk" data-n="1" style="top:27.6%" aria-hidden="true">1</span><span class="mk" data-n="2" style="top:38.9%" aria-hidden="true">2</span><span class="mk" data-n="3" style="top:50.1%" aria-hidden="true">3</span><span class="mk" data-n="4" style="top:87.9%" aria-hidden="true">4</span></div><p class="phone-cap">Start screen</p></div>
     </article>
@@ -1239,7 +1284,7 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
           <div class="pd-pair edi"><div class="pd-p"><span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v6.5" stroke-linecap="round"/><circle cx="12" cy="16.8" r=".9" fill="currentColor" stroke="none"/></svg>Problem</span><p>Accounts closed quietly and cards expired without warning, so people were fined with money still in the account.</p></div><div class="edi-sep">So the design</div><div class="pd-d"><p>The account <em>says its own state</em>, and alerts for low balance, card expiry and payment failure are one switch away.</p></div></div>
           </div><div class="dec-more"><div class="pd"><div><span>On screen</span><ol class="ann"><li data-n="1">Balance and account status first.</li><li data-n="2">Top up right where the balance is.</li><li data-n="3">Auto-Pay amounts always visible.</li><li data-n="4">The card Auto-Pay uses.</li><li data-n="5">Every row opens a receipt.</li><li data-n="6">Vehicles, crossings and account, one tap away.</li></ol></div>
         </div>
-        <div class="ev-row"><details class="evd" open><summary><span class="evd-k">Evidence</span><em>5 sources</em></summary><p class="evs"><a class="ev" href="#r-social">Social media · forum post, complaint 4</a><a class="ev" href="#r-sm">Service map · silent suspension</a><a class="ev" href="#r-ia">Missing screens · settings, alerts</a><a class="ev" href="#r-aff">Affinity · scenario 04</a><a class="ev" href="#r-r2d">Package A · 01, 02, 05</a></p></details><span class="pts"><span class="pts-k">Answers</span><a class="fpc" href="#r-fp" title="Accounts close quietly, without warning">06</a><a class="fpc" href="#r-fp" title="Expired cards cause fines, not warnings">07</a><a class="fpc" href="#r-fp" title="Unclear top ups and missing payments">08</a><a class="fpc" href="#r-fp" title="Problems when adding or changing vehicles">10</a><a class="fpc" href="#r-fp" title="Fined even with money in the account">11</a></span></div></div>
+        <div class="ev-row"><details class="evd" open><summary><span class="evd-k">Evidence</span><em>7 sources</em></summary><p class="evs"><a class="ev" href="#r-social">Social media · forum post, complaint 4</a><a class="ev" href="#r-sm">Service map · silent suspension</a><a class="ev" href="#r-ia">Missing screens · settings, alerts</a><a class="ev" href="#r-aff">Affinity · scenario 04</a><a class="ev" href="#r-r2d">Package A · 01, 02, 05</a><a class="ev" href="#r-un">User needs · alerts</a><a class="ev" href="#r-gap">Gap 04</a></p></details><span class="pts"><span class="pts-k">Answers</span><a class="fpc" href="#r-fp" title="Accounts close quietly, without warning">06</a><a class="fpc" href="#r-fp" title="Expired cards cause fines, not warnings">07</a><a class="fpc" href="#r-fp" title="Unclear top ups and missing payments">08</a><a class="fpc" href="#r-fp" title="Problems when adding or changing vehicles">10</a><a class="fpc" href="#r-fp" title="Fined even with money in the account">11</a></span></div></div>
       </div>
       <div><div class="vs" role="group" aria-label="Compare"><button type="button" class="on" data-v="after">Final design</button><button type="button" data-v="before">As shipped</button></div><div class="anno"><div class="fphone"><iframe data-src="DCFINAL?s=dash" title="Final design, dashboard" tabindex="-1"></iframe></div><div class="fphone vs-live"><iframe data-src="DCLIVE?s=dash" title="Dashboard as shipped" tabindex="-1"></iframe></div><span class="mk" data-n="1" style="top:23.5%" aria-hidden="true">1</span><span class="mk" data-n="2" style="top:35.1%" aria-hidden="true">2</span><span class="mk" data-n="3" style="top:47.4%" aria-hidden="true">3</span><span class="mk" data-n="4" style="top:54.7%" aria-hidden="true">4</span><span class="mk" data-n="5" style="top:61.6%" aria-hidden="true">5</span><span class="mk" data-n="6" style="top:95.4%" aria-hidden="true">6</span></div><p class="phone-cap">Dashboard</p></div>
     </article>
@@ -1265,7 +1310,7 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
           <div class="pd-pair edi"><div class="pd-p"><span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v6.5" stroke-linecap="round"/><circle cx="12" cy="16.8" r=".9" fill="currentColor" stroke="none"/></svg>Problem</span><p>The whole penalty system rested on one rule, written as a sentence. In the app it arrived as a pop-up that blocked payment, and the total was easy to miss.</p></div><div class="edi-sep">So the design</div><div class="pd-d"><p>The rule, the price and the total sit <em>on the step itself</em>, so nothing surprises you at payment.</p></div></div>
           </div><div class="dec-more"><div class="pd"><div><span>On screen</span><ol class="ann"><li data-n="1">The late payment rule, inline, not a pop-up.</li><li data-n="2">Where you are, step two of four.</li><li data-n="3">Plus and minus, no typing.</li><li data-n="4">Price each and the total update together.</li><li data-n="5">Actions pinned in thumb reach.</li></ol></div>
         </div>
-        <div class="ev-row"><details class="evd" open><summary><span class="evd-k">Evidence</span><em>4 sources</em></summary><p class="evs"><a class="ev" href="#r-heur">Heuristic · step count hidden</a><a class="ev" href="#r-ut">Usability · step list too late</a><a class="ev" href="#r-aff">Affinity · scenarios 01, 02</a><a class="ev" href="#r-sm">Service map · midnight deadline</a></p></details><span class="pts"><span class="pts-k">Answers</span><a class="fpc" href="#r-fp" title="A hidden midnight deadline">02</a><a class="fpc" href="#r-fp" title="Paying for the wrong date goes unnoticed">03</a></span></div></div>
+        <div class="ev-row"><details class="evd" open><summary><span class="evd-k">Evidence</span><em>6 sources</em></summary><p class="evs"><a class="ev" href="#r-heur">Heuristic · step count hidden</a><a class="ev" href="#r-ut">Usability · step list too late</a><a class="ev" href="#r-aff">Affinity · scenarios 01, 02</a><a class="ev" href="#r-sm">Service map · midnight deadline</a><a class="ev" href="#r-comp">Competitive analysis</a><a class="ev" href="#r-r2d">Package A · 04</a></p></details><span class="pts"><span class="pts-k">Answers</span><a class="fpc" href="#r-fp" title="A hidden midnight deadline">02</a><a class="fpc" href="#r-fp" title="Paying for the wrong date goes unnoticed">03</a></span></div></div>
       </div>
       <div><div class="vs" role="group" aria-label="Compare"><button type="button" class="on" data-v="after">Final design</button><button type="button" data-v="before">As shipped</button></div><div class="anno"><div class="fphone"><iframe data-src="DCFINAL?s=pay_qty" title="Final design, number of crossings" tabindex="-1"></iframe></div><div class="fphone vs-live"><iframe data-src="DCLIVE?s=pay_qty" title="Number of crossings as shipped" tabindex="-1"></iframe></div><span class="mk" data-n="1" style="top:22.7%" aria-hidden="true">1</span><span class="mk" data-n="2" style="top:33.3%" aria-hidden="true">2</span><span class="mk" data-n="3" style="top:47.9%" aria-hidden="true">3</span><span class="mk" data-n="4" style="top:62.9%" aria-hidden="true">4</span><span class="mk" data-n="5" style="top:86.5%" aria-hidden="true">5</span></div><p class="phone-cap">Number of crossings, with the total</p></div>
     </article>
@@ -1276,7 +1321,7 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
           <div class="pd-pair edi"><div class="pd-p"><span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v6.5" stroke-linecap="round"/><circle cx="12" cy="16.8" r=".9" fill="currentColor" stroke="none"/></svg>Problem</span><p>It is 11:40pm and the driver thinks they paid. The old answers were log in, with no account, or call, with the lines closed.</p></div><div class="edi-sep">So the design</div><div class="pd-d"><p>A payment reference and a number plate are enough to check, so <em>no login</em> is needed.</p></div></div>
           </div><div class="dec-more"><div class="pd"><div><span>On screen</span><ol class="ann"><li data-n="1">Bought, used and remaining at a glance.</li><li data-n="2">Which crossing used the payment.</li><li data-n="3">When the rest expire, and how they are used.</li><li data-n="4">The next step is one tap.</li></ol></div>
         </div>
-        <div class="ev-row"><details class="evd" open><summary><span class="evd-k">Evidence</span><em>3 sources</em></summary><p class="evs"><a class="ev" href="#r-social">Social media · complaint 3</a><a class="ev" href="#r-gap">Gaps 03, 07</a><a class="ev" href="#r-un">User needs · payment alerts</a></p></details><span class="pts"><span class="pts-k">Answers</span><a class="fpc" href="#r-fp" title="“Did I already pay?” has no answer">04</a></span></div></div>
+        <div class="ev-row"><details class="evd" open><summary><span class="evd-k">Evidence</span><em>6 sources</em></summary><p class="evs"><a class="ev" href="#r-social">Social media · complaint 3</a><a class="ev" href="#r-gap">Gaps 03, 07</a><a class="ev" href="#r-un">User needs · payment alerts</a><a class="ev" href="#r-comp">Competitive analysis</a><a class="ev" href="#r-int">Interviews</a><a class="ev" href="#r-jm">Journey map</a></p></details><span class="pts"><span class="pts-k">Answers</span><a class="fpc" href="#r-fp" title="“Did I already pay?” has no answer">04</a></span></div></div>
       </div>
       <div><div class="anno"><div class="fphone"><iframe data-src="DCFINAL?s=check_result" title="Final design, check your crossings result" tabindex="-1"></iframe></div><span class="mk" data-n="1" style="top:27.5%" aria-hidden="true">1</span><span class="mk" data-n="2" style="top:40.0%" aria-hidden="true">2</span><span class="mk" data-n="3" style="top:51.7%" aria-hidden="true">3</span><span class="mk" data-n="4" style="top:86.5%" aria-hidden="true">4</span></div><p class="phone-cap">Check your crossings, result</p></div>
     </article>
@@ -1367,6 +1412,28 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
   </div>
 </section>
 
+<!-- LIVE -->
+<section class="section live" id="live">
+  <div class="wrap">
+    <div class="kicker">Live on the App Store</div>
+    <h2 class="h2 rv">Still live, and rated 4.7 by drivers.</h2>
+    <p class="intro rv">The app is on the App Store today. Conduent built it from our handover and has changed it since, so these ratings are for the live service, not for my design alone.</p>
+    <div class="lv-stats rv">
+      <div><b>4.7</b><span>out of 5, from 982 ratings</span></div>
+      <div><b>No. 89</b><span>in Travel on the App Store chart</span></div>
+      <div><b>iPhone</b><span>free, run by Conduent</span></div>
+    </div>
+    <figure class="lv-fig rv"><img src="../assets/dc-appstore-listing.webp" alt="The Dart Charge listing on the App Store: rated 4.7 from 982 ratings, number 89 in Travel, developer Conduent" loading="lazy"><figcaption>The App Store listing, November 2026.</figcaption></figure>
+    <p class="o-sub rv">What the reviews tell us</p>
+    <div class="lv-rev rv">
+      <div class="lr"><span class="lr-s" aria-label="5 stars">★★★★★</span><q>When I call customer service, they advise me to download the app.</q><p><b>The call centre sends people to the app.</b> We surveyed the call centre twice during research. Today its own staff point callers to the app.</p></div>
+      <div class="lr"><span class="lr-s" aria-label="5 stars">★★★★★</span><q>Finally a quicker way for us to top up or pay. Clearly laid out and easy to use.</q><p><b>Paying is the job.</b> What drivers praise is the thing the research put first: a fast, clear way to pay.</p></div>
+      <div class="lr lr-warn"><span class="lr-s" aria-label="4 stars">★★★★☆</span><q>Needs a different password from the internet account. If your biometric login expires, you can't log back in without deleting the app.</q><p><b>Sign in still fails people.</b> The final design adds a reset by emailed code, so nobody has to delete the app to get back in. It is the next flow I would test.</p></div>
+    </div>
+    <figure class="lv-fig lv-fig2 rv"><img src="../assets/dc-appstore-reviews.webp" alt="Ratings and reviews for Dart Charge on the App Store" loading="lazy"><figcaption>The reviews as they appear in the store. Quotes above are lightly trimmed.</figcaption></figure>
+  </div>
+</section>
+
 <!-- REFLECTION -->
 <section class="reflect" id="reflection">
   <div class="wrap">
@@ -1398,11 +1465,11 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
   <div class="wrap">
     <div class="kicker">Research in full</div>
     <h2 class="h2 rv">The research, step by step.</h2>
-    <p class="intro rv" style="margin-bottom:40px">Each method, what it found, and the decision it led to.</p>
+    <p class="intro rv" style="margin-bottom:40px">Each row states what the method found. Open it for the evidence and the decision it led to.</p>
     <div class="acc">
       <div class="acc-blk2"><p>Overview</p><h3>How the work was set up</h3></div>
       <details id="r-methods">
-        <summary class="rsum"><span class="rno">·</span><div><h3>Eleven methods, in three blocks</h3><small>Objectives, methods, and who ran them</small><span class="rtags"><b>Solo and group</b></span></div><span class="rth rst"><b>11</b><small>methods</small></span><span class="pm" aria-hidden="true">+</span></summary>
+        <summary class="rsum"><span class="rno">·</span><div><h3>Eleven methods, in three blocks</h3><small>Every finding had to show up in two methods before it counted</small><span class="rtags"><b>Solo and group</b></span></div><span class="rth rst"><b>11</b><small>methods</small></span><span class="pm" aria-hidden="true">+</span></summary>
         <div class="body rbody">
 <p class="rp">Every finding had to show up in at least two methods before it reached the roadmap.</p>
 <div class="rgoals">
@@ -1410,13 +1477,16 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
   <div><span>Objective 02</span><b>Underserved audiences</b><p>Find who the service serves badly, and what they are missing.</p></div>
   <div><span>Objective 03</span><b>Hand it forward</b><p>Turn it into a roadmap the team can build from.</p></div>
 </div>
+<p class="rm" style="margin-top:30px">Research questions, by when they happen to a driver</p>
+<div class="rqs"><div><span>Awareness</span><b>Pre journey</b><ul><li>How much do drivers really know about the crossing?</li><li>If they knew nothing beforehand, how did they find out?</li></ul></div><div><span>Awareness</span><b>Planning</b><ul><li>Do people plan their journeys at all, and how?</li><li>Could the website help with the planning itself?</li></ul></div><div><span>Setting up an account</span><b>Pre and post journey</b><ul><li>How do business and personal users each find this process?</li><li>Can people choose the right account for them?</li></ul></div><div><span>Payment method</span><b>Pre and post journey</b><ul><li>What happens when auto top up fails, and how does the user cope?</li><li>Does one payment method go wrong more than the others?</li></ul></div><div><span>Account use</span><b>Post journey</b><ul><li>Which account features matter, and which are nice to have?</li></ul></div></div>
+<p class="rnote">The service was built for the end of the journey. Paying and managing an account were designed for. Knowing the charge exists, and planning around it, were not.</p>
 <p class="rm" style="margin-top:30px">Eleven methods, in three blocks</p>
 <div class="mgrid"><div><span>01</span><b>Heuristic review</b><p>Ten heuristics across the live service, every issue graded by damage.</p><em>Solo</em></div><div><span>02</span><b>Competitive analysis</b><p>Scored against six toll services in six countries.</p><em>Solo</em></div><div><span>03</span><b>Social media research</b><p>Public posts, sorted by what people were angry about.</p><em>Solo</em></div><div><span>04</span><b>Stakeholder and user interviews</b><p>Eleven user groups and 16 plus stakeholders, all remote.</p><em>Group</em></div><div><span>05</span><b>Interview sessions and usability tasks</b><p>Participants on their own device and connection.</p><em>Group and solo</em></div><div><span>06</span><b>Card sorting and affinity mapping</b><p>Six scenarios where the service and the driver disagree.</p><em>Group</em></div><div><span>07</span><b>Personas</b><p>Eight, built on behaviour rather than demographics.</p><em>Group</em></div><div><span>08</span><b>Journey map</b><p>Planning a trip and crossing for the first time.</p><em>Group</em></div><div><span>09</span><b>Service map</b><p>The end to end service, including the back end.</p><em>Group</em></div><div><span>10</span><b>User needs</b><p>Every need as a story, traced to its source.</p><em>Group</em></div><div><span>11</span><b>Gap analysis</b><p>Three usability tasks found the gaps, four methods confirmed them.</p><em>Solo</em></div></div>
         </div>
       </details>
       <div class="acc-blk2"><p>Block one · Secondary research</p><h3>What is happening</h3><span>4 methods, before talking to anyone</span></div>
       <details id="r-ia">
-        <summary class="rsum"><span class="rno">IA</span><div><h3>Missing screens map</h3><small>Fourteen screens people needed, and none of them existed</small><span class="rtags"><b>Solo</b><em>Led to</em><i>D04</i><i>D06</i></span></div><span class="rth rst"><b>14</b><small>missing</small></span><span class="pm" aria-hidden="true">+</span></summary>
+        <summary class="rsum"><span class="rno">01</span><div><h3>Missing screens map</h3><small>Fourteen screens people needed did not exist, most inside the account</small><span class="rtags"><b>Solo</b><em>Led to</em><i>D04</i><i>D06</i></span></div><span class="rth rst"><b>14</b><small>missing</small></span><span class="pm" aria-hidden="true">+</span></summary>
         <div class="body rbody">
 
         <p class="rp">We mapped every route through the live service. The holes sat inside the account, where regular users spend their time.</p>
@@ -1427,7 +1497,7 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
         </div>
       </details>
       <details id="r-heur">
-        <summary class="rsum"><span class="rno">01</span><div><h3>Heuristic review</h3><small>Ten heuristics, every issue graded by damage</small><span class="rtags"><b>Solo</b><em>Led to</em><i>D01</i><i>D02</i></span></div><span class="rth"><img src="../assets/img-63df9d15.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
+        <summary class="rsum"><span class="rno">02</span><div><h3>Heuristic review</h3><small>Two showstoppers: an unexplained login email, and no contact number anywhere</small><span class="rtags"><b>Solo</b><em>Led to</em><i>D01</i><i>D02</i><i>D05</i></span></div><span class="rth"><img src="../assets/img-63df9d15.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
         <div class="body rbody">
 
         <p class="rp">Grading every finding let us order the roadmap on evidence, not taste.</p>
@@ -1443,22 +1513,23 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
           <div><span class="sev bad">Major problem</span><span class="hh">H5, H9, H10</span><p>No required fields, and no error message names the error or suggests a fix. People cannot tell what went wrong.</p><p class="fix">Mark required fields, and explain every error with a way to fix it.</p></div>
         </div>
         <div class="htab"><div class="hrow"><div><span class="sev bad">Major problem</span><span class="hh">H3, H5, H10</span></div><p>The number of steps in payment and account setup is never shown, and one colour is used for every state.</p><p class="fix">Label every step and show status with colour.</p></div><div class="hrow"><div><span class="sev bad">Major problem</span><span class="hh">H4, H5</span></div><p>Two names for one task: create an account and set up an account. Highlights read as payment notices.</p><p class="fix">One vocabulary, and colour reserved for meaning.</p></div><div class="hrow"><div><span class="sev warn">Irritant</span><span class="hh">H3, H5, H10</span></div><p>On the no charge screen people must log in before paying, and account creation has no way out once started.</p><p class="fix">Let people pay without an account, and give every flow an exit.</p></div><div class="hrow"><div><span class="sev warn">Irritant</span><span class="hh">H1, H4, H8, H10</span></div><p>Balance and account number look like every other field, and data is cluttered rather than grouped.</p><p class="fix">Bold the balance and account number, group the rest.</p></div><div class="hrow"><div><span class="sev warn">Irritant</span><span class="hh">H4, H5, H10</span></div><p>Back and next buttons change position and look between tasks.</p><p class="fix">Fix button positions once, everywhere.</p></div><div class="hrow"><div><span class="sev warn">Irritant</span><span class="hh">H3, H5, H7, H10</span></div><p>The current stage is unreadable except on account setup.</p><p class="fix">Make the stage explicit on every screen.</p></div></div>
-        <p class="led"><span>Led to</span><a href="#d1">Decision 01 · Pay first, account later</a><a href="#d2">Decision 02 · No surprises at payment</a></p>
+        <p class="led"><span>Led to</span><a href="#d1">Decision 01 · Pay first, account later</a><a href="#d2">Decision 02 · No surprises at payment</a><a href="#d5">Decision 05 · Pay or challenge, equally</a></p>
         </div>
       </details>
       <details id="r-comp">
-        <summary class="rsum"><span class="rno">02</span><div><h3>Competitive analysis</h3><small>Seven reds against none</small><span class="rtags"><b>Solo</b><em>Led to</em><i>D01</i><i>D02</i><i>D03</i></span></div><span class="rth"><img src="../assets/img-e3d958b8.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
+        <summary class="rsum"><span class="rno">03</span><div><h3>Competitive analysis</h3><small>Dart Charge scored red on seven of ten heuristics. The best service scored none</small><span class="rtags"><b>Solo</b><em>Led to</em><i>D01</i><i>D02</i><i>D03</i></span></div><span class="rth"><img src="../assets/img-e3d958b8.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
         <div class="body rbody">
 
         <p class="rp">Dart Charge scored red on seven of ten heuristics. The Toll Roads in the USA scored red on none, so the failures were solvable.</p>
         <p class="chips2"><span>The Toll Roads, USA</span><span>Toll Collect, Germany</span><span>Waka Kotahi, New Zealand</span><span>Autostrade, Italy</span><span>Linkt, Australia</span><span>RTA, United Arab Emirates</span><span class="me">Dart Charge, UK</span></p>
+<p class="rnote" style="margin:4px 0 0">Scored in full against all ten heuristics: 1. The Toll Roads, USA. 2. Toll Collect, Germany. 3. Waka Kotahi, New Zealand.</p>
         <figure class="rfig"><img src="../assets/img-e3d958b8.webp" alt="Ten heuristics scored across toll services, green amber and red" loading="lazy"><figcaption>The scorecard.</figcaption></figure>
         <figure class="rfig"><img src="../assets/img-e28d233d.webp" alt="Detail of the heuristic comparison for user control, consistency, error prevention, recognition and flexibility" loading="lazy"><figcaption>Detail, five heuristics.</figcaption></figure>
         <p class="led"><span>Led to</span><a href="#d1">Decision 01 · Pay first, account later</a><a href="#d2">Decision 02 · No surprises at payment</a><a href="#d3">Decision 03 · Have I already paid?</a></p>
         </div>
       </details>
       <details id="r-social">
-        <summary class="rsum"><span class="rno">03</span><div><h3>Social media research</h3><small>The words people use when nobody is asking</small><span class="rtags"><b>Solo</b><em>Led to</em><i>D01</i><i>D03</i><i>D04</i></span></div><span class="rth"><img src="../assets/img-dc75fa58.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
+        <summary class="rsum"><span class="rno">04</span><div><h3>Social media research</h3><small>The top complaint: people did not know the charge existed</small><span class="rtags"><b>Solo</b><em>Led to</em><i>D01</i><i>D03</i><i>D04</i></span></div><span class="rth"><img src="../assets/img-dc75fa58.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
         <div class="body rbody">
 
         <p class="rp">Unprompted public posts, sorted by what people were angry about.</p>
@@ -1474,9 +1545,9 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
         <p class="led"><span>Led to</span><a href="#d1">Decision 01 · Pay first, account later</a><a href="#d3">Decision 03 · Have I already paid?</a><a href="#d4">Decision 04 · A dashboard that speaks up</a></p>
         </div>
       </details>
-      <div class="acc-blk2"><p>Block two · Primary research</p><h3>Why it is happening</h3><span>3 parts, with real users</span></div>
+      <div class="acc-blk2"><p>Block two · Primary research</p><h3>Why it is happening</h3><span>Interviews and tasks, with real users</span></div>
       <details id="r-int">
-        <summary class="rsum"><span class="rno">04</span><div><h3>Stakeholder and user interviews</h3><small>Eleven user groups, every session remote</small><span class="rtags"><b>Group</b><em>Led to</em><i>D01</i><i>D03</i></span></div><span class="rth"><img src="../assets/img-8d8bcfda.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
+        <summary class="rsum"><span class="rno">05</span><div><h3>Interviews and questionnaire</h3><small>Eleven user groups, 50+ users, 16+ stakeholders, one shared questionnaire</small><span class="rtags"><b>Group</b><em>Led to</em><i>D01</i><i>D03</i></span></div><span class="rth"><img src="../assets/img-8d8bcfda.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
         <div class="body rbody">
 <p class="rp">Eleven user groups, all remote, on people&#39;s own devices, which is how the service is really used.</p>
 <div class="rnums r4"><div><b>11</b><span>User groups</span></div><div><b>50+</b><span>User interviews</span></div><div><b>16+</b><span>Stakeholder interviews</span></div><div><b>2</b><span>Call centre surveys</span></div></div>
@@ -1485,19 +1556,16 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
 <figure class="rfig"><img src="../assets/img-8d8bcfda.webp" alt="Remote interview session in progress, participant and researcher on video" loading="lazy"><figcaption>Remote session.</figcaption></figure>
 <figure class="rfig"><img src="../assets/img-be8ddd0a.webp" alt="Remote interview session in progress, participant and researcher on video" loading="lazy"><figcaption>Remote session.</figcaption></figure>
 </div>
-<p class="led"><span>Led to</span><a href="#d1">Decision 01 · Pay first, account later</a><a href="#d3">Decision 03 · Have I already paid?</a></p>
-        </div>
-      </details>
-      <details id="r-q">
-        <summary class="rsum"><span class="rno">·</span><div><h3>Interview questionnaire</h3><small>Five sections, every question with a follow up</small><span class="rtags"><b>Group</b></span></div><span class="rth"><img src="../assets/img-0d78cb3d.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
-        <div class="body rbody">
+<div class="rsub" id="r-q"><p class="rsub-h">The questionnaire</p>
 <p class="rp">Five sections. Every question had a follow up and a reason, so every interview probed the same way.</p>
 <ol class="qsec"><li><span>01</span>Open discovery questions</li><li><span>02</span>Understanding user activities</li><li><span>03</span>Opinions, attitudes and projections</li><li><span>04</span>Recalling the past, anticipating the future</li><li><span>05</span>Closing questions</li></ol>
 <figure class="rfig"><img src="../assets/img-0d78cb3d.webp" alt="The interview questionnaire, with question, follow up and comment columns" loading="lazy"><figcaption>The questionnaire.</figcaption></figure>
+</div>
+<p class="led"><span>Led to</span><a href="#d1">Decision 01 · Pay first, account later</a><a href="#d3">Decision 03 · Have I already paid?</a></p>
         </div>
       </details>
       <details id="r-ut">
-        <summary class="rsum"><span class="rno">05</span><div><h3>Usability tasks</h3><small>Three tasks on the live service, on people&#39;s own devices</small><span class="rtags"><b>Group and solo</b><em>Led to</em><i>D01</i><i>D02</i></span></div><span class="rth"><img src="../assets/img-97d918cc.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
+        <summary class="rsum"><span class="rno">06</span><div><h3>Usability tasks</h3><small>Account setup showed how long it was only after three steps were done</small><span class="rtags"><b>Group and solo</b><em>Led to</em><i>D01</i><i>D02</i></span></div><span class="rth"><img src="../assets/img-97d918cc.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
         <div class="body rbody">
 <p class="rp">Three tasks on the live service. Where people hesitated or gave up became a candidate gap.</p>
 <div class="rgoals">
@@ -1512,19 +1580,19 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
 <p class="led"><span>Led to</span><a href="#d1">Decision 01 · Pay first, account later</a><a href="#d2">Decision 02 · No surprises at payment</a></p>
         </div>
       </details>
-      <div class="acc-blk2"><p>Block three · Synthesis</p><h3>What matters most</h3><span>6 methods, from notes to gaps</span></div>
+      <div class="acc-blk2"><p>Block three · Synthesis</p><h3>What matters most</h3><span>From notes to numbered problems</span></div>
       <details id="r-aff">
-        <summary class="rsum"><span class="rno">06</span><div><h3>Affinity mapping</h3><small>Six scenarios where the service and the driver disagree</small><span class="rtags"><b>Group</b><em>Led to</em><i>D02</i><i>D05</i></span></div><span class="rth"><img src="../assets/img-5855d3aa.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
+        <summary class="rsum"><span class="rno">07</span><div><h3>Affinity mapping</h3><small>Six moments where the service and the driver disagree</small><span class="rtags"><b>Group</b><em>Led to</em><i>D02</i><i>D04</i><i>D05</i><i>D06</i></span></div><span class="rth"><img src="../assets/img-5855d3aa.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
         <div class="body rbody">
 <p class="rp">Every note we heard, clustered into six moments where the service and the driver disagree.</p>
 <div class="scen"><div><span>Scenario 01</span>Late payment, first contravention, paid within 14 days</div><div><span>Scenario 02</span>Paid late, not a first contravention or more than 14 days late</div><div><span>Scenario 03</span>Paid with a wrong number plate, no account</div><div><span>Scenario 04</span>Negative account balance, first report</div><div><span>Scenario 05</span>Made a number of crossings, but paid for fewer</div><div><span>Scenario 06</span>Vehicle not on the account at the time of crossing</div></div>
 <figure class="rfig"><img src="../assets/img-5855d3aa.webp" alt="The affinity mapping board, notes clustered by colour" loading="lazy"><figcaption>The affinity board.</figcaption></figure>
 
-<p class="led"><span>Led to</span><a href="#d2">Decision 02 · No surprises at payment</a><a href="#d5">Decision 05 · Pay or challenge, equally</a></p>
+<p class="led"><span>Led to</span><a href="#d2">Decision 02 · No surprises at payment</a><a href="#d4">Decision 04 · A dashboard that speaks up</a><a href="#d5">Decision 05 · Pay or challenge, equally</a><a href="#d6">Decision 06 · No dead ends</a></p>
         </div>
       </details>
       <details id="r-per">
-        <summary class="rsum"><span class="rno">07</span><div><h3>Personas</h3><small>Eight, built on behaviour. Two shown in full</small><span class="rtags"><b>Group</b><em>Led to</em><i>D01</i><i>D05</i></span></div><span class="rth"><img src="../assets/img-1994acff.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
+        <summary class="rsum"><span class="rno">08</span><div><h3>Personas</h3><small>Eight personas built on behaviour, from anxious challenger to family admin</small><span class="rtags"><b>Group</b><em>Led to</em><i>D01</i><i>D05</i></span></div><span class="rth"><img src="../assets/img-1994acff.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
         <div class="body rbody">
 
 <div class="plist"><span>01 · The anxious challenger</span><span>02 · The wilful fine payer</span><span>03 · The diligent company reconciler</span><span>04 · The busy self employed professional</span><span>05 · The careful planner</span><span>06 · The free time traveller</span><span>07 · The leave and let go local resident</span><span>08 · The family administrator</span></div>
@@ -1535,37 +1603,30 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
         </div>
       </details>
       <details id="r-jm">
-        <summary class="rsum"><span class="rno">08</span><div><h3>User journey map</h3><small>Where the severity peaks</small><span class="rtags"><b>Group</b><em>Led to</em><i>D01</i><i>D03</i></span></div><span class="rth"><img src="../assets/img-2f1c814d.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
+        <summary class="rsum"><span class="rno">09</span><div><h3>Journey and service maps</h3><small>Five days to enforcement, and the service speaks once, with a letter</small><span class="rtags"><b>Group</b><em>Led to</em><i>D01</i><i>D02</i><i>D03</i><i>D04</i></span></div><span class="rth"><img src="../assets/img-2f1c814d.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
         <div class="body rbody">
 <p class="rp">A first time driver, from planning the trip to paying. Nine steps, pain points graded by severity.</p>
 <figure class="rfig"><img src="../assets/img-2f1c814d.webp" alt="The user journey map, planning, journey and paying phases" loading="lazy"><figcaption>The journey map.</figcaption></figure>
 
-<p class="led"><span>Led to</span><a href="#d1">Decision 01 · Pay first, account later</a><a href="#d3">Decision 03 · Have I already paid?</a></p>
-        </div>
-      </details>
-      <details id="r-sm">
-        <summary class="rsum"><span class="rno">09</span><div><h3>Service map</h3><small>Five days from crossing to enforcement</small><span class="rtags"><b>Group</b><em>Led to</em><i>D04</i></span></div><span class="rth"><img src="../assets/img-d9fa3a34.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
-        <div class="body rbody">
+<div class="rsub" id="r-sm"><p class="rsub-h">The service map, behind the journey</p>
 <p class="rp">The full service, including the back end the driver never sees.</p>
 <figure class="rfig"><img src="../assets/img-d9fa3a34.webp" alt="The service map, from crossing through account creation, account management and enforcement" loading="lazy"><figcaption>The service map, front stage and back end.</figcaption></figure>
 
 <p class="rq">Five days to enforcement, and the service only speaks to the driver once, with a letter at the end.</p>
-<p class="led"><span>Led to</span><a href="#d4">Decision 04 · A dashboard that speaks up</a></p>
-        </div>
-      </details>
-      <details id="r-un">
-        <summary class="rsum"><span class="rno">10</span><div><h3>User needs</h3><small>Every need as a story, traced to its source</small><span class="rtags"><b>Group</b><em>Led to</em><i>D03</i><i>D04</i></span></div><span class="rth"><img src="../assets/img-a4bf8b49.webp" alt="" loading="lazy"></span><span class="pm" aria-hidden="true">+</span></summary>
-        <div class="body rbody">
-<p class="rp">Every need as a user story, traced to its source, marked met or not met.</p>
-<figure class="rfig"><img src="../assets/img-a4bf8b49.webp" alt="The user needs sheet, stories with a met or unmet column" loading="lazy"><figcaption>The user needs sheet.</figcaption></figure>
-<div class="quotes"><p>“As a user I want to see different payment methods”<span>User interview</span></p><p>“A mobile app will be quicker to use than the website”<span>User interview</span></p><p>“Alerts and notifications will make sure the payment has been done”<span>User interview</span></p></div>
-<p class="led"><span>Led to</span><a href="#d3">Decision 03 · Have I already paid?</a><a href="#d4">Decision 04 · A dashboard that speaks up</a></p>
+</div>
+<p class="led"><span>Led to</span><a href="#d1">Decision 01 · Pay first, account later</a><a href="#d2">Decision 02 · No surprises at payment</a><a href="#d3">Decision 03 · Have I already paid?</a><a href="#d4">Decision 04 · A dashboard that speaks up</a></p>
         </div>
       </details>
       <details id="r-gap">
-        <summary class="rsum"><span class="rno">11</span><div><h3>Gap analysis</h3><small>Seven gaps, and the decisions that answer them</small><span class="rtags"><b>Solo</b><em>Led to</em><i>D01</i><i>D03</i><i>D04</i><i>D05</i><i>D06</i></span></div><span class="rth rst"><b>7</b><small>gaps</small></span><span class="pm" aria-hidden="true">+</span></summary>
+        <summary class="rsum"><span class="rno">10</span><div><h3>User needs and gaps</h3><small>Seven gaps between what people needed and what the service did</small><span class="rtags"><b>Solo</b><em>Led to</em><i>D01</i><i>D03</i><i>D04</i><i>D05</i><i>D06</i></span></div><span class="rth rst"><b>7</b><small>gaps</small></span><span class="pm" aria-hidden="true">+</span></summary>
         <div class="body rbody">
 <p class="rp">What people came to do, against what the service let them do. Only gaps seen in two or more methods counted.</p>
+<div class="rsub" id="r-un"><p class="rsub-h">The user needs behind the gaps</p>
+<p class="rp">Every need as a user story, traced to its source, marked met or not met.</p>
+<figure class="rfig"><img src="../assets/img-a4bf8b49.webp" alt="The user needs sheet, stories with a met or unmet column" loading="lazy"><figcaption>The user needs sheet.</figcaption></figure>
+<div class="quotes"><p>“As a user I want to see different payment methods”<span>User interview</span></p><p>“A mobile app will be quicker to use than the website”<span>User interview</span></p><p>“Alerts and notifications will make sure the payment has been done”<span>User interview</span></p></div>
+</div>
+
 <div class="gaps"><div class="gh"><span>What people needed</span><span>What the service did</span><span>Answered by</span></div><div class="gr"><p><b>01</b>To know a charge exists before crossing, and by when it is due.</p><p>Stated the rule as “the day after you cross”, in guidance, after the fact.</p><a href="#d1">Decision 01</a></div><div class="gr"><p><b>02</b>To pay for a crossing without opening an account.</p><p>Put account type in front of a single crossing payment. Most people left there.</p><a href="#d1">Decision 01</a></div><div class="gr"><p><b>03</b>To confirm a payment actually landed.</p><p>No way to check without logging in, and most payers had no account.</p><a href="#d3">Decision 03</a></div><div class="gr"><p><b>04</b>To be told when the account cannot pay.</p><p>Accounts closed quietly and cards expired silently. People were fined in credit.</p><a href="#d4">Decision 04</a></div><div class="gr"><p><b>05</b>To challenge a fine without it growing meanwhile.</p><p>A paper form, a phone queue, no reference, and the charge rising.</p><a href="#d5">Decision 05</a></div><div class="gr"><p><b>06</b>To pay when the plate is not recognised.</p><p>A validation error and nothing after it. Hire and foreign plates hit the same wall.</p><a href="#d6">Decision 06</a></div><div class="gr"><p><b>07</b>To get help without joining a queue.</p><p>A phone number, opening hours, and no idea of the wait.</p><a href="#d3">Decision 03</a></div></div>
 <div class="rnums"><div><b>7</b><span>Gaps confirmed by two or more methods</span></div><div><b>4</b><span>Sat at or before payment</span></div><div><b>0</b><span>Needed data the crossing does not already hold</span></div></div>
 <div class="flow"><span><b>6</b> scenarios, from card sorting</span><i>and</i><span><b>7</b> gaps, from gap analysis</span><i>became</i><span><b>18</b> numbered failure points</span><i>summarised as</i><span><b>5</b> Package A recommendations</span></div>
@@ -1573,7 +1634,7 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
         </div>
       </details>
       <details id="r-fp">
-        <summary class="rsum"><span class="rno">·</span><div><h3>Eighteen failure points</h3><small>Every research theme as a numbered problem, and the decision that answers it</small><span class="rtags"><b>Synthesis</b></span></div><span class="rth rst"><b>18</b><small>points</small></span><span class="pm" aria-hidden="true">+</span></summary>
+        <summary class="rsum"><span class="rno">11</span><div><h3>Eighteen failure points</h3><small>Every theme as a numbered problem. Sixteen answered by a decision</small><span class="rtags"><b>Synthesis</b></span></div><span class="rth rst"><b>18</b><small>points</small></span><span class="pm" aria-hidden="true">+</span></summary>
         <div class="body rbody">
 <p class="rp">Each decision names the points it answers. Hover a number on a decision to read it, or open it here.</p>
 <div class="fpgrid"><div class="fpg"><p class="rm">First time drivers</p><div class="fpr"><b>01</b><span>No booth, no barrier, drivers do not know they must pay</span><a href="#d1">D01</a></div><div class="fpr"><b>02</b><span>A hidden midnight deadline</span><a href="#d2">D02</a></div><div class="fpr"><b>03</b><span>Paying for the wrong date goes unnoticed</span><a href="#d2">D02</a></div><div class="fpr"><b>04</b><span>“Did I already pay?” has no answer</span><a href="#d3">D03</a></div><div class="fpr"><b>05</b><span>Fake payment websites take the search traffic</span><a href="#d1">D01</a></div></div><div class="fpg"><p class="rm">Account holders</p><div class="fpr"><b>06</b><span>Accounts close quietly, without warning</span><a href="#d4">D04</a></div><div class="fpr"><b>07</b><span>Expired cards cause fines, not warnings</span><a href="#d4">D04</a></div><div class="fpr"><b>08</b><span>Unclear top ups and missing payments</span><a href="#d4">D04</a></div><div class="fpr"><b>09</b><span>No way to switch account type</span><i>Not a decision here</i></div><div class="fpr"><b>10</b><span>Problems when adding or changing vehicles</span><a href="#d4">D04</a></div></div><div class="fpg"><p class="rm">Business and fleets</p><div class="fpr"><b>11</b><span>Fined even with money in the account</span><a href="#d4">D04</a></div><div class="fpr"><b>12</b><span>No way to manage many vehicles at once</span><i>Not a decision here</i></div></div><div class="fpg"><p class="rm">Penalties and appeals</p><div class="fpr"><b>13</b><span>Appeals get lost, with no reference number</span><a href="#d5">D05</a></div><div class="fpr"><b>14</b><span>The fine keeps growing during an appeal</span><a href="#d5">D05</a></div><div class="fpr"><b>15</b><span>Fines sent to old addresses</span><a href="#d5">D05</a></div></div><div class="fpg"><p class="rm">Underserved drivers</p><div class="fpr"><b>16</b><span>Foreign drivers know the rules the least</span><a href="#d6">D06</a></div><div class="fpr"><b>17</b><span>Hire car drivers pay the fine plus admin fees</span><a href="#d6">D06</a></div><div class="fpr"><b>18</b><span>Long phone queues are the only help</span><a href="#d6">D06</a></div></div></div>
@@ -1655,7 +1716,7 @@ h1,h2,h3,h4,.h1,.h2{color:var(--ink)}
   document.addEventListener('click', function(ev){
     var a = ev.target.closest && ev.target.closest('a[href^="#r-"]'); if(!a) return;
     var d = document.getElementById(a.getAttribute('href').slice(1));
-    if(d && d.tagName === 'DETAILS'){ d.open = true; if(!embedded){ ev.preventDefault(); d.scrollIntoView({behavior:'smooth', block:'start'}); } }
+    var dd = d && (d.tagName === 'DETAILS' ? d : d.closest('details')); if(dd){ dd.open = true; if(!embedded){ ev.preventDefault(); d.scrollIntoView({behavior:'smooth', block:'start'}); } }
   }, true);
 
   /* in page links: ask the parent to scroll, since an auto height iframe never scrolls itself */
