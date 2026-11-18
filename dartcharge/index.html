@@ -1867,10 +1867,22 @@ li.addEventListener('mouseleave',function(){li.classList.remove('on');if(mk)mk.c
   var hero = document.querySelector('.hero') || document.querySelector('h1');
   var links = [].slice.call(bar.querySelectorAll('a')), secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
   if(embedded){
-    /* inside Framer the page cannot pin anything to the screen, so the bar sits still in the page instead of chasing the scroll */
-    bar.classList.add('static');
-    var heroSec = hero.closest('header,section,.hero') || hero.parentElement;
-    if(heroSec && heroSec.parentNode) heroSec.parentNode.insertBefore(bar, heroSec.nextSibling);
+    /* inside Framer, the site draws this bar itself, pinned outside the embed */
+    bar.style.display='none';
+    var lastSent='';
+    var THEME={hideBrand:true,maxWidth:1104,padX:48,height:58,itemPad:'7px 13px',fontSize:14,fullFrom:0,bg:'rgba(245,241,232,0.95)',border:'#E3DCCD',text:'#1C1A17',muted:'#4B463E',num:'#8A8377',activeBg:'#E4ECE7',activeText:'#244E42',font:'Inter, system-ui, sans-serif',progress:'#2C5E4F'};
+    function sendNav(){
+      var items=[];
+      links.forEach(function(a,i){ var el=secs[i]; if(!el) return; items.push({label:a.textContent.trim(), y:Math.round(el.getBoundingClientRect().top)}); });
+      if(!items.length) return;
+      var msg={type:'embed-nav',brand:'Dart Charge',coverBottom:Math.round(hero.getBoundingClientRect().bottom),items:items,theme:THEME};
+      var key=JSON.stringify(msg); if(key===lastSent) return; lastSent=key;
+      try{ window.parent.postMessage(msg,'*'); }catch(e){}
+    }
+    window.addEventListener('message',function(e){ var d=e.data; if(d && d.type==='embed-viewport') sendNav(); });
+    window.addEventListener('load',sendNav); window.addEventListener('resize',sendNav);
+    setInterval(function(){ lastSent=''; sendNav(); },2000);
+    sendNav();
     return;
   }
   function view(){ if(vp) return vp; if(!embedded) return {top: window.scrollY, bottom: window.scrollY + window.innerHeight}; return null; }
