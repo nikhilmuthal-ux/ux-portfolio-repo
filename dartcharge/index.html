@@ -1226,6 +1226,8 @@ p.subtitle{font-size:clamp(19px,2vw,22px)!important}
 .anno.show-before ~ .vsd{box-shadow:0 0 0 2px #0F2D5B}
 
 .phone-cap.cap-before{color:#0F2D5B;font-family:var(--sans);font-size:13.5px;line-height:1.45;max-width:270px;margin-left:auto;margin-right:auto;text-align:center}
+
+.stoc.static{position:relative!important;top:auto!important;transform:none!important;opacity:1!important;pointer-events:auto!important;margin:32px 0 0;border-top:1px solid var(--line);background:var(--bg)}
 </style>
 </head>
 <body>
@@ -1864,7 +1866,13 @@ li.addEventListener('mouseleave',function(){li.classList.remove('on');if(mk)mk.c
   var embedded = window.parent !== window, vp = null;
   var hero = document.querySelector('.hero') || document.querySelector('h1');
   var links = [].slice.call(bar.querySelectorAll('a')), secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
-  if(embedded) bar.classList.add('emb');
+  if(embedded){
+    /* inside Framer the page cannot pin anything to the screen, so the bar sits still in the page instead of chasing the scroll */
+    bar.classList.add('static');
+    var heroSec = hero.closest('header,section,.hero') || hero.parentElement;
+    if(heroSec && heroSec.parentNode) heroSec.parentNode.insertBefore(bar, heroSec.nextSibling);
+    return;
+  }
   function view(){ if(vp) return vp; if(!embedded) return {top: window.scrollY, bottom: window.scrollY + window.innerHeight}; return null; }
   function upd(){
     var v = view(); if(!v) return;
