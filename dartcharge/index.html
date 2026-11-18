@@ -1214,6 +1214,18 @@ p.subtitle{font-size:clamp(19px,2vw,22px)!important}
 
 .dec-big{font-size:clamp(64px,7vw,88px)!important;line-height:1!important}
 .dec-head h3{margin-bottom:12px!important}
+
+/* what differs from as shipped */
+.vsd{margin:18px auto 0;max-width:300px;padding:14px 16px;border-radius:14px;background:#EEF2F8;border:1px solid #D5DEEC}
+.vsd-h{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:#0F2D5B;margin:0 0 6px}
+.vsd-l{font-size:13.5px;color:var(--ink2);margin:0 0 8px;line-height:1.45}
+.vsd ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.vsd li{position:relative;padding-left:16px;font-size:13.5px;line-height:1.45;color:var(--ink)}
+.vsd li::before{content:"";position:absolute;left:2px;top:.55em;width:6px;height:6px;border-radius:50%;background:#0F2D5B}
+.vsd-a{margin:8px 0 0;font-size:13px}.vsd-a a{color:#0F2D5B}
+.anno.show-before ~ .vsd{box-shadow:0 0 0 2px #0F2D5B}
+
+.phone-cap.cap-before{color:#0F2D5B;font-family:var(--sans);font-size:13.5px;line-height:1.45;max-width:270px;margin-left:auto;margin-right:auto;text-align:center}
 </style>
 </head>
 <body>
@@ -1341,7 +1353,7 @@ p.subtitle{font-size:clamp(19px,2vw,22px)!important}
         </div>
         <div class="ev-row"><details class="evd" open><summary><span class="evd-k">Evidence</span><em>8 sources</em></summary><p class="evs"><a class="ev" href="#r-social">Social media · complaint 1</a><a class="ev" href="#r-ut">Usability task 02</a><a class="ev" href="#r-heur">Heuristic · log in before paying</a><a class="ev" href="#r-gap">Gaps 01, 02</a><a class="ev" href="#r-per">Persona · Sian</a><a class="ev" href="#r-comp">Competitive analysis</a><a class="ev" href="#r-int">Interviews</a><a class="ev" href="#r-jm">Journey map</a></p></details><span class="pts"><span class="pts-k">Answers</span><a class="fpc" href="#r-fp" title="No booth, no barrier, drivers do not know they must pay">01</a><a class="fpc" href="#r-fp" title="“Did I already pay?” has no answer">04</a><a class="fpc" href="#r-fp" title="Fake payment websites take the search traffic">05</a></span></div></div>
       </div>
-      <div><div class="vs" role="group" aria-label="Compare"><button type="button" class="on" data-v="after">Final design</button><button type="button" data-v="before">As shipped</button></div><div class="anno"><div class="fphone"><iframe data-src="DCFINAL" title="Final design, start screen" tabindex="-1"></iframe></div><div class="fphone vs-live"><iframe data-src="DCLIVE" title="Start screen as shipped" tabindex="-1"></iframe></div><span class="mk" data-n="1" style="top:27.6%" aria-hidden="true">1</span><span class="mk" data-n="2" style="top:38.9%" aria-hidden="true">2</span><span class="mk" data-n="3" style="top:50.1%" aria-hidden="true">3</span><span class="mk" data-n="4" style="top:87.9%" aria-hidden="true">4</span></div><p class="phone-cap">Start screen</p></div>
+      <div><div class="vs" role="group" aria-label="Compare"><button type="button" class="on" data-v="after">Final design</button><button type="button" data-v="before">As shipped</button></div><div class="anno"><div class="fphone"><iframe data-src="DCFINAL" title="Final design, start screen" tabindex="-1"></iframe></div><div class="fphone vs-live"><iframe data-src="DCLIVE" title="Start screen as shipped" tabindex="-1"></iframe></div><span class="mk" data-n="1" style="top:27.6%" aria-hidden="true">1</span><span class="mk" data-n="2" style="top:38.9%" aria-hidden="true">2</span><span class="mk" data-n="3" style="top:50.1%" aria-hidden="true">3</span><span class="mk" data-n="4" style="top:87.9%" aria-hidden="true">4</span></div><p class="phone-cap" data-before="As shipped: hints say &ldquo;Click here to...&rdquo;, and Sign in is in spaced capitals.">Start screen</p></div>
     </article>
 
     
@@ -1357,7 +1369,7 @@ p.subtitle{font-size:clamp(19px,2vw,22px)!important}
         </div>
         <div class="ev-row"><details class="evd" open><summary><span class="evd-k">Evidence</span><em>7 sources</em></summary><p class="evs"><a class="ev" href="#r-social">Social media · forum post, complaint 4</a><a class="ev" href="#r-sm">Service map · silent suspension</a><a class="ev" href="#r-ia">Missing screens · settings, alerts</a><a class="ev" href="#r-aff">Affinity · scenario 04</a><a class="ev" href="#r-r2d">Package A · 01, 02, 05</a><a class="ev" href="#r-un">User needs · alerts</a><a class="ev" href="#r-gap">Gap 04</a></p></details><span class="pts"><span class="pts-k">Answers</span><a class="fpc" href="#r-fp" title="Accounts close quietly, without warning">06</a><a class="fpc" href="#r-fp" title="Expired cards cause fines, not warnings">07</a><a class="fpc" href="#r-fp" title="Unclear top ups and missing payments">08</a><a class="fpc" href="#r-fp" title="Problems when adding or changing vehicles">10</a><a class="fpc" href="#r-fp" title="Fined even with money in the account">11</a></span></div></div>
       </div>
-      <div><div class="vs" role="group" aria-label="Compare"><button type="button" class="on" data-v="after">Final design</button><button type="button" data-v="before">As shipped</button></div><div class="anno"><div class="fphone"><iframe data-src="DCFINAL?s=dash" title="Final design, dashboard" tabindex="-1"></iframe></div><div class="fphone vs-live"><iframe data-src="DCLIVE?s=dash" title="Dashboard as shipped" tabindex="-1"></iframe></div><span class="mk" data-n="1" style="top:23.5%" aria-hidden="true">1</span><span class="mk" data-n="2" style="top:35.1%" aria-hidden="true">2</span><span class="mk" data-n="3" style="top:47.4%" aria-hidden="true">3</span><span class="mk" data-n="4" style="top:54.7%" aria-hidden="true">4</span><span class="mk" data-n="5" style="top:61.6%" aria-hidden="true">5</span><span class="mk" data-n="6" style="top:95.4%" aria-hidden="true">6</span></div><p class="phone-cap">Dashboard</p></div>
+      <div><div class="vs" role="group" aria-label="Compare"><button type="button" class="on" data-v="after">Final design</button><button type="button" data-v="before">As shipped</button></div><div class="anno"><div class="fphone"><iframe data-src="DCFINAL?s=dash" title="Final design, dashboard" tabindex="-1"></iframe></div><div class="fphone vs-live"><iframe data-src="DCLIVE?s=dash" title="Dashboard as shipped" tabindex="-1"></iframe></div><span class="mk" data-n="1" style="top:23.5%" aria-hidden="true">1</span><span class="mk" data-n="2" style="top:35.1%" aria-hidden="true">2</span><span class="mk" data-n="3" style="top:47.4%" aria-hidden="true">3</span><span class="mk" data-n="4" style="top:54.7%" aria-hidden="true">4</span><span class="mk" data-n="5" style="top:61.6%" aria-hidden="true">5</span><span class="mk" data-n="6" style="top:95.4%" aria-hidden="true">6</span></div><p class="phone-cap" data-before="As shipped: built from our handover. Rows read &ldquo;Top Up, Balance&rdquo;, and there is no tab bar.">Dashboard</p></div>
     </article>
 
     <article class="dec rv" id="d5">
@@ -1383,7 +1395,7 @@ p.subtitle{font-size:clamp(19px,2vw,22px)!important}
         </div>
         <div class="ev-row"><details class="evd" open><summary><span class="evd-k">Evidence</span><em>6 sources</em></summary><p class="evs"><a class="ev" href="#r-heur">Heuristic · step count hidden</a><a class="ev" href="#r-ut">Usability · step list too late</a><a class="ev" href="#r-aff">Affinity · scenarios 01, 02</a><a class="ev" href="#r-sm">Service map · midnight deadline</a><a class="ev" href="#r-comp">Competitive analysis</a><a class="ev" href="#r-r2d">Package A · 04</a></p></details><span class="pts"><span class="pts-k">Answers</span><a class="fpc" href="#r-fp" title="A hidden midnight deadline">02</a><a class="fpc" href="#r-fp" title="Paying for the wrong date goes unnoticed">03</a></span></div></div>
       </div>
-      <div><div class="vs" role="group" aria-label="Compare"><button type="button" class="on" data-v="after">Final design</button><button type="button" data-v="before">As shipped</button></div><div class="anno"><div class="fphone"><iframe data-src="DCFINAL?s=pay_qty" title="Final design, number of crossings" tabindex="-1"></iframe></div><div class="fphone vs-live"><iframe data-src="DCLIVE?s=pay_qty" title="Number of crossings as shipped" tabindex="-1"></iframe></div><span class="mk" data-n="1" style="top:22.7%" aria-hidden="true">1</span><span class="mk" data-n="2" style="top:33.3%" aria-hidden="true">2</span><span class="mk" data-n="3" style="top:47.9%" aria-hidden="true">3</span><span class="mk" data-n="4" style="top:62.9%" aria-hidden="true">4</span><span class="mk" data-n="5" style="top:86.5%" aria-hidden="true">5</span></div><p class="phone-cap">Number of crossings, with the total</p></div>
+      <div><div class="vs" role="group" aria-label="Compare"><button type="button" class="on" data-v="after">Final design</button><button type="button" data-v="before">As shipped</button></div><div class="anno"><div class="fphone"><iframe data-src="DCFINAL?s=pay_qty" title="Final design, number of crossings" tabindex="-1"></iframe></div><div class="fphone vs-live"><iframe data-src="DCLIVE?s=pay_qty" title="Number of crossings as shipped" tabindex="-1"></iframe></div><span class="mk" data-n="1" style="top:22.7%" aria-hidden="true">1</span><span class="mk" data-n="2" style="top:33.3%" aria-hidden="true">2</span><span class="mk" data-n="3" style="top:47.9%" aria-hidden="true">3</span><span class="mk" data-n="4" style="top:62.9%" aria-hidden="true">4</span><span class="mk" data-n="5" style="top:86.5%" aria-hidden="true">5</span></div><p class="phone-cap" data-before="As shipped: no step count, a typed number, and the late payment rule shown elsewhere.">Number of crossings, with the total</p></div>
     </article>
     <article class="dec dt-p" hidden id="d3">
       <div class="dec-head"><span class="dec-big" aria-hidden="true">03</span><div class="no">03 · Have I already paid?</div><h3>“Have I paid?” answered in a few taps, with no account.</h3></div>
@@ -1955,6 +1967,16 @@ document.querySelectorAll('.vs').forEach(function(g){
     new MutationObserver(run).observe(big,{attributes:true,attributeFilter:['class']}); run();
     setTimeout(function(){ if(!go){ go=true; nums.forEach(function(n){ n.textContent=n.dataset.count; }); } },8000);
   }
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.vs').forEach(function(vs){
+    var col=vs.parentElement, cap=col.querySelector('.phone-cap[data-before]'); if(!cap) return;
+    var after=cap.textContent;
+    vs.addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return;
+      var before=b.dataset.v==='before'; cap.innerHTML= before ? cap.dataset.before : after; cap.classList.toggle('cap-before',before); });
+  });
 })();
 </script>
 </body>
