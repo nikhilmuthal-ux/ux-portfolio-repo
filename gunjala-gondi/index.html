@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gunjala Gondi · A type design story · Nikhil Muthal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Gunjala+Gondi:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F0E6; --paper2:#EDE5D6; --ink:#1B1815; --ink2:#3D3832; --mute:#7A7166; --rule:#D6CCBA;
+  --blue:#24418F; --blue-soft:#DCE3F2; --red:#C2362B; --red-soft:#F3DCD6;
+  --serif:"Source Serif 4",Georgia,serif; --display:"Cormorant Garamond",Garamond,serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --gondi:"Noto Sans Gunjala Gondi",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink2);font-family:var(--serif);font-size:19px;line-height:1.7;font-optical-sizing:auto;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(rgba(27,24,21,.035) 1px,transparent 1px);background-size:4px 4px}
+img{display:block;max-width:100%;height:auto}
+a{color:var(--blue);text-decoration-thickness:1px;text-underline-offset:3px}
+::selection{background:var(--red);color:var(--paper)}
+.col{max-width:1180px;margin:0 auto;padding:0 40px}
+.text{max-width:660px}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+
+/* cover */
+.cover{min-height:100vh;display:grid;grid-template-rows:1fr auto;padding:36px 0 40px;border-bottom:1px solid var(--rule)}
+.topline{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.cover-body{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:40px;padding:40px 0}
+.ka{font-family:var(--gondi);font-size:clamp(220px,34vw,480px);line-height:.9;color:var(--ink);position:relative;text-align:center;user-select:none}
+.ka:after{content:"";position:absolute;width:clamp(30px,4vw,56px);height:clamp(30px,4vw,56px);border-radius:50%;background:var(--red);right:12%;top:8%}
+.ka-cap{text-align:center;margin-top:10px}
+h1{font-family:var(--display);font-weight:300;font-size:clamp(64px,9vw,132px);line-height:.92;letter-spacing:-.02em;color:var(--ink);margin:0}
+h1 i{font-weight:300;color:var(--blue)}
+.sub{font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(24px,2.6vw,34px);line-height:1.25;color:var(--ink2);margin:22px 0 0;max-width:520px}
+.colophon{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);margin-top:10px}
+.colophon div{padding:14px 18px 0 0}
+.colophon b{display:block;font-family:var(--display);font-weight:500;font-size:22px;color:var(--ink);line-height:1.25;margin-top:4px}
+
+/* index */
+.index{display:flex;flex-wrap:wrap;gap:6px 26px;padding:22px 0;border-bottom:1px solid var(--rule)}
+.index a{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-decoration:none}
+.index a span{color:var(--red);margin-right:6px}
+.index a:hover{color:var(--blue)}
+
+/* chapters */
+.chapter{padding:120px 0 40px;scroll-margin-top:20px}
+.chead{display:grid;grid-template-columns:140px 1fr;gap:20px;align-items:baseline;margin-bottom:46px}
+.numeral{font-family:var(--display);font-weight:300;font-style:italic;font-size:88px;line-height:.8;color:var(--red)}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(44px,5.4vw,76px);line-height:1;letter-spacing:-.015em;color:var(--ink);margin:0}
+h2 i{color:var(--blue)}
+.kicker{display:block;margin-bottom:14px}
+.body{display:grid;grid-template-columns:140px 1fr;gap:20px}
+.body > div{max-width:660px}
+p{margin:0 0 1.1em}
+.dropcap:first-letter{font-family:var(--display);font-weight:500;float:left;font-size:5.4em;line-height:.78;margin:.06em .1em 0 0;color:var(--ink)}
+h3{font-family:var(--display);font-weight:500;font-size:34px;line-height:1.15;color:var(--ink);margin:0 0 12px}
+h3 small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:400;margin-bottom:8px}
+
+/* figures */
+figure{margin:48px 0 0}
+figure img{width:100%;box-shadow:0 1px 0 var(--rule)}
+figcaption{display:flex;gap:14px;margin-top:12px;font-size:15px;line-height:1.5;color:var(--mute);font-style:italic}
+figcaption b{font-family:var(--mono);font-style:normal;font-weight:500;font-size:11px;letter-spacing:.12em;color:var(--red);white-space:nowrap;padding-top:3px}
+.plate{background:#000;padding:clamp(18px,3vw,36px)}
+.plate img{box-shadow:none}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.duo figure{margin-top:0}
+.wide{margin-left:calc(140px + 20px)}
+.bleed{margin:56px -40px 0}
+.bleed img{width:100%}
+
+/* steps */
+.steps{border-top:1px solid var(--ink);margin-top:20px}
+.step{display:grid;grid-template-columns:140px 1fr;gap:20px;padding:56px 0;border-bottom:1px solid var(--rule)}
+.step .n{font-family:var(--display);font-style:italic;font-size:44px;color:var(--blue);line-height:1}
+
+/* quote */
+.pull{font-family:var(--display);font-style:italic;font-weight:300;font-size:clamp(34px,4.2vw,56px);line-height:1.15;color:var(--ink);margin:70px 0 0;padding-left:160px;position:relative}
+.pull:before{content:"\201C";position:absolute;left:96px;top:-.18em;font-size:2.4em;color:var(--red);font-style:normal}
+
+/* strip */
+.strip{overflow:hidden;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:26px 0;margin-top:110px;background:var(--paper2)}
+.strip div{display:inline-block;white-space:nowrap;font-family:var(--gondi);font-size:64px;line-height:1.2;color:var(--ink);animation:strip 60s linear infinite;padding-right:60px}
+@keyframes strip{to{transform:translateX(-50%)}}
+
+/* map */
+.mapzoom{position:relative;overflow:hidden;aspect-ratio:1000/625;background:var(--paper2);border:1px solid var(--rule);--x:46.53%;--y:23.59%}
+.mapsvg{display:block;width:100%;height:100%;transform-origin:var(--x) var(--y)}
+.mapsvg .sea{fill:#E9E1D0}
+.mapsvg .st{fill:var(--paper);stroke:#C9BDA8;stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.mapsvg .tg{fill:var(--red-soft);stroke:var(--red);stroke-width:1.4;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.mapsvg .lb{font-family:"IBM Plex Mono",monospace;font-size:10px;fill:#9A8E7C;letter-spacing:.14em;text-transform:uppercase}
+.mapsvg .lbt{fill:var(--red)}
+.mapzoom.go .mapsvg{animation:mz 12s cubic-bezier(.65,0,.35,1) infinite}
+@keyframes mz{0%,12%{transform:scale(1)}45%,78%{transform:scale(3.4)}100%{transform:scale(1)}}
+.pin{position:absolute;left:var(--x);top:var(--y)}
+.pin em{position:absolute;left:-6px;top:-6px;width:12px;height:12px;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px var(--paper)}
+.pin i{position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--red);opacity:0}
+.mapzoom.go .pin i{animation:ring 2.4s ease-out infinite}
+.mapzoom.go .pin i+i{animation-delay:1.2s}
+@keyframes ring{0%{transform:scale(.6);opacity:.9}100%{transform:scale(4.4);opacity:0}}
+.place{position:absolute;left:calc(var(--x) + 24px);top:calc(var(--y) + 18px);background:var(--paper);border:1px solid var(--ink);padding:8px 14px 9px;opacity:0;transform:translateY(6px);line-height:1.25}
+.place b{display:block;font-family:var(--display);font-weight:500;font-size:24px;color:var(--ink)}
+.place span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.mapzoom.go .place{animation:tag 12s ease infinite}
+@keyframes tag{0%,40%{opacity:0;transform:translateY(6px)}50%,76%{opacity:1;transform:none}86%,100%{opacity:0;transform:translateY(6px)}}
+
+/* key decision */
+.versus{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;margin-top:48px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:40px 0}
+.versus .side{text-align:center}
+.versus .vs{font-family:var(--display);font-style:italic;font-size:40px;color:var(--red)}
+.versus h4{font-family:var(--display);font-weight:500;font-size:28px;margin:0 0 6px;color:var(--ink)}
+.versus p{font-size:16px;color:var(--mute);margin:0 auto;max-width:280px}
+
+/* laptop */
+.laptop{max-width:860px;margin:56px auto 0}
+.screen{background:#141210;border-radius:18px 18px 0 0;padding:14px 14px 16px}
+.view{height:400px;overflow:hidden;background:#fff;position:relative}
+.reel{animation:reel 28s linear infinite}
+.reel img{width:100%}
+@keyframes reel{to{transform:translateY(-50%)}}
+.base{height:16px;background:linear-gradient(#cfc7b8,#a39a8a);border-radius:0 0 16px 16px;margin:0 -44px;position:relative}
+.base:after{content:"";position:absolute;left:50%;top:0;width:120px;height:6px;transform:translateX(-50%);background:#8f8677;border-radius:0 0 8px 8px}
+
+
+/* browser frame */
+.browser{background:#fff;border:1px solid var(--ink);box-shadow:12px 12px 0 var(--paper2),12px 12px 0 1px var(--rule)}
+.browser .chrome{display:flex;align-items:center;gap:14px;padding:10px 14px;border-bottom:1px solid var(--rule);background:#FBF8F2}
+.browser .dots{display:flex;gap:6px}.browser .dots i{width:10px;height:10px;border-radius:50%;background:#D9CFBE}
+.browser .dots i:first-child{background:var(--red)}
+.browser .url{flex:1;font-family:var(--mono);font-size:12px;color:var(--mute);background:#fff;border:1px solid var(--rule);padding:5px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.browser img{box-shadow:none}
+
+.browser.dark{background:#131314;border-color:#131314;box-shadow:14px 14px 0 var(--paper2),14px 14px 0 1px var(--rule)}
+.browser.dark .chrome{background:#202124;border-bottom:1px solid #3c4043}
+.browser.dark .dots i{background:#5f6368}.browser.dark .dots i:first-child{background:var(--red)}
+.browser.dark .url{background:#131314;border-color:#3c4043;color:#bdc1c6}
+.browser img{display:block;width:100%}
+.gfduo{position:relative}
+.gfduo .b2{width:74%;margin:-14% 0 0 auto;position:relative;z-index:2;box-shadow:-14px 14px 0 var(--paper2),-14px 14px 0 1px var(--rule)}
+@media(max-width:820px){.gfduo .b2{width:100%;margin:24px 0 0}}
+/* glyph grid */
+.glyphs h4{font-family:var(--mono);font-weight:400;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin:44px 0 0;padding-bottom:10px;border-bottom:1px solid var(--ink)}
+.glyphs ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr))}
+.glyphs li{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;transition:background .25s}
+.glyphs .g{font-family:var(--gondi);font-size:46px;line-height:1;color:var(--ink);transition:transform .35s cubic-bezier(.2,.8,.2,1),color .25s}
+.glyphs .u{position:absolute;bottom:8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--mute);opacity:0;transition:opacity .25s}
+.glyphs li:hover{background:var(--ink)}
+.glyphs li:hover .g{transform:scale(1.25);color:var(--paper)}
+.glyphs li:hover .u{opacity:1;color:#BDB3A3}
+
+.btn{display:inline-flex;align-items:center;gap:12px;margin-top:20px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper);background:var(--ink);text-decoration:none;padding:16px 24px}
+.btn:hover{background:var(--blue)}
+.figures{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);margin-top:56px}
+.figures div{padding:22px 24px 0 0}
+.figures b{display:block;font-family:var(--display);font-weight:300;font-size:64px;line-height:1;color:var(--ink)}
+.figures b i{color:var(--red);font-weight:300}
+.figures span{font-size:15px;color:var(--mute);display:block;margin-top:8px;max-width:260px}
+
+.principle{background:#000;color:var(--paper);padding:90px 0;margin-top:120px;text-align:center}
+.principle p{font-family:var(--display);font-style:italic;font-weight:300;font-size:clamp(32px,4vw,52px);line-height:1.2;max-width:900px;margin:18px auto 0}
+.principle .mono{color:#BDB3A3}
+.colo{padding:40px 0 60px;text-align:center}
+.colo p{font-family:var(--display);font-style:italic;font-size:20px;color:var(--mute);margin:0}
+
+@media (prefers-reduced-motion:reduce){.strip div,.reel,.mapzoom.go .mapsvg,.mapzoom.go .pin i,.mapzoom.go .place{animation:none}.mapzoom .place{opacity:1;transform:none}}
+@media (max-width:900px){
+  body{font-size:17.5px}
+  .col{padding:0 20px}
+  .cover{min-height:auto}
+  .cover-body{grid-template-columns:1fr;padding:20px 0}
+  .colophon,.figures{grid-template-columns:1fr 1fr}
+  .chead,.body,.step{grid-template-columns:1fr;gap:6px}
+  .numeral{font-size:64px}
+  .wide{margin-left:0}
+  .bleed{margin:40px -20px 0}
+  .duo{grid-template-columns:1fr}
+  .pull{padding-left:0;margin-top:50px}.pull:before{position:static;display:block;height:.5em}
+  .versus{grid-template-columns:1fr;gap:28px}
+  .view{height:240px}.base{margin:0 -18px}
+  .strip div{font-size:44px}
+  .glyphs ul{grid-template-columns:repeat(auto-fill,minmax(72px,1fr))}.glyphs .g{font-size:34px}
+  .chapter{padding:80px 0 20px}
+  .place{left:calc(var(--x) + 14px)}.place b{font-size:18px}
+}
+
+/* ===== v3 craft layer ===== */
+.progress{position:fixed;left:0;top:0;height:2px;width:0;background:var(--red);z-index:50}
+/* cover: drawing the KA on its guide lines */
+.ka-stage{position:relative;padding:.046em 0;font-size:clamp(220px,34vw,480px)}
+.metric{position:absolute;left:0;right:0;height:0;border-top:1px dashed #BFB29C}
+.metric span{position:absolute;right:0;top:-18px;font-family:var(--mono);font-size:10px;line-height:1;letter-spacing:.14em;text-transform:uppercase;color:#A3967F}
+.metric.bl{border-top-style:solid;border-color:var(--ink)}
+.ka{color:var(--ink);font-weight:500;font-size:1em!important;animation:inkfill 3s cubic-bezier(.6,0,.2,1) .3s both}
+.ka:after{animation:dot .6s cubic-bezier(.3,1.6,.5,1) 3s both}
+@keyframes inkfill{0%{color:rgba(27,24,21,0);-webkit-text-stroke:1.2px rgba(27,24,21,0)}35%{color:rgba(27,24,21,0);-webkit-text-stroke:1.2px var(--ink)}100%{color:var(--ink);-webkit-text-stroke:0 var(--ink)}}
+@keyframes dot{from{transform:scale(0)}to{transform:scale(1)}}
+/* chapter heads carry the Gondi numeral too */
+.chead{position:relative}
+.chead .gd{position:absolute;right:-10px;top:-70px;font-family:var(--gondi);font-size:clamp(160px,20vw,280px);line-height:1;color:rgba(27,24,21,.055);pointer-events:none;user-select:none}
+.numeral small{display:block;font-family:var(--mono);font-style:normal;font-size:10.5px;letter-spacing:.14em;color:var(--mute);margin-top:14px}
+/* ornament between chapters */
+.orn{display:flex;align-items:center;gap:22px;padding-top:110px}
+.orn:before,.orn:after{content:"";flex:1;height:1px;background:var(--rule)}
+.orn span{font-family:var(--gondi);font-size:30px;color:var(--red);line-height:1}
+.orn + .chapter{padding-top:70px}
+/* printer's mat with crop marks */
+.mat{background:var(--paper);border:1px solid var(--rule);padding:clamp(18px,4vw,52px);position:relative}
+.mat img{box-shadow:none}
+.mat:before,.mat:after{content:"";position:absolute;width:22px;height:22px;border-color:var(--red)}
+.mat:before{left:-8px;top:-8px;border-left:1px solid;border-top:1px solid}
+.mat:after{right:-8px;bottom:-8px;border-right:1px solid;border-bottom:1px solid}
+.paper-img img{box-shadow:none;filter:drop-shadow(0 14px 14px rgba(60,45,25,.22))}
+/* night chapter */
+.night{background:#000;color:#CFC6B7;position:relative;margin-top:120px}
+.night .chapter{padding-top:130px;padding-bottom:130px}
+.night h2,.night h3{color:var(--paper)}
+.night h2 i{color:#9DB0E6}
+.night .chead .gd{color:rgba(245,240,230,.06)}
+.night figcaption{color:#8F8677}
+.night .plate{background:transparent;padding:0}
+.night .mono{color:#9A9082}
+.night .browser.dark{border-color:#3c4043;box-shadow:14px 14px 0 #1A1714}
+.night .gfduo .b2{box-shadow:-14px 14px 0 #1A1714}
+.night .glyphs h4{color:#9A9082;border-color:var(--paper)}
+.night .glyphs li{border-color:rgba(245,240,230,.12)}
+.night .glyphs .g{color:var(--paper)}
+.night .glyphs li:hover{background:var(--paper)}
+.night .glyphs li:hover .g{color:var(--ink)}
+.night .glyphs li:hover .u{color:var(--mute)}
+.night .btn{background:var(--paper);color:var(--ink)}.night .btn:hover{background:var(--red);color:var(--paper)}
+.night .base{background:linear-gradient(#5b544a,#3a342d)}.night .base:after{background:#2a251f}
+.night .screen{box-shadow:0 0 0 1px #3a342d}
+/* weight specimen */
+.weights{margin-top:56px;border-top:1px solid var(--paper);border-bottom:1px solid rgba(245,240,230,.15);padding:30px 0 34px}
+.weights .bar{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.weights .word{font-family:var(--gondi);font-size:clamp(64px,11vw,150px);line-height:1.25;color:var(--paper);font-weight:400;white-space:nowrap;overflow:hidden;animation:wt 9s ease-in-out infinite}
+.weights.manual .word{animation:none}
+@keyframes wt{0%,100%{font-weight:400}50%{font-weight:700}}
+.weights input{width:220px;accent-color:var(--red)}
+.weights output{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--paper);min-width:110px;display:inline-block}
+.pair img{aspect-ratio:1/1;object-fit:cover}
+.msduo{display:grid;grid-template-columns:473fr 977fr;gap:22px;align-items:start}
+.msduo img{box-shadow:0 26px 40px -28px rgba(60,45,25,.5)}
+.stack{display:grid;gap:clamp(20px,3vw,40px)}
+.stack figure{margin:0}
+.breakout{margin-left:-160px}
+@media(max-width:900px){.breakout{margin-left:0}}
+.matra-film{padding:clamp(18px,3.5vw,44px)}
+.mf-top{display:grid;grid-template-columns:1fr 1.2fr;gap:30px;align-items:center}
+.mf-out{text-align:center}.mf-out img{max-width:420px;margin:0 auto 10px}
+.mf-stage{position:relative;height:300px;border-left:1px solid var(--rule)}
+.mf-stage .metric{left:24px}
+.mf-g{position:absolute;inset:0 0 0 24px;display:flex;align-items:center;justify-content:center;font-family:var(--gondi);font-size:190px;line-height:1;color:var(--ink);transition:opacity .25s}
+.mf-g.swap{opacity:0}
+.mf-l{position:absolute;left:24px;bottom:0;color:var(--red)}
+.mf-chips{list-style:none;margin:28px 0 0;padding:16px 0 0;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px}
+.mf-chips li{font-family:var(--gondi);font-size:30px;line-height:1.5;color:#B5AA98;padding:0 4px;border-bottom:2px solid transparent;transition:color .3s,border-color .3s;cursor:pointer}
+.mf-chips li.on{color:var(--ink);border-color:var(--red)}
+.mf-bar{height:2px;background:var(--rule);margin-top:14px}.mf-bar i{display:block;height:100%;width:0;background:var(--red);transition:width .4s ease}
+@media(max-width:900px){.mf-top{grid-template-columns:1fr}.mf-stage{height:220px;border-left:0;border-top:1px solid var(--rule)}.mf-g{font-size:140px}.mf-chips li{font-size:24px}}
+/* macbook, true proportions */
+.laptop{max-width:780px;margin:64px auto 0;position:relative}
+.screen{background:#0d0d0e;border-radius:22px 22px 0 0;padding:16px 16px 22px;position:relative;box-shadow:inset 0 0 0 1.5px #3a3a3c,0 0 0 1px #1c1c1e}
+.screen:before{content:"";position:absolute;top:6px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#2a2a2d;box-shadow:inset 0 0 0 1.5px #1a1a1c}
+.view{height:auto;aspect-ratio:16/10;border-radius:4px}
+.base{height:14px;margin:0 -9%;border-radius:2px 2px 14px 14px;background:linear-gradient(#e2e1e4 0%,#c9c8cc 40%,#9a999e 100%);box-shadow:0 18px 30px -18px rgba(0,0,0,.6)}
+.base:after{width:16%;height:5px;background:linear-gradient(#b7b6ba,#d0cfd3);border-radius:0 0 6px 6px}
+.night .base{background:linear-gradient(#d9d8dc 0%,#bdbcc1 40%,#8d8c91 100%)}.night .base:after{background:linear-gradient(#a9a8ad,#c6c5ca)}
+.night .screen{box-shadow:inset 0 0 0 1.5px #3a3a3c,0 0 0 1px #48484b}
+@media(max-width:900px){.base{margin:0 -5%}.screen{padding:9px 9px 14px;border-radius:14px 14px 0 0}.screen:before{top:3px;width:4px;height:4px}}
+.night figure img,.night .plate img{box-shadow:none}
+/* ===== motion layer ===== */
+.tofu-wrap{margin-top:56px;padding:34px 0 26px;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule)}
+.tofu{display:flex;flex-wrap:wrap;gap:clamp(8px,1.6vw,22px);cursor:pointer}
+.tofu span{position:relative;width:clamp(40px,5.6vw,72px);height:clamp(56px,7.6vw,96px);display:flex;align-items:center;justify-content:center}
+.tofu b{position:absolute;inset:8% 14%;border:2px solid var(--ink2);transition:transform .5s cubic-bezier(.5,0,.2,1),opacity .4s;transition-delay:calc(var(--d)*110ms)}
+.tofu b:before,.tofu b:after{content:"";position:absolute;left:50%;top:50%;width:140%;height:2px;background:var(--ink2);opacity:.25;transform:translate(-50%,-50%) rotate(54deg)}
+.tofu b:after{transform:translate(-50%,-50%) rotate(-54deg)}
+.tofu i{font-style:normal;font-family:var(--gondi);font-size:clamp(34px,4.8vw,64px);line-height:1;color:var(--ink);opacity:0;transform:translateY(14px) scale(.85);transition:opacity .6s ease,transform .7s cubic-bezier(.2,1.4,.4,1);transition-delay:calc(var(--d)*110ms + 220ms)}
+.tofu.on b{transform:scale(.2) rotate(45deg);opacity:0}
+.tofu.on i{opacity:1;transform:none}
+.tofu.on span:nth-child(3n+1) i{color:var(--blue)}
+.tofu-cap{display:flex;justify-content:space-between;margin-top:18px;gap:12px}
+.tofu-cap .t2{color:var(--red);opacity:0;transition:opacity .6s 1.4s}
+.tofu-wrap.on .t1{opacity:.45;text-decoration:line-through;transition:opacity .6s .2s}
+.tofu-wrap.on .t2{opacity:1}
+@media (prefers-reduced-motion:reduce){.tofu b,.tofu i,.js .chead h2,.js .chead .numeral,.js .chead .gd,.js .glyphs li,.principle .w,.orn span,h2 i path{transition:none!important}.js .chead h2{clip-path:none;transform:none}.bleed img{transform:none}}
+/* strip v2: two counter-moving rows, filled and outlined */
+.strip{border:0!important;background:none!important;padding:10px 0!important;margin-top:120px!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.strip div{display:block!important;width:max-content;font-size:clamp(56px,7vw,96px)!important;line-height:1.35!important}
+.strip .r1{animation:strip 110s linear infinite!important}
+.strip .r2{color:transparent!important;-webkit-text-stroke:1px rgba(194,54,43,.55);animation:strip2 130s linear infinite!important;margin-top:-6px}
+@keyframes strip2{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.tofu{flex-wrap:nowrap!important;justify-content:space-between}
+.tofu span{flex:0 1 auto}
+/* lightbox */
+.zoomable{cursor:zoom-in}
+.lb{position:fixed;inset:0;z-index:99;background:rgba(21,18,15,.92);display:flex;align-items:center;justify-content:center;padding:4vw;opacity:0;pointer-events:none;transition:opacity .35s;cursor:zoom-out}
+.lb.on{opacity:1;pointer-events:auto}
+.lb img{max-width:100%;max-height:100%;width:auto;transform:scale(.94);transition:transform .45s cubic-bezier(.2,.8,.2,1);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.lb.on img{transform:none}
+.lb span{position:absolute;top:18px;right:24px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:#BDB3A3}
+/* ===== type hierarchy: sturdier weights ===== */
+body{font-weight:400;color:#35302A}
+h1{font-weight:500;letter-spacing:-.025em}
+h1 i{font-weight:600}
+h2{font-weight:500}
+h2 i{font-weight:600}
+h3{font-weight:600;letter-spacing:-.005em}
+.sub{font-weight:500}
+.colophon b{font-weight:600}
+.numeral{font-weight:500!important}
+.step .n{font-weight:500}
+.chead + .body p:first-child,.lede{font-size:1.14em;font-weight:400;line-height:1.6;color:var(--ink)}
+p strong{font-weight:600;color:var(--ink)}
+.pull{font-weight:500!important}
+.principle p{font-weight:500!important}
+.versus h4,.place b{font-weight:600}
+figcaption{color:#6A6157}
+.mono{color:#6F665B}
+.glyphs .g{font-weight:500}
+.strip .r1{font-weight:700}
+.tofu i{font-weight:600}
+/* numbers: lining figures, never old-style */
+body{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+.num,.figures b{font-family:var(--serif)!important;font-variant-numeric:lining-nums proportional-nums;font-feature-settings:"lnum" 1,"pnum" 1}
+.figures b{font-weight:400!important;letter-spacing:-.02em;color:var(--ink)}
+.figures b i{font-family:var(--serif);font-style:normal;font-weight:400}
+.colophon .num{font-weight:500;font-size:.92em}
+.ekg{gap:20px}.ekg figure{margin:0}.ekg img{aspect-ratio:1/1;object-fit:cover}
+.credits{max-width:660px;margin:0 auto;padding:60px 0 0;text-align:center;font-size:15px;line-height:1.7;color:var(--mute)}
+.credits .mono{display:block;margin-bottom:10px}
+/* ===== tighter rhythm ===== */
+.chapter{padding:84px 0 24px}
+.chead{margin-bottom:34px}
+.orn{padding-top:64px}
+.orn + .chapter{padding-top:44px}
+.step{padding:40px 0}
+figure{margin-top:36px}
+.duo figure{margin-top:0}
+.pull{margin-top:52px}
+.strip{margin-top:72px!important}
+.night{margin-top:84px}
+.night .chapter{padding-top:96px;padding-bottom:90px}
+.principle{margin-top:84px;padding:70px 0}
+.figures{margin-top:40px}
+.tofu-wrap{margin-top:40px}
+.laptop{margin-top:44px}
+.weights{margin-top:44px}
+.credits{padding-top:44px}
+.cover-body{padding:24px 0}
+@media(max-width:900px){.chapter{padding:60px 0 16px}.orn{padding-top:44px}.orn + .chapter{padding-top:32px}.night .chapter{padding:64px 0}.step{padding:30px 0}}
+.chartfig{display:grid;grid-template-columns:minmax(0,470px) minmax(0,1fr);gap:56px;align-items:center;margin-top:36px}
+.chartfig figure{margin:0}
+.tilt img{transform:rotate(-1.6deg);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.tilt:hover img{transform:rotate(0) scale(1.01)}
+.chartnote p{font-size:17px;margin:12px 0 0}
+.chartnote figcaption{margin-top:22px;padding-top:14px;border-top:1px solid var(--rule)}
+@media(max-width:900px){.chartfig{grid-template-columns:1fr;gap:24px}}
+.p2{display:grid;gap:clamp(20px,3vw,40px);align-items:end}
+.p2 img{width:100%;filter:drop-shadow(0 14px 14px rgba(60,45,25,.22))}
+@media(max-width:600px){.p2{grid-template-columns:1fr!important}}
+.night .chead + .body p:first-child,.night p{color:#E3DCCF}
+.sk img{box-shadow:none!important}
+/* loop vs knot, redrawn */
+.kafig{background:var(--paper);border:1px solid var(--rule);padding:clamp(10px,2vw,24px);cursor:pointer}
+.kasvg{display:block;width:100%;height:auto;overflow:visible}
+.kasvg .gl{stroke:#B9AD98;stroke-width:1.4;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.1s cubic-bezier(.6,0,.2,1) var(--d)}
+.kasvg .gl.faint{stroke:#D8CEBD;stroke-width:1}
+.kasvg .lbl{font-family:var(--mono);font-size:19px;letter-spacing:.12em;text-transform:uppercase;fill:var(--mute);opacity:0;transition:opacity .8s var(--d)}
+.kasvg .col{font-family:var(--display);font-weight:600;font-size:34px;fill:var(--ink);opacity:0;transition:opacity .8s .5s}
+.kasvg .foot{font-family:var(--mono);font-size:19px;letter-spacing:.12em;text-transform:uppercase;fill:var(--mute);opacity:0;transition:opacity .8s .6s}
+.kasvg .g{fill:transparent;stroke:var(--ink);stroke-width:2.5;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.8s cubic-bezier(.5,0,.3,1) .7s,fill .9s ease 2.2s}
+.kasvg .g2{transition-delay:1s,2.5s}
+.kasvg .vs{font-family:var(--display);font-style:italic;font-weight:500;font-size:64px;fill:var(--red);opacity:0;transition:opacity .8s 2.6s}
+.kasvg .co{stroke:var(--red);stroke-width:2.4;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .9s cubic-bezier(.6,0,.2,1) 3s}
+.kasvg .co.c2{transition-delay:3.3s}
+.kasvg .dot{fill:var(--red);transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .45s cubic-bezier(.3,1.6,.5,1) 3.8s}
+.kasvg .dot.d0{transition-delay:3s}.kasvg .dot.d2{transition-delay:4.1s}.kasvg .dot.d0.d2{transition-delay:3.3s}
+.kasvg .cl{font-family:var(--display);font-style:italic;font-weight:600;font-size:36px;fill:var(--red);opacity:0;transition:opacity .6s 3s}
+.kasvg .c2t{transition-delay:3.3s}
+.kasvg .ring{fill:none;stroke:var(--red);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center}
+.kafig.in .gl,.kafig.in .g,.kafig.in .co{stroke-dashoffset:0}
+.kafig.in .g{fill:var(--ink)}
+.kafig.in .lbl,.kafig.in .col,.kafig.in .foot,.kafig.in .vs,.kafig.in .cl{opacity:1}
+.kafig.in .dot{transform:scale(1)}
+.kafig.in .ring{animation:kring 2.6s ease-out 4.4s 2}
+.kafig.in .r2{animation-delay:4.7s}
+@keyframes kring{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(4)}}
+@media (prefers-reduced-motion:reduce){.kasvg *{transition:none!important;animation:none!important}}
+@media(max-width:700px){.kasvg .lbl,.kasvg .foot{font-size:24px}}
+.credits{padding-bottom:60px}
+
+/* sticky chapter bar */
+.index{position:sticky;top:0;z-index:40;background:rgba(245,240,230,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;padding:16px 0!important;transition:box-shadow .3s}
+.index::-webkit-scrollbar{display:none}
+.index a{white-space:nowrap;padding:4px 0;border-bottom:1.5px solid transparent;transition:color .25s,border-color .25s}
+.index a.on{color:var(--ink);border-color:var(--red)}
+.index.stuck{box-shadow:0 1px 0 var(--rule),0 10px 24px -18px rgba(27,24,21,.35)}
+.chapter{scroll-margin-top:64px!important}
+@media(max-width:900px){.index{margin:0 -20px;padding:14px 20px!important;gap:6px 22px}}
+/* embedded in Framer */
+html.emb{scroll-behavior:auto}
+html.emb .cover{min-height:0}
+html.emb .progress,html.emb .index{display:none}
+html.emb .lb{position:absolute;inset:auto 0 auto 0}
+/* reveal */
+.js .rv{opacity:0;transform:translateY(12px);transition:opacity .9s ease,transform .9s ease}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.ka{animation:none;color:var(--ink)}.ka:after{animation:none;transform:none}.weights .word{animation:none}.js .rv{opacity:1;transform:none;transition:none}}
+@media (max-width:900px){.chead .gd{top:-30px;font-size:130px}.metric span{display:none}.orn{padding-top:70px}.night{margin-top:80px}.night .chapter{padding:80px 0}.weights input{width:100%}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="cover col">
+  <div class="cover-body">
+    <div>
+      <span class="mono kicker">A type design story</span>
+      <h1>Gunjala <i>Gondi</i></h1>
+      <p class="sub">Drawing the first letters of a script that, until recently, lived only in handwritten manuscripts.</p>
+    </div>
+    <div>
+      <div class="ka-stage">
+        <div class="metric" style="top:.248em"><span>Head line</span></div>
+        <div class="metric" style="top:.12em"><span>Matra line</span></div>
+        <div class="metric bl" style="top:.883em"><span>Base line</span></div>
+        <div class="ka" aria-label="The letter KA in Gunjala Gondi">&#x11D71;</div>
+      </div>
+      <div class="ka-cap mono">The letter ka · U+11D71</div>
+    </div>
+  </div>
+  <div class="colophon">
+    <div><span class="mono">Role</span><b>Type design intern</b></div>
+    <div><span class="mono">Studio</span><b>EkType, for Google Noto</b></div>
+    <div><span class="mono">Year</span><b><span class="num">2019</span></b></div>
+    <div><span class="mono">Tools</span><b>FontLab VI, pencil, paper</b></div>
+  </div>
+</header>
+
+<nav class="col index" aria-label="Chapters">
+  <a href="#prologue"><span>I</span>Prologue</a>
+  <a href="#place"><span>II</span>The place</a>
+  <a href="#hand"><span>III</span>Reading the hand</a>
+  <a href="#drawing"><span>IV</span>Drawing</a>
+  <a href="#readers"><span>V</span>The readers</a>
+  <a href="#typeface"><span>VI</span>The typeface</a>
+  <a href="#afterword"><span>VII</span>Afterword</a>
+</nav>
+
+<main>
+
+<section class="chapter col" id="prologue">
+  <div class="chead"><div class="numeral">I</div><span class="gd" aria-hidden="true">&#x11DA1;</span><h2>Prologue</h2></div>
+  <div class="body"><span></span><div>
+    <p class="dropcap">A script without a font cannot be typed, searched or shared. It stays on paper, and slowly, on paper only, it fades. Gunjala Gondi was one of those scripts: written by hand in a small village in Telangana, and missing from every phone and computer.</p>
+    <p>In 2019 I joined EkType, one of India's leading type foundries, as a type design intern. I was part of the EkType team that designed what would become Noto Sans Gunjala Gondi, a Google font. My part was to learn the script, study how it had been written, and draw early drafts of letters for the regular weight, under the guidance of the team's type designers.</p>
+    <p>I could not read a single letter of it when I began.</p>
+  </div></div>
+  <div class="figures">
+    <div><b>2<i>&#xd7;</i></b><span>rounds of letter comparison, from handwriting to village manuscripts</span></div>
+    <div><b data-count="254">254</b><span>glyphs in the released font, across four weights from Regular to Bold</span></div>
+    <div><b data-count="1">1</b><span>font now released on Google Fonts, free for anyone to use</span></div>
+  </div>
+</section>
+
+<div class="strip" aria-hidden="true"><div class="r1">𑵠 𑵡 𑵢 𑵣 𑵤 𑵥 𑵧 𑵨 𑵪 𑵫 𑵬 𑵭 𑵮 𑵯 𑵰 𑵱 𑵲 𑵳 𑵴 𑵵 𑵶 𑵷 𑵸 𑵹 𑵺 𑵻 𑵼 𑵽 𑵾 𑵿 𑶀 𑶁 𑶂 𑶃 𑶄 𑶅 𑶆 𑶇 𑶈 𑶉 &nbsp; 𑵠 𑵡 𑵢 𑵣 𑵤 𑵥 𑵧 𑵨 𑵪 𑵫 𑵬 𑵭 𑵮 𑵯 𑵰 𑵱 𑵲 𑵳 𑵴 𑵵 𑵶 𑵷 𑵸 𑵹 𑵺 𑵻 𑵼 𑵽 𑵾 𑵿 𑶀 𑶁 𑶂 𑶃 𑶄 𑶅 𑶆 𑶇 𑶈 𑶉</div><div class="r2">𑶉 𑶈 𑶇 𑶆 𑶅 𑶄 𑶃 𑶂 𑶁 𑶀 𑵿 𑵾 𑵽 𑵼 𑵻 𑵺 𑵹 𑵸 𑵷 𑵶 𑵵 𑵴 𑵳 𑵲 𑵱 𑵰 𑵯 𑵮 𑵭 𑵬 𑵫 𑵪 𑵨 𑵧 𑵥 𑵤 𑵣 𑵢 𑵡 𑵠 &nbsp; 𑶉 𑶈 𑶇 𑶆 𑶅 𑶄 𑶃 𑶂 𑶁 𑶀 𑵿 𑵾 𑵽 𑵼 𑵻 𑵺 𑵹 𑵸 𑵷 𑵶 𑵵 𑵴 𑵳 𑵲 𑵱 𑵰 𑵯 𑵮 𑵭 𑵬 𑵫 𑵪 𑵨 𑵧 𑵥 𑵤 𑵣 𑵢 𑵡 𑵠</div></div>
+
+<section class="chapter col" id="place">
+  <div class="chead"><div class="numeral">II</div><span class="gd" aria-hidden="true">&#x11DA2;</span><h2>The <i>place</i></h2></div>
+  <div class="body"><span></span><div>
+    <p>The script is named after the village of Gunjala in the Adilabad district of Telangana, where manuscripts written in it were recently found.</p>
+    <p>Google's Noto project aims to give every writing system on earth a font, so that no language appears as empty boxes on a screen. Gunjala Gondi was one of the scripts still waiting. There was no earlier typeface to learn from, only the hands of the people who wrote it.</p>
+  </div></div>
+  <div class="wide tofu-wrap">
+    <div class="tofu" id="tofu" title="Tap to replay"><span style="--d:0"><b></b><i>&#x11D71;</i></span><span style="--d:1"><b></b><i>&#x11D6C;</i></span><span style="--d:2"><b></b><i>&#x11D7A;</i></span><span style="--d:3"><b></b><i>&#x11D82;</i></span><span style="--d:4"><b></b><i>&#x11D6F;</i></span><span style="--d:5"><b></b><i>&#x11D76;</i></span><span style="--d:6"><b></b><i>&#x11D7E;</i></span><span style="--d:7"><b></b><i>&#x11D60;</i></span><span style="--d:8"><b></b><i>&#x11D88;</i></span><span style="--d:9"><b></b><i>&#x11D74;</i></span><span style="--d:10"><b></b><i>&#x11D79;</i></span></div>
+    <div class="tofu-cap"><span class="mono t1">Without a font: empty boxes</span><span class="mono t2">With a font: the script, readable</span></div>
+  </div>
+  <figure class="wide">
+    <div class="mapzoom" id="mapzoom">
+      <svg class="mapsvg" viewBox="0 0 1000 625" role="img" aria-label="Map of central and south India with Gunjala village in Telangana" xmlns="http://www.w3.org/2000/svg"><rect width="1000" height="625" class="sea"/><path class="st" d="M850.2,-12.0L759.2,-12.0L754.7,-10.0L751.2,-12.0L742.2,-12.0L742.4,-8.7L739.9,-2.4L742.2,1.5L747.2,1.9L751.9,6.9L763.8,7.9L762.5,10.3L761.8,16.6L769.1,20.8L770.0,23.9L775.3,26.2L774.1,29.3L776.9,31.4L776.5,36.6L772.9,39.3L778.6,43.2L784.5,45.4L784.8,49.2L787.3,51.8L789.3,49.2L792.3,49.8L793.9,54.2L795.6,55.5L800.7,56.7L801.8,61.1L803.4,63.5L812.1,61.9L817.1,58.9L822.3,54.6L825.5,48.7L828.9,45.7L829.4,52.6L831.4,55.9L830.5,60.7L833.1,65.8L838.6,64.1L841.7,61.6L842.6,64.8L845.8,65.2L847.5,59.7L845.3,57.3L845.3,54.0L847.6,49.8L850.1,50.2L850.6,55.6L849.9,60.2L852.8,65.9L857.5,61.2L862.0,64.0L865.2,63.4L861.7,51.6L864.4,50.6L863.4,44.6L865.0,42.0L861.6,32.6L862.1,30.9L860.1,25.6L858.5,18.4L859.9,14.1L856.0,9.4L856.3,5.0L860.3,0.6L855.9,-1.4L850.8,-1.6L849.9,-3.7L853.1,-10.7L850.2,-12.0ZM825.5,59.9L825.5,62.4L828.5,63.1L829.8,59.9L829.2,53.3L827.0,55.7L825.5,59.9ZM848.0,51.2L846.1,54.4L848.4,56.6L849.3,51.8L848.0,51.2Z"><title>West Bengal</title></path><path class="st" d="M316.0,-12.0L270.0,-12.0L270.0,-9.6L273.2,-8.6L277.1,-9.4L280.6,-5.3L282.8,-6.4L288.4,-1.9L288.5,0.4L293.3,1.8L296.8,6.6L298.3,5.4L302.7,5.5L307.9,3.5L311.9,0.8L309.7,-1.0L305.0,-2.0L306.3,-6.7L309.3,-9.3L316.0,-12.0Z"><title>Rajasthan</title></path><path class="st" d="M270.0,-12.0L149.5,-12.0L149.5,3.7L150.6,7.1L149.5,9.1L149.5,94.8L157.2,98.3L162.6,100.1L167.8,99.8L169.0,98.7L174.2,97.5L181.1,94.2L186.6,92.7L190.0,89.2L191.3,89.8L196.4,86.9L198.2,86.9L204.5,82.9L207.0,82.7L211.4,79.9L211.4,75.5L216.6,68.9L218.7,61.9L215.5,59.6L213.7,56.3L213.9,52.5L212.2,48.7L217.2,47.6L219.2,44.9L219.5,40.7L215.2,37.1L225.8,38.7L228.6,36.8L232.7,37.1L237.7,39.4L236.1,41.5L231.7,39.7L228.2,41.8L226.8,49.6L229.0,54.5L227.8,59.5L231.0,60.7L238.0,61.1L236.2,65.5L231.2,68.6L229.4,72.5L230.6,77.4L238.1,83.0L237.5,86.5L239.5,90.9L241.7,93.3L241.4,95.9L243.7,97.4L241.4,103.4L241.6,106.0L239.9,109.5L241.3,112.5L238.8,113.0L236.1,117.0L234.6,125.3L237.0,124.2L243.8,123.1L241.9,119.3L247.7,115.0L250.1,118.0L247.6,119.4L247.4,121.9L252.2,123.6L255.2,122.6L256.3,120.5L259.8,121.1L261.0,117.4L259.7,113.4L263.5,106.7L261.4,101.4L264.2,101.0L272.8,105.7L276.3,103.9L277.1,101.1L280.8,97.1L280.6,92.8L279.2,89.1L276.2,85.8L272.6,83.2L275.7,79.4L276.6,76.9L281.2,76.4L282.8,72.4L286.4,69.5L288.5,70.0L295.6,67.5L295.1,65.1L291.7,66.3L284.2,65.9L277.4,67.8L274.8,63.7L277.7,62.1L276.7,58.5L277.0,54.6L281.2,53.4L286.7,50.5L289.3,50.0L289.8,45.6L287.1,40.1L286.5,36.3L293.0,34.1L292.9,31.7L288.7,31.6L285.3,28.8L286.8,27.2L290.5,27.4L294.8,23.6L298.8,22.0L302.0,15.9L300.8,13.1L298.4,13.0L296.8,6.6L293.3,1.8L288.5,0.4L288.4,-1.9L282.8,-6.4L280.6,-5.3L277.1,-9.4L273.2,-8.6L270.0,-9.6L270.0,-12.0Z"><title>Gujarat</title></path><path class="st" d="M526.1,388.1L526.5,387.5L523.9,380.7L524.5,375.0L521.7,369.1L520.3,362.6L520.1,358.9L522.1,354.8L523.0,346.0L521.6,342.0L519.7,340.3L517.5,328.0L517.4,324.8L518.9,316.3L522.1,311.0L525.5,301.5L529.3,297.4L533.5,295.1L542.0,292.4L545.3,293.1L547.4,298.6L550.5,294.4L553.9,294.6L559.9,289.0L559.9,286.9L563.5,275.6L566.1,273.8L570.0,274.8L573.0,274.0L583.3,275.5L587.1,273.4L592.2,272.1L600.2,267.9L604.3,265.2L606.5,255.9L602.8,253.7L602.2,251.2L603.9,247.2L610.7,240.1L620.1,234.4L627.0,232.0L634.3,227.1L640.1,224.6L647.0,216.1L647.5,214.2L654.6,206.5L660.8,202.7L672.4,197.4L675.0,193.3L678.3,190.5L680.3,187.3L685.8,182.9L690.3,177.2L693.8,171.6L698.0,167.1L699.4,163.6L696.2,161.8L694.1,164.2L689.7,166.9L687.8,166.9L687.3,170.4L684.3,172.5L681.7,175.9L675.3,176.8L672.2,175.6L665.7,176.0L663.8,173.9L661.8,168.3L658.1,168.2L654.5,163.1L653.0,165.5L649.8,166.2L647.3,169.7L644.1,168.1L643.5,171.1L646.1,173.5L638.7,178.6L635.8,178.0L632.0,182.7L631.7,184.5L634.2,187.3L632.4,189.5L632.4,192.7L627.2,194.1L626.2,191.9L622.5,191.6L622.5,194.0L615.0,198.6L615.4,195.3L612.1,191.4L611.8,187.9L609.7,187.4L606.6,191.7L606.3,196.6L604.4,200.5L606.0,202.1L605.1,206.6L601.7,208.6L597.5,206.8L594.0,206.6L589.5,208.3L583.1,212.0L583.8,215.0L578.1,217.8L574.5,222.8L572.0,231.6L569.6,233.5L562.2,235.4L559.5,238.4L553.5,239.7L549.8,242.1L549.2,245.1L547.4,246.6L541.2,245.2L538.2,242.8L534.7,244.1L530.2,249.4L533.7,250.9L538.0,251.0L537.2,253.9L538.4,256.7L534.9,256.7L528.9,253.9L526.2,248.5L523.9,247.1L518.4,249.5L515.5,253.6L518.2,255.5L517.1,258.9L513.8,263.2L510.9,260.3L505.9,259.5L504.7,260.9L496.3,262.7L492.5,264.9L487.1,265.6L485.1,268.7L484.9,272.9L485.9,275.2L485.2,278.7L483.1,279.7L477.7,278.6L470.7,283.5L470.7,285.8L466.6,287.3L462.6,285.6L460.8,286.2L457.6,284.7L453.8,285.1L448.2,288.2L447.4,290.5L441.7,295.2L434.1,291.7L432.6,292.7L424.6,292.4L417.0,290.3L408.6,289.4L405.4,290.0L401.2,293.5L400.8,297.2L403.1,301.8L399.9,303.9L400.9,314.5L403.9,316.2L404.8,323.2L402.9,327.0L397.9,327.6L390.8,324.8L389.0,328.9L393.0,331.7L392.2,336.7L390.7,338.0L390.0,341.8L390.4,345.9L393.3,349.4L397.2,350.2L394.6,354.7L396.3,358.3L401.6,359.3L404.1,355.4L409.8,355.2L410.6,356.7L414.7,358.1L417.6,357.0L417.9,360.9L414.1,362.1L412.5,366.5L414.8,370.1L412.7,372.3L411.0,368.1L404.2,368.4L399.7,365.9L398.9,362.3L396.9,361.0L395.0,363.1L397.7,366.1L397.4,368.1L400.3,372.4L398.3,377.3L401.1,378.8L405.0,377.2L403.8,374.6L405.7,372.4L411.1,374.7L414.7,374.7L416.2,376.7L416.9,380.5L419.1,380.4L422.7,377.9L428.2,375.6L430.4,373.5L430.4,370.9L433.7,371.9L435.3,375.4L439.7,373.2L442.1,376.2L441.0,380.6L445.5,384.5L452.8,385.4L451.9,393.6L453.1,395.7L460.3,397.6L458.3,405.1L454.4,410.7L449.4,414.9L447.2,418.3L452.0,423.0L454.5,423.4L460.8,417.5L463.2,409.0L466.7,406.2L474.7,404.9L479.9,407.2L483.1,406.9L486.6,402.7L489.0,403.4L493.1,399.8L494.2,395.4L497.8,395.7L498.9,397.3L502.6,397.0L503.7,399.2L507.1,399.7L508.3,396.8L513.7,394.0L513.9,391.9L519.2,390.1L523.2,390.7L525.4,389.9L520.0,388.6L517.6,384.8L518.9,382.3L523.0,382.9L526.1,388.1Z"><title>Andhra Pradesh</title></path><path class="st" d="M803.4,63.5L801.8,61.1L800.7,56.7L795.6,55.5L793.9,54.2L792.3,49.8L789.3,49.2L787.3,51.8L784.8,49.2L784.5,45.4L778.6,43.2L772.9,39.3L765.2,34.6L760.6,34.9L756.8,31.2L750.4,28.0L748.0,25.8L744.1,28.0L746.0,32.3L745.1,38.3L745.5,43.9L743.2,47.2L740.1,48.6L738.2,47.6L738.5,42.9L734.1,45.0L729.2,43.7L724.3,41.5L720.4,43.0L716.9,46.7L712.2,43.7L707.4,43.5L711.4,36.9L711.8,32.3L710.5,27.9L704.4,31.2L700.3,30.0L697.7,31.0L689.9,31.1L685.7,34.8L681.4,35.1L675.2,32.6L672.0,28.0L668.3,26.5L669.3,30.4L667.4,33.2L663.3,34.1L659.2,37.6L654.2,40.2L652.0,44.0L650.8,49.5L652.9,51.2L652.4,54.7L649.2,55.8L648.0,59.3L644.5,65.0L643.6,68.1L645.6,72.1L644.8,74.6L641.7,73.8L638.6,81.2L636.9,83.1L633.9,83.5L629.6,81.0L624.1,81.8L618.2,81.9L614.1,90.0L609.9,94.3L605.6,93.7L606.6,101.9L605.5,105.9L608.7,111.1L609.1,121.8L608.5,125.5L616.0,128.7L619.2,128.2L618.7,135.3L614.6,137.5L614.7,134.5L607.1,132.8L603.6,134.8L601.2,129.8L598.8,129.0L596.1,126.2L594.2,127.5L590.1,124.0L587.3,126.3L585.5,129.6L585.7,131.7L589.7,134.3L590.9,136.4L593.5,137.2L594.0,142.7L593.5,147.5L598.9,152.8L598.0,158.5L601.1,167.7L601.1,171.4L598.9,173.1L597.8,178.4L591.2,180.8L588.7,183.4L589.1,186.5L584.4,190.8L582.5,194.0L578.7,196.6L574.8,197.8L571.0,213.1L569.1,216.1L576.2,216.5L583.1,212.0L589.5,208.3L594.0,206.6L597.5,206.8L601.7,208.6L605.1,206.6L606.0,202.1L604.4,200.5L606.3,196.6L606.6,191.7L609.7,187.4L611.8,187.9L612.1,191.4L615.4,195.3L615.0,198.6L622.5,194.0L622.5,191.6L626.2,191.9L627.2,194.1L632.4,192.7L632.4,189.5L634.2,187.3L631.7,184.5L632.0,182.7L635.8,178.0L638.7,178.6L646.1,173.5L643.5,171.1L644.1,168.1L647.3,169.7L649.8,166.2L653.0,165.5L654.5,163.1L658.1,168.2L661.8,168.3L663.8,173.9L665.7,176.0L672.2,175.6L675.3,176.8L681.7,175.9L684.3,172.5L687.3,170.4L687.8,166.9L689.7,166.9L694.1,164.2L696.2,161.8L699.4,163.6L703.0,159.5L710.7,153.4L714.9,149.2L712.0,147.6L716.5,138.8L725.8,132.1L729.9,133.2L729.1,140.6L736.6,137.6L747.0,134.7L749.5,134.5L756.8,131.8L760.8,129.6L764.5,124.4L765.5,120.8L770.7,118.8L773.5,116.8L774.7,109.7L776.3,107.7L782.0,103.3L785.1,101.9L783.1,94.2L779.0,84.9L778.7,81.1L781.8,75.0L787.5,69.1L792.7,66.0L798.2,65.6L803.4,63.5Z"><title>Odisha</title></path><path class="st" d="M252.2,123.6L247.4,121.9L247.6,119.4L250.1,118.0L247.7,115.0L241.9,119.3L243.8,123.1L245.7,126.6L252.0,126.3L252.2,123.6ZM238.8,113.0L241.3,112.5L239.9,109.5L238.8,113.0Z"><title>Dadra and Nagar Haveli and Daman and Diu</title></path><path class="st" d="M272.8,299.6L277.1,297.6L280.8,299.6L282.1,303.2L283.9,303.9L288.2,302.9L287.9,301.7L291.5,297.8L293.0,299.4L297.1,298.0L298.0,293.5L300.9,288.7L300.4,284.6L302.4,284.1L301.7,278.3L298.4,276.7L295.6,267.3L297.9,266.7L300.9,262.7L304.6,263.5L305.8,266.3L310.0,264.2L310.7,260.1L315.0,257.8L317.7,257.4L316.9,254.3L319.8,252.8L321.3,250.4L324.5,250.3L329.3,253.7L332.2,252.3L332.7,250.0L337.1,249.0L340.3,249.8L344.2,247.8L346.6,249.4L347.8,244.8L346.1,242.1L346.8,239.5L344.1,233.7L346.5,229.5L353.0,233.4L356.3,231.7L358.9,235.3L365.0,233.3L369.4,232.8L374.6,234.3L373.8,223.6L376.4,222.9L381.1,217.4L384.2,217.5L387.4,220.1L388.5,216.7L390.5,215.3L389.9,212.4L393.7,213.0L395.4,209.4L395.7,202.6L397.9,201.1L403.3,200.4L404.4,198.2L408.8,195.0L408.8,191.9L411.5,189.9L413.2,194.2L417.6,197.0L421.1,196.0L419.2,193.0L422.7,186.4L426.1,185.5L426.9,181.5L429.9,180.1L432.2,175.9L435.0,174.9L432.0,170.2L429.3,168.5L428.8,166.4L432.0,163.4L432.8,159.1L435.3,155.0L438.1,155.3L440.8,157.7L444.9,157.7L445.1,153.2L447.6,149.8L450.0,148.9L451.2,142.5L453.2,140.8L450.8,133.7L453.1,133.6L456.8,136.3L458.9,135.2L465.8,137.3L468.4,137.1L471.0,139.2L472.0,142.2L477.8,146.6L479.2,146.4L484.5,149.8L487.1,144.6L490.3,145.0L493.1,146.8L497.7,146.9L505.2,144.1L507.5,144.5L510.2,147.9L512.7,148.9L514.1,152.2L512.7,159.8L513.2,161.5L510.1,165.0L512.9,166.1L513.9,173.6L515.5,176.8L518.9,180.4L525.8,179.7L526.0,177.2L528.7,174.2L525.9,169.1L529.5,163.6L530.7,158.9L533.5,155.6L537.6,152.6L539.2,155.5L541.6,155.4L543.0,157.7L547.4,154.4L546.4,152.1L549.3,151.1L549.8,148.9L547.4,146.4L542.9,144.5L541.4,141.1L537.2,138.6L536.1,135.8L531.8,132.5L533.1,130.6L535.9,131.4L536.9,126.3L535.9,122.8L531.8,122.4L531.7,118.8L536.0,117.4L539.4,115.1L539.4,104.1L535.9,104.4L534.8,102.8L537.5,100.2L536.7,91.4L533.9,90.9L532.2,88.2L534.1,81.4L539.5,78.4L541.6,74.1L539.5,75.1L531.5,70.2L527.3,64.9L522.6,62.5L515.6,66.2L509.2,66.7L507.6,64.6L501.9,64.8L498.2,66.1L497.4,63.3L492.8,60.5L486.1,59.6L485.2,61.9L473.9,65.2L473.2,67.7L465.2,69.1L460.0,68.3L458.2,67.0L454.9,67.8L454.3,63.9L445.8,66.1L443.9,68.1L439.5,70.6L433.4,72.2L430.2,71.2L427.3,72.9L422.1,72.8L418.4,71.2L416.5,68.1L417.5,66.1L421.2,66.4L421.1,60.2L417.6,57.3L412.7,57.1L408.3,60.1L404.3,59.1L401.0,60.3L396.7,63.4L391.9,65.0L391.6,68.0L389.5,71.6L385.7,74.5L386.5,78.1L385.0,80.0L380.5,80.9L378.2,83.8L372.4,85.1L368.6,84.7L365.6,82.0L366.9,80.4L366.4,76.9L364.6,73.4L356.7,72.1L354.2,72.8L346.9,72.7L343.4,73.2L334.9,72.9L327.9,70.6L324.7,65.9L318.8,63.6L311.6,63.7L304.1,59.0L303.1,55.3L303.0,50.2L300.0,47.2L295.3,50.3L292.2,51.1L289.3,50.0L286.7,50.5L281.2,53.4L277.0,54.6L276.7,58.5L277.7,62.1L274.8,63.7L277.4,67.8L284.2,65.9L291.7,66.3L295.1,65.1L295.6,67.5L288.5,70.0L286.4,69.5L282.8,72.4L281.2,76.4L276.6,76.9L275.7,79.4L272.6,83.2L276.2,85.8L279.2,89.1L280.6,92.8L280.8,97.1L277.1,101.1L276.3,103.9L272.8,105.7L264.2,101.0L261.4,101.4L263.5,106.7L259.7,113.4L261.0,117.4L259.8,121.1L256.3,120.5L255.2,122.6L252.2,123.6L252.0,126.3L245.7,126.6L243.8,123.1L237.0,124.2L234.6,125.3L232.9,130.1L232.3,134.5L234.8,138.4L235.0,144.0L238.0,147.2L236.1,149.5L237.7,154.4L237.0,157.7L239.0,166.1L241.6,168.6L243.6,166.1L245.5,169.0L241.9,172.5L243.0,175.2L240.1,177.5L240.2,181.0L242.8,186.1L241.6,190.7L242.4,193.6L244.9,196.5L245.1,205.1L246.6,210.3L248.3,213.2L250.6,219.4L250.9,226.8L252.8,229.2L252.2,231.9L254.9,236.3L254.2,238.3L255.6,241.8L257.0,249.0L256.4,254.4L258.2,260.7L258.1,268.0L260.6,272.4L260.4,275.1L262.8,282.0L263.0,285.7L264.7,288.7L268.5,292.3L270.4,295.8L270.6,298.5L272.8,299.6Z"><title>Maharashtra</title></path><path class="st" d="M287.8,333.0L293.6,330.3L294.3,324.6L295.6,321.0L293.6,319.0L296.0,316.9L293.5,309.6L294.3,307.7L293.1,303.3L288.2,302.9L283.9,303.9L282.1,303.2L280.8,299.6L277.1,297.6L272.8,299.6L272.7,302.0L276.4,310.1L279.9,311.1L280.1,314.8L282.3,322.1L281.0,325.4L285.5,328.7L285.7,331.7L287.8,333.0Z"><title>Goa</title></path><path class="st" d="M317.2,418.1L320.7,417.7L321.2,419.4L326.8,421.5L329.6,424.7L333.3,424.6L332.5,427.2L334.9,429.9L337.8,436.9L339.3,437.0L343.5,441.9L347.1,444.6L352.2,446.0L352.7,448.3L355.4,450.7L359.9,451.6L363.5,450.2L365.8,454.4L368.2,454.4L373.6,458.9L376.3,459.0L377.4,462.1L379.3,460.1L381.8,460.4L382.5,462.9L384.7,463.5L390.3,463.1L393.0,463.7L393.9,460.5L396.3,456.7L399.8,455.7L403.1,458.5L404.6,457.0L409.8,456.0L413.5,457.4L416.6,456.2L418.7,451.7L425.7,449.9L429.5,443.9L425.6,440.5L418.8,440.5L418.0,437.7L421.5,435.1L423.7,430.0L421.8,426.3L423.3,421.8L426.9,421.4L429.3,419.9L430.7,414.4L434.3,413.7L438.5,416.4L440.5,414.8L444.7,417.7L447.2,418.3L449.4,414.9L454.4,410.7L458.3,405.1L460.3,397.6L453.1,395.7L451.9,393.6L452.8,385.4L445.5,384.5L441.0,380.6L442.1,376.2L439.7,373.2L435.3,375.4L433.7,371.9L430.4,370.9L430.4,373.5L428.2,375.6L422.7,377.9L419.1,380.4L416.9,380.5L416.2,376.7L414.7,374.7L411.1,374.7L405.7,372.4L403.8,374.6L405.0,377.2L401.1,378.8L398.3,377.3L400.3,372.4L397.4,368.1L397.7,366.1L395.0,363.1L396.9,361.0L398.9,362.3L399.7,365.9L404.2,368.4L411.0,368.1L412.7,372.3L414.8,370.1L412.5,366.5L414.1,362.1L417.9,360.9L417.6,357.0L414.7,358.1L410.6,356.7L409.8,355.2L404.1,355.4L401.6,359.3L396.3,358.3L394.6,354.7L397.2,350.2L393.3,349.4L390.4,345.9L390.0,341.8L390.7,338.0L392.2,336.7L393.0,331.7L389.0,328.9L390.8,324.8L397.9,327.6L402.9,327.0L404.8,323.2L403.9,316.2L400.9,314.5L399.9,303.9L403.1,301.8L400.8,297.2L401.2,293.5L405.4,290.0L408.6,289.4L417.0,290.3L418.5,288.4L418.8,278.0L420.7,276.4L420.4,274.0L411.2,272.2L409.8,270.5L414.2,267.5L416.5,264.7L416.9,261.1L415.7,259.6L416.6,255.9L416.5,251.0L417.8,246.7L414.3,239.5L422.9,228.9L422.3,225.2L418.9,225.2L415.7,223.1L417.7,219.8L420.1,218.5L419.1,215.9L423.7,211.3L423.8,208.9L421.6,205.5L423.0,203.7L421.1,196.0L417.6,197.0L413.2,194.2L411.5,189.9L408.8,191.9L408.8,195.0L404.4,198.2L403.3,200.4L397.9,201.1L395.7,202.6L395.4,209.4L393.7,213.0L389.9,212.4L390.5,215.3L388.5,216.7L387.4,220.1L384.2,217.5L381.1,217.4L376.4,222.9L373.8,223.6L374.6,234.3L369.4,232.8L365.0,233.3L358.9,235.3L356.3,231.7L353.0,233.4L346.5,229.5L344.1,233.7L346.8,239.5L346.1,242.1L347.8,244.8L346.6,249.4L344.2,247.8L340.3,249.8L337.1,249.0L332.7,250.0L332.2,252.3L329.3,253.7L324.5,250.3L321.3,250.4L319.8,252.8L316.9,254.3L317.7,257.4L315.0,257.8L310.7,260.1L310.0,264.2L305.8,266.3L304.6,263.5L300.9,262.7L297.9,266.7L295.6,267.3L298.4,276.7L301.7,278.3L302.4,284.1L300.4,284.6L300.9,288.7L298.0,293.5L297.1,298.0L293.0,299.4L291.5,297.8L287.9,301.7L288.2,302.9L293.1,303.3L294.3,307.7L293.5,309.6L296.0,316.9L293.6,319.0L295.6,321.0L294.3,324.6L293.6,330.3L287.8,333.0L288.6,337.3L294.5,340.5L296.3,347.8L298.0,348.4L299.5,352.1L300.9,359.0L302.3,361.3L303.8,368.2L308.0,375.2L311.9,395.4L315.8,414.2L317.7,415.5L317.2,418.1Z"><title>Karnataka</title></path><path class="st" d="M331.4,447.8L331.4,444.7L333.5,444.7L334.6,447.0L334.0,449.5L335.4,452.8L337.5,454.1L343.3,461.0L346.6,469.8L349.6,472.0L354.9,484.9L358.4,498.2L363.4,508.3L368.2,522.0L368.4,524.6L370.8,524.8L372.1,529.7L375.2,532.3L376.5,535.1L376.1,537.9L377.5,545.1L380.7,547.5L379.0,549.0L375.1,548.0L376.5,541.7L374.4,540.9L372.0,536.5L373.4,549.2L375.3,555.9L381.2,568.8L384.6,570.0L382.3,572.4L386.2,576.2L388.2,579.3L395.2,588.1L399.7,594.2L404.1,597.6L406.3,595.5L410.6,587.9L407.7,584.5L406.8,581.1L408.9,577.6L409.5,574.6L407.7,573.2L406.2,568.9L409.7,564.0L411.9,556.9L415.2,548.9L413.0,545.7L410.0,546.6L407.1,544.4L408.9,538.3L408.6,534.5L409.9,530.4L408.5,526.5L410.5,520.4L407.2,514.8L402.4,517.0L399.3,519.6L397.1,519.4L393.8,516.4L392.5,511.3L393.0,503.5L395.1,501.7L395.6,497.6L392.9,493.7L387.9,491.5L389.0,483.2L386.0,480.4L379.3,480.6L378.5,479.4L381.9,476.2L380.4,473.4L377.1,471.3L371.2,469.6L370.6,464.6L374.4,465.1L377.4,462.1L376.3,459.0L373.6,458.9L368.2,454.4L365.8,454.4L363.5,450.2L359.9,451.6L355.4,450.7L352.7,448.3L352.2,446.0L347.1,444.6L343.5,441.9L339.3,437.0L337.8,436.9L334.9,429.9L332.5,427.2L333.3,424.6L329.6,424.7L326.8,421.5L321.2,419.4L320.7,417.7L317.2,418.1L321.1,427.2L327.9,440.4L330.3,447.8L331.4,447.8Z"><title>Kerala</title></path><path class="st" d="M334.6,447.0L333.5,444.7L331.4,444.7L331.4,447.8L334.6,447.0ZM509.5,489.6L505.3,489.3L504.0,492.4L506.4,493.2L509.5,496.4L509.5,489.6ZM509.6,450.5L507.4,452.0L503.3,448.7L504.9,455.0L508.1,455.4L509.6,450.5Z"><title>Puducherry</title></path><path class="st" d="M509.5,496.4L506.4,493.2L504.0,492.4L505.3,489.3L509.5,489.6L509.8,482.4L508.5,473.1L507.2,471.7L505.9,465.7L507.2,458.0L508.1,455.4L504.9,455.0L503.3,448.7L507.4,452.0L509.6,450.5L510.1,447.8L521.4,429.7L524.2,421.7L525.5,415.3L526.4,405.9L528.2,400.7L528.8,394.7L528.0,391.4L525.4,389.9L523.2,390.7L519.2,390.1L513.9,391.9L513.7,394.0L508.3,396.8L507.1,399.7L503.7,399.2L502.6,397.0L498.9,397.3L497.8,395.7L494.2,395.4L493.1,399.8L489.0,403.4L486.6,402.7L483.1,406.9L479.9,407.2L474.7,404.9L466.7,406.2L463.2,409.0L460.8,417.5L454.5,423.4L452.0,423.0L447.2,418.3L444.7,417.7L440.5,414.8L438.5,416.4L434.3,413.7L430.7,414.4L429.3,419.9L426.9,421.4L423.3,421.8L421.8,426.3L423.7,430.0L421.5,435.1L418.0,437.7L418.8,440.5L425.6,440.5L429.5,443.9L425.7,449.9L418.7,451.7L416.6,456.2L413.5,457.4L409.8,456.0L404.6,457.0L403.1,458.5L399.8,455.7L396.3,456.7L393.9,460.5L393.0,463.7L390.3,463.1L384.7,463.5L382.5,462.9L381.8,460.4L379.3,460.1L377.4,462.1L374.4,465.1L370.6,464.6L371.2,469.6L377.1,471.3L380.4,473.4L381.9,476.2L378.5,479.4L379.3,480.6L386.0,480.4L389.0,483.2L387.9,491.5L392.9,493.7L395.6,497.6L395.1,501.7L393.0,503.5L392.5,511.3L393.8,516.4L397.1,519.4L399.3,519.6L402.4,517.0L407.2,514.8L410.5,520.4L408.5,526.5L409.9,530.4L408.6,534.5L408.9,538.3L407.1,544.4L410.0,546.6L413.0,545.7L415.2,548.9L411.9,556.9L409.7,564.0L406.2,568.9L407.7,573.2L409.5,574.6L408.9,577.6L406.8,581.1L407.7,584.5L410.6,587.9L406.3,595.5L404.1,597.6L408.5,601.6L412.0,603.8L419.5,605.9L424.7,602.7L428.8,602.0L430.9,599.8L440.8,594.0L443.3,589.4L443.7,582.1L445.2,578.4L445.2,574.5L447.6,570.3L452.9,565.8L455.7,564.2L462.2,563.3L470.9,559.1L475.2,557.9L480.2,558.7L474.3,552.2L473.5,549.9L476.2,542.2L480.5,536.8L484.6,530.0L487.6,527.4L486.0,522.2L488.6,518.1L492.2,515.8L497.4,515.9L499.2,517.0L506.2,518.5L509.7,517.5L510.2,513.7L509.5,496.4Z"><title>Tamil Nadu</title></path><path class="st" d="M248.8,596.4L248.6,597.2L248.2,597.8L247.7,598.2L246.9,598.6L247.1,599.0L247.6,598.9L248.4,598.2L249.1,596.6L248.8,596.4Z"><title>Lakshadweep</title></path><path class="st" d="M742.2,-12.0L668.4,-12.0L667.4,-6.8L670.0,-7.3L671.0,-4.4L670.6,2.2L672.9,4.6L673.9,8.1L680.7,8.1L683.0,12.6L678.2,16.7L676.8,20.0L669.3,24.3L668.3,26.5L672.0,28.0L675.2,32.6L681.4,35.1L685.7,34.8L689.9,31.1L697.7,31.0L700.3,30.0L704.4,31.2L710.5,27.9L711.8,32.3L711.4,36.9L707.4,43.5L712.2,43.7L716.9,46.7L720.4,43.0L724.3,41.5L729.2,43.7L734.1,45.0L738.5,42.9L738.2,47.6L740.1,48.6L743.2,47.2L745.5,43.9L745.1,38.3L746.0,32.3L744.1,28.0L748.0,25.8L750.4,28.0L756.8,31.2L760.6,34.9L765.2,34.6L772.9,39.3L776.5,36.6L776.9,31.4L774.1,29.3L775.3,26.2L770.0,23.9L769.1,20.8L761.8,16.6L762.5,10.3L763.8,7.9L751.9,6.9L747.2,1.9L742.2,1.5L739.9,-2.4L742.4,-8.7L742.2,-12.0ZM759.2,-12.0L751.2,-12.0L754.7,-10.0L759.2,-12.0Z"><title>Jharkhand</title></path><path class="st" d="M577.8,-12.0L316.0,-12.0L309.3,-9.3L306.3,-6.7L305.0,-2.0L309.7,-1.0L311.9,0.8L307.9,3.5L302.7,5.5L298.3,5.4L296.8,6.6L298.4,13.0L300.8,13.1L302.0,15.9L298.8,22.0L294.8,23.6L290.5,27.4L286.8,27.2L285.3,28.8L288.7,31.6L292.9,31.7L293.0,34.1L286.5,36.3L287.1,40.1L289.8,45.6L289.3,50.0L292.2,51.1L295.3,50.3L300.0,47.2L303.0,50.2L303.1,55.3L304.1,59.0L311.6,63.7L318.8,63.6L324.7,65.9L327.9,70.6L334.9,72.9L343.4,73.2L346.9,72.7L354.2,72.8L356.7,72.1L364.6,73.4L366.4,76.9L366.9,80.4L365.6,82.0L368.6,84.7L372.4,85.1L378.2,83.8L380.5,80.9L385.0,80.0L386.5,78.1L385.7,74.5L389.5,71.6L391.6,68.0L391.9,65.0L396.7,63.4L401.0,60.3L404.3,59.1L408.3,60.1L412.7,57.1L417.6,57.3L421.1,60.2L421.2,66.4L417.5,66.1L416.5,68.1L418.4,71.2L422.1,72.8L427.3,72.9L430.2,71.2L433.4,72.2L439.5,70.6L443.9,68.1L445.8,66.1L454.3,63.9L454.9,67.8L458.2,67.0L460.0,68.3L465.2,69.1L473.2,67.7L473.9,65.2L485.2,61.9L486.1,59.6L492.8,60.5L497.4,63.3L498.2,66.1L501.9,64.8L507.6,64.6L509.2,66.7L515.6,66.2L522.6,62.5L527.3,64.9L531.5,70.2L539.5,75.1L541.6,74.1L543.2,69.2L543.6,59.5L546.4,57.1L547.7,54.2L547.6,50.0L550.8,44.2L553.4,43.7L554.8,40.3L558.5,36.3L558.7,32.0L560.8,28.9L563.0,30.3L568.3,28.3L570.0,30.6L574.7,27.2L578.6,26.0L579.7,23.7L583.4,21.5L584.3,13.9L590.1,10.2L590.3,6.3L595.2,4.0L597.4,4.2L599.7,-3.6L596.2,-6.9L592.1,-8.1L589.3,-12.0L580.0,-12.0L577.8,-12.0Z"><title>Madhya Pradesh</title></path><path class="st" d="M668.4,-12.0L589.3,-12.0L592.1,-8.1L596.2,-6.9L599.7,-3.6L597.4,4.2L595.2,4.0L590.3,6.3L590.1,10.2L584.3,13.9L583.4,21.5L579.7,23.7L578.6,26.0L574.7,27.2L570.0,30.6L568.3,28.3L563.0,30.3L560.8,28.9L558.7,32.0L558.5,36.3L554.8,40.3L553.4,43.7L550.8,44.2L547.6,50.0L547.7,54.2L546.4,57.1L543.6,59.5L543.2,69.2L541.6,74.1L539.5,78.4L534.1,81.4L532.2,88.2L533.9,90.9L536.7,91.4L537.5,100.2L534.8,102.8L535.9,104.4L539.4,104.1L539.4,115.1L536.0,117.4L531.7,118.8L531.8,122.4L535.9,122.8L536.9,126.3L535.9,131.4L533.1,130.6L531.8,132.5L536.1,135.8L537.2,138.6L541.4,141.1L542.9,144.5L547.4,146.4L549.8,148.9L549.3,151.1L546.4,152.1L547.4,154.4L543.0,157.7L541.6,155.4L539.2,155.5L537.6,152.6L533.5,155.6L530.7,158.9L529.5,163.6L525.9,169.1L528.7,174.2L526.0,177.2L525.8,179.7L527.7,182.6L531.2,184.7L534.8,184.3L537.9,186.7L542.2,191.8L545.1,199.0L548.2,200.5L551.5,204.9L553.1,209.8L553.4,214.7L555.6,217.3L559.6,214.9L563.4,216.2L569.1,216.1L571.0,213.1L574.8,197.8L578.7,196.6L582.5,194.0L584.4,190.8L589.1,186.5L588.7,183.4L591.2,180.8L597.8,178.4L598.9,173.1L601.1,171.4L601.1,167.7L598.0,158.5L598.9,152.8L593.5,147.5L594.0,142.7L593.5,137.2L590.9,136.4L589.7,134.3L585.7,131.7L585.5,129.6L587.3,126.3L590.1,124.0L594.2,127.5L596.1,126.2L598.8,129.0L601.2,129.8L603.6,134.8L607.1,132.8L614.7,134.5L614.6,137.5L618.7,135.3L619.2,128.2L616.0,128.7L608.5,125.5L609.1,121.8L608.7,111.1L605.5,105.9L606.6,101.9L605.6,93.7L609.9,94.3L614.1,90.0L618.2,81.9L624.1,81.8L629.6,81.0L633.9,83.5L636.9,83.1L638.6,81.2L641.7,73.8L644.8,74.6L645.6,72.1L643.6,68.1L644.5,65.0L648.0,59.3L649.2,55.8L652.4,54.7L652.9,51.2L650.8,49.5L652.0,44.0L654.2,40.2L659.2,37.6L663.3,34.1L667.4,33.2L669.3,30.4L668.3,26.5L669.3,24.3L676.8,20.0L678.2,16.7L683.0,12.6L680.7,8.1L673.9,8.1L672.9,4.6L670.6,2.2L671.0,-4.4L670.0,-7.3L667.4,-6.8L668.4,-12.0Z"><title>Chhattisgarh</title></path><path class="tg" d="M421.1,196.0L423.0,203.7L421.6,205.5L423.8,208.9L423.7,211.3L419.1,215.9L420.1,218.5L417.7,219.8L415.7,223.1L418.9,225.2L422.3,225.2L422.9,228.9L414.3,239.5L417.8,246.7L416.5,251.0L416.6,255.9L415.7,259.6L416.9,261.1L416.5,264.7L414.2,267.5L409.8,270.5L411.2,272.2L420.4,274.0L420.7,276.4L418.8,278.0L418.5,288.4L417.0,290.3L424.6,292.4L432.6,292.7L434.1,291.7L441.7,295.2L447.4,290.5L448.2,288.2L453.8,285.1L457.6,284.7L460.8,286.2L462.6,285.6L466.6,287.3L470.7,285.8L470.7,283.5L477.7,278.6L483.1,279.7L485.2,278.7L485.9,275.2L484.9,272.9L485.1,268.7L487.1,265.6L492.5,264.9L496.3,262.7L504.7,260.9L505.9,259.5L510.9,260.3L513.8,263.2L517.1,258.9L518.2,255.5L515.5,253.6L518.4,249.5L523.9,247.1L526.2,248.5L528.9,253.9L534.9,256.7L538.4,256.7L537.2,253.9L538.0,251.0L533.7,250.9L530.2,249.4L534.7,244.1L538.2,242.8L541.2,245.2L547.4,246.6L549.2,245.1L549.8,242.1L553.5,239.7L559.5,238.4L562.2,235.4L569.6,233.5L572.0,231.6L574.5,222.8L578.1,217.8L583.8,215.0L583.1,212.0L576.2,216.5L569.1,216.1L563.4,216.2L559.6,214.9L555.6,217.3L553.4,214.7L553.1,209.8L551.5,204.9L548.2,200.5L545.1,199.0L542.2,191.8L537.9,186.7L534.8,184.3L531.2,184.7L527.7,182.6L525.8,179.7L518.9,180.4L515.5,176.8L513.9,173.6L512.9,166.1L510.1,165.0L513.2,161.5L512.7,159.8L514.1,152.2L512.7,148.9L510.2,147.9L507.5,144.5L505.2,144.1L497.7,146.9L493.1,146.8L490.3,145.0L487.1,144.6L484.5,149.8L479.2,146.4L477.8,146.6L472.0,142.2L471.0,139.2L468.4,137.1L465.8,137.3L458.9,135.2L456.8,136.3L453.1,133.6L450.8,133.7L453.2,140.8L451.2,142.5L450.0,148.9L447.6,149.8L445.1,153.2L444.9,157.7L440.8,157.7L438.1,155.3L435.3,155.0L432.8,159.1L432.0,163.4L428.8,166.4L429.3,168.5L432.0,170.2L435.0,174.9L432.2,175.9L429.9,180.1L426.9,181.5L426.1,185.5L422.7,186.4L419.2,193.0L421.1,196.0Z"><title>Telangana</title></path><text class="lb" x="185" y="35" text-anchor="middle">Gujarat</text><text class="lb" x="475" y="331" text-anchor="middle">Andhra Pradesh</text><text class="lb" x="684" y="106" text-anchor="middle">Odisha</text><text class="lb" x="350" y="152" text-anchor="middle">Maharashtra</text><text class="lb" x="346" y="340" text-anchor="middle">Karnataka</text><text class="lb" x="378" y="505" text-anchor="middle">Kerala</text><text class="lb" x="454" y="488" text-anchor="middle">Tamil Nadu</text><text class="lb" x="440" y="26" text-anchor="middle">Madhya Pradesh</text><text class="lb" x="576" y="78" text-anchor="middle">Chhattisgarh</text><text class="lb lbt" x="479" y="242" text-anchor="middle">Telangana</text></svg>
+      <span class="pin"><i></i><i></i><em></em></span>
+      <span class="place"><b>Gunjala</b><span>Adilabad · Telangana</span></span>
+    </div>
+    <figcaption><b>FIG. 1</b>Gunjala village in Telangana, where the manuscripts were found. Map data from Natural Earth.</figcaption>
+  </figure>
+</section>
+
+<div class="orn col" aria-hidden="true"><span>&#x11D6C;</span></div>
+<section class="chapter col" id="hand">
+  <div class="chead"><div class="numeral">III</div><span class="gd" aria-hidden="true">&#x11DA3;</span><h2>Reading <i>the hand</i></h2></div>
+  <div class="body"><span></span><div>
+    <p>I learned the script the way you might learn someone's handwriting from their old letters: by copying it, comparing it, and noticing what stays the same from one page to the next.</p>
+  </div></div>
+
+  <div class="steps">
+    <div class="step"><div class="n">i.</div><div>
+      <h3><small>Where it began</small>Calligraphy practice</h3>
+      <p class="text">It started with calligraphy. Practising Devanagari with pen and ink taught me the gap between handwriting and type. A hand changes a little every time it writes a letter; a font has to give that letter one steady form that works in every word. Learning to see that difference is what I carried into Gunjala Gondi.</p>
+      <figure class="narrow"><img src="img/callig.jpg" alt="Sheets of Devanagari calligraphy practice with a pen and an ink bottle"><figcaption><b>FIG. 2</b>Devanagari calligraphy practice with pen and ink.</figcaption></figure>
+    </div></div>
+
+    <div class="step"><div class="n">ii.</div><div>
+      <h3><small>Primary research</small>Learning the letters by hand</h3>
+      <p class="text">I began with handwritten pages of the vowels, consonants and vowel signs, and wrote them out again and again until the shapes felt natural in my own hand.</p>
+      <figure class="paper-img"><img src="img/primary.webp" alt="Handwritten pages of Gunjala Gondi letters"><figcaption><b>FIG. 3</b>Handwritten reference pages of vowels, consonants and vowel signs.</figcaption></figure>
+    </div></div>
+
+    <div class="step"><div class="n">iii.</div><div>
+      <h3><small>First comparison</small>Mapping every letter</h3>
+      <p class="text">These pages were written in Gunjala Gondi by a member of the community and carefully preserved by his family. I set them side by side and compared every vowel, consonant and number, to see where different writers agreed and where they drifted apart.</p>
+      <figure class="pair2 narrow"><div class="p2" style="grid-template-columns:1099fr 877fr"><img src="img/comp1_page.webp" alt="Handwritten reference page used for comparison"><img src="img/chart1h.webp" alt="Hand-drawn comparison chart of Gunjala Gondi letters"></div><figcaption><b>FIG. 4</b>Handwritten Gunjala Gondi references, written by a community member and kept safe by his family.</figcaption></figure>
+    </div></div>
+
+    <div class="step"><div class="n">iv.</div><div>
+      <h3><small>Secondary research</small>Back to the manuscripts</h3>
+      <p class="text">Everyone writes a little differently, so no single hand could simply be copied into a typeface. I studied the manuscripts from the village and took numbers, letters and writing style directly from them.</p>
+      <figure><img src="img/manuscript1.jpg" alt="Old Gunjala Gondi manuscript pages"><figcaption><b>FIG. 5</b>Manuscripts from Gunjala village.</figcaption></figure>
+      <figure><div class="msduo"><img src="img/manuscript2a.jpg" alt="Manuscript page with number grids"><img src="img/manuscript2b.jpg" alt="An open manuscript spread"></div><figcaption><b>FIG. 6</b>Numbers, letters and writing style taken from these pages.</figcaption></figure>
+    </div></div>
+
+    <div class="step"><div class="n">v.</div><div>
+      <h3><small>Second comparison</small>Every variant, one row per letter</h3>
+      <p class="text">With more references, I rebuilt the chart. Each row holds one letter and every version of it I found. The aim was not to pick one writer's style, but to find the clearest and most widely recognised form of each letter across all of them.</p>
+      <div class="mat duo breakout" style="margin-top:36px;padding:clamp(16px,2.4vw,30px)">
+        <figure><img src="img/comp2a.jpg" alt="Second comparison chart, part one"></figure>
+        <figure><img src="img/comp2b.jpg" alt="Second comparison chart, part two"></figure>
+      </div>
+      <figcaption><b>FIG. 7</b>The second comparison chart, after gathering more references. Tap any image to see it full size.</figcaption>
+    </div></div>
+  </div>
+</section>
+
+<div class="orn col" aria-hidden="true"><span>&#x11D7A;</span></div>
+<section class="chapter col" id="drawing">
+  <div class="chead"><div class="numeral">IV</div><span class="gd" aria-hidden="true">&#x11DA4;</span><h2>Drawing</h2></div>
+  <div class="body"><span></span><div>
+    <p>Only after the research did I start to draw: by hand first, with pencil on gridded paper, then as clean outlines in FontLab, every letter sitting on the same set of guide lines.</p>
+  </div></div>
+  <figure class="bleed sk"><img src="img/sketch_hd.webp" alt="Pencil sketches of Gunjala Gondi letters"></figure>
+  <figcaption class="wide" style="margin-top:12px"><b>FIG. 8</b>Letter sketches on paper, before going digital.</figcaption>
+  <figure class="wide"><div class="mat matra-film">
+    <div class="mf-top">
+      <div class="mf-out"><img src="img/outline_only.jpg" alt="Glyph outline with control points in FontLab"><span class="mono">FontLab outline</span></div>
+      <div class="mf-stage" aria-live="off">
+        <div class="metric" style="top:24%"><span>Head line</span></div>
+        <div class="metric bl" style="top:80%"><span>Base line</span></div>
+        <div class="mf-g" id="mfg">&#x11D71;</div>
+        <span class="mono mf-l" id="mfl">KA</span>
+      </div>
+    </div>
+    <ol class="mf-chips" id="mfc"><li data-n="KA" class=on>&#x11D71;</li><li data-n="AA">&#x11D71;&#x11D8A;</li><li data-n="I">&#x11D71;&#x11D8B;</li><li data-n="II">&#x11D71;&#x11D8C;</li><li data-n="U">&#x11D71;&#x11D8D;</li><li data-n="UU">&#x11D71;&#x11D8E;</li><li data-n="EE">&#x11D71;&#x11D90;</li><li data-n="AI">&#x11D71;&#x11D91;</li><li data-n="OO">&#x11D71;&#x11D93;</li><li data-n="AU">&#x11D71;&#x11D94;</li><li data-n="ANUSVARA">&#x11D71;&#x11D95;</li><li data-n="VISARGA">&#x11D71;&#x11D96;</li></ol>
+    <div class="mf-bar"><i id="mfb"></i></div>
+  </div><figcaption><b>FIG. 9</b>Outlines in FontLab, and the letter KA tested with each vowel sign. The test is replayed here in the released font.</figcaption></figure>
+
+  <div class="body" style="margin-top:56px"><span class="mono" style="color:var(--red)">A decision</span><div>
+    <h3 style="font-size:44px">Loop, or knot?</h3>
+    <p>My two rounds of research gave me two honest versions of the same letter. The handwriting I learned first closes the letter KA with an open loop. The village manuscripts show a tighter knot.</p>
+    <p>This was not a choice to make on taste. A font is used by everyone who reads the script, so the right form is the one readers recognise most easily, not the one that looks best to the designer. It became one of the questions we carried to the people who read the script every day.</p>
+  </div></div>
+  <figure class="wide"><div class="kafig" id="kafig"><svg class="kasvg" viewBox="40 120 1790 840" role="img" aria-label="The letter KA drawn two ways: with an open loop from primary research, and with a knot from secondary research">
+<line class="gl" style="--d:0.00s" x1="252" y1="233" x2="1657" y2="233" pathLength="1"/><text class="lbl" style="--d:0.30s" x="232" y="239" text-anchor="end">Matra line</text><line class="gl" style="--d:0.08s" x1="252" y1="380" x2="1657" y2="380" pathLength="1"/><text class="lbl" style="--d:0.38s" x="232" y="386" text-anchor="end">Head line</text><line class="gl faint" style="--d:0.16s" x1="252" y1="415" x2="1657" y2="415" pathLength="1"/><line class="gl faint" style="--d:0.24s" x1="252" y1="555" x2="1657" y2="555" pathLength="1"/><line class="gl" style="--d:0.32s" x1="252" y1="703" x2="1657" y2="703" pathLength="1"/><text class="lbl" style="--d:0.62s" x="232" y="709" text-anchor="end">Base line</text><line class="gl" style="--d:0.40s" x1="252" y1="860" x2="1657" y2="860" pathLength="1"/><text class="lbl" style="--d:0.70s" x="232" y="866" text-anchor="end">Rukar line</text><line class="gl v" style="--d:0.20s" x1="453" y1="150" x2="453" y2="935" pathLength="1"/><line class="gl v" style="--d:0.28s" x1="892" y1="150" x2="892" y2="935" pathLength="1"/><line class="gl v" style="--d:0.36s" x1="1027" y1="150" x2="1027" y2="935" pathLength="1"/><line class="gl v" style="--d:0.44s" x1="1445" y1="150" x2="1445" y2="935" pathLength="1"/>
+<text class="col" x="672" y="196" text-anchor="middle">Primary research</text>
+<text class="col" x="1236" y="196" text-anchor="middle">Secondary research</text>
+<text class="foot" x="672" y="895" text-anchor="middle">Letter KA · loop</text>
+<text class="foot" x="1236" y="895" text-anchor="middle">Letter KA · knot</text>
+<path class="g g1" d="M646.6 701.9C677.5 695.2 697.0 677.4 704.6 648.9C706.9 640.2 706.9 623.5 704.6 615.5C699.7 598.8 687.2 583.0 672.5 574.9C665.0 570.8 665.0 570.8 665.0 565.9C665.0 561.1 665.1 560.9 673.8 552.3C683.3 542.7 693.3 529.8 698.3 520.8C701.1 515.8 701.9 515.0 704.5 515.0C708.3 515.0 729.6 518.7 731.1 519.6C732.3 520.3 732.0 527.6 730.0 544.0C726.9 568.7 732.8 589.1 747.2 603.4C775.2 631.3 819.8 624.3 836.5 589.5C845.3 571.2 844.9 552.5 835.3 533.0C831.3 524.9 829.3 522.1 821.1 513.9C812.1 505.0 799.5 496.0 791.7 493.1C787.3 491.4 787.9 484.8 793.9 469.8C802.2 448.8 811.4 432.5 820.9 421.8L825.2 417.0L858.1 417.0L891.0 417.0L890.8 398.8L890.5 380.5L797.5 380.2L704.5 380.0L700.1 372.9C666.2 317.9 591.7 294.1 531.1 318.9C516.9 324.7 494.5 340.2 494.5 344.2C494.5 345.1 499.6 351.3 505.8 357.9C517.1 370.0 517.1 370.0 516.8 374.7L516.5 379.5L485.5 380.0L454.5 380.5L454.5 398.5L454.5 416.5L563.8 416.8C673.1 417.0 673.1 417.0 674.2 419.8C675.6 422.8 676.0 462.7 674.8 467.1C674.1 469.6 674.0 469.6 656.8 470.8C635.2 472.4 625.8 474.0 610.0 479.0C565.9 492.9 535.6 523.2 525.0 564.2C521.9 576.2 521.2 598.3 523.4 611.8C533.6 672.9 590.1 714.2 646.6 701.9ZM614.3 664.6C592.0 659.5 575.0 642.2 567.8 617.3C564.4 605.7 564.4 579.9 567.8 569.0C574.8 546.6 590.8 529.6 613.6 520.3C623.5 516.3 638.7 512.3 645.6 511.8C650.5 511.5 650.5 511.5 650.8 516.8C651.1 522.0 651.0 522.1 645.3 528.2C633.8 540.2 622.0 547.7 609.3 550.9L602.5 552.6L602.5 571.1L602.5 589.5L606.0 589.8C640.9 593.0 663.0 608.4 663.0 629.7C663.0 654.7 640.8 670.6 614.3 664.6ZM782.0 581.9C774.6 578.9 770.0 570.1 770.0 558.6C770.0 548.9 773.0 529.9 774.6 529.3C778.5 527.8 794.0 539.7 798.8 548.0C802.7 554.6 803.3 570.8 799.8 575.9C795.7 581.9 788.3 584.4 782.0 581.9ZM735.0 478.4C730.3 477.6 724.7 476.6 722.5 476.2L718.5 475.5L718.9 447.0C719.1 431.3 719.5 418.2 719.9 417.7C720.3 417.3 732.5 417.1 747.1 417.2L773.5 417.5L773.8 422.1C774.1 426.2 773.5 427.7 769.6 433.8C764.5 441.7 755.2 459.5 749.7 471.8C747.7 476.3 745.5 479.9 744.8 479.9C744.1 479.8 739.7 479.1 735.0 478.4ZM522.7 379.3C522.3 379.0 522.0 376.6 522.0 374.1C522.0 369.6 522.2 369.4 528.3 364.8C536.0 359.0 549.3 352.7 559.7 349.8C571.3 346.6 594.9 346.7 607.7 349.9C618.0 352.4 632.9 359.5 640.8 365.5C645.9 369.5 646.0 369.6 645.7 374.5L645.5 379.5L584.4 379.8C550.8 379.9 523.0 379.7 522.7 379.3Z" pathLength="1" fill-rule="evenodd"/>
+<path class="g g2" d="M1188.9 701.4C1232.2 694.1 1261.0 670.3 1267.0 637.0C1270.0 620.7 1267.6 602.6 1260.8 589.0C1255.7 578.8 1244.0 566.5 1234.3 561.0C1228.1 557.5 1228.1 557.5 1228.0 552.5C1228.0 547.5 1228.0 547.5 1235.3 543.0C1247.1 535.8 1260.5 521.1 1269.5 505.5C1272.0 501.2 1318.4 528.8 1337.1 545.7C1341.7 549.9 1341.9 551.5 1339.5 577.5C1335.8 618.2 1338.7 638.1 1350.0 650.4C1361.4 662.7 1383.7 661.9 1394.1 648.8C1401.1 639.9 1402.5 633.1 1402.5 608.0C1402.5 583.2 1401.0 571.5 1395.2 550.0L1391.5 536.5L1391.5 477.0L1391.5 417.5L1418.0 417.0L1444.5 416.5L1444.8 398.2L1445.0 380.0L1366.8 380.0C1323.7 380.0 1288.0 379.6 1287.3 379.2C1286.6 378.8 1285.0 374.6 1283.6 370.0C1267.5 314.6 1222.6 282.9 1160.5 283.0C1124.0 283.1 1091.0 296.1 1066.9 320.0C1057.7 329.0 1049.7 340.2 1050.2 343.3C1050.5 344.9 1077.7 362.8 1080.1 363.0C1080.5 363.0 1082.0 361.1 1083.5 358.8C1085.1 356.4 1089.3 351.4 1092.9 347.6C1108.9 331.0 1128.0 322.0 1151.8 320.0C1189.0 316.8 1221.5 333.7 1236.1 363.8C1238.4 368.6 1239.0 371.1 1238.8 374.8L1238.5 379.5L1133.0 380.0L1027.5 380.5L1027.5 398.5L1027.5 416.5L1136.5 417.0L1245.5 417.5L1245.8 423.5C1246.3 431.2 1244.1 451.5 1242.6 453.4C1241.6 454.8 1240.5 454.8 1232.5 453.5C1136.2 437.7 1055.2 482.4 1043.1 558.0C1031.2 631.7 1070.8 689.9 1140.5 701.4C1157.4 704.2 1172.5 704.2 1188.9 701.4ZM1143.5 664.0C1114.1 657.8 1091.9 634.8 1085.6 603.8C1083.5 593.6 1083.5 571.5 1085.6 561.2C1094.1 519.2 1128.9 492.5 1181.0 487.9C1190.9 487.0 1197.1 487.0 1206.4 487.9C1224.5 489.6 1224.4 489.6 1224.8 495.7C1225.1 500.5 1224.8 501.1 1220.1 506.7C1206.5 523.1 1189.5 531.6 1165.0 534.3L1153.5 535.6L1153.5 553.0L1153.5 570.5L1169.0 571.1C1196.6 572.2 1212.0 580.1 1220.5 597.3C1233.5 623.8 1222.9 650.6 1195.1 661.1C1181.8 666.1 1159.6 667.3 1143.5 664.0ZM1343.5 500.4C1333.2 491.9 1304.1 475.1 1290.1 469.6C1285.7 467.9 1285.7 467.9 1286.3 459.2C1286.7 454.4 1287.4 443.5 1288.0 435.0C1288.6 426.5 1289.3 418.9 1289.5 418.2C1289.9 417.2 1296.3 417.0 1319.2 417.2L1348.5 417.5L1348.5 459.9C1348.5 487.3 1348.1 502.4 1347.5 502.6C1347.0 502.8 1345.2 501.8 1343.5 500.4Z" pathLength="1" fill-rule="evenodd"/>
+<text class="vs" x="958" y="540" text-anchor="middle">vs</text>
+<line class="co" x1="255" y1="589" x2="757" y2="589" pathLength="1"/><circle class="dot" cx="757" cy="589" r="7"/><circle class="dot d0" cx="255" cy="589" r="5"/>
+<text class="cl" x="236" y="597" text-anchor="end">Loop</text>
+<line class="co c2" x1="1660" y1="587" x2="1369" y2="587" pathLength="1"/><circle class="dot d2" cx="1369" cy="587" r="7"/><circle class="dot d0 d2" cx="1660" cy="587" r="5"/>
+<text class="cl c2t" x="1678" y="595">Knot</text>
+<circle class="ring" cx="757" cy="589" r="7"/><circle class="ring r2" cx="1369" cy="587" r="7"/>
+</svg></div><figcaption><b>FIG. 10</b>The letter KA: an open loop from the handwriting I learned first, against a knot from the village manuscripts. Tap to replay.</figcaption></figure>
+</section>
+
+<div class="orn col" aria-hidden="true"><span>&#x11D82;</span></div>
+<section class="chapter col" id="readers">
+  <div class="chead"><div class="numeral">V</div><span class="gd" aria-hidden="true">&#x11DA5;</span><h2>The <i>readers</i></h2></div>
+  <div class="body"><span></span><div>
+    <p>A typeface only works if the people who read the script recognise every letter in it. I tested the drafts at several sizes for readability, and then we sat with fluent readers, sheets of options in hand, and asked them which forms looked right.</p>
+  </div></div>
+  <figure class="wide"><div class="mat"><img src="img/testing.jpg" alt="Glyphs set at several sizes for readability testing"></div><figcaption><b>FIG. 11</b>Readability testing at several sizes after drawing the glyph set.</figcaption></figure>
+  <div class="duo wide pair" style="margin-top:36px">
+    <figure><img src="img/ek_verify.jpg" alt="Glyph verification session with fluent readers of the script"><figcaption><b>FIG. 12</b>Verifying glyphs with fluent readers of the script. Photo shared by EkType, June 2020.</figcaption></figure>
+    <figure><img src="img/verify2.jpg" alt="Option sheet asking which form is preferred, beside a manuscript copy"><figcaption><b>FIG. 13</b>Option sheets: which form is preferred, with knot or with loops?</figcaption></figure>
+  </div>
+  <p class="pull">The people who use a design are the real experts on it.</p>
+</section>
+
+<div class="night">
+<section class="chapter col" id="typeface">
+  <div class="chead"><div class="numeral">VI</div><span class="gd" aria-hidden="true">&#x11DA6;</span><h2>The <i>typeface</i></h2></div>
+  <div class="body"><span></span><div>
+    <p>Together, the drafts grew into a complete regular weight: every vowel and consonant, and each consonant joined with every vowel sign.</p>
+  </div></div>
+
+  <div class="wide"><div class="laptop" aria-label="The glyph set scrolling in FontLab">
+    <div class="screen"><div class="view"><div class="reel"><img src="img/glyphset_clean.jpg" alt="Gunjala Gondi glyph set in FontLab"><img src="img/glyphset_clean.jpg" alt=""></div></div></div>
+    <div class="base"></div>
+  </div>
+  <figcaption style="justify-content:center"><b>FIG. 14</b>The glyph set in FontLab VI.</figcaption></div>
+
+  <figure class="plate wide"><img src="img/final.jpg" alt="All vowels and consonants of Gunjala Gondi"></figure>
+  <figcaption class="wide"><b>FIG. 15</b>All vowels and consonants of Gunjala Gondi in the working draft.</figcaption>
+  <div class="duo wide" style="margin-top:28px">
+    <figure class="plate"><img src="img/matra_i.jpg" alt="Letters with the I vowel sign"></figure>
+    <figure class="plate"><img src="img/matra_ii.jpg" alt="Letters with the II vowel sign"></figure>
+    <figure class="plate"><img src="img/matra_ee.jpg" alt="Letters with the EE vowel sign"></figure>
+    <figure class="plate"><img src="img/matra_ai.jpg" alt="Letters with the AI vowel sign"></figure>
+  </div>
+  <figcaption class="wide"><b>FIG. 16</b>Consonants with the I, II, EE and AI vowel signs.</figcaption>
+
+  <figure class="bleed"><img src="img/poster.jpg" alt="Framed specimen poster of Gunjala Gondi"></figure>
+  <figcaption class="wide" style="margin-top:12px"><b>FIG. 17</b>A framed specimen poster I designed with the typeface.</figcaption>
+
+  <div class="body" style="margin-top:64px"><span class="mono" style="color:var(--red)">Specimen</span><div>
+    <h3 style="font-size:44px">The released font</h3>
+    <p>The typeface went on to be released as Noto Sans Gunjala Gondi. The EkType team refined, completed and produced the final typeface; my drafts were one early part of that work. Every letter below is set live in the released font. Hover over one to see its Unicode code point.</p>
+  </div></div>
+  <figure class="wide gfduo">
+    <a href="https://fonts.google.com/specimen/Noto+Sans+Gunjala+Gondi" target="_blank" rel="noopener" style="display:block;text-decoration:none">
+      <div class="browser dark">
+        <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="url">fonts.google.com/specimen/Noto+Sans+Gunjala+Gondi</span></div>
+        <img src="img/gf_dark_main.jpg" alt="The Noto Sans Gunjala Gondi specimen page on Google Fonts, dark mode">
+      </div>
+      <div class="browser dark b2">
+        <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="url">fonts.google.com/specimen/Noto+Sans+Gunjala+Gondi#styles</span></div>
+        <img src="img/gf_dark_styles.jpg" alt="The Styles section showing Regular, Medium and SemiBold weights">
+      </div>
+    </a>
+    <figcaption><b>FIG. 18</b>Noto Sans Gunjala Gondi on Google Fonts today: the specimen page, and three of the family's four weights. Captured November 2026.</figcaption>
+  </figure>
+  <div class="duo wide ekg" style="margin-top:44px">
+    <figure><img src="img/ek_glyph.jpg" alt="A single Gunjala Gondi letter, large, on navy"></figure>
+    <figure><img src="img/ek_matras.jpg" alt="One consonant shown with each vowel sign"></figure>
+    <figure><img src="img/ek_name.jpg" alt="Noto Sans Gunjala Gondi written in the script"></figure>
+    <figure><img src="img/ek_text.jpg" alt="Running text set in Noto Sans Gunjala Gondi"></figure>
+  </div>
+  <figcaption class="wide"><b>FIG. 19</b>Specimens from the release of Noto Sans Gunjala Gondi. Images courtesy of EkType.</figcaption>
+  <div class="weights wide" id="weights">
+    <div class="bar"><span class="mono">Variable weight · live in the released font</span><span><output id="wout">Weight 400</output> <input type="range" min="400" max="700" value="400" id="wr" aria-label="Font weight"></span></div>
+    <div class="word" id="wword" lang="gon">𑵱𑵬𑵺𑶂𑵯𑵶𑵾</div>
+  </div>
+  <div class="glyphs wide" style="margin-top:40px">
+    <h4>Vowels</h4><ul><li><span class="g">𑵠</span><span class="u">U+11D60</span></li><li><span class="g">𑵡</span><span class="u">U+11D61</span></li><li><span class="g">𑵢</span><span class="u">U+11D62</span></li><li><span class="g">𑵣</span><span class="u">U+11D63</span></li><li><span class="g">𑵤</span><span class="u">U+11D64</span></li><li><span class="g">𑵥</span><span class="u">U+11D65</span></li><li><span class="g">𑵧</span><span class="u">U+11D67</span></li><li><span class="g">𑵨</span><span class="u">U+11D68</span></li><li><span class="g">𑵪</span><span class="u">U+11D6A</span></li><li><span class="g">𑵫</span><span class="u">U+11D6B</span></li></ul>
+    <h4>Consonants</h4><ul><li><span class="g">𑵬</span><span class="u">U+11D6C</span></li><li><span class="g">𑵭</span><span class="u">U+11D6D</span></li><li><span class="g">𑵮</span><span class="u">U+11D6E</span></li><li><span class="g">𑵯</span><span class="u">U+11D6F</span></li><li><span class="g">𑵰</span><span class="u">U+11D70</span></li><li><span class="g">𑵱</span><span class="u">U+11D71</span></li><li><span class="g">𑵲</span><span class="u">U+11D72</span></li><li><span class="g">𑵳</span><span class="u">U+11D73</span></li><li><span class="g">𑵴</span><span class="u">U+11D74</span></li><li><span class="g">𑵵</span><span class="u">U+11D75</span></li><li><span class="g">𑵶</span><span class="u">U+11D76</span></li><li><span class="g">𑵷</span><span class="u">U+11D77</span></li><li><span class="g">𑵸</span><span class="u">U+11D78</span></li><li><span class="g">𑵹</span><span class="u">U+11D79</span></li><li><span class="g">𑵺</span><span class="u">U+11D7A</span></li><li><span class="g">𑵻</span><span class="u">U+11D7B</span></li><li><span class="g">𑵼</span><span class="u">U+11D7C</span></li><li><span class="g">𑵽</span><span class="u">U+11D7D</span></li><li><span class="g">𑵾</span><span class="u">U+11D7E</span></li><li><span class="g">𑵿</span><span class="u">U+11D7F</span></li><li><span class="g">𑶀</span><span class="u">U+11D80</span></li><li><span class="g">𑶁</span><span class="u">U+11D81</span></li><li><span class="g">𑶂</span><span class="u">U+11D82</span></li><li><span class="g">𑶃</span><span class="u">U+11D83</span></li><li><span class="g">𑶄</span><span class="u">U+11D84</span></li><li><span class="g">𑶅</span><span class="u">U+11D85</span></li><li><span class="g">𑶆</span><span class="u">U+11D86</span></li><li><span class="g">𑶇</span><span class="u">U+11D87</span></li><li><span class="g">𑶈</span><span class="u">U+11D88</span></li><li><span class="g">𑶉</span><span class="u">U+11D89</span></li></ul>
+    <h4>Digits</h4><ul><li><span class="g">𑶠</span><span class="u">U+11DA0</span></li><li><span class="g">𑶡</span><span class="u">U+11DA1</span></li><li><span class="g">𑶢</span><span class="u">U+11DA2</span></li><li><span class="g">𑶣</span><span class="u">U+11DA3</span></li><li><span class="g">𑶤</span><span class="u">U+11DA4</span></li><li><span class="g">𑶥</span><span class="u">U+11DA5</span></li><li><span class="g">𑶦</span><span class="u">U+11DA6</span></li><li><span class="g">𑶧</span><span class="u">U+11DA7</span></li><li><span class="g">𑶨</span><span class="u">U+11DA8</span></li><li><span class="g">𑶩</span><span class="u">U+11DA9</span></li></ul>
+  </div>
+  <div class="wide"><a class="btn" href="https://fonts.google.com/specimen/Noto+Sans+Gunjala+Gondi" target="_blank" rel="noopener">View on Google Fonts &rarr;</a></div>
+</section>
+</div>
+
+<div class="orn col" aria-hidden="true"><span>&#x11D6F;</span></div>
+<section class="chapter col" id="afterword">
+  <div class="chead"><div class="numeral">VII</div><span class="gd" aria-hidden="true">&#x11DA7;</span><h2>Afterword</h2></div>
+  <div class="body"><span></span><div>
+    <p class="dropcap">I came to this project unable to read a single letter of Gunjala Gondi. The only way forward was the slow one: writing it again and again, and trusting the manuscripts over my own sense of what looked good.</p>
+    <p>The loop and the knot changed how I work. Every hand I studied wrote the script a little differently, and a typeface cannot copy any one of them. It has to hold the best of all of them. Sitting with fluent readers and letting them choose was the moment I understood who a design really belongs to.</p>
+    <p>If I did it again, I would bring readers in earlier, right after the first comparison chart, instead of waiting until the glyph set was drawn.</p>
+  </div></div>
+</section>
+
+</main>
+
+<section class="principle">
+  <div class="col">
+    <span class="mono">What I took away</span>
+    <p>Study how people actually write, compare every variation, and let the people who read it every day decide what is right.</p>
+  </div>
+</section>
+<section class="credits col"><span class="mono">Credits</span><p>Noto Sans Gunjala Gondi was designed and produced by EkType for Google's Noto project. I contributed to it as a type design intern in 2019, alongside the EkType team. Specimens and photographs marked as such are courtesy of EkType.</p></section>
+
+
+<script>
+(function(){
+  var mz=document.getElementById('mapzoom');
+  if(mz&&'IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){mz.classList.toggle('go',e.isIntersecting)})},{threshold:.4}).observe(mz)}
+  var pr=document.getElementById('progress');
+  function sp(){var h=document.documentElement;pr.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'}
+  addEventListener('scroll',sp,{passive:true});sp();
+  var els=document.querySelectorAll('figure,.chead,.weights,.laptop,.pull');
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el){el.classList.add('rv');io.observe(el)})}
+  var wr=document.getElementById('wr'),ww=document.getElementById('wword'),wo=document.getElementById('wout'),wb=document.getElementById('weights');
+  if(wr){wr.addEventListener('input',function(){wb.classList.add('manual');ww.style.fontWeight=wr.value;wo.textContent='Weight '+wr.value})}
+  var mfc=document.getElementById('mfc');
+  if(mfc){var li=mfc.querySelectorAll('li'),g=document.getElementById('mfg'),l=document.getElementById('mfl'),b=document.getElementById('mfb'),k=0,t=null;
+    function show(i){li[k].classList.remove('on');k=i;li[k].classList.add('on');g.classList.add('swap');
+      setTimeout(function(){g.textContent=li[k].textContent;l.textContent=k?'KA + vowel sign '+li[k].dataset.n:'KA';g.classList.remove('swap')},180);
+      b.style.width=((k+1)/li.length*100)+'%'}
+    function play(){if(!t&&!matchMedia('(prefers-reduced-motion: reduce)').matches)t=setInterval(function(){show((k+1)%li.length)},1300)}
+    function stop(){clearInterval(t);t=null}
+    li.forEach(function(x,i){x.addEventListener('click',function(){stop();show(i)})});
+    if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?play():stop()})},{threshold:.3}).observe(mfc.parentNode)}else play();
+    b.style.width=(1/li.length*100)+'%'}
+  // motion layer
+  var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tw=document.querySelector('.tofu-wrap'),tf=document.getElementById('tofu');
+  function tofuOn(){tf.classList.add('on');tw.classList.add('on')}
+  if(tf){tf.addEventListener('click',function(){tf.classList.remove('on');tw.classList.remove('on');setTimeout(tofuOn,900)})}
+  function count(el){var n=+el.dataset.count,t0=null;if(rm||n<3)return;function st(t){t0=t0||t;var p=Math.min((t-t0)/1600,1);el.textContent=Math.max(1,Math.round(n*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(st)}requestAnimationFrame(st)}
+  var watch=document.querySelectorAll('.tofu-wrap,.kafig');
+  if('IntersectionObserver' in window){var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var t=e.target;
+      if(t.classList.contains('tofu-wrap'))setTimeout(tofuOn,700);else if(t.classList.contains('kafig'))t.classList.add('in');else if(t.dataset.count)count(t);else t.classList.add('in');io2.unobserve(t)})},{threshold:.35});
+    watch.forEach(function(el){io2.observe(el)})}
+  else{watch.forEach(function(el){el.classList.add('in')});if(tf)tofuOn()}
+  var kf=document.getElementById('kafig');if(kf)kf.addEventListener('click',function(){kf.classList.remove('in');void kf.offsetWidth;setTimeout(function(){kf.classList.add('in')},60)});
+  var nav=document.querySelector('.index');
+  if(nav){var links={},cur=null;nav.querySelectorAll('a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+    if('IntersectionObserver' in window){var nio=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var a=links[e.target.id];if(!a||a===cur)return;if(cur)cur.classList.remove('on');cur=a;a.classList.add('on');nav.scrollTo({left:a.offsetLeft-20,behavior:'smooth'})})},{rootMargin:'-40% 0px -55% 0px'});
+      document.querySelectorAll('.chapter[id]').forEach(function(c){nio.observe(c)})}
+    addEventListener('scroll',function(){nav.classList.toggle('stuck',nav.getBoundingClientRect().top<=1)},{passive:true})}
+  var lb=document.createElement('div');lb.className='lb';lb.innerHTML='<img alt=""><span>CLOSE &times;</span>';document.body.appendChild(lb);
+  var lbi=lb.querySelector('img');
+  document.querySelectorAll('main figure img').forEach(function(im){if(im.closest('.reel,.browser,.mf-out'))return;im.classList.add('zoomable');im.addEventListener('click',function(){lbi.src=im.src;lbi.alt=im.alt;lb.classList.add('on')})});
+  lb.addEventListener('click',function(){lb.classList.remove('on')});addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('on')});
+})();
+</script>
+<script>
+(function(){
+  var emb=window.parent!==window; if(!emb) return;
+  document.documentElement.classList.add('emb');
+  /* auto height */
+  var last=0;function sendH(){var h=Math.ceil(document.body.getBoundingClientRect().height);if(h>0&&h!==last){last=h;parent.postMessage({type:'embed-height',height:h},'*')}}
+  if(window.ResizeObserver)new ResizeObserver(sendH).observe(document.body);
+  addEventListener('load',sendH);setInterval(sendH,1000);sendH();
+  /* chapter bar drawn by the Framer site, pinned outside the embed */
+  var nav=document.querySelector('.index'),cover=document.querySelector('.cover');
+  var links=[].slice.call(nav.querySelectorAll('a')),secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  var THEME={hideBrand:true,maxWidth:1180,padX:40,height:56,itemPad:'7px 12px',fontSize:13,fullFrom:0,bg:'rgba(245,240,230,0.95)',border:'#D6CCBA',text:'#1B1815',muted:'#3D3832',num:'#C2362B',activeBg:'#EDE5D6',activeText:'#1B1815',font:'"IBM Plex Mono", ui-monospace, monospace',progress:'#C2362B'};
+  var lastSent='';
+  function sendNav(){var items=[];links.forEach(function(a,i){var el=secs[i];if(!el)return;items.push({label:a.textContent.replace(/^[IVX]+/,'').trim(),y:Math.round(el.getBoundingClientRect().top)})});
+    var msg={type:'embed-nav',brand:'Gunjala Gondi',coverBottom:Math.round(cover.getBoundingClientRect().bottom),items:items,theme:THEME};
+    var k=JSON.stringify(msg);if(k===lastSent)return;lastSent=k;try{parent.postMessage(msg,'*')}catch(e){}}
+  addEventListener('load',sendNav);addEventListener('resize',sendNav);setInterval(function(){lastSent='';sendNav()},2000);sendNav();
+  /* in-page links scroll the parent */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(ev){var el=document.getElementById(a.getAttribute('href').slice(1));if(!el)return;ev.preventDefault();parent.postMessage({type:'embed-scroll-to',y:el.getBoundingClientRect().top-24},'*')})});
+  /* keep the lightbox inside the visible part of the page */
+  var vp=null;addEventListener('message',function(e){var d=e.data;if(d&&d.type==='embed-viewport'&&isFinite(d.top)){vp=d;sendNav();place()}});
+  function place(){var lb=document.querySelector('.lb');if(!lb)return;var t=vp?Math.max(0,vp.top):0,b=vp?vp.bottom:innerHeight;lb.style.top=t+'px';lb.style.height=(b-t)+'px'}
+  document.addEventListener('click',function(){setTimeout(place,0)},true);
+})();
+</script>
+</body>
+</html>
