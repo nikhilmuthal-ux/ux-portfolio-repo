@@ -1083,6 +1083,22 @@ html body .cs #ch7 .dark p.pr-sub{font-size:16px!important}
 html body .cs .im-c h4{font-size:20px!important}
 html body .cs .rf-c q{font-size:17px!important}
 html body .cs .nx-h h3{font-size:26px!important}
+/* chapter bar: editorial tabs with underline */
+html body .nav-list{gap:26px!important;padding:0 32px!important;align-items:stretch}
+html body .nav-link{position:relative;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:19px 0 18px!important;font-size:14px!important;font-weight:500!important;color:#8F887C!important;gap:7px!important;align-items:baseline}
+html body .nav-link:hover{background:transparent!important;color:#1C1A16!important}
+html body .nav-link .n{font-family:Fraunces,Georgia,serif!important;font-style:italic;font-weight:400!important;font-size:13px!important;color:#B5AEA3!important}
+html body .nav-link.on{color:#1C1A16!important;font-weight:600!important;background:transparent!important}
+html body .nav-link.on .n{color:#3A35E8!important}
+html body .nav-link.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:#1C1A16}
+/* merged A + B: ultramarine ticks for read chapters, marigold current, progress line */
+html body .nav-list{position:relative}
+html body .nav-link.on::after{background:#FFB020!important;height:3px!important;bottom:0!important;z-index:1}
+html body .nav-link.on .n{color:#3A35E8!important}
+html body .nav-link.done{color:#4F4D49!important}
+html body .nav-link.done .n{font-size:0!important;width:16px;height:16px;border-radius:50%;background:#3A35E8;display:inline-flex;align-items:center;justify-content:center;align-self:center;font-style:normal}
+html body .nav-link.done .n::before{content:"\2713";font:700 9px/1 "Plus Jakarta Sans",system-ui,sans-serif;color:#FFFFFF}
+.nav-trk{position:absolute;left:0;bottom:0;height:3px;background:linear-gradient(90deg,#3A35E8,#FFB020);transition:width .35s ease;pointer-events:none}
 </style>
 </helmet>
 
@@ -1454,12 +1470,12 @@ class Component extends DCLogic {
   renderVals() {
     const items = [
       ['ch1', '01', 'Overview'],
-      ['ch2', '02', 'Context & problem'],
+      ['ch2', '02', 'Context'],
       ['ch3', '03', 'Research'],
-      ['ch4', '04', 'Shaping the model'],
-      ['ch5', '05', 'The solution'],
-      ['ch8', '06', 'Screens & prototype'],
-      ['ch6', '07', 'Impact & next steps'],
+      ['ch4', '04', 'Model'],
+      ['ch5', '05', 'Solution'],
+      ['ch8', '06', 'Screens'],
+      ['ch6', '07', 'Impact'],
       ['ch7', '08', 'Takeaways']
     ];
     const active = (this.state && this.state.active) || 'ch1';
@@ -1480,8 +1496,8 @@ if(window.ResizeObserver){var go=function(){if(document.body)new ResizeObserver(
 (function(){
 if(window.parent===window) return;
 var embed=false,lastSent='';
-var CH=[['ch1','01','Overview','Overview'],['ch2','02','Context & problem','Context'],['ch3','03','Research','Research'],['ch4','04','Shaping the model','Model'],['ch5','05','The solution','Solution'],['ch8','06','Screens & prototype','Screens'],['ch6','07','Impact & next steps','Impact'],['ch7','08','Takeaways','Takeaways']];
-var THEME={hideBrand:true,maxWidth:1240,padX:32,height:58,itemPad:'8px 12px',fontSize:13.5,fullFrom:1180,bg:'rgba(246,243,238,0.96)',border:'#ECE7DF',text:'#1C1A16',muted:'#6A6459',num:'#A39B8E',activeBg:'#1C1A16',activeBorder:'#1C1A16',activeText:'#FFFFFF',font:'"Plus Jakarta Sans", Inter, system-ui, sans-serif',progress:'linear-gradient(90deg,#3A35E8,#FFB020)'};
+var CH=[['ch1','01','Overview','Overview'],['ch2','02','Context','Context'],['ch3','03','Research','Research'],['ch4','04','Model','Model'],['ch5','05','Solution','Solution'],['ch8','06','Screens','Screens'],['ch6','07','Impact','Impact'],['ch7','08','Takeaways','Takeaways']];
+var THEME={hideBrand:true,maxWidth:1240,padX:32,height:58,itemPad:'8px 13px',fontSize:14,fullFrom:1180,bg:'rgba(246,243,238,0.96)',border:'#ECE7DF',text:'#1C1A16',muted:'#6A6459',num:'#B5AEA3',activeBg:'transparent',activeBorder:'transparent',activeText:'#1C1A16',font:'"Plus Jakarta Sans", Inter, system-ui, sans-serif',progress:'linear-gradient(90deg,#3A35E8,#FFB020)'};
 function sendNav(){
   if(!embed) return;
   var items=[];CH.forEach(function(c){var el=document.getElementById(c[0]);if(el)items.push({n:c[1],label:c[2],short:c[3],y:Math.round(el.getBoundingClientRect().top)});});
@@ -1502,5 +1518,6 @@ document.addEventListener('click',function(ev){
 },true);
 })();
 </script>
+<script>(function(){function upd(){var l=[].slice.call(document.querySelectorAll('.nav-link'));if(!l.length)return;var on=-1;l.forEach(function(a,i){if(a.classList.contains('on'))on=i;});l.forEach(function(a,i){a.classList.toggle('done',on>-1&&i<on);});var ul=document.querySelector('.nav-list');if(!ul)return;var t=ul.querySelector('.nav-trk');if(!t){t=document.createElement('span');t.className='nav-trk';ul.appendChild(t);}if(on<0){t.style.width='0';return;}var r=l[on].getBoundingClientRect(),u=ul.getBoundingClientRect();t.style.left=(-ul.scrollLeft)+'px';t.style.width=(r.right-u.left+ul.scrollLeft)+'px';}setInterval(upd,300);addEventListener('scroll',upd,{passive:true});})();</script>
 </body>
 </html>
