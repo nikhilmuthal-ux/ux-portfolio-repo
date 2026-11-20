@@ -1099,6 +1099,7 @@ html body .nav-link.done{color:#4F4D49!important}
 html body .nav-link.done .n{font-size:0!important;width:16px;height:16px;border-radius:50%;background:#3A35E8;display:inline-flex;align-items:center;justify-content:center;align-self:center;font-style:normal}
 html body .nav-link.done .n::before{content:"\2713";font:700 9px/1 "Plus Jakarta Sans",system-ui,sans-serif;color:#FFFFFF}
 .nav-trk{position:absolute;left:0;bottom:0;height:3px;background:linear-gradient(90deg,#3A35E8,#FFB020);transition:width .35s ease;pointer-events:none}
+html body .nav-list{justify-content:space-between!important;max-width:none!important;gap:12px!important}
 </style>
 </helmet>
 
@@ -1497,7 +1498,7 @@ if(window.ResizeObserver){var go=function(){if(document.body)new ResizeObserver(
 if(window.parent===window) return;
 var embed=false,lastSent='';
 var CH=[['ch1','01','Overview','Overview'],['ch2','02','Context','Context'],['ch3','03','Research','Research'],['ch4','04','Model','Model'],['ch5','05','Solution','Solution'],['ch8','06','Screens','Screens'],['ch6','07','Impact','Impact'],['ch7','08','Takeaways','Takeaways']];
-var THEME={hideBrand:true,maxWidth:1240,padX:32,height:58,itemPad:'8px 13px',fontSize:14,fullFrom:1180,bg:'rgba(246,243,238,0.96)',border:'#ECE7DF',text:'#1C1A16',muted:'#6A6459',num:'#B5AEA3',activeBg:'transparent',activeBorder:'transparent',activeText:'#1C1A16',font:'"Plus Jakarta Sans", Inter, system-ui, sans-serif',progress:'linear-gradient(90deg,#3A35E8,#FFB020)'};
+var THEME={hideBrand:true,maxWidth:4000,padX:32,height:58,itemPad:'0 2px',gap:0,spread:true,fontSize:14,fullFrom:1180,bg:'rgba(246,243,238,0.96)',border:'#ECE7DF',text:'#1C1A16',muted:'#8F887C',num:'#B5AEA3',numFont:'Fraunces, Georgia, serif',numItalic:true,numSize:13,activeBg:'transparent',activeBorder:'transparent',activeText:'#1C1A16',activeNum:'#3A35E8',underline:'#FFB020',doneTick:'#3A35E8',doneText:'#4F4D49',font:'"Plus Jakarta Sans", Inter, system-ui, sans-serif',progress:'linear-gradient(90deg,#3A35E8,#FFB020)'};
 function sendNav(){
   if(!embed) return;
   var items=[];CH.forEach(function(c){var el=document.getElementById(c[0]);if(el)items.push({n:c[1],label:c[2],short:c[3],y:Math.round(el.getBoundingClientRect().top)});});
