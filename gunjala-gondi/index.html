@@ -424,6 +424,24 @@ html.emb .lb{position:absolute;inset:auto 0 auto 0}
 .col{padding-left:40px!important;padding-right:40px!important}
 @media (max-width:900px){.col{padding-left:20px!important;padding-right:20px!important}}
 html,body{overflow-x:clip}
+/* shared case study scale: matches the other case studies optically (Cormorant runs small, so headings sit a few px above the sans sizes); type specimens stay large */
+body{font-size:17px}
+h1{font-size:clamp(46px,6vw,62px)!important;line-height:1.02}
+.sub{font-size:clamp(20px,2.2vw,23px)!important}
+h2{font-size:clamp(32px,3.8vw,40px)!important;line-height:1.1}
+h3{font-size:24px!important}
+.numeral{font-size:48px!important}
+.step .n{font-size:28px!important}
+.pull{font-size:clamp(22px,2.4vw,28px)!important}
+.principle p{font-size:clamp(22px,2.6vw,30px)!important}
+.versus h4{font-size:20px!important}
+.versus .vs{font-size:26px!important}
+.figures b{font-size:38px!important}
+.place b{font-size:19px!important}
+.colophon b{font-size:19px!important}
+.colo p{font-size:17px!important}
+.chead + .body p:first-child,.lede{font-size:18px!important}
+@media (max-width:680px){body{font-size:16px}h1{font-size:40px!important}h2{font-size:28px!important}}
 </style>
 </head>
 <body>
