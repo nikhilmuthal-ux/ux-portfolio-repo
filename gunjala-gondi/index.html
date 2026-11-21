@@ -757,7 +757,7 @@ h3{font-size:24px!important}
   var emb=window.parent!==window; if(!emb) return;
   document.documentElement.classList.add('emb');
   /* auto height */
-  var last=0;function sendH(){var h=Math.ceil(document.body.getBoundingClientRect().height);if(h>0&&h!==last){last=h;parent.postMessage({type:'embed-height',height:h},'*')}}
+  var last=0;function sendH(){var h=Math.ceil(Math.max(document.body.getBoundingClientRect().height,document.documentElement.getBoundingClientRect().height));if(h>0&&h!==last){last=h;parent.postMessage({type:'embed-height',height:h},'*')}}
   if(window.ResizeObserver)new ResizeObserver(sendH).observe(document.body);
   addEventListener('load',sendH);setInterval(sendH,1000);sendH();
   /* chapter bar drawn by the Framer site, pinned outside the embed */
