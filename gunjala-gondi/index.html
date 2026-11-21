@@ -420,6 +420,10 @@ html.emb .lb{position:absolute;inset:auto 0 auto 0}
 .js .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.ka{animation:none;color:var(--ink)}.ka:after{animation:none;transform:none}.weights .word{animation:none}.js .rv{opacity:1;transform:none;transition:none}}
 @media (max-width:900px){.chead .gd{top:-30px;font-size:130px}.metric span{display:none}.orn{padding-top:70px}.night{margin-top:80px}.night .chapter{padding:80px 0}.weights input{width:100%}}
+/* side margins: later rules were removing the column padding, so text touched the edges */
+.col{padding-left:40px!important;padding-right:40px!important}
+@media (max-width:900px){.col{padding-left:20px!important;padding-right:20px!important}}
+html,body{overflow-x:clip}
 </style>
 </head>
 <body>
