@@ -1870,7 +1870,7 @@ li.addEventListener('mouseleave',function(){li.classList.remove('on');if(mk)mk.c
     /* inside Framer, the site draws this bar itself, pinned outside the embed */
     bar.style.display='none';
     var lastSent='';
-    var THEME={hideBrand:true,maxWidth:1104,padX:48,height:58,itemPad:'7px 13px',fontSize:14,fullFrom:0,bg:'rgba(245,241,232,0.95)',border:'#E3DCCD',text:'#1C1A17',muted:'#4B463E',num:'#8A8377',activeBg:'#E4ECE7',activeText:'#244E42',font:'Inter, system-ui, sans-serif',progress:'#2C5E4F'};
+    var THEME={hideBrand:true,maxWidth:4000,padX:32,height:58,itemPad:'0 2px',gap:16,spread:true,fontSize:14,fullFrom:1180,activeBg:'transparent',activeBorder:'transparent',numItalic:true,numSize:13,autoNum:true,bg:'rgba(255,255,255,0.94)',border:'#E3DCCD',text:'#1C1A17',muted:'#8A8377',num:'#B3AB9C',numFont:'"Playfair Display", Georgia, serif',fontSize:13.5,activeText:'#1C1A17',activeNum:'#2C5E4F',underline:'#8FB8F2',doneTick:'#2C5E4F',doneText:'#4B463E',font:'Inter, system-ui, sans-serif',progress:'linear-gradient(90deg,#2C5E4F,#8FB8F2)',fullFrom:1240,shorts:{'Final design':'Design','Trade offs':'Trade offs','Looking back':'Looking back','Research in full':'Appendix'},fontHref:'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,400&display=swap'};
     function sendNav(){
       var items=[];
       links.forEach(function(a,i){ var el=secs[i]; if(!el) return; items.push({label:a.textContent.trim(), y:Math.round(el.getBoundingClientRect().top)}); });
