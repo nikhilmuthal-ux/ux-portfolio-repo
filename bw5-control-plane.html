@@ -1,0 +1,1341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script>if(window.parent!==window)document.documentElement.classList.add('in-embed')</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BW5 on Control Plane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&family=Fragment+Mono&display=swap">
+<style>/* BW5 on Control Plane. Blueprint theme: drafting blue, paper white, signal orange. Instrument Serif, Inter, Fragment Mono. */
+:root{
+  --bp:#1E1B18; --bp2:#14120F; --bp-l:#5E7D63; --ink:#1E1B18; --body:#4A443D; --muted:#776E64;
+  --paper:#F6F1E8; --card:#FFFDF9; --line:#E6DDCF; --row:#EFE8DC; --grid:rgba(30,27,24,.045);
+  --sig:#D9603B; --sig-t:#F8E4D9; --sig-d:#A6442A; --sky:#EDB99F;
+  --fd:'Fraunces', Georgia, serif; --f:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; --fm:'Fragment Mono', ui-monospace, Menlo, monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px;color:var(--body);font-family:var(--f);font-size:16px;line-height:1.65}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--fd);font-weight:400;color:var(--ink);margin:0;letter-spacing:-.01em;text-wrap:balance}
+p{margin:0} ul,ol{margin:0;padding:0;list-style:none}
+button{font:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.k{display:block;font-family:var(--fm);font-size:12px;color:var(--sig-d);margin-bottom:10px;letter-spacing:.02em}
+.k::before{content:"// "}
+
+/* ===== hero ===== */
+.hero{position:relative;overflow:hidden;color:#DDD2C4;padding-block:56px 0;background:radial-gradient(900px 500px at 85% 10%,rgba(217,96,59,.32),transparent 65%),linear-gradient(180deg,var(--bp) 0%,var(--bp2) 100%)}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:96px 96px,96px 96px,16px 16px,16px 16px;pointer-events:none}
+.hero .wrap{position:relative}
+.h-top{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.tag{font-family:var(--fm);font-size:12px;color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:4px;padding:5px 10px}
+.tag.ghost{color:var(--sky);border-style:dashed}
+.hero h1{color:#fff;font-size:clamp(56px,9vw,120px);line-height:.95}
+.hero h1 em{font-style:italic;color:var(--sky)}
+.intro{font-size:19px;max-width:34em;margin-top:22px;color:#DDD2C4}
+.h-stage{margin-top:44px;position:relative}
+.h-shot{margin:0;border-radius:12px 12px 0 0;overflow:hidden;border:1px solid rgba(255,255,255,.22);border-bottom:0;box-shadow:0 -20px 80px -30px rgba(0,0,0,.6);position:relative;background:#fff}
+.h-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#EDE6DA}
+.h-bar i{width:9px;height:9px;border-radius:50%;background:#CFC4B3}
+.h-bar span{font-family:var(--fm);font-size:11px;color:var(--muted);margin-left:8px}
+.h-shot img{width:100%}
+.co{position:absolute;display:inline-flex;align-items:center;gap:8px;font-family:var(--fm);font-size:12px;color:#fff;background:var(--ink);border-radius:999px;padding:5px 12px 5px 5px;box-shadow:0 8px 24px -10px rgba(0,0,0,.5);white-space:nowrap;transform:translate(-50%,-50%);animation:float 5s ease-in-out infinite}
+.co:nth-of-type(2){animation-delay:-1.2s}.co:nth-of-type(3){animation-delay:-2.4s}.co:nth-of-type(4){animation-delay:-3.6s}
+.co b{display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--sig);color:#fff;align-items:center;justify-content:center;font-weight:400;font-size:11px}
+@keyframes float{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,calc(-50% - 5px))}}
+.tblock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 150px;border:1px solid rgba(255,255,255,.35);border-top:0;background:rgba(20,18,15,.55);backdrop-filter:blur(6px)}
+.tblock > div{padding:14px 18px;border-right:1px solid rgba(255,255,255,.2);display:flex;flex-direction:column;gap:4px}
+.tblock > div:last-child{border-right:0}
+.tblock span{font-family:var(--fm);font-size:11px;color:var(--sky);text-transform:uppercase;letter-spacing:.08em}
+.tblock b{color:#fff;font-weight:600;font-size:15px;line-height:1.35}
+.tblock .sh b{font-family:var(--fm);font-weight:400;font-size:13px;color:var(--sig)}
+.dims{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding-block:36px 44px}
+.dims > div{position:relative;padding:0 20px}
+.dims > div:not(:last-child){border-right:1px dashed rgba(255,255,255,.25)}
+.dims > div::before{content:"";position:absolute;left:20px;right:20px;top:-14px;height:9px;border-left:1px solid rgba(237,185,159,.45);border-right:1px solid rgba(237,185,159,.45);border-top:1px solid rgba(237,185,159,.45)}
+.dn{font-family:var(--fd);font-size:64px;line-height:1;color:#fff}
+.dn span{color:var(--sig);margin:0 6px;font-size:.7em;vertical-align:.12em}
+.dims p:last-child{font-family:var(--fm);font-size:12.5px;color:#C9BCAB;margin-top:8px}
+
+/* ===== chapters bar ===== */
+.chapters{position:sticky;top:0;z-index:9;background:rgba(246,241,232,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.chap-row{display:flex;gap:4px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+.chap-row::-webkit-scrollbar{display:none}
+.chapters a{flex:none;display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:6px;white-space:nowrap}
+.chapters a i{font-style:normal;font-family:var(--fm);font-weight:400;font-size:11px;color:var(--bp-l)}
+.chapters a:hover{color:var(--ink);background:#fff}
+.chapters a.on{background:var(--bp);color:#fff}.chapters a.on i{color:var(--sky)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--sig);outline-offset:2px}
+
+/* ===== chapter ===== */
+main{padding-bottom:96px}
+.chapter{padding-top:88px;scroll-margin-top:60px;display:flex;flex-direction:column;gap:24px}
+.ch{display:grid;grid-template-columns:auto 1fr auto;align-items:end;gap:18px;padding-bottom:14px;border-bottom:1px solid var(--ink)}
+.ch-n{font-family:var(--fm);font-size:14px;color:var(--sig-d);padding-bottom:10px}
+h2{font-size:clamp(44px,6vw,72px);line-height:1}
+.ch-r{font-family:var(--fm);font-size:11.5px;color:var(--muted);padding-bottom:10px}
+.lede{font-size:20px;color:var(--ink);max-width:38em}
+h3.sub{font-size:34px;margin-top:20px}
+.note{font-family:var(--fm);font-size:12.5px;color:var(--muted)}
+
+/* overview bento */
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.b{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;min-width:0}
+.b-wide{grid-column:span 2}
+.b.dark{background:var(--bp);border-color:var(--bp);color:#DDD2C4;grid-row:span 1}
+.b.dark .k{color:var(--sky)}
+.big{font-family:var(--fd);font-size:30px;line-height:1.15;color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips li{font-size:13px;font-weight:600;color:var(--bp);background:#E8EFE6;border:1px solid #CCDACB;border-radius:6px;padding:4px 10px}
+.chips.o li{color:var(--sig-d);background:var(--sig-t);border-color:#F1C8B6}
+
+/* sheets (figures) */
+.sheet{margin:0;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 18px 40px -30px rgba(30,27,24,.45);min-width:0}
+.sheet-img{background:#fff}
+.sheet-img img{width:100%;cursor:zoom-in}
+.rel{position:relative}
+.sheet figcaption{font-size:13.5px;color:var(--muted);padding:11px 16px 13px;border-top:1px solid var(--row)}
+.sheet figcaption span{font-family:var(--fm);color:var(--bp-l);margin-right:10px}
+
+/* challenge markup */
+.markup{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:22px;align-items:start}
+.mk-shots{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mk-shots .sheet:first-child{grid-column:span 2}
+.mk .sheet-img{position:relative}
+.mk .sheet-img::after{content:"";position:absolute;inset:6px;border:2px dashed var(--sig);border-radius:10px;opacity:.7;pointer-events:none}
+.mk figcaption span{color:var(--sig-d)}
+.mk-list{counter-reset:m;display:flex;flex-direction:column;gap:10px}
+.mk-list li{counter-increment:m;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--sig);border-radius:12px;padding:16px 18px 16px 54px;position:relative}
+.mk-list li::before{content:counter(m,decimal-leading-zero);position:absolute;left:16px;top:16px;font-family:var(--fm);font-size:12px;color:var(--sig-d)}
+.mk-list b{display:block;color:var(--ink)}
+.mk-list p{font-size:14.5px;color:var(--muted);margin-top:2px}
+.hmw{background:var(--ink);color:#fff;border-radius:18px;padding:34px 38px;position:relative;overflow:hidden}
+.hmw::after{content:"?";position:absolute;right:28px;bottom:-40px;font-family:var(--fd);font-size:220px;line-height:1;color:rgba(255,255,255,.06)}
+.hmw .k{color:var(--sig)}
+.hmw p:last-child{font-family:var(--fd);font-size:clamp(26px,3.2vw,38px);line-height:1.2;max-width:26em;position:relative}
+.principles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--ink);border-radius:14px;overflow:hidden;background:var(--card)}
+.principles > div{padding:20px;border-right:1px solid var(--line)}
+.principles > div:last-child{border-right:0}
+.principles span{font-family:var(--fm);font-size:12px;color:var(--bp-l)}
+.principles b{display:block;color:var(--ink);margin:8px 0 4px;line-height:1.3}
+.principles p{font-size:14px;color:var(--muted)}
+
+/* process loop */
+.loop{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}
+.loop-head p{max-width:42em;color:var(--body)}
+.track{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));margin-top:30px;position:relative}
+.track::before{content:"";position:absolute;left:4%;right:4%;top:15px;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 14px)}
+.track li{position:relative;padding:0 6px;text-align:center}
+.track i{position:relative;display:inline-flex;width:32px;height:32px;border-radius:50%;align-items:center;justify-content:center;font-style:normal;font-family:var(--fm);font-size:12px;background:#fff;border:2px solid var(--bp-l);color:var(--bp);margin-bottom:12px}
+.track .p2 i{border-color:var(--bp);background:var(--bp);color:#fff}
+.track .p3 i{border-color:var(--sig);background:var(--sig);color:#fff}
+.track b{display:block;color:var(--ink);font-size:13.5px;line-height:1.3}
+.track p{font-size:12px;color:var(--muted);line-height:1.4;margin-top:4px}
+.loop-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px;padding-top:16px;border-top:1px dashed var(--line);font-family:var(--fm);font-size:12px;color:var(--muted)}
+.loop-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.loop-legend .p1::before{border:2px solid var(--bp-l)}.loop-legend .p2::before{background:var(--bp)}.loop-legend .p3::before{background:var(--sig)}
+.loop-legend .ret{margin-left:auto;color:var(--bp)}.loop-legend .ret::before{display:none}
+
+/* product map tree */
+.tree{display:flex;flex-direction:column;align-items:center;gap:22px;padding:30px;background:var(--card);border:1px solid var(--line);border-radius:18px}
+.tree > *{position:relative}
+.tree > *:not(:last-child)::after{content:"";position:absolute;left:50%;bottom:-23px;width:2px;height:22px;background:var(--bp-l)}
+.tn{background:#fff;border:1.5px solid var(--ink);border-radius:12px;padding:12px 18px;text-align:center;min-width:240px;max-width:520px;box-shadow:4px 4px 0 var(--ink)}
+.tn span{font-family:var(--fm);font-size:11px;color:var(--sig-d)}
+.tn b{display:block;font-family:var(--fd);font-weight:400;font-size:24px;color:var(--ink);line-height:1.1}
+.tn p{font-size:13.5px;color:var(--muted)}
+.tn.root{background:var(--bp);border-color:var(--bp);box-shadow:4px 4px 0 var(--sig)}
+.tn.root b{color:#fff}.tn.root p{color:#DDD2C4}.tn.root span{color:var(--sky)}
+.tsplit{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.tsplit::before{content:"";position:absolute;left:25%;right:25%;top:-12px;height:2px;background:var(--bp-l)}
+.tsecs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.tsecs div{font-size:13px;font-weight:600;color:var(--sig-d);background:var(--sig-t);border:1px dashed var(--sig);border-radius:8px;padding:8px 12px}
+.tn.leaf{background:#E8EFE6}
+
+/* decisions compare */
+.dec{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:24px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+.dec-n{font-family:var(--fm);font-size:12px;color:var(--sig-d)}
+.dec h3{font-size:30px;line-height:1.1;margin:6px 0 10px}
+.dec-l > p{font-size:15px;color:var(--muted)}
+.ticks{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.ticks li{position:relative;padding-left:24px;font-size:14.5px}
+.ticks li::before{content:"\2713";position:absolute;left:0;top:0;color:var(--bp-l);font-weight:700}
+.cmp{position:relative;aspect-ratio:16/10;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--paper);user-select:none}
+.cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.cmp-b{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--p)) 0 0);background:#EEE7DC}
+.cmp-line{position:absolute;top:0;bottom:0;left:var(--p);width:2px;background:var(--sig);transform:translateX(-1px);pointer-events:none}
+.cmp-line i{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;border-radius:50%;background:var(--sig);color:#fff;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:16px;box-shadow:0 6px 18px -4px rgba(217,96,59,.6)}
+.cmp-tag{position:absolute;top:12px;font-family:var(--fm);font-size:11px;padding:4px 9px;border-radius:4px;pointer-events:none}
+.cmp-tag.b{left:12px;background:var(--ink);color:#fff}.cmp-tag.a{right:12px;background:var(--bp-l);color:#fff}
+.cmp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+
+/* hotspots */
+.hot{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:22px;align-items:center}
+.hp{position:absolute;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;border:0;padding:0;background:var(--sig);color:#fff;cursor:pointer;font-family:var(--fm);font-size:12px;box-shadow:0 0 0 4px rgba(217,96,59,.25)}
+.hp::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--sig);animation:pulse 2s ease-out infinite;opacity:0}
+.hp.on{background:var(--ink);box-shadow:0 0 0 4px rgba(30,27,24,.25)}
+@keyframes pulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.9);opacity:0}}
+.hot-leg{display:flex;flex-direction:column;gap:6px}
+.hot-leg button{display:flex;gap:12px;width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:12px;padding:10px 12px;cursor:pointer;color:inherit}
+.hot-leg button:hover{background:#fff}
+.hot-leg button.on{background:#fff;border-color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
+.hot-leg button > span{flex:none;display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--sig);color:#fff;align-items:center;justify-content:center;font-family:var(--fm);font-size:12px}
+.hot-leg b{display:block;color:var(--ink);font-size:15px}
+.hot-leg p{font-size:13.5px;color:var(--muted);line-height:1.5}
+
+/* capability three + duo */
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--ink);border-radius:16px;overflow:hidden;background:var(--card)}
+.three > div{padding:22px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.three > div:last-child{border-right:0}
+.three span{font-family:var(--fm);font-size:12px;color:var(--sig-d)}
+.three b{font-family:var(--fd);font-weight:400;font-size:24px;color:var(--ink);line-height:1.15}
+.three p{font-size:14.5px;color:var(--muted);flex:1}
+.three em{font-style:normal;font-family:var(--fm);font-size:12px;color:var(--bp);background:#E8EFE6;border-radius:6px;padding:6px 10px;align-self:flex-start}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* flow player */
+.fp{background:var(--ink);border-radius:22px;padding:14px;color:#DDD2C4}
+.fp-tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:4px;background:rgba(255,255,255,.06);border-radius:12px}
+.fp-tabs::-webkit-scrollbar{display:none}
+.fp-tab{flex:1 0 auto;display:inline-flex;align-items:center;gap:8px;justify-content:center;border:0;border-radius:9px;padding:10px 14px;background:transparent;color:#C9BCAB;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.fp-tab span{font-family:var(--fm);font-weight:400;font-size:11px;opacity:.7}
+.fp-tab em{font-style:normal;font-family:var(--fm);font-weight:400;font-size:11px;background:rgba(255,255,255,.1);border-radius:999px;padding:1px 7px}
+.fp-tab:hover{color:#fff}
+.fp-tab.on{background:#fff;color:var(--ink)}.fp-tab.on em{background:var(--sig);color:#fff}
+.fp-flow{display:none;padding:22px 10px 8px}
+.fp-flow.on{display:block;animation:fin .4s ease}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.fp-top h3{color:#fff;font-size:34px;line-height:1.1}
+.fp-top p{color:#C9BCAB;margin-top:6px;max-width:46em;font-size:15px}
+.fp-journey{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));margin:24px 0 18px;position:relative}
+.fp-journey::before{content:"";position:absolute;left:calc(50% / var(--n));right:calc(50% / var(--n));top:13px;height:2px;background:rgba(255,255,255,.15)}
+.fj{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;background:transparent;border:0;cursor:pointer;color:#A99C8C;padding:0 4px}
+.fj i{display:inline-flex;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;font-style:normal;font-family:var(--fm);font-size:12px;background:var(--ink);border:2px solid rgba(255,255,255,.25);color:#C9BCAB;transition:all .25s}
+.fj span{font-size:12.5px;font-weight:600;line-height:1.3;text-align:center}
+.fj.done i{border-color:var(--bp-l);background:var(--bp-l);color:#fff}
+.fj.on i{border-color:var(--sig);background:var(--sig);color:#fff;box-shadow:0 0 0 5px rgba(217,96,59,.25)}
+.fj.on span{color:#fff}
+.fj:hover span{color:#fff}
+.fp-stage{margin:0;border-radius:14px;overflow:hidden;background:#fff}
+.fs-imgs{position:relative;aspect-ratio:1440/900}
+.fs-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease;cursor:zoom-in}
+.fs-img.on{opacity:1}
+.fp-cap{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:16px 18px;background:#fff;border-top:1px solid var(--row)}
+.fp-of{font-family:var(--fm);font-size:12px;color:var(--sig-d);white-space:nowrap}
+.fp-txt b{display:block;color:var(--ink);font-size:16px}
+.fp-txt p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.fp-ctl{display:flex;gap:6px}
+.fp-ctl button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.fp-ctl button:hover{background:var(--paper)}
+.fp-play{background:var(--ink) !important;color:#fff !important;border-color:var(--ink) !important;font-size:11px !important}
+.fp-play .i-pause{display:none}.fp.playing .fp-play .i-pause{display:inline}.fp.playing .fp-play .i-play{display:none}
+
+/* app shell */
+.shell{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(0,1fr);gap:22px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
+.sh-stage{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.sh-stage img{width:100%}
+.zone{position:absolute;border:2px solid transparent;border-radius:4px;cursor:pointer;transition:all .25s}
+.zone.on{border-color:var(--sig);background:rgba(217,96,59,.08);box-shadow:0 0 0 9999px rgba(30,27,24,.5)}
+.sh-leg{display:flex;flex-direction:column;gap:6px}
+.sh-leg button{display:flex;gap:12px;width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:12px;padding:10px 12px;cursor:pointer;color:inherit}
+.sh-leg button.on{background:#fff;border-color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
+.sh-leg button > span{flex:none;font-family:var(--fm);font-size:12px;color:var(--sig-d);padding-top:2px;width:24px}
+.sh-leg b{display:block;color:var(--ink);font-size:15px}
+.sh-leg p{font-size:13.5px;color:var(--muted);line-height:1.5}
+
+/* components */
+.anat{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:24px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+.anat-l h3{font-size:34px;line-height:1.05}
+.anat-l > p{color:var(--muted);margin:6px 0 14px}
+.anat-img{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.anat .hp::after{display:none}
+.status{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+.status .k{margin:0 8px 0 0}
+.status p{font-size:14px;color:var(--muted);margin-left:auto}
+.st{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:5px 14px 5px 6px;font-size:14px}
+.st i{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-size:11px;font-weight:800}
+.st.ok i{background:#1a8f4a}.st.warn i{background:#e08a1e}.st.bad i{background:#d3202f;font-size:8px}
+.specs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;grid-auto-flow:dense}
+.spec{margin:0;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:transform .25s,box-shadow .25s}
+.spec:hover{transform:translateY(-3px);box-shadow:6px 6px 0 var(--ink);border-color:var(--ink)}
+.spec-img{flex:1;display:flex;align-items:center;justify-content:center;padding:18px;background-color:var(--paper);background-image:radial-gradient(#D8CDBC 1px,transparent 1px);background-size:14px 14px;border-bottom:1px solid var(--row)}
+.spec-img img{max-width:100%;max-height:300px;width:auto;border-radius:6px;border:1px solid var(--line);box-shadow:0 10px 26px -16px rgba(30,27,24,.5);background:#fff;cursor:zoom-in}
+.spec figcaption{padding:14px 16px 16px}
+.spec-n{font-family:var(--fm);font-size:11px;color:var(--sig-d)}
+.spec b{display:block;color:var(--ink);font-size:15px;margin:2px 0 4px}
+.spec p{font-size:13.5px;color:var(--muted);line-height:1.5}
+.w6{grid-column:span 6}.w4{grid-column:span 4}.w3{grid-column:span 3}.w2{grid-column:span 2}.w2b{grid-column:span 2}
+.t2{grid-row:span 2}
+.t2 .spec-img img{max-height:520px}
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--ink);border-radius:14px;overflow:hidden;background:var(--card)}
+.rules li{padding:16px 18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14.5px}
+.rules li:nth-child(3n){border-right:0}.rules li:nth-child(n+4){border-bottom:0}
+.rules span{display:block;font-family:var(--fm);font-size:11px;color:var(--bp-l);margin-bottom:4px}
+
+/* outcome */
+.out{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--ink)}
+.out > div{padding:22px 20px 0 0}
+.out > div + div{padding-left:20px;border-left:1px solid var(--line)}
+.onum{font-family:var(--fd);font-size:64px;line-height:1;color:var(--bp-l)}
+.out b{display:block;color:var(--ink);font-size:17px;margin:10px 0 4px}
+.out p:last-child{font-size:14.5px;color:var(--muted)}
+.learn{margin:12px 0 0;background:var(--sig);border-radius:18px;padding:34px 38px;color:#fff}
+.learn .k{color:#fff;opacity:.85}
+.learn p{font-family:var(--fd);font-size:clamp(26px,3.2vw,38px);line-height:1.2;max-width:26em}
+
+/* lightbox and motion */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(6,15,40,.88);display:none;align-items:center;justify-content:center;padding:28px}
+.lb.on{display:flex}
+.lb img{max-width:100%;max-height:100%;border-radius:8px;background:#fff;cursor:zoom-out}
+.lb button{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;border:0;background:#fff;color:var(--ink);font-size:20px;cursor:pointer}
+@media (prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth}
+  .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .rv.in{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){.co,.hp::after{animation:none}}
+
+/* responsive */
+@media (max-width:980px){
+  .markup,.dec,.hot,.shell,.anat{grid-template-columns:1fr}
+  .track{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:22px}.track::before{display:none}
+  .specs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .w6,.w4,.w3{grid-column:span 2}.w2,.w2b{grid-column:span 1}.t2{grid-row:span 1}
+  .fp-journey{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:110px;overflow-x:auto;scrollbar-width:none}
+  .fp-journey::before{display:none}
+}
+@media (max-width:820px){
+  .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .tblock{grid-template-columns:1fr 1fr}.tblock > div{border-bottom:1px solid rgba(255,255,255,.2)}
+  .dims{grid-template-columns:1fr 1fr;row-gap:30px}.dims > div:nth-child(2){border-right:0}
+  .co{display:none}
+  .bento,.principles,.three,.duo,.out,.rules,.mk-shots,.tsplit{grid-template-columns:1fr}
+  .b-wide{grid-column:auto}.mk-shots .sheet:first-child{grid-column:auto}
+  .principles > div,.three > div,.rules li{border-right:0;border-bottom:1px solid var(--line)}
+  .out > div + div{padding-left:0;border-left:0}
+  .ch{grid-template-columns:1fr}.ch-r{display:none}.ch-n{padding:0}
+  .fp-cap{grid-template-columns:1fr}
+  .specs{grid-template-columns:1fr}.w2,.w2b,.w6,.w4,.w3{grid-column:auto}
+  .hmw,.learn{padding:26px 22px}
+  .tn{min-width:0}
+}
+
+/* Ink and terracotta: Fraunces display weights */
+h1,h2,h3,.big,.dn,.onum,.tn b,.three b,.hmw p:last-child,.learn p{font-variation-settings:"SOFT" 50,"WONK" 0;font-optical-sizing:auto}
+.hero h1{font-weight:600;font-size:clamp(52px,8vw,104px);line-height:.98;letter-spacing:-.025em}
+.hero h1 em{font-weight:500;color:var(--sky)}
+h2{font-weight:600;font-size:clamp(40px,5.2vw,62px);letter-spacing:-.02em}
+h3,.dec h3,.fp-top h3,.anat-l h3,h3.sub{font-weight:600;letter-spacing:-.015em}
+.dec h3,.fp-top h3,.anat-l h3,h3.sub{font-size:28px}
+.big,.hmw p:last-child,.learn p{font-weight:500}
+.dn,.onum{font-weight:500}
+.tn b,.three b{font-weight:600;font-size:21px}
+.hero{background:radial-gradient(900px 520px at 88% 0%,rgba(217,96,59,.30),transparent 62%),radial-gradient(700px 420px at 0% 100%,rgba(94,125,99,.28),transparent 65%),linear-gradient(180deg,#1E1B18 0%,#14120F 100%)}
+.b.dark{background:var(--sig);border-color:var(--sig);color:#FBE9DF}
+.b.dark .k{color:#FFE5D6}
+.chapters a.on{background:var(--ink)}.chapters a.on i{color:var(--sky)}
+.tn.root{background:var(--ink);border-color:var(--ink)}
+.track .p2 i{background:var(--bp-l);border-color:var(--bp-l)}
+.track i{border-color:var(--bp-l);color:var(--bp-l)}
+.loop-legend .p1::before{border-color:var(--bp-l)}.loop-legend .p2::before{background:var(--bp-l)}
+.cmp-tag.a{background:var(--bp-l)}
+.sheet figcaption span,.principles span,.rules span{color:var(--bp-l)}
+.onum{color:var(--sig)}
+.fp-tab.on em{background:var(--sig)}
+::selection{background:#F1C8B6;color:var(--ink)}
+
+/* No tile grid: plain paper and a clean hero */
+body{background-image:none}
+.hero::before{display:none}
+.spec-img{background-image:none;background-color:#F3EDE2}
+
+/* Lighter type */
+.hero h1{font-weight:400;letter-spacing:-.02em}
+.hero h1 em{font-weight:300}
+h2{font-weight:400}
+h3,.dec h3,.fp-top h3,.anat-l h3,h3.sub{font-weight:400}
+.big,.hmw p:last-child,.learn p,.dn,.onum{font-weight:300}
+.tn b,.three b{font-weight:400}
+.mk-list b,.principles b,.hot-leg b,.sh-leg b,.spec b,.out b,.tblock b,.track b,.fj span,.fp-txt b,.fp-tab{font-weight:500}
+.chips li,.tsecs div,.chapters a{font-weight:500}
+
+/* Shared scale with the other case studies (Process Monitoring): sizes, widths and spacing */
+.wrap{max-width:1080px}
+body{font-size:16px;line-height:1.65}
+.hero{padding-block:56px 0}
+.hero h1{font-size:clamp(40px,6vw,64px);line-height:1.05}
+.intro{font-size:18px;margin-top:18px}
+.chapter{padding-top:72px;gap:22px;scroll-margin-top:72px}
+h2{font-size:clamp(30px,4vw,40px);line-height:1.1}
+.ch{padding-bottom:12px}.ch-n,.ch-r{padding-bottom:6px}
+.lede{font-size:19px}
+h3.sub{font-size:20px;margin-top:12px}
+.dec h3,.fp-top h3,.anat-l h3{font-size:20px}
+.tn b,.three b{font-size:18px}
+h4,.mk-list b,.principles b,.hot-leg b,.sh-leg b,.spec b,.out b,.fp-txt b{font-size:16px}
+.k,.label{font-size:11.5px}
+.big,.hmw p:last-child,.learn p{font-size:clamp(20px,2.4vw,26px);line-height:1.35}
+.dn{font-size:40px}.onum{font-size:40px}
+.b,.loop,.tree,.dec,.shell,.anat{border-radius:20px}
+.b{padding:24px 26px}
+.hmw,.learn{padding:34px 36px;border-radius:24px}
+.sheet figcaption,.fp-txt p,.hot-leg p,.sh-leg p,.spec p,.mk-list p,.principles p,.out p:last-child{font-size:14.5px}
+@media (max-width:820px){.chapter{padding-top:52px}.hmw,.learn{padding:26px 22px}}
+
+/* Simple content: text sits on the page, no boxes. Visuals keep their frames. */
+.b,.b.dark,.mk-list li,.principles,.principles > div,.three,.three > div,.rules,.rules li,.out > div,.status,.loop,.tree{background:none;border:0;box-shadow:none;border-radius:0}
+.bento{gap:28px 36px}
+.b{padding:0}
+.b.dark{color:var(--body);grid-column:1/-1}
+.b.dark .k{color:var(--sig-d)}
+.b.dark .big{color:var(--ink);font-size:clamp(20px,2.4vw,26px);max-width:30em}
+.mk-list{gap:18px}
+.mk-list li{padding:0 0 0 38px}
+.mk-list li::before{left:0;top:2px}
+.principles{gap:28px}
+.principles > div,.three > div{padding:0}
+.three{gap:32px}
+.three em{background:none;padding:0;color:var(--sig-d)}
+.rules{gap:14px 32px}
+.rules li{padding:0}
+.out{border-top:0;gap:32px}
+.out > div,.out > div + div{padding:0;border:0}
+.status{padding:0}
+.loop,.tree{padding:8px 0}
+.hmw,.learn{background:none;color:var(--ink);border-left:3px solid var(--sig);border-radius:0;padding:4px 0 4px 24px}
+.hmw::after{display:none}
+.hmw .k,.learn .k{color:var(--sig-d);opacity:1}
+.hmw p:last-child,.learn p{color:var(--ink)}
+.tn{box-shadow:none}
+.tn.root{box-shadow:none}
+
+/* Elegant: quiet labels, generous space, fewer marks */
+.k{font-family:var(--f);font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--sig-d)}
+.k::before{content:none}
+.ch{grid-template-columns:auto 1fr;gap:16px;border-bottom:1px solid var(--line);padding-bottom:16px}
+.ch-n{font-family:var(--fd);font-size:18px;font-style:italic;font-weight:300;color:var(--sig)}
+.chapter{padding-top:96px;gap:26px}
+.lede{color:var(--muted);font-weight:300;font-size:19px}
+.tblock{grid-template-columns:repeat(4,minmax(0,1fr))}
+.tblock span{font-family:var(--f);letter-spacing:.14em;font-size:11px}
+.co{animation:none;font-family:var(--f);font-size:12px}
+.dims > div::before{display:none}
+.dims > div:not(:last-child){border-right:1px solid rgba(255,255,255,.12)}
+.dims p:last-child{font-family:var(--f);font-size:13.5px;letter-spacing:0}
+.chapters a i{font-family:var(--fd);font-style:italic;font-size:13px}
+.mk .sheet-img::after{display:none}
+.chips{gap:0}
+.chips li,.chips.o li{background:none;border:0;padding:0;font-weight:400;font-size:15px;color:var(--body)}
+.chips li:not(:last-child)::after{content:"·";margin:0 10px;color:var(--sig)}
+.bento{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 56px}
+.b-wide{grid-column:auto}
+.mk-list li::before,.principles span,.three span,.rules span,.dec-n,.spec-n,.fp-of,.sheet figcaption span{font-family:var(--fd);font-style:italic;font-size:15px;letter-spacing:0}
+.sheet{box-shadow:0 20px 50px -38px rgba(30,27,24,.5)}
+.three em{font-family:var(--f);font-size:13px}
+.tn{border-width:1px}
+.track i,.fj i{font-family:var(--f)}
+.loop-legend{font-family:var(--f)}
+.note{font-family:var(--f);font-style:italic}
+
+/* ===== Elegant pass ===== */
+/* Calm hero: one screen on a soft mat */
+.h-shot{border-radius:14px 14px 0 0;border-color:rgba(255,255,255,.12)}
+.co{display:none}
+
+/* Component gallery */
+.specs{display:flex;flex-direction:column;gap:72px;margin-top:20px}
+.galg{display:flex;flex-direction:column;gap:40px}
+.galg-h{display:flex;align-items:baseline;gap:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.galg-h .k{margin:0}
+.galg-h p{font-family:var(--fd);font-style:italic;font-weight:300;font-size:17px;color:var(--muted)}
+.gal{margin:0;display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,2fr);gap:40px;align-items:center}
+.gal.wide{grid-template-columns:1fr;gap:18px}
+.gal.wide figcaption{display:grid;grid-template-columns:auto 220px 1fr;gap:20px;align-items:baseline}
+.gal-n{display:block;font-family:var(--fd);font-style:italic;font-weight:300;font-size:30px;line-height:1;color:var(--sig);margin-bottom:10px}
+.gal.wide .gal-n{margin:0;font-size:24px}
+.gal figcaption b{display:block;font-family:var(--fd);font-weight:400;font-size:22px;line-height:1.2;color:var(--ink);margin-bottom:6px}
+.gal.wide figcaption b{margin:0}
+.gal figcaption p{font-size:15px;color:var(--muted);line-height:1.6;max-width:30em}
+.mat{background:linear-gradient(180deg,#EFE9DF 0%,#E9E2D6 100%);border-radius:18px;padding:clamp(22px,4vw,48px);display:flex;align-items:center;justify-content:center;position:relative}
+.mat::after{content:"";position:absolute;inset:10px;border:1px solid rgba(255,255,255,.55);border-radius:12px;pointer-events:none}
+.mat img{max-width:100%;max-height:340px;width:auto;height:auto;border-radius:8px;background:#fff;box-shadow:0 1px 0 rgba(30,27,24,.04),0 24px 48px -28px rgba(30,27,24,.45);cursor:zoom-in;transition:transform .35s ease}
+.gal:hover .mat img{transform:translateY(-4px)}
+.gal.tall .mat img{max-height:520px}
+.gal:nth-child(odd):not(.wide){grid-template-columns:minmax(0,2fr) minmax(0,.75fr)}
+.gal:nth-child(odd):not(.wide) figcaption{order:2}
+
+/* Anatomy and status, lighter */
+.anat{background:none;border:0;padding:0;gap:48px}
+.anat-img{border:0;border-radius:18px;background:linear-gradient(180deg,#EFE9DF,#E9E2D6);padding:clamp(18px,3vw,36px);overflow:visible}
+.anat-img img{border-radius:8px;box-shadow:0 24px 48px -28px rgba(30,27,24,.45)}
+.anat-img .hp{transform:translate(-50%,-50%)}
+.anat-l h3{font-size:30px}
+.hot-leg button.on,.sh-leg button.on{box-shadow:none;border-color:var(--line);background:var(--card)}
+.rules{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 40px;padding-top:20px;border-top:1px solid var(--line)}
+.rules li{font-size:15px;color:var(--body)}
+
+/* Light flow players */
+.fp{background:var(--card);color:var(--body);border:1px solid var(--line);border-radius:22px;padding:16px}
+.fp-tabs{background:var(--paper)}
+.fp-tab{color:var(--muted)}
+.fp-tab:hover{color:var(--ink)}
+.fp-tab.on{background:var(--ink);color:#fff}
+.fp-tab em{background:var(--row)}
+.fp-top h3{color:var(--ink);font-size:26px}
+.fp-top p{color:var(--muted)}
+.fp-journey::before{background:var(--line)}
+.fj{color:var(--muted)}
+.fj i{background:var(--card);border-color:var(--line);color:var(--muted)}
+.fj.done i{background:var(--bp-l);border-color:var(--bp-l);color:#fff}
+.fj.on span,.fj:hover span{color:var(--ink)}
+.fp-stage{border:1px solid var(--line)}
+
+@media (max-width:900px){
+  .gal,.gal:nth-child(odd):not(.wide){grid-template-columns:1fr;gap:16px}
+  .gal:nth-child(odd):not(.wide) figcaption{order:0}
+  .gal.wide figcaption{grid-template-columns:auto 1fr}.gal.wide figcaption p{grid-column:1/-1}
+  .rules{grid-template-columns:1fr}
+}
+
+/* ===== Compact, refined: chapters 07 to 09 ===== */
+/* pins */
+.hp{width:20px;height:20px;font-size:10.5px;box-shadow:0 0 0 3px rgba(255,253,249,.9),0 4px 10px -4px rgba(30,27,24,.5)}
+.hp::after{inset:-3px;border-width:1px;animation-duration:2.6s}
+@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.5);opacity:0}}
+.hot-leg button > span,.sh-leg button > span{width:20px;height:20px;font-size:10.5px}
+.hot-leg button{padding:8px 10px}.hot-leg b,.sh-leg b{font-size:14.5px}.hot-leg p,.sh-leg p{font-size:13px}
+
+/* capability: three sections and the two entries */
+#capability .three{gap:28px}
+#capability .three b{font-size:17px}
+#capability .three p{font-size:13.5px}
+#capability .three em{font-size:12px}
+#capability .duo{gap:18px}
+.sheet figcaption{font-size:13px;padding:9px 14px 11px}
+
+/* flow players */
+.fp{padding:12px;border-radius:18px}
+.fp-tabs{padding:3px;border-radius:10px}
+.fp-tab{padding:7px 12px;font-size:13px}
+.fp-tab em,.fp-tab span{font-size:10.5px}
+.fp-flow{padding:18px 8px 4px}
+.fp-top h3{font-size:21px}
+.fp-top p{font-size:14px;margin-top:4px}
+.fp-journey{margin:18px 0 14px}
+.fp-journey::before{top:10px}
+.fj{gap:6px}
+.fj i{width:22px;height:22px;font-size:10.5px;border-width:1.5px}
+.fj.on i{box-shadow:0 0 0 4px rgba(217,96,59,.18)}
+.fj span{font-size:11.5px;font-weight:500}
+.fp-stage{max-width:920px;margin:0 auto;border-radius:12px}
+.fp-cap{padding:12px 14px;gap:14px}
+.fp-txt b{font-size:14.5px}.fp-txt p{font-size:13px}
+.fp-of{font-size:13px}
+.fp-ctl button{width:32px;height:32px;font-size:12px}
+h3.sub{font-size:18px;margin-top:8px}
+
+/* app shell */
+.shell{padding:16px;gap:20px;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr)}
+
+/* components */
+#components .anat{gap:36px;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr)}
+#components .anat-l h3{font-size:24px}
+#components .anat-img{padding:clamp(14px,2.4vw,26px)}
+.status{gap:8px}.st{font-size:13px;padding:4px 12px 4px 5px}.st i{width:17px;height:17px;font-size:10px}
+.status p{font-size:13px}
+.specs{gap:48px}
+.galg{gap:28px}
+.galg-h p{font-size:15px}
+.gal{gap:28px;grid-template-columns:minmax(0,.7fr) minmax(0,1.6fr)}
+.gal:nth-child(odd):not(.wide){grid-template-columns:minmax(0,1.6fr) minmax(0,.7fr)}
+.gal-n{font-size:22px;margin-bottom:6px}
+.gal.wide .gal-n{font-size:18px}
+.gal.wide figcaption{grid-template-columns:auto 190px 1fr;gap:14px}
+.gal figcaption b{font-size:18px}
+.gal figcaption p{font-size:13.5px}
+.mat{padding:clamp(16px,2.6vw,28px);border-radius:14px}
+.mat::after{inset:7px;border-radius:9px}
+.mat img{max-height:230px;border-radius:6px}
+.gal.tall .mat img{max-height:360px}
+.gal.wide .mat img{max-height:150px}
+.rules{gap:16px 32px}.rules li{font-size:13.5px}
+
+/* Product map: a quiet route */
+.route{display:grid;grid-template-columns:1fr 1fr 1.8fr 1.1fr;gap:28px;position:relative;padding-top:34px}
+.route::before{content:"";position:absolute;left:6px;right:6px;top:9px;height:1px;background:linear-gradient(90deg,var(--sig) 0%,var(--line) 100%)}
+.stop{position:relative}
+.stop::before{content:"";position:absolute;left:0;top:-31px;width:9px;height:9px;border-radius:50%;background:var(--paper);border:1.5px solid var(--sig)}
+.stop:first-child::before{background:var(--sig)}
+.sn{display:block;font-family:var(--fd);font-style:italic;font-weight:300;font-size:15px;color:var(--sig);margin-bottom:6px}
+.stop > b{display:block;font-family:var(--fd);font-weight:400;font-size:24px;line-height:1.1;color:var(--ink);margin-bottom:6px}
+.stop > p{font-size:14px;color:var(--muted);line-height:1.55}
+.fork2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:8px 0 16px}
+.fork2 > div{border-left:1px solid var(--line);padding-left:12px}
+.fork2 em{font-style:normal;font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--bp-l)}
+.fork2 p{font-size:13.5px;color:var(--muted);line-height:1.5;margin-top:2px}
+.secl,.navl{display:flex;flex-direction:column;gap:6px}
+.secl li{font-size:13.5px;color:var(--ink);padding-left:16px;position:relative;line-height:1.45}
+.secl li::before{content:"";position:absolute;left:0;top:.6em;width:8px;height:1px;background:var(--sig)}
+.navl{gap:3px}
+.navl li{font-size:13.5px;color:var(--muted)}
+@media (max-width:900px){
+  .route{grid-template-columns:1fr;gap:26px;padding:0 0 0 26px}
+  .route::before{left:4px;right:auto;top:6px;bottom:6px;width:1px;height:auto;background:linear-gradient(180deg,var(--sig),var(--line))}
+  .stop::before{left:-26px;top:6px}
+}
+
+/* Hero cover: three screens, dashboard to capability to app */
+.h-stage.trio{position:relative;height:clamp(260px,40vw,470px);margin-top:44px;margin-bottom:28px}
+.hs{position:absolute;margin:0;background:#fff;border:1px solid rgba(255,255,255,.14);border-radius:12px;overflow:hidden;box-shadow:0 30px 70px -30px rgba(0,0,0,.75);transition:transform .4s ease,box-shadow .4s ease}
+.hs img{width:100%;cursor:zoom-in}
+.hs-back{left:0;top:0;width:58%;transform:rotate(-1.5deg)}
+.hs-mid{left:21%;top:12%;width:58%;z-index:1}
+.hs-front{right:0;top:24%;width:52%;z-index:2;transform:rotate(1.2deg)}
+.hs:hover{transform:translateY(-8px) rotate(0);z-index:3;box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
+.tblock{border-top:1px solid rgba(255,255,255,.35)}
+@media (max-width:820px){.h-stage.trio{height:auto}.hs{position:relative;width:100%;left:auto;right:auto;top:auto;transform:none}.hs-back,.hs-front{display:none}}
+
+/* Classier hero: one deep tone, no coloured glows */
+.hero{background:radial-gradient(1200px 600px at 50% -20%,rgba(255,255,255,.06),transparent 60%),#171614}
+.hero::before,.hero::after{display:none}
+.h-bar,.hs .h-bar{background:#F3F1ED;border-bottom:1px solid #E4E0D9}
+.h-bar i{background:#D6D1C9}
+.h-bar span{color:#8A847B}
+.hs{border-color:rgba(255,255,255,.08);box-shadow:0 40px 90px -40px rgba(0,0,0,.9)}
+.tblock{background:none;border-color:rgba(255,255,255,.14)}
+.tblock > div{border-color:rgba(255,255,255,.1)}
+.tblock span{color:#B8AEA3}
+.dims > div:not(:last-child){border-right-color:rgba(255,255,255,.08)}
+.dims p:last-child{color:#A29A90}
+.intro{color:#CFC8BF}
+.hero h1 em{color:#E7B79E}
+.tag{border-color:rgba(255,255,255,.18);color:#E9E4DD}
+
+/* Flows, one after another */
+.flist{display:flex;flex-direction:column;gap:64px;margin-top:8px}
+.fp.solo{background:none;border:0;padding:0;border-radius:0}
+.fp.solo .fp-flow{padding:0;animation:none}
+.fl-h{display:grid;grid-template-columns:44px 1fr auto;gap:16px;align-items:baseline;margin-bottom:20px}
+.fl-n{font-family:var(--fd);font-style:italic;font-weight:300;font-size:22px;color:var(--sig)}
+.fl-h h3{font-family:var(--fd);font-weight:400;font-size:24px;line-height:1.15;color:var(--ink)}
+.fl-h p{font-size:14.5px;color:var(--muted);margin-top:4px;max-width:42em}
+.fl-c{font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fp.solo .fp-stage{max-width:none;border:1px solid var(--line);border-radius:14px;box-shadow:0 24px 60px -44px rgba(30,27,24,.55)}
+.fp.solo .fp-cap{grid-template-columns:64px 1fr auto;padding:14px 18px}
+.fp.solo .fp-of{font-family:var(--fd);font-style:italic;font-size:15px;color:var(--sig)}
+.fp.solo .fp-journey{display:flex;justify-content:center;gap:8px;margin:16px 0 0;overflow:visible}
+.fp.solo .fp-journey::before{display:none}
+.fp.solo .fj{width:auto;padding:4px;gap:0}
+.fp.solo .fj span{display:none}
+.fp.solo .fj i{width:7px;height:7px;border:0;border-radius:4px;background:#D9D0C3;box-shadow:none;transition:width .3s,background .3s}
+.fp.solo .fj.done i{background:#BFA995}
+.fp.solo .fj.on i{width:26px;background:var(--sig);box-shadow:none}
+@media (max-width:820px){.fl-h{grid-template-columns:32px 1fr}.fl-c{display:none}.fp.solo .fp-cap{grid-template-columns:1fr}}
+
+/* Smaller number circles everywhere */
+.hot-leg button > span,.sh-leg button > span{width:16px;height:16px;font-size:9px;margin-top:3px}
+.hp{width:16px;height:16px;font-size:9px}
+.hp::after{inset:-2px}
+.track i{width:22px;height:22px;font-size:10px;border-width:1.5px;margin-bottom:10px}
+.track::before{top:10px}
+.st i{width:14px;height:14px;font-size:8.5px}
+.co b{width:16px;height:16px;font-size:9px}
+#capability .three b{font-size:16px;margin:4px 0 8px}
+#capability .three > div{gap:0}
+
+/* Before and after fill the same frame */
+.cmp{aspect-ratio:2214/960;background:#fff}
+.cmp img{object-fit:cover;object-position:center top}
+.cmp-b{background:#fff}
+
+/* How I worked: highlighted on a dark panel */
+.loop{background:#1B1A18;border-radius:20px;padding:30px 32px;color:#CFC8BF}
+.loop .k{color:#E7B79E}
+.loop-head p{color:#E9E4DD}
+.track::before{background:repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 6px,transparent 6px 12px)}
+.track i{background:#1B1A18;border-color:#9DB59F;color:#9DB59F}
+.track .p2 i{background:#7E9C80;border-color:#7E9C80;color:#fff}
+.track .p3 i{background:var(--sig);border-color:var(--sig);color:#fff}
+.track b{color:#fff;font-weight:500}
+.track p{color:#A29A90}
+.loop-legend{border-top-color:rgba(255,255,255,.12);color:#A29A90}
+.loop-legend .p1::before{border-color:#9DB59F}
+.loop-legend .p2::before{background:#7E9C80}
+.loop-legend .ret{color:#E9E4DD}
+
+/* Softer dark: warm taupe instead of near black */
+.loop{background:#3B342E}
+.track i{background:#3B342E}
+.hero{background:radial-gradient(1200px 600px at 50% -20%,rgba(255,255,255,.07),transparent 60%),#2E2A26}
+
+/* Overview */
+.aim{margin:6px 0 0;padding:0}
+.aim p{font-family:var(--fd);font-weight:300;font-size:clamp(24px,3vw,34px);line-height:1.25;color:var(--ink);max-width:24em}
+.ctx{display:grid;grid-template-columns:minmax(0,1fr) 120px minmax(0,1.5fr);align-items:stretch;margin-top:18px}
+.ctx-cp,.ctx-dp{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px}
+.ctx-cp{background:#3B342E;border-color:#3B342E;color:#CFC8BF}
+.ctx-cp .k{color:#E7B79E}
+.ctx b{display:block;font-family:var(--fd);font-weight:400;font-size:21px;line-height:1.2;color:var(--ink);margin-bottom:6px}
+.ctx-cp b{color:#fff}
+.ctx p{font-size:14px;line-height:1.55}
+.ctx-link{display:flex;align-items:center;justify-content:center;gap:6px;flex-direction:column}
+.ctx-link i{width:1px;flex:1;display:none}
+.ctx-link{flex-direction:row}
+.ctx-link i{display:block;flex:1;height:1px;width:auto;background:repeating-linear-gradient(90deg,var(--sig) 0 5px,transparent 5px 10px)}
+.ctx-link span{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap;padding:0 6px}
+.ctx-caps{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.ctx-caps li{font-size:13px;line-height:1.45;color:var(--muted);border:1px solid var(--line);border-radius:12px;padding:10px 12px;opacity:.6}
+.ctx-caps li.on{opacity:1;border-color:#E9B9A3;background:#FBEFE8;color:var(--body)}
+.ctx-caps em{display:block;font-style:normal;font-weight:600;color:var(--ink);font-size:14px;margin-bottom:2px}
+.ctx-caps li.on em{color:var(--sig-d)}
+.ctx-note{font-family:var(--fd);font-style:italic;font-weight:300;font-size:15px;color:var(--muted)}
+.ov2{display:grid;grid-template-columns:1fr 1fr;gap:28px 56px;margin-top:10px}
+.ov2 p{font-size:15.5px;color:var(--body);max-width:32em}
+.flows2{padding-top:22px;border-top:1px solid var(--line)}
+.fh{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:6px}
+.fh .k{margin:0}
+.fh em{font-family:var(--fd);font-style:italic;font-weight:300;color:var(--muted);font-size:15px}
+.fl2{columns:2;column-gap:28px}
+.fl2 li{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--row);font-size:14.5px;color:var(--ink);break-inside:avoid}
+.fl2 span{font-family:var(--fd);font-style:italic;font-weight:300;font-size:13px;color:var(--sig);min-width:20px}
+@media (max-width:820px){.ctx{grid-template-columns:1fr}.ctx-link{height:44px;flex-direction:column}.ctx-link i{width:1px;height:auto;background:repeating-linear-gradient(180deg,var(--sig) 0 5px,transparent 5px 10px)}.ov2{grid-template-columns:1fr}.fl2{columns:1}}
+
+/* Highlight panels without dark colour: soft sand with ink text */
+.loop,.ctx-cp{background:#EAE2D5;border:1px solid #DED3C2;color:var(--body)}
+.loop .k,.ctx-cp .k{color:var(--sig-d)}
+.loop-head p,.ctx-cp b{color:var(--ink)}
+.track::before{background:repeating-linear-gradient(90deg,#CDBFAB 0 6px,transparent 6px 12px)}
+.track i{background:#EAE2D5;border-color:#7E9C80;color:#5E7D63}
+.track .p2 i{background:#7E9C80;border-color:#7E9C80;color:#fff}
+.track b{color:var(--ink)}
+.track p{color:var(--muted)}
+.loop-legend{border-top-color:#DCCFBD;color:var(--muted)}
+.loop-legend .p1::before{border-color:#7E9C80}
+.loop-legend .ret{color:var(--ink)}
+.ctx-cp p{color:var(--body)}
+.ctx{align-items:center}
+.ctx-link i{min-width:18px;flex:1 1 18px;height:1px}
+@media (max-width:820px){.ctx-link i{min-width:1px;width:1px;flex:1 1 12px;height:auto}}
+.cmp.modal{aspect-ratio:1600/1040;background:#E9ECF1}
+.cmp.modal img{object-fit:contain;object-position:center}
+.cmp.modal .cmp-b{background:#E9ECF1}
+
+/* Minimal hero */
+.hero{padding-block:72px 0}
+.hero h1{margin:0}
+.intro{font-size:18px;margin-top:16px;color:#BDB5AB;font-weight:300}
+.h-stage.trio{margin-top:52px;margin-bottom:-60px;z-index:2}
+/* Facts below the hero */
+.facts{padding-top:100px;padding-bottom:12px}
+.fx-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.fx-meta div{padding:16px 18px 16px 0}
+.fx-meta div + div{padding-left:18px;border-left:1px solid var(--line)}
+.fx-meta dt{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--sig-d)}
+.fx-meta dd{margin:4px 0 0;font-size:15px;color:var(--ink)}
+.fx-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;padding-top:28px}
+.fx-stats li{font-size:13.5px;color:var(--muted);line-height:1.4}
+.fx-stats b{display:block;font-family:var(--fd);font-weight:300;font-size:44px;line-height:1;color:var(--ink);margin-bottom:8px}
+.fx-stats b span{color:var(--sig);font-size:.6em;margin:0 6px;vertical-align:.15em}
+@media (max-width:820px){.fx-meta,.fx-stats{grid-template-columns:1fr 1fr}.fx-meta div:nth-child(3){padding-left:0;border-left:0}.h-stage.trio{margin-bottom:0}.facts{padding-top:40px}}
+.hero{overflow:visible;position:relative;z-index:1}
+.h-stage.trio{margin-bottom:-120px}
+.facts{padding-top:170px}
+@media (max-width:820px){.h-stage.trio{margin-bottom:0}.facts{padding-top:40px}}
+.fork2.one{grid-template-columns:1fr}
+
+/* Soft colour bands for key sections */
+.facts{background:#ECE4D7;padding-bottom:44px}
+.fx-meta{border-top-color:#CDBFAB;border-bottom-color:#D9CCBA}
+.fx-meta div + div{border-left-color:#D9CCBA}
+.flows2{border-top:0;padding-top:0;gap:20px}
+.flows2 > div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px 12px}
+.flows2 > div:last-child{background:#EEF2EC;border-color:#D7E1D4}
+.flows2 > div:last-child .fl2 li{border-bottom-color:#DDE6DA}
+.flows2 > div:last-child .fh{border-bottom-color:#D7E1D4}
+.hmw{background:var(--sig-t);border:0;border-radius:20px;padding:30px 34px}
+.principles{gap:14px}
+.principles > div{background:#EEF2EC;border-radius:16px;padding:20px 20px 22px}
+.principles span{color:var(--bp-l)}
+
+/* Key decisions: side by side */
+.dec2{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px;display:flex;flex-direction:column;gap:22px}
+.d2-h{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:baseline}
+.d2-h h3{font-family:var(--fd);font-weight:400;font-size:24px;line-height:1.15;color:var(--ink)}
+.d2-h p{font-size:15px;color:var(--muted);margin-top:4px}
+.d2-pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.d2-f{margin:0;display:flex;flex-direction:column;gap:10px}
+.d2-f figcaption{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
+.d2-f figcaption::before{content:"";width:8px;height:8px;border-radius:50%;background:#C9BFB2}
+.d2-f.after figcaption{color:var(--sig-d)}
+.d2-f.after figcaption::before{background:var(--sig)}
+.d2-mat{aspect-ratio:16/11;border-radius:14px;background:#EDE7DD;display:flex;align-items:center;justify-content:center;padding:clamp(14px,2.4vw,28px)}
+.d2-f.after .d2-mat{background:#F6E6DD}
+.d2-mat img{max-width:100%;max-height:100%;width:auto;height:auto;border-radius:8px;background:#fff;box-shadow:0 18px 40px -26px rgba(30,27,24,.55);cursor:zoom-in}
+.d2-f.before .d2-mat img{filter:saturate(.75)}
+.d2-pts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding-top:18px;border-top:1px solid var(--line)}
+.d2-pts li{font-size:14.5px;color:var(--body);line-height:1.5;display:flex;gap:10px}
+.d2-pts span{font-family:var(--fd);font-style:italic;font-weight:300;color:var(--sig);font-size:14px}
+@media (max-width:820px){.d2-pair,.d2-pts{grid-template-columns:1fr}.dec2{padding:18px}.d2-h{grid-template-columns:1fr}}
+.d2-mat{position:relative;padding:0}
+.d2-mat img{position:absolute;inset:clamp(14px,2.4vw,28px);width:calc(100% - 2*clamp(14px,2.4vw,28px));height:calc(100% - 2*clamp(14px,2.4vw,28px));max-width:none;max-height:none;object-fit:contain;background:none;box-shadow:none;border-radius:0;filter:drop-shadow(0 14px 22px rgba(30,27,24,.22))}
+.d2-f.before .d2-mat img{filter:saturate(.75) drop-shadow(0 14px 22px rgba(30,27,24,.22))}
+
+/* Dashboard: zig zag */
+.hot + .hot{grid-template-columns:minmax(0,1fr) minmax(0,1.7fr)}
+.hot + .hot .hot-fig{order:2}
+.hot + .hot .hot-leg{order:1}
+#dashboard{gap:56px}
+@media (max-width:980px){.hot + .hot{grid-template-columns:1fr}.hot + .hot .hot-fig{order:0}}
+
+/* Hero blends into the page: warm sand, no dark block */
+.hero{background:radial-gradient(900px 420px at 80% 0%,rgba(217,96,59,.10),transparent 70%),linear-gradient(180deg,#E6DCCC 0%,#ECE4D7 100%);color:var(--body)}
+.hero h1{color:var(--ink)}
+.hero h1 em{color:var(--sig)}
+.intro{color:var(--muted)}
+.hs{border-color:#DCD1C0;box-shadow:0 30px 60px -34px rgba(60,45,30,.45)}
+.facts{background:linear-gradient(180deg,#ECE4D7 0%,var(--paper) 100%)}
+
+/* Principle cards: clearly visible */
+.principles > div{background:#FFFDF9;border:1px solid #E2D8C9;border-top:3px solid var(--bp-l);box-shadow:0 10px 24px -18px rgba(60,45,30,.35)}
+.principles > div:nth-child(2){border-top-color:var(--sig)}
+.principles > div:nth-child(3){border-top-color:#B8925F}
+.principles > div:nth-child(4){border-top-color:#7E6A9C}
+.principles span{display:inline-flex;align-items:center;justify-content:center;font-family:var(--fd);font-style:italic;font-size:13px;color:#fff;background:var(--bp-l);border-radius:999px;padding:1px 10px}
+.principles > div:nth-child(2) span{background:var(--sig)}
+.principles > div:nth-child(3) span{background:#B8925F}
+.principles > div:nth-child(4) span{background:#7E6A9C}
+
+/* Principle cards: soft gradients that melt into the page */
+.principles > div{border:0;border-top:0;box-shadow:none;background:linear-gradient(160deg,#E3EBE1 0%,rgba(246,241,232,0) 85%)}
+.principles > div:nth-child(2){background:linear-gradient(160deg,#F6DED2 0%,rgba(246,241,232,0) 85%)}
+.principles > div:nth-child(3){background:linear-gradient(160deg,#F0E3CC 0%,rgba(246,241,232,0) 85%)}
+.principles > div:nth-child(4){background:linear-gradient(160deg,#E6E0EE 0%,rgba(246,241,232,0) 85%)}
+.principles span{background:none !important;padding:0;color:var(--bp-l);font-size:15px}
+.principles > div:nth-child(2) span{color:var(--sig)}
+.principles > div:nth-child(3) span{color:#A07B45}
+.principles > div:nth-child(4) span{color:#7E6A9C}
+
+/* Challenge: text only */
+.markup{grid-template-columns:1fr}
+.mk-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 56px}
+@media (max-width:820px){.mk-list{grid-template-columns:1fr}}
+#dashboard{gap:26px}
+#dashboard .hot + .hot{margin-top:32px}
+.stop.ctxs b,.stop.ctxs p{opacity:.55}
+.ex{display:block;font-style:normal;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.ctxnote{font-family:var(--fd);font-style:italic;font-weight:300;font-size:15px;color:var(--muted);margin-top:-10px}
+/* draft to final */
+.task{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:18px;margin:34px 0 18px}
+.task-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+.task-card>b{display:block;font-family:var(--fd);font-weight:400;font-size:21px;line-height:1.3;color:var(--ink);margin:8px 0 14px}
+.task-card dl{display:grid;gap:6px;margin:0 0 14px;padding:12px 0;border-top:1px solid var(--row);border-bottom:1px solid var(--row)}
+.task-card dl div{display:flex;gap:10px;font-size:13.5px}
+.task-card dt{color:var(--muted);min-width:118px}.task-card dd{margin:0;color:var(--ink)}
+.task-card>p{font-size:14.5px;color:var(--muted);margin:0}
+.task-steps{list-style:none;margin:0;padding:0;display:grid;gap:12px;align-content:start}
+.task-steps li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.task-steps p{font-size:14.5px;color:var(--body);margin:8px 0 0}
+.ts-k{display:inline-block;font-family:var(--fm);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.ts-k.fin{color:var(--sig);border-color:currentColor}
+.sheet.board{margin-top:18px}
+.d2-f figcaption em{font-style:normal;font-family:var(--fm);font-size:11px;opacity:.7;margin-left:6px;text-transform:none;letter-spacing:0}
+@media (max-width:760px){.task{grid-template-columns:1fr}}
+.hot + .hot + .hot{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}
+.hot + .hot + .hot .hot-fig{order:0}.hot + .hot + .hot .hot-leg{order:0}
+@media (max-width:980px){.hot + .hot + .hot{grid-template-columns:1fr}}
+/* zoom pair, trade-off, folding flows */
+.zpair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+.d2-cost{display:flex;gap:12px;align-items:baseline;margin:16px 0 0;padding-top:14px;border-top:1px dashed var(--line);font-size:14.5px;color:var(--body)}
+.d2-cost span{flex:none;font-family:var(--fm);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--sig)}
+.fl-t{background:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;align-self:center}
+.fl-t:hover{border-color:var(--ink);color:var(--ink)}
+.fl-t i{width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-135deg) translate(-1px,-1px);transition:transform .2s}
+.fp.fold .fl-t i{transform:rotate(45deg) translate(-2px,-2px)}
+.fp.fold .fp-stage,.fp.fold .fp-journey{display:none}
+.fp.fold .fl-h{margin-bottom:0}
+.fp.fold{cursor:pointer}
+@media (max-width:820px){.zpair{grid-template-columns:1fr}.fl-h .fl-t{display:inline-flex;grid-column:2;justify-self:start}}
+/* compact window bar */
+.h-bar,.hs .h-bar{padding:5px 10px;gap:4px}
+.h-bar i{width:6px;height:6px}
+.h-bar span{font-size:10px;margin-left:6px;letter-spacing:.02em}
+.about{display:grid;grid-template-columns:160px minmax(0,1fr);gap:24px;margin:26px 0 30px;padding:0 0 26px;border-bottom:1px solid var(--line)}
+.about .k{padding-top:6px}
+.about-l{font-family:var(--fd);font-weight:300;font-size:24px;line-height:1.35;color:var(--ink);margin:0 0 10px;max-width:30em}
+.about p:not(.about-l){font-size:16px;color:var(--body);max-width:40em;margin:0}
+@media (max-width:760px){.about{grid-template-columns:1fr;gap:10px}.about-l{font-size:20px}}
+/* compact figure captions */
+.sheet figcaption{font-size:12px;padding:6px 12px 7px;line-height:1.4}
+.sheet figcaption span{font-size:12px;margin-right:8px}
+/* display font: Instrument Serif */
+:root{--fd:'Instrument Serif', Georgia, serif}
+h1,h2,h3,.big,.dn,.onum,.tn b,.three b,.hmw p:last-child,.learn p,.about-l,.aim p,.task-card>b,.fl-h h3,.d2-h h3{font-weight:400 !important;letter-spacing:-.005em}
+.ch h2{letter-spacing:-.01em}
+/* display font: Libre Caslon */
+:root{--fd:'Libre Caslon Display', 'Libre Caslon Text', Georgia, serif}
+em,i,.sheet figcaption span,.fl-n,.dec-n,.onum{font-synthesis:none}
+h1 em,.hero h1 em,h2 em,h3 em{font-family:'Libre Caslon Text', Georgia, serif;font-style:italic}
+/* display font: Playfair Display with lining numbers */
+:root{--fd:'Playfair Display', Georgia, serif}
+h1 em,.hero h1 em,h2 em,h3 em{font-family:var(--fd);font-style:italic}
+body,body *{font-variant-numeric:lining-nums}
+/* D03 real flow comparison */
+.fc{display:grid;gap:18px;margin:20px 0 18px}
+.fc-row{border-radius:14px;padding:16px 18px 18px}
+.fc-row.before{background:linear-gradient(180deg,#EFE9DF,#E9E2D6)}
+.fc-row.after{background:linear-gradient(180deg,#F7E3D9,#F2D9CC)}
+.fc-k{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.fc-row.after .fc-k{color:var(--sig)}
+.fc-k em{font-style:normal;text-transform:none;letter-spacing:0;margin-left:6px;opacity:.8}
+.fc-g{display:grid;gap:12px}.fc-g.g3{grid-template-columns:repeat(3,1fr)}.fc-g.g4{grid-template-columns:repeat(4,1fr)}
+.fc-i{margin:0;min-width:0}
+.fc-m{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 14px 30px -22px rgba(30,27,24,.5)}
+.fc-m img{display:block;width:100%;height:auto}
+.fc-i figcaption{font-size:12.5px;color:var(--body);margin-top:8px;display:flex;gap:6px}
+.fc-i figcaption span{font-family:var(--fd);font-style:italic;color:var(--sig)}
+.fc-note{font-size:12.5px;color:var(--muted);margin:0}
+@media (max-width:820px){.fc-g.g3,.fc-g.g4{grid-template-columns:1fr 1fr}}
+.proof{margin:34px 0 8px;padding:24px 28px;border-radius:16px;background:linear-gradient(180deg,#F7E3D9,#F2D9CC)}
+.proof blockquote{margin:10px 0 12px;font-family:var(--fd);font-style:italic;font-size:26px;line-height:1.3;color:var(--ink)}
+.proof blockquote::before{content:"\201C"}.proof blockquote::after{content:"\201D"}
+.proof p{font-size:15px;color:var(--body);max-width:44em;margin:0}
+.proof figcaption{font-size:12.5px;color:var(--muted);margin-top:10px}
+.proof{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:28px;align-items:center}
+.pf-img{background:#fff;border-radius:12px;padding:10px;box-shadow:0 20px 40px -26px rgba(30,27,24,.45)}
+.pf-img img{display:block;width:100%;height:auto;border-radius:6px}
+.proof blockquote{font-size:23px}
+@media (max-width:860px){.proof{grid-template-columns:1fr}}
+.pf-link{display:inline-block;margin-left:4px;color:var(--sig);font-weight:500;text-decoration:none;border-bottom:1px solid currentColor}
+.pf-link:hover{opacity:.8}
+a.pf-img{display:block;transition:transform .2s ease,box-shadow .2s ease}a.pf-img:hover{transform:translateY(-2px);box-shadow:0 26px 48px -26px rgba(30,27,24,.55)}
+/* upright small numerals */
+.ch-n,.fl-n,.dec-n,.sheet figcaption span,.fc-i figcaption span,.gal-n,.d2-pts span,.onum,.fp-of,.chapters a i{font-style:normal!important;font-variant-numeric:lining-nums}
+/* chapters bar: same pattern as the rest (terracotta accent, underline, no dark fill) */
+.chap-row{gap:2px;padding-block:0;justify-content:space-between}
+.chapters a{position:relative;font-size:13px;font-weight:500;color:var(--muted);padding:14px 8px;border-radius:0;background:none!important;gap:6px}
+.chapters a i{font-family:var(--fm)!important;font-style:normal!important;font-size:10.5px;color:var(--muted);opacity:.75}
+.chapters a::after{content:"";position:absolute;left:8px;right:8px;bottom:-1px;height:2px;border-radius:2px;background:transparent;transition:background .2s}
+.chapters a:hover{color:var(--ink)}
+.chapters a.on{color:var(--sig)}.chapters a.on i{color:var(--sig);opacity:1}
+.chapters a.on::after{background:var(--sig)}
+@media (max-width:1100px){.chap-row{justify-content:flex-start}}
+.chapters a{padding:14px 6px;font-size:12.8px}
+img{height:auto}
+
+html.in-embed nav.chapters{height:0!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;overflow:hidden!important;box-shadow:none!important}</style>
+</head>
+<body>
+
+<header class="hero"><div class="wrap">
+<h1>BW5 on <em>Control Plane</em></h1>
+<p class="intro">Bringing BusinessWorks 5 into Control Plane, so building, deploying and running an app works the same on every page.</p>
+<div class="h-stage trio">
+<figure class="hs hs-back"><div class="h-bar" aria-hidden="true"><i></i><i></i><i></i><span>Dashboard</span></div><img width="2880" height="1800" src="bw5-assets/00_home.webp" alt="The Control Plane home dashboard"></figure>
+<figure class="hs hs-mid"><div class="h-bar" aria-hidden="true"><i></i><i></i><i></i><span>Capability</span></div><img width="2880" height="1800" src="bw5-assets/05_tea_builds.webp" alt="A BW5 domain page with the App Builds table"></figure>
+<figure class="hs hs-front"><div class="h-bar" aria-hidden="true"><i></i><i></i><i></i><span>App</span></div><img width="2880" height="1800" src="bw5-assets/31_app_endpoints.webp" alt="A BW5 app page open on Endpoints"></figure>
+</div>
+</div></header>
+
+<section class="facts"><div class="wrap">
+<dl class="fx-meta">
+<div><dt>Role</dt><dd>Product designer, end to end</dd></div>
+<div><dt>Scope</dt><dd>Capability and app level</dd></div>
+<div><dt>Product</dt><dd>BusinessWorks 5</dd></div>
+<div><dt>Company</dt><dd>TIBCO</dd></div>
+</dl>
+<ul class="fx-stats">
+<li><b>1</b>modal size for every flow</li>
+<li><b>3</b>sections on every capability</li>
+<li><b>10</b>flows designed end to end</li>
+<li><b>3</b>years on the product</li>
+</ul>
+</div></section>
+
+<nav class="chapters" aria-label="Chapters"><div class="wrap chap-row">
+<a href="#overview" class="on"><i>01</i>Overview</a><a href="#challenge"><i>02</i>Challenge</a><a href="#process"><i>03</i>How I worked</a><a href="#map"><i>04</i>Product map</a><a href="#dashboard"><i>05</i>Where it starts</a><a href="#decisions"><i>06</i>Decisions</a><a href="#capability"><i>07</i>Capability</a><a href="#app"><i>08</i>App level</a><a href="#components"><i>09</i>Components</a><a href="#outcome"><i>10</i>Outcome</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="overview" class="chapter">
+<div class="ch"><span class="ch-n">01</span><h2>Overview</h2></div>
+<div class="about"><span class="k">What is BW5</span><div><p class="about-l">TIBCO makes integration software. It helps the apps and systems inside a large business talk to each other and share data in real time.</p><p>TIBCO BusinessWorks 5, or BW5, is the core tool that makes this happen. Instead of heavy coding, developers visually design workflows that connect databases, websites and applications.</p></div></div>
+<p class="lede">I designed how BW5 apps live in Control Plane, from start to end.</p>
+<blockquote class="aim"><span class="k">The aim</span><p>BW5 should feel native in Control Plane. Learn one page, and every other already makes sense.</p></blockquote>
+<div class="ctx">
+<div class="ctx-cp"><span class="k">Control Plane</span><b>One place for every data plane</b><p>Provision, manage and monitor TIBCO capabilities, on any cloud or bare metal.</p></div>
+<div class="ctx-link" aria-hidden="true"><i></i><span>secure tunnel</span><i></i></div>
+<div class="ctx-dp"><span class="k">Data plane</span><b>Where the apps run</b>
+<ul class="ctx-caps"><li class="on"><em>BW5</em>Proven integration engine, now run from Control Plane</li><li><em>Flogo</em>Lightweight apps</li><li><em>EMS</em>Messaging</li></ul></div>
+</div>
+<p class="ctx-note">This case study covers BW5, highlighted above.</p>
+<div class="ov2">
+<div><span class="k">The work</span><p>The capability pages, the domain pages and every app page, with the flows between them.</p></div>
+<div><span class="k">Who it is for</span><p><b>Integration developers</b> build, deploy, scale and upgrade their apps. <b>Platform admins</b> keep each data plane ready: runtime versions, plugins and supplements.</p></div>
+</div>
+<div class="ov2 flows2">
+<div><div class="fh"><span class="k">Capability level</span><em>5 flows</em></div><ol class="fl2"><li><span>01</span>Build and deploy</li><li><span>02</span>Provision plugins</li><li><span>03</span>New version</li><li><span>04</span>Upload supplements</li><li><span>05</span>Import and apps using a build</li></ol></div>
+<div><div class="fh"><span class="k">App level</span><em>5 flows</em></div><ol class="fl2"><li><span>01</span>Run and scale</li><li><span>02</span>Endpoint visibility</li><li><span>03</span>Monitor, configure and troubleshoot</li><li><span>04</span>Helm and rollback</li><li><span>05</span>Upgrade app</li></ol></div>
+</div>
+</section>
+
+<section id="challenge" class="chapter">
+<div class="ch"><span class="ch-n">02</span><h2>The challenge</h2></div>
+<p class="lede">Many flows, and screens that had grown apart.</p>
+<div class="markup">
+
+<ol class="mk-list">
+<li><b>Pages organised differently</b><p>Capability, domain and app pages each had their own layout, so the same task looked different on each.</p></li>
+<li><b>Mixed components</b><p>Input sizes, footer buttons on the left, toggle size controls and old tables sat next to the new design system.</p></li>
+<li><b>Long flows with weak endings</b><p>Build, deploy and provision ran across many screens and ended without a clear success or failure state.</p></li>
+<li><b>Critical moments with little care</b><p>Making an endpoint public, rolling back a release and accepting the agreement had no real treatment.</p></li>
+</ol>
+</div>
+<div class="hmw"><span class="k">Problem statement</span><p>How might we give BW5 teams one clear way to build, deploy and run their apps in Control Plane?</p></div>
+<div class="principles">
+<div><span>P1</span><b>Same structure everywhere</b><p>Same sections, same order, same actions.</p></div>
+<div><span>P2</span><b>Keep the product's words</b><p>App Builds and Available Supplements stay exactly as users know them.</p></div>
+<div><span>P3</span><b>One modal, many flows</b><p>Same size, header, steps and footer.</p></div>
+<div><span>P4</span><b>Color means status</b><p>Running green, Critical amber, Stopped red.</p></div>
+</div>
+</section>
+
+<section id="process" class="chapter">
+<div class="ch"><span class="ch-n">03</span><h2>How I worked</h2></div>
+<p class="lede">Three years on the product, one quarterly release at a time.</p>
+<div class="loop">
+<div class="loop-head"><span class="k">Every quarter</span><p>Each Jira task went round this loop.</p></div>
+<ol class="track">
+<li class="p1"><i>01</i><b>Quarterly release</b><p>Features planned</p></li>
+<li class="p1"><i>02</i><b>Tasks in Jira</b><p>Features split into tasks</p></li>
+<li class="p1"><i>03</i><b>Requirement call</b><p>With the product managers</p></li>
+<li class="p2"><i>04</i><b>Design</b><p>Flows and screens</p></li>
+<li class="p2"><i>05</i><b>Team review</b><p>With my lead and the design team</p></li>
+<li class="p2"><i>06</i><b>Approval</b><p>By the Head of Design</p></li>
+<li class="p3"><i>07</i><b>Visual design review</b><p>A final visual check</p></li>
+<li class="p3"><i>08</i><b>Implementation</b><p>Built by the developers</p></li>
+<li class="p3"><i>09</i><b>Implementation review</b><p>The build checked against the design</p></li>
+</ol>
+<div class="loop-legend"><span class="p1">Plan</span><span class="p2">Design and approve</span><span class="p3">Build and check</span><span class="ret">&#8635; Next release</span></div>
+</div>
+<div class="task">
+<div class="task-card"><span class="k">One task, start to finish</span><b>Expose flags from application.tra on the Control Plane UI</b>
+<dl><div><dt>Product</dt><dd>BW5</dd></div><div><dt>Tracked in</dt><dd>Jira, with a linked Figma file</dd></div><div><dt>Product designer</dt><dd>Nikhil</dd></div></dl>
+<p>Every task got its own Figma board: the Jira summary on top, a draft, then the finalised flow with arrows between screens.</p></div>
+<ol class="task-steps">
+<li><span class="ts-k">Draft I</span><p>Properties as a key value table. Add, edit and delete row by row, a modal to add several values, and prompts for unsaved changes and deletes.</p></li>
+<li><span class="ts-k fin">Finalised</span><p>One Properties editor with the file as text. Save, then Push update, with a banner that says a restart is needed to apply the change.</p></li>
+</ol>
+</div>
+<figure class="sheet board"><div class="sheet-img"><img width="3600" height="2797" src="bw5-assets/proc_draft.webp" alt="Draft I. The key value table, its modals and toasts." loading="lazy" decoding="async"></div><figcaption><span>Fig 01</span>Draft I. The key value table, its modals and toasts.</figcaption></figure>
+<figure class="sheet board"><div class="sheet-img"><img width="3600" height="1478" src="bw5-assets/proc_final.webp" alt="Finalised. Fewer modals: one editor and one push." loading="lazy" decoding="async"></div><figcaption><span>Fig 02</span>Finalised. Fewer modals: one editor and one push.</figcaption></figure>
+<div class="zpair">
+<figure class="d2-f before"><figcaption>Draft I <em>.tra Properties as rows</em></figcaption><div class="d2-mat"><img width="2880" height="1800" src="bw5-assets/proc_zd.webp" alt="Draft I: .tra Properties as a table of property names and values, with row actions" loading="lazy" decoding="async"></div></figure>
+<figure class="d2-f after"><figcaption>Finalised <em>one editor, one push</em></figcaption><div class="d2-mat"><img width="2880" height="1800" src="bw5-assets/proc_zf.webp" alt="Finalised: a Properties editor with Refresh, Push update and a restart banner" loading="lazy" decoding="async"></div></figure>
+</div>
+</section>
+
+<section id="map" class="chapter">
+<div class="ch"><span class="ch-n">04</span><h2>Product map</h2></div>
+<p class="lede">Four levels. My work covers the last two.</p>
+<div class="route">
+<div class="stop ctxs"><span class="sn">i.</span><b>Dashboard</b><p>Home and data planes</p><em class="ex">Existing, entry point</em></div>
+<div class="stop ctxs"><span class="sn">ii.</span><b>Data plane</b><p>Capabilities and the apps on it</p><em class="ex">Existing, entry point</em></div>
+<div class="stop wide"><span class="sn">iii.</span><b>Capability</b>
+<div class="fork2 one"><div><em>BW5</em><p>Through domains, each with the same three sections</p></div></div>
+<ul class="secl"><li>App Builds</li><li>Available TIBCO Software &amp; Plugins On This Data Plane</li><li>Available Supplements</li></ul></div>
+<div class="stop"><span class="sn">iv.</span><b>App</b><ul class="navl"><li>Processes</li><li>Endpoints</li><li>Monitoring</li><li>Environmental Controls</li><li>Logs</li><li>Traces</li><li>Helm Configuration</li></ul></div>
+</div>
+</section>
+
+<section id="dashboard" class="chapter">
+<div class="ch"><span class="ch-n">05</span><h2>Where it starts</h2></div>
+<p class="lede">Users reach BW5 from home, through the data plane list, to one data plane.</p>
+<p class="ctxnote">Existing pages, shown for context. They were not part of my scope.</p>
+<div class="hot" data-hot><figure class="sheet hot-fig"><div class="sheet-img rel"><img width="2880" height="1800" src="bw5-assets/00_home.webp" alt="Home." loading="lazy" decoding="async"><button type="button" class="hp" style="left:22%;top:38%" data-i="0" aria-label="Counts at a glance"><span>1</span></button><button type="button" class="hp" style="left:30%;top:60%" data-i="1" aria-label="Apps running"><span>2</span></button><button type="button" class="hp" style="left:78%;top:52%" data-i="2" aria-label="Needs attention"><span>3</span></button><button type="button" class="hp" style="left:32%;top:90%" data-i="3" aria-label="Data plane health"><span>4</span></button></div><figcaption><span>Fig 03</span>Home.</figcaption></figure><ol class="hot-leg"><li><button type="button" data-i="0"><span>1</span><div><b>Counts at a glance</b><p>Data planes, apps and capabilities with their status.</p></div></button></li><li><button type="button" data-i="1"><span>2</span><div><b>Apps running</b><p>A trend across all data planes.</p></div></button></li><li><button type="button" data-i="2"><span>3</span><div><b>Needs attention</b><p>Each item with the action that fixes it.</p></div></button></li><li><button type="button" data-i="3"><span>4</span><div><b>Data plane health</b><p>CPU, memory and apps per data plane.</p></div></button></li></ol></div>
+<div class="hot" data-hot><figure class="sheet hot-fig"><div class="sheet-img rel"><img width="2880" height="1800" src="bw5-assets/02_dplist.webp" alt="Data planes." loading="lazy" decoding="async"><button type="button" class="hp" style="left:46%;top:17%" data-i="0" aria-label="Status at a glance"><span>1</span></button><button type="button" class="hp" style="left:40%;top:32%" data-i="1" aria-label="Find a data plane"><span>2</span></button><button type="button" class="hp" style="left:44%;top:47%" data-i="2" aria-label="Data plane cards"><span>3</span></button></div><figcaption><span>Fig 04</span>Data planes.</figcaption></figure><ol class="hot-leg"><li><button type="button" data-i="0"><span>1</span><div><b>Status at a glance</b><p>All, Running, Critical, Stopped and Upgrades, each one a filter.</p></div></button></li><li><button type="button" data-i="1"><span>2</span><div><b>Find a data plane</b><p>Search, type, region and sort, in grid or list view.</p></div></button></li><li><button type="button" data-i="2"><span>3</span><div><b>Data plane cards</b><p>Type, region, capabilities and apps. localdp leads on to BW5.</p></div></button></li></ol></div>
+<div class="hot" data-hot><figure class="sheet hot-fig"><div class="sheet-img rel"><img width="2880" height="1800" src="bw5-assets/01_dp.webp" alt="Data plane." loading="lazy" decoding="async"><button type="button" class="hp" style="left:30%;top:24%" data-i="0" aria-label="Data plane summary"><span>1</span></button><button type="button" class="hp" style="left:38%;top:47%" data-i="1" aria-label="Capability cards"><span>2</span></button><button type="button" class="hp" style="left:50%;top:76%" data-i="2" aria-label="Applications"><span>3</span></button></div><figcaption><span>Fig 05</span>Data plane.</figcaption></figure><ol class="hot-leg"><li><button type="button" data-i="0"><span>1</span><div><b>Data plane summary</b><p>Status, tunnel and resource use.</p></div></button></li><li><button type="button" data-i="1"><span>2</span><div><b>Capability cards</b><p>The BW5 card leads into my work.</p></div></button></li><li><button type="button" data-i="2"><span>3</span><div><b>Applications</b><p>Every app on the data plane.</p></div></button></li></ol></div>
+</section>
+
+
+<section id="decisions" class="chapter">
+<div class="ch"><span class="ch-n">06</span><h2>Key decisions</h2></div>
+<p class="lede">Three changes that shaped the work.</p>
+<article class="dec2"><header class="d2-h"><span class="dec-n">D01</span><div><h3>Top tabs became a left navigation</h3><p>Tabs could not hold a second level.</p></div></header>
+<div class="d2-pair">
+<figure class="d2-f before"><figcaption>Before <em>real screen, the original page</em></figcaption><div class="d2-mat"><img width="2852" height="1228" src="bw5-assets/ma_b_real.webp" alt="Before: Top tabs became a left navigation" loading="lazy" decoding="async"></div></figure>
+<figure class="d2-f after"><figcaption>After</figcaption><div class="d2-mat"><img width="2880" height="1800" src="bw5-assets/ma_a.webp" alt="After: Top tabs became a left navigation" loading="lazy" decoding="async"></div></figure>
+</div>
+<ol class="d2-pts"><li><span>01</span>Groups open in place, one click to any page.</li><li><span>02</span>Content gets the full width, run controls stay in the header.</li><li><span>03</span>Every app page uses it.</li></ol><p class="d2-cost"><span>Trade-off</span>The left navigation takes width, so the product navigation collapses to icons inside an app.</p></article>
+<article class="dec2"><header class="d2-h"><span class="dec-n">D02</span><div><h3>Upgrade moved from a full page into a guided wizard</h3><p>A full page for one choice, with no review step.</p></div></header>
+<div class="d2-pair">
+<figure class="d2-f before"><figcaption>Before <em>real screen, product names blurred</em></figcaption><div class="d2-mat"><img width="2978" height="1278" src="bw5-assets/mu_b_real.webp" alt="Before: Upgrade moved from a full page into a guided wizard" loading="lazy" decoding="async"></div></figure>
+<figure class="d2-f after"><figcaption>After</figcaption><div class="d2-mat"><img width="2880" height="1800" src="bw5-assets/24_newversion.webp" alt="After: Upgrade moved from a full page into a guided wizard" loading="lazy" decoding="async"></div></figure>
+</div>
+<ol class="d2-pts"><li><span>01</span>Stays on the capability page, in the standard modal.</li><li><span>02</span>Latest and Current tagged, older versions one click away.</li><li><span>03</span>A review step before anything is provisioned.</li></ol><p class="d2-cost"><span>Trade-off</span>One more step to reach the result, kept because provisioning is hard to undo.</p></article>
+<article class="dec2"><header class="d2-h"><span class="dec-n">D03</span><div><h3>Provisioning moved into the same modal pattern</h3><p>A separate full page, a different look from every other flow.</p></div></header>
+<div class="fc"><div class="fc-row before"><p class="fc-k">Before <em>the original flow, 3 full pages</em></p><div class="fc-g g3"><figure class="fc-i"><div class="fc-m"><img width="1600" height="655" src="bw5-assets/pv_o1.webp" alt="Start on the capability page" loading="lazy" decoding="async"></div><figcaption><span>01</span>Start on the capability page</figcaption></figure><figure class="fc-i"><div class="fc-m"><img width="1600" height="662" src="bw5-assets/pv_o2.webp" alt="A full page wizard" loading="lazy" decoding="async"></div><figcaption><span>02</span>A full page wizard</figcaption></figure><figure class="fc-i"><div class="fc-m"><img width="1600" height="662" src="bw5-assets/pv_o3.webp" alt="Status on the same page" loading="lazy" decoding="async"></div><figcaption><span>03</span>Status on the same page</figcaption></figure></div></div>
+<div class="fc-row after"><p class="fc-k">After <em>one modal, 4 states</em></p><div class="fc-g g4"><figure class="fc-i"><div class="fc-m"><img width="1600" height="1064" src="bw5-assets/pv_n1.webp" alt="Pick plugins in a modal" loading="lazy" decoding="async"></div><figcaption><span>01</span>Pick plugins in a modal</figcaption></figure><figure class="fc-i"><div class="fc-m"><img width="1600" height="1064" src="bw5-assets/pv_n2.webp" alt="Or upload a custom one" loading="lazy" decoding="async"></div><figcaption><span>02</span>Or upload a custom one</figcaption></figure><figure class="fc-i"><div class="fc-m"><img width="1600" height="1064" src="bw5-assets/pv_n3.webp" alt="Clear success" loading="lazy" decoding="async"></div><figcaption><span>03</span>Clear success</figcaption></figure><figure class="fc-i"><div class="fc-m"><img width="1600" height="1064" src="bw5-assets/pv_n4.webp" alt="Clear failure, with Retry" loading="lazy" decoding="async"></div><figcaption><span>04</span>Clear failure, with Retry</figcaption></figure></div></div>
+<p class="fc-note">Real screens from the design file. Product and people names are blurred. BW5 uses the same flow, where adapters are called plugins.</p></div>
+<ol class="d2-pts"><li><span>01</span>Runtime picked once, in a context box at the top.</li><li><span>02</span>Plugins and custom upload as two clear tabs.</li><li><span>03</span>A success and a failure screen, each with a next step.</li></ol><p class="d2-cost"><span>Trade-off</span>A fixed modal size means long plugin lists scroll inside the body instead of growing the page.</p></article>
+</section>
+
+<section id="capability" class="chapter">
+<div class="ch"><span class="ch-n">07</span><h2>Capability level</h2></div>
+<p class="lede">Same three sections, same actions.</p>
+<div class="three">
+<div><span>S1</span><b>App Builds</b><em>Import · Create New App Build &amp; Deploy</em></div>
+<div><span>S2</span><b>Available TIBCO Software &amp; Plugins On This Data Plane</b><em>Check for new versions · Provision</em></div>
+<div><span>S3</span><b>Available Supplements</b><em>Upload Supplements</em></div>
+</div>
+<div class="duo">
+<figure class="sheet "><div class="sheet-img"><img width="2880" height="1800" src="bw5-assets/04_bw5_tea.webp" alt="BW5 capability, with its domains." loading="lazy" decoding="async"></div><figcaption><span>Fig 06</span>BW5 capability, with its domains.</figcaption></figure>
+<figure class="sheet "><div class="sheet-img"><img width="2880" height="1800" src="bw5-assets/05_tea_builds.webp" alt="A domain with the three sections." loading="lazy" decoding="async"></div><figcaption><span>Fig 07</span>A domain with the three sections.</figcaption></figure>
+</div>
+<h3 class="sub">Capability flows</h3>
+<div class="flist" aria-label="Capability flows"><article class="fp solo" data-fp id="f-build"><div class="fp-flow on">
+<header class="fl-h"><span class="fl-n">i.</span><div><h3>Build and deploy</h3><p>Build, choose how it is managed, deploy.</p></div><button type="button" class="fl-c fl-t" aria-expanded="true">9 steps<i aria-hidden="true"></i></button></header>
+<figure class="fp-stage"><div class="fs-imgs"><img width="2880" height="1800" class="fs-img on" src="bw5-assets/10_build_upload_empty.webp" alt="Start the wizard: Opens App Build, steps always visible." loading="lazy" decoding="async" data-t="Start the wizard" data-d="Opens App Build, steps always visible."><img width="2880" height="1800" class="fs-img" src="bw5-assets/11_build_upload.webp" alt="Upload the EAR: Drop the EAR, progress fills in place." loading="lazy" decoding="async" data-t="Upload the EAR" data-d="Drop the EAR, progress fills in place."><img width="2880" height="1800" class="fs-img" src="bw5-assets/12_build_config.webp" alt="Configure the build: Versions, profile, name and plugins." loading="lazy" decoding="async" data-t="Configure the build" data-d="Versions, profile, name and plugins."><img width="2880" height="1800" class="fs-img" src="bw5-assets/13_deploy_choose.webp" alt="Choose how it is managed: Provisioner or Helm Charts." loading="lazy" decoding="async" data-t="Choose how it is managed" data-d="Provisioner or Helm Charts."><img width="2880" height="1800" class="fs-img" src="bw5-assets/14_deploy_resources.webp" alt="App resource configuration: Name, profile and namespace." loading="lazy" decoding="async" data-t="App resource configuration" data-d="Name, profile and namespace."><img width="2880" height="1800" class="fs-img" src="bw5-assets/15_deploy_autoscale.webp" alt="Turn on auto scaling: Min, max and targets, validated." loading="lazy" decoding="async" data-t="Turn on auto scaling" data-d="Min, max and targets, validated."><img width="2880" height="1800" class="fs-img" src="bw5-assets/16_deploy_yaml.webp" alt="Review the YAML: Generated values, ready to review." loading="lazy" decoding="async" data-t="Review the YAML" data-d="Generated values, ready to review."><img width="2880" height="1800" class="fs-img" src="bw5-assets/17_eula.webp" alt="Read the agreement: Opens full screen to read." loading="lazy" decoding="async" data-t="Read the agreement" data-d="Opens full screen to read."><img width="2880" height="1800" class="fs-img" src="bw5-assets/18_deploy_done.webp" alt="Deployed: App ID and next steps." loading="lazy" decoding="async" data-t="Deployed" data-d="App ID and next steps."></div>
+<figcaption class="fp-cap"><span class="fp-of">01 / 09</span><div class="fp-txt"><b>Start the wizard</b><p>Opens App Build, steps always visible.</p></div>
+<div class="fp-ctl"><button type="button" class="fp-prev" aria-label="Previous step">&larr;</button><button type="button" class="fp-play" aria-label="Play through the steps"><span class="i-play">&#9654;</span><span class="i-pause">&#10073;&#10073;</span></button><button type="button" class="fp-next" aria-label="Next step">&rarr;</button></div></figcaption></figure>
+<ol class="fp-journey"><li><button type="button" class="fj on" data-i="0" aria-label="Step 1: Start the wizard"><i></i><span>Start the wizard</span></button></li><li><button type="button" class="fj" data-i="1" aria-label="Step 2: Upload the EAR"><i></i><span>Upload the EAR</span></button></li><li><button type="button" class="fj" data-i="2" aria-label="Step 3: Configure the build"><i></i><span>Configure the build</span></button></li><li><button type="button" class="fj" data-i="3" aria-label="Step 4: Choose how it is managed"><i></i><span>Choose how it is managed</span></button></li><li><button type="button" class="fj" data-i="4" aria-label="Step 5: App resource configuration"><i></i><span>App resource configuration</span></button></li><li><button type="button" class="fj" data-i="5" aria-label="Step 6: Turn on auto scaling"><i></i><span>Turn on auto scaling</span></button></li><li><button type="button" class="fj" data-i="6" aria-label="Step 7: Review the YAML"><i></i><span>Review the YAML</span></button></li><li><button type="button" class="fj" data-i="7" aria-label="Step 8: Read the agreement"><i></i><span>Read the agreement</span></button></li><li><button type="button" class="fj" data-i="8" aria-label="Step 9: Deployed"><i></i><span>Deployed</span></button></li></ol>
+</div></article><article class="fp solo fold" data-fp id="f-plugin"><div class="fp-flow on">
+<header class="fl-h"><span class="fl-n">ii.</span><div><h3>Provision plugins</h3><p>Pick a runtime, then plugins.</p></div><button type="button" class="fl-c fl-t" aria-expanded="false">4 steps<i aria-hidden="true"></i></button></header>
+<figure class="fp-stage"><div class="fs-imgs"><img width="2880" height="1800" class="fs-img on" src="bw5-assets/20_plugin_select.webp" alt="Select plugins: Searchable list, a version each." loading="lazy" decoding="async" data-t="Select plugins" data-d="Searchable list, a version each."><img width="2880" height="1800" class="fs-img" src="bw5-assets/21_plugin_custom.webp" alt="Upload a custom plugin: ID, version, icon and zip." loading="lazy" decoding="async" data-t="Upload a custom plugin" data-d="ID, version, icon and zip."><img width="2880" height="1800" class="fs-img" src="bw5-assets/22_plugin_status.webp" alt="Watch it provision: Live status per plugin." loading="lazy" decoding="async" data-t="Watch it provision" data-d="Live status per plugin."><img width="2880" height="1800" class="fs-img" src="bw5-assets/23_plugin_done.webp" alt="Provisioned: Success, or Retry on failure." loading="lazy" decoding="async" data-t="Provisioned" data-d="Success, or Retry on failure."></div>
+<figcaption class="fp-cap"><span class="fp-of">01 / 04</span><div class="fp-txt"><b>Select plugins</b><p>Searchable list, a version each.</p></div>
+<div class="fp-ctl"><button type="button" class="fp-prev" aria-label="Previous step">&larr;</button><button type="button" class="fp-play" aria-label="Play through the steps"><span class="i-play">&#9654;</span><span class="i-pause">&#10073;&#10073;</span></button><button type="button" class="fp-next" aria-label="Next step">&rarr;</button></div></figcaption></figure>
+<ol class="fp-journey"><li><button type="button" class="fj on" data-i="0" aria-label="Step 1: Select plugins"><i></i><span>Select plugins</span></button></li><li><button type="button" class="fj" data-i="1" aria-label="Step 2: Upload a custom plugin"><i></i><span>Upload a custom plugin</span></button></li><li><button type="button" class="fj" data-i="2" aria-label="Step 3: Watch it provision"><i></i><span>Watch it provision</span></button></li><li><button type="button" class="fj" data-i="3" aria-label="Step 4: Provisioned"><i></i><span>Provisioned</span></button></li></ol>
+</div></article><article class="fp solo fold" data-fp id="f-version"><div class="fp-flow on">
+<header class="fl-h"><span class="fl-n">iii.</span><div><h3>New version</h3><p>Flagged in the table, done in two steps.</p></div><button type="button" class="fl-c fl-t" aria-expanded="false">3 steps<i aria-hidden="true"></i></button></header>
+<figure class="fp-stage"><div class="fs-imgs"><img width="2880" height="1800" class="fs-img on" src="bw5-assets/06_tea_sw.webp" alt="Spot the new version: A blue New Version tag." loading="lazy" decoding="async" data-t="Spot the new version" data-d="A blue New Version tag."><img width="2880" height="1800" class="fs-img" src="bw5-assets/24_newversion.webp" alt="Select the version: Latest and Current tagged." loading="lazy" decoding="async" data-t="Select the version" data-d="Latest and Current tagged."><img width="2880" height="1800" class="fs-img" src="bw5-assets/25_newversion_review.webp" alt="Review and provision: Current to new, in one row." loading="lazy" decoding="async" data-t="Review and provision" data-d="Current to new, in one row."></div>
+<figcaption class="fp-cap"><span class="fp-of">01 / 03</span><div class="fp-txt"><b>Spot the new version</b><p>A blue New Version tag.</p></div>
+<div class="fp-ctl"><button type="button" class="fp-prev" aria-label="Previous step">&larr;</button><button type="button" class="fp-play" aria-label="Play through the steps"><span class="i-play">&#9654;</span><span class="i-pause">&#10073;&#10073;</span></button><button type="button" class="fp-next" aria-label="Next step">&rarr;</button></div></figcaption></figure>
+<ol class="fp-journey"><li><button type="button" class="fj on" data-i="0" aria-label="Step 1: Spot the new version"><i></i><span>Spot the new version</span></button></li><li><button type="button" class="fj" data-i="1" aria-label="Step 2: Select the version"><i></i><span>Select the version</span></button></li><li><button type="button" class="fj" data-i="2" aria-label="Step 3: Review and provision"><i></i><span>Review and provision</span></button></li></ol>
+</div></article><article class="fp solo fold" data-fp id="f-supp"><div class="fp-flow on">
+<header class="fl-h"><span class="fl-n">iv.</span><div><h3>Upload supplements</h3><p>Missing drivers are called out early.</p></div><button type="button" class="fl-c fl-t" aria-expanded="false">2 steps<i aria-hidden="true"></i></button></header>
+<figure class="fp-stage"><div class="fs-imgs"><img width="2880" height="1800" class="fs-img on" src="bw5-assets/07_tea_supp.webp" alt="See what is missing: Each missing file, with an Upload." loading="lazy" decoding="async" data-t="See what is missing" data-d="Each missing file, with an Upload."><img width="2880" height="1800" class="fs-img" src="bw5-assets/26_supp_upload.webp" alt="Upload: Plug-in, name and file." loading="lazy" decoding="async" data-t="Upload" data-d="Plug-in, name and file."></div>
+<figcaption class="fp-cap"><span class="fp-of">01 / 02</span><div class="fp-txt"><b>See what is missing</b><p>Each missing file, with an Upload.</p></div>
+<div class="fp-ctl"><button type="button" class="fp-prev" aria-label="Previous step">&larr;</button><button type="button" class="fp-play" aria-label="Play through the steps"><span class="i-play">&#9654;</span><span class="i-pause">&#10073;&#10073;</span></button><button type="button" class="fp-next" aria-label="Next step">&rarr;</button></div></figcaption></figure>
+<ol class="fp-journey"><li><button type="button" class="fj on" data-i="0" aria-label="Step 1: See what is missing"><i></i><span>See what is missing</span></button></li><li><button type="button" class="fj" data-i="1" aria-label="Step 2: Upload"><i></i><span>Upload</span></button></li></ol>
+</div></article><article class="fp solo fold" data-fp id="f-more"><div class="fp-flow on">
+<header class="fl-h"><span class="fl-n">v.</span><div><h3>Import and apps using a build</h3><p>Smaller flows on the same modal.</p></div><button type="button" class="fl-c fl-t" aria-expanded="false">2 steps<i aria-hidden="true"></i></button></header>
+<figure class="fp-stage"><div class="fs-imgs"><img width="2880" height="1800" class="fs-img on" src="bw5-assets/28_import.webp" alt="Import an app build: Same upload component." loading="lazy" decoding="async" data-t="Import an app build" data-d="Same upload component."><img width="2880" height="1800" class="fs-img" src="bw5-assets/27_using.webp" alt="Apps using this app build: Apps on a build, with status." loading="lazy" decoding="async" data-t="Apps using this app build" data-d="Apps on a build, with status."></div>
+<figcaption class="fp-cap"><span class="fp-of">01 / 02</span><div class="fp-txt"><b>Import an app build</b><p>Same upload component.</p></div>
+<div class="fp-ctl"><button type="button" class="fp-prev" aria-label="Previous step">&larr;</button><button type="button" class="fp-play" aria-label="Play through the steps"><span class="i-play">&#9654;</span><span class="i-pause">&#10073;&#10073;</span></button><button type="button" class="fp-next" aria-label="Next step">&rarr;</button></div></figcaption></figure>
+<ol class="fp-journey"><li><button type="button" class="fj on" data-i="0" aria-label="Step 1: Import an app build"><i></i><span>Import an app build</span></button></li><li><button type="button" class="fj" data-i="1" aria-label="Step 2: Apps using this app build"><i></i><span>Apps using this app build</span></button></li></ol>
+</div></article></div>
+</section>
+
+<section id="app" class="chapter">
+<div class="ch"><span class="ch-n">08</span><h2>App level</h2></div>
+<p class="lede">One app page, every section on the left. Hover a zone.</p>
+<div class="shell" data-shell>
+<div class="sh-stage"><img width="2880" height="1800" src="bw5-assets/31_app_endpoints.webp" alt="A BW5 app page with product navigation, header, left navigation and content" loading="lazy" decoding="async">
+<span class="zone" data-z="0" style="left:0;top:0;width:4.4%;height:100%"></span><span class="zone" data-z="1" style="left:4.4%;top:0;width:95.6%;height:13.1%"></span><span class="zone" data-z="2" style="left:4.4%;top:13.1%;width:16.7%;height:86.9%"></span><span class="zone" data-z="3" style="left:21.1%;top:13.1%;width:78.9%;height:86.9%"></span></div>
+<ol class="sh-leg">
+<li><button type="button" data-z="0"><span>Z1</span><div><b>Product navigation</b><p>Collapses to icons inside an app, so the app gets the room.</p></div></button></li>
+<li><button type="button" data-z="1"><span>Z2</span><div><b>Header</b><p>Status, name and description, with replicas, Start and Stop, Auto Scaling and the menu.</p></div></button></li>
+<li><button type="button" data-z="2"><span>Z3</span><div><b>Left navigation</b><p>Replaced the top tabs. Groups open in place.</p></div></button></li>
+<li><button type="button" data-z="3"><span>Z4</span><div><b>Content</b><p>Full width for tables, editors and charts.</p></div></button></li>
+</ol>
+</div>
+<h3 class="sub">App flows</h3>
+<div class="flist" aria-label="App flows"><article class="fp solo" data-fp id="a-scale"><div class="fp-flow on">
+<header class="fl-h"><span class="fl-n">i.</span><div><h3>Run and scale</h3><p>Controls live in the header.</p></div><button type="button" class="fl-c fl-t" aria-expanded="true">3 steps<i aria-hidden="true"></i></button></header>
+<figure class="fp-stage"><div class="fs-imgs"><img width="2880" height="1800" class="fs-img on" src="bw5-assets/30_app_processes.webp" alt="Header controls: Replicas, Stop, Auto Scaling." loading="lazy" decoding="async" data-t="Header controls" data-d="Replicas, Stop, Auto Scaling."><img width="2880" height="1800" class="fs-img" src="bw5-assets/44_autoscale.webp" alt="Auto Scaling Configuration: Min, max and targets." loading="lazy" decoding="async" data-t="Auto Scaling Configuration" data-d="Min, max and targets."><img width="2880" height="1800" class="fs-img" src="bw5-assets/40_app_menu.webp" alt="App actions: Less frequent actions." loading="lazy" decoding="async" data-t="App actions" data-d="Less frequent actions."></div>
+<figcaption class="fp-cap"><span class="fp-of">01 / 03</span><div class="fp-txt"><b>Header controls</b><p>Replicas, Stop, Auto Scaling.</p></div>
+<div class="fp-ctl"><button type="button" class="fp-prev" aria-label="Previous step">&larr;</button><button type="button" class="fp-play" aria-label="Play through the steps"><span class="i-play">&#9654;</span><span class="i-pause">&#10073;&#10073;</span></button><button type="button" class="fp-next" aria-label="Next step">&rarr;</button></div></figcaption></figure>
+<ol class="fp-journey"><li><button type="button" class="fj on" data-i="0" aria-label="Step 1: Header controls"><i></i><span>Header controls</span></button></li><li><button type="button" class="fj" data-i="1" aria-label="Step 2: Auto Scaling Configuration"><i></i><span>Auto Scaling Configuration</span></button></li><li><button type="button" class="fj" data-i="2" aria-label="Step 3: App actions"><i></i><span>App actions</span></button></li></ol>
+</div></article><article class="fp solo fold" data-fp id="a-endpoint"><div class="fp-flow on">
+<header class="fl-h"><span class="fl-n">ii.</span><div><h3>Endpoint visibility</h3><p>A risky change, made clear.</p></div><button type="button" class="fl-c fl-t" aria-expanded="false">2 steps<i aria-hidden="true"></i></button></header>
+<figure class="fp-stage"><div class="fs-imgs"><img width="2880" height="1800" class="fs-img on" src="bw5-assets/31_app_endpoints.webp" alt="Endpoints: Ingress details above the table." loading="lazy" decoding="async" data-t="Endpoints" data-d="Ingress details above the table."><img width="2880" height="1800" class="fs-img" src="bw5-assets/32_visibility.webp" alt="Set Endpoint Visibility: Warning first, then the choices." loading="lazy" decoding="async" data-t="Set Endpoint Visibility" data-d="Warning first, then the choices."></div>
+<figcaption class="fp-cap"><span class="fp-of">01 / 02</span><div class="fp-txt"><b>Endpoints</b><p>Ingress details above the table.</p></div>
+<div class="fp-ctl"><button type="button" class="fp-prev" aria-label="Previous step">&larr;</button><button type="button" class="fp-play" aria-label="Play through the steps"><span class="i-play">&#9654;</span><span class="i-pause">&#10073;&#10073;</span></button><button type="button" class="fp-next" aria-label="Next step">&rarr;</button></div></figcaption></figure>
+<ol class="fp-journey"><li><button type="button" class="fj on" data-i="0" aria-label="Step 1: Endpoints"><i></i><span>Endpoints</span></button></li><li><button type="button" class="fj" data-i="1" aria-label="Step 2: Set Endpoint Visibility"><i></i><span>Set Endpoint Visibility</span></button></li></ol>
+</div></article><article class="fp solo fold" data-fp id="a-env"><div class="fp-flow on">
+<header class="fl-h"><span class="fl-n">iii.</span><div><h3>Monitor, configure and troubleshoot</h3><p>Everything under the left navigation.</p></div><button type="button" class="fl-c fl-t" aria-expanded="false">6 steps<i aria-hidden="true"></i></button></header>
+<figure class="fp-stage"><div class="fs-imgs"><img width="2880" height="1800" class="fs-img on" src="bw5-assets/33_app_metrics.webp" alt="Resource metrics: CPU and memory over time." loading="lazy" decoding="async" data-t="Resource metrics" data-d="CPU and memory over time."><img width="2880" height="1800" class="fs-img" src="bw5-assets/51_bw5_appvars.webp" alt="Application variables: Edited in place, pushed together." loading="lazy" decoding="async" data-t="Application variables" data-d="Edited in place, pushed together."><img width="2880" height="1800" class="fs-img" src="bw5-assets/34_app_engine.webp" alt="Engine variables: Grouped, with row actions." loading="lazy" decoding="async" data-t="Engine variables" data-d="Grouped, with row actions."><img width="2880" height="1800" class="fs-img" src="bw5-assets/35_app_resource.webp" alt="Resource configuration: Requests and limits, validated." loading="lazy" decoding="async" data-t="Resource configuration" data-d="Requests and limits, validated."><img width="2880" height="1800" class="fs-img" src="bw5-assets/36_app_logs.webp" alt="Real time logs: Filters and a live mode." loading="lazy" decoding="async" data-t="Real time logs" data-d="Filters and a live mode."><img width="2880" height="1800" class="fs-img" src="bw5-assets/52_bw5_traces.webp" alt="Traces: Off state links to the fix." loading="lazy" decoding="async" data-t="Traces" data-d="Off state links to the fix."></div>
+<figcaption class="fp-cap"><span class="fp-of">01 / 06</span><div class="fp-txt"><b>Resource metrics</b><p>CPU and memory over time.</p></div>
+<div class="fp-ctl"><button type="button" class="fp-prev" aria-label="Previous step">&larr;</button><button type="button" class="fp-play" aria-label="Play through the steps"><span class="i-play">&#9654;</span><span class="i-pause">&#10073;&#10073;</span></button><button type="button" class="fp-next" aria-label="Next step">&rarr;</button></div></figcaption></figure>
+<ol class="fp-journey"><li><button type="button" class="fj on" data-i="0" aria-label="Step 1: Resource metrics"><i></i><span>Resource metrics</span></button></li><li><button type="button" class="fj" data-i="1" aria-label="Step 2: Application variables"><i></i><span>Application variables</span></button></li><li><button type="button" class="fj" data-i="2" aria-label="Step 3: Engine variables"><i></i><span>Engine variables</span></button></li><li><button type="button" class="fj" data-i="3" aria-label="Step 4: Resource configuration"><i></i><span>Resource configuration</span></button></li><li><button type="button" class="fj" data-i="4" aria-label="Step 5: Real time logs"><i></i><span>Real time logs</span></button></li><li><button type="button" class="fj" data-i="5" aria-label="Step 6: Traces"><i></i><span>Traces</span></button></li></ol>
+</div></article><article class="fp solo fold" data-fp id="a-helm"><div class="fp-flow on">
+<header class="fl-h"><span class="fl-n">iv.</span><div><h3>Helm and rollback</h3><p>Every release is kept.</p></div><button type="button" class="fl-c fl-t" aria-expanded="false">3 steps<i aria-hidden="true"></i></button></header>
+<figure class="fp-stage"><div class="fs-imgs"><img width="2880" height="1800" class="fs-img on" src="bw5-assets/37_app_helm.webp" alt="Helm Configuration: Status, revision, YAML editor." loading="lazy" decoding="async" data-t="Helm Configuration" data-d="Status, revision, YAML editor."><img width="2880" height="1800" class="fs-img" src="bw5-assets/38_revisions.webp" alt="Revision history: Every revision, chart and date." loading="lazy" decoding="async" data-t="Revision history" data-d="Every revision, chart and date."><img width="2880" height="1800" class="fs-img" src="bw5-assets/39_rollback.webp" alt="Confirm the rollback: Says exactly what changes." loading="lazy" decoding="async" data-t="Confirm the rollback" data-d="Says exactly what changes."></div>
+<figcaption class="fp-cap"><span class="fp-of">01 / 03</span><div class="fp-txt"><b>Helm Configuration</b><p>Status, revision, YAML editor.</p></div>
+<div class="fp-ctl"><button type="button" class="fp-prev" aria-label="Previous step">&larr;</button><button type="button" class="fp-play" aria-label="Play through the steps"><span class="i-play">&#9654;</span><span class="i-pause">&#10073;&#10073;</span></button><button type="button" class="fp-next" aria-label="Next step">&rarr;</button></div></figcaption></figure>
+<ol class="fp-journey"><li><button type="button" class="fj on" data-i="0" aria-label="Step 1: Helm Configuration"><i></i><span>Helm Configuration</span></button></li><li><button type="button" class="fj" data-i="1" aria-label="Step 2: Revision history"><i></i><span>Revision history</span></button></li><li><button type="button" class="fj" data-i="2" aria-label="Step 3: Confirm the rollback"><i></i><span>Confirm the rollback</span></button></li></ol>
+</div></article><article class="fp solo fold" data-fp id="a-upgrade"><div class="fp-flow on">
+<header class="fl-h"><span class="fl-n">v.</span><div><h3>Upgrade app</h3><p>A new EAR, same wizard.</p></div><button type="button" class="fl-c fl-t" aria-expanded="false">3 steps<i aria-hidden="true"></i></button></header>
+<figure class="fp-stage"><div class="fs-imgs"><img width="2880" height="1800" class="fs-img on" src="bw5-assets/41_upgrade_ear.webp" alt="Upload EAR: Current build keeps running." loading="lazy" decoding="async" data-t="Upload EAR" data-d="Current build keeps running."><img width="2880" height="1800" class="fs-img" src="bw5-assets/42_upgrade_yaml.webp" alt="YAML configuration: Current, Latest or Custom chart." loading="lazy" decoding="async" data-t="YAML configuration" data-d="Current, Latest or Custom chart."><img width="2880" height="1800" class="fs-img" src="bw5-assets/43_upgrade_done.webp" alt="Upgraded: New file and revision." loading="lazy" decoding="async" data-t="Upgraded" data-d="New file and revision."></div>
+<figcaption class="fp-cap"><span class="fp-of">01 / 03</span><div class="fp-txt"><b>Upload EAR</b><p>Current build keeps running.</p></div>
+<div class="fp-ctl"><button type="button" class="fp-prev" aria-label="Previous step">&larr;</button><button type="button" class="fp-play" aria-label="Play through the steps"><span class="i-play">&#9654;</span><span class="i-pause">&#10073;&#10073;</span></button><button type="button" class="fp-next" aria-label="Next step">&rarr;</button></div></figcaption></figure>
+<ol class="fp-journey"><li><button type="button" class="fj on" data-i="0" aria-label="Step 1: Upload EAR"><i></i><span>Upload EAR</span></button></li><li><button type="button" class="fj" data-i="1" aria-label="Step 2: YAML configuration"><i></i><span>YAML configuration</span></button></li><li><button type="button" class="fj" data-i="2" aria-label="Step 3: Upgraded"><i></i><span>Upgraded</span></button></li></ol>
+</div></article></div>
+</section>
+
+<section id="components" class="chapter">
+<div class="ch"><span class="ch-n">09</span><h2>Components</h2></div>
+<p class="lede">The parts that make every flow feel the same.</p>
+<div class="anat" data-hot>
+<div class="anat-l"><span class="k">Anatomy</span><h3>The flow modal</h3><p>One modal behind every flow in this case study.</p>
+<ol class="hot-leg">
+<li><button type="button" data-i="0"><span>1</span><div><b>Title and subtitle</b><p>What the flow is and what it acts on</p></div></button></li>
+<li><button type="button" data-i="1"><span>2</span><div><b>Maximize and close</b><p>Full screen when content needs room</p></div></button></li>
+<li><button type="button" data-i="2"><span>3</span><div><b>Step rail</b><p>Done, current and next steps</p></div></button></li>
+<li><button type="button" data-i="3"><span>4</span><div><b>Required marker</b><p>An asterisk on every required field</p></div></button></li>
+<li><button type="button" data-i="4"><span>5</span><div><b>Fixed body</b><p>Same size in every flow, scrolls inside</p></div></button></li>
+<li><button type="button" data-i="5"><span>6</span><div><b>Footer on the right</b><p>Text Cancel, outlined Previous, filled primary</p></div></button></li>
+</ol></div>
+<div class="sheet-img rel anat-img"><img width="1954" height="1258" src="bw5-assets/c_modal.webp" alt="The App Build modal on its configuration step" loading="lazy" decoding="async">
+<button type="button" class="hp" style="left:16%;top:5%" data-i="0"><span>1</span></button><button type="button" class="hp" style="left:86%;top:7%" data-i="1"><span>2</span></button><button type="button" class="hp" style="left:12%;top:52%" data-i="2"><span>3</span></button><button type="button" class="hp" style="left:36%;top:23%" data-i="3"><span>4</span></button><button type="button" class="hp" style="left:97%;top:58%" data-i="4"><span>5</span></button><button type="button" class="hp" style="left:71%;top:94%" data-i="5"><span>6</span></button></div>
+</div>
+<div class="status"><span class="k">Status language</span><span class="st ok"><i>&#10003;</i>Running</span><span class="st warn"><i>!</i>Critical</span><span class="st bad"><i>&#9632;</i>Stopped</span><p>One color and one icon per state, on every page.</p></div>
+<div class="specs"><div class="galg"><div class="galg-h"><span class="k">Structure</span><p>How a page is framed.</p></div><figure class="gal wide"><figcaption><span class="gal-n">01</span><b>Summary cards as tabs</b><p>Numbers that open their section.</p></figcaption><div class="mat"><img width="2304" height="252" src="bw5-assets/c_tabs.webp" alt="Summary cards as tabs" decoding="async"></div></figure><figure class="gal wide"><figcaption><span class="gal-n">02</span><b>Section toolbar</b><p>Search left, actions right.</p></figcaption><div class="mat"><img width="2320" height="272" src="bw5-assets/c_toolbar.webp" alt="Section toolbar" decoding="async"></div></figure></div><div class="galg"><div class="galg-h"><span class="k">Data</span><p>How lists and status read at a glance.</p></div><figure class="gal"><figcaption><span class="gal-n">03</span><b>Tables</b><p>One row height everywhere.</p></figcaption><div class="mat"><img width="2264" height="660" src="bw5-assets/c_table.webp" alt="Tables" decoding="async"></div></figure><figure class="gal"><figcaption><span class="gal-n">04</span><b>Domain cards</b><p>Status, permission and counts at a glance.</p></figcaption><div class="mat"><img width="2288" height="736" src="bw5-assets/c_cards.webp" alt="Domain cards" decoding="async"></div></figure><figure class="gal wide"><figcaption><span class="gal-n">05</span><b>Info strip</b><p>Static values, grouped.</p></figcaption><div class="mat"><img width="2224" height="164" src="bw5-assets/c_ingress.webp" alt="Info strip" decoding="async"></div></figure></div></div>
+<ul class="rules">
+<li><span>R1</span>Every flow modal is the same size, with a fixed body that scrolls.</li>
+<li><span>R2</span>Footer actions on the right. Cancel is a text button.</li>
+<li><span>R3</span>Required fields carry an asterisk, inputs keep fixed widths.</li>
+<li><span>R4</span>Tables inside modals use the small size.</li>
+<li><span>R5</span>Agreements open full screen.</li>
+<li><span>R6</span>Every long flow ends on a success or failure screen.</li>
+</ul>
+</section>
+
+<section id="outcome" class="chapter">
+<div class="ch"><span class="ch-n">10</span><h2>Outcome</h2></div>
+<p class="lede">What changed, in the product itself.</p>
+<div class="out">
+<div><p class="onum">10</p><b>Flows on one modal</b><p>Same size, step rail and footer in every flow, at both levels.</p></div>
+<div><p class="onum">3</p><b>Sections on every domain</b><p>App Builds, software and plugins, and supplements, always in that order.</p></div>
+<div><p class="onum">1</p><b>Left navigation for every app page</b><p>It replaced the top tabs, so sections can have a second level.</p></div>
+<div><p class="onum">&#10003;</p><b>Every flow shipped</b><p>Approved, through visual design review, built, then checked against the design.</p></div>
+</div>
+<figure class="proof"><div class="pf-t"><span class="k">Launched</span>
+<blockquote>The TIBCO Platform provides a unified control plane</blockquote>
+<p>TIBCO's Product Management &amp; Strategy Head for Platform &amp; Integration, the PM who gave me the requirements, announced the launch publicly. His post contrasts TIBCO Administrator, where every domain is an island with its own server and GUI, with one place for every domain. That is the experience these pages deliver.</p>
+<figcaption>From his public LinkedIn post announcing BW5 on the TIBCO Platform, tagged #UserExperience. <a class="pf-link" href="https://www.linkedin.com/posts/karangera23_tibco-tibcoplatform-bw5-share-7437444635045634049-T5Nt/" target="_blank" rel="noopener">View the post on LinkedIn &#8599;</a></figcaption></div><a class="pf-img" href="https://www.linkedin.com/posts/karangera23_tibco-tibcoplatform-bw5-share-7437444635045634049-T5Nt/" target="_blank" rel="noopener" aria-label="Open the post on LinkedIn"><img width="1096" height="462" src="bw5-assets/launch_post.webp" alt="The opening of his LinkedIn post announcing BW5 on the TIBCO Platform" loading="lazy" decoding="async"></a></figure>
+<blockquote class="learn"><span class="k">What I learned</span><p>Keeping long product labels exactly as users know them, like Available TIBCO Software &amp; Plugins On This Data Plane, meant the layout had to make room for the words, not the other way round.</p></blockquote>
+</section>
+</main>
+
+<script>(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Flow players: tabs pick a flow, the journey line picks a step, play walks through.
+  document.querySelectorAll('[data-fp]').forEach(function (fp) {
+    var tabs = fp.querySelectorAll('.fp-tab'), flows = fp.querySelectorAll('.fp-flow'), timer = null;
+    function flowCtl(fl) {
+      var imgs = fl.querySelectorAll('.fs-img'), js = fl.querySelectorAll('.fj'), of = fl.querySelector('.fp-of'), tb = fl.querySelector('.fp-txt b'), tp = fl.querySelector('.fp-txt p'), cur = 0, n = imgs.length;
+      function go(i) {
+        cur = (i + n) % n;
+        imgs.forEach(function (im, k) { im.classList.toggle('on', k === cur); });
+        js.forEach(function (j, k) { j.classList.toggle('on', k === cur); j.classList.toggle('done', k < cur); j.setAttribute('aria-current', k === cur ? 'step' : 'false'); });
+        of.textContent = String(cur + 1).padStart(2, '0') + ' / ' + String(n).padStart(2, '0');
+        tb.textContent = imgs[cur].dataset.t; tp.textContent = imgs[cur].dataset.d;
+        var a = js[cur], row = a.closest('.fp-journey'); if (row.scrollWidth > row.clientWidth) row.scrollTo({ left: a.offsetLeft - 40, behavior: 'smooth' });
+      }
+      js.forEach(function (j, k) { j.addEventListener('click', function () { stop(); go(k); }); });
+      fl.querySelector('.fp-prev').addEventListener('click', function () { stop(); go(cur - 1); });
+      fl.querySelector('.fp-next').addEventListener('click', function () { stop(); go(cur + 1); });
+      fl.querySelector('.fp-play').addEventListener('click', function () { if (timer) stop(); else play(); });
+      fl.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { stop(); go(cur + 1); e.preventDefault(); } if (e.key === 'ArrowLeft') { stop(); go(cur - 1); e.preventDefault(); } });
+      go(0);
+      fl._go = go; fl._cur = function () { return cur; }; fl._n = n;
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } fp.classList.remove('playing'); }
+    function play() {
+      var fl = fp.querySelector('.fp-flow.on'); fp.classList.add('playing');
+      timer = setInterval(function () { var c = fl._cur(); if (c >= fl._n - 1) { stop(); return; } fl._go(c + 1); }, 3200);
+    }
+    flows.forEach(flowCtl);
+    tabs.forEach(function (t, k) {
+      t.addEventListener('click', function () {
+        stop();
+        tabs.forEach(function (x, i) { x.classList.toggle('on', i === k); x.setAttribute('aria-selected', i === k ? 'true' : 'false'); });
+        flows.forEach(function (f, i) { f.classList.toggle('on', i === k); if (i === k) f._go(0); });
+      });
+    });
+  });
+
+  // Hotspots: pins and legend highlight each other.
+  document.querySelectorAll('[data-hot]').forEach(function (h) {
+    var pins = h.querySelectorAll('.hp'), items = h.querySelectorAll('.hot-leg button');
+    function set(i) { pins.forEach(function (p, k) { p.classList.toggle('on', k === i); }); items.forEach(function (b, k) { b.classList.toggle('on', k === i); }); }
+    pins.forEach(function (p) { var i = +p.dataset.i; p.addEventListener('mouseenter', function () { set(i); }); p.addEventListener('click', function () { set(i); }); });
+    items.forEach(function (b) { var i = +b.dataset.i; b.addEventListener('mouseenter', function () { set(i); }); b.addEventListener('focus', function () { set(i); }); b.addEventListener('click', function () { set(i); }); });
+  });
+
+  // App shell zones.
+  document.querySelectorAll('[data-shell]').forEach(function (sh) {
+    var zones = sh.querySelectorAll('.zone'), btns = sh.querySelectorAll('.sh-leg button');
+    function set(i) { zones.forEach(function (z, k) { z.classList.toggle('on', k === i); }); btns.forEach(function (b, k) { b.classList.toggle('on', k === i); }); }
+    btns.forEach(function (b, k) { ['mouseenter', 'focus', 'click'].forEach(function (ev) { b.addEventListener(ev, function () { set(k); }); }); });
+    zones.forEach(function (z, k) { ['mouseenter', 'click'].forEach(function (ev) { z.addEventListener(ev, function () { set(k); }); }); });
+    sh.addEventListener('mouseleave', function () { set(-1); });
+  });
+
+  // Before and after compare sliders.
+  document.querySelectorAll('[data-cmp]').forEach(function (c) {
+    var r = c.querySelector('input');
+    r.addEventListener('input', function () { c.style.setProperty('--p', r.value + '%'); });
+  });
+
+  // Chapter pills follow the scroll.
+  var links = [].slice.call(document.querySelectorAll('.chapters a'));
+  var secs = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  var cur = -1;
+  function setOn(i) {
+    if (i === cur) return; cur = i;
+    links.forEach(function (a, k) { a.classList.toggle('on', k === i); });
+    var on = links[i], row = on && on.parentNode;
+    if (row && row.scrollWidth > row.clientWidth) row.scrollTo({ left: on.offsetLeft - (row.clientWidth - on.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+  }
+  function spy() {
+    if (Date.now() < lock) return;
+    var y = 140, i = 0;
+    secs.forEach(function (s, k) { if (s && s.getBoundingClientRect().top <= y) i = k; });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) i = secs.length - 1;
+    setOn(i);
+  }
+  var lock = 0;
+  links.forEach(function (a, k) { a.addEventListener('click', function () { setOn(k); lock = Date.now() + 1200; }); });
+  var tk = false;
+  window.addEventListener('scrollend', function () { lock = 0; spy(); });
+  window.addEventListener('scroll', function () { if (!tk) { tk = true; requestAnimationFrame(function () { tk = false; spy(); }); } }, { passive: true });
+  window.addEventListener('resize', spy); spy();
+  if ('IntersectionObserver' in window) {
+    var els = document.querySelectorAll('.b, .sheet, .mk-list li, .hmw, .principles, .loop, .tree, .dec, .hot, .three, .fp, .shell, .anat, .status, .spec, .rules, .out > div, .learn');
+    var ro = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
+    els.forEach(function (el) { el.classList.add('rv'); ro.observe(el); });
+  }
+
+  // Click any screen to see it full size.
+  var lb = document.createElement('div'); lb.className = 'lb'; lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-label', 'Screen at full size');
+  lb.innerHTML = '<button type="button" aria-label="Close">&times;</button><img alt="">';
+  document.body.appendChild(lb);
+  var big = lb.querySelector('img');
+  function close() { lb.classList.remove('on'); }
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (t.matches && t.matches('.sheet-img img, .fs-img.on, .spec-img img, .h-shot img, .hs img, .mat img, .sh-stage img, .d2-mat img')) { big.src = t.currentSrc || t.src; big.alt = t.alt; lb.classList.add('on'); }
+    else if (lb.contains(t)) close();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+})();
+document.querySelectorAll('.fp').forEach(function (fp) {
+  var t = fp.querySelector('.fl-t'); if (!t) return;
+  function toggle(ev) { ev && ev.stopPropagation(); var f = fp.classList.toggle('fold'); t.setAttribute('aria-expanded', f ? 'false' : 'true'); }
+  t.addEventListener('click', toggle);
+  fp.querySelector('.fl-h').addEventListener('click', function (ev) { if (fp.classList.contains('fold')) toggle(ev); });
+});
+</script>
+<script>
+(function(){var last=0;function send(){var el=document.body;if(!el)return;var h=Math.ceil(el.getBoundingClientRect().height);if(h>0&&h!==last){last=h;try{parent.postMessage({type:"embed-height",height:h},"*")}catch(e){}}}
+if(window.ResizeObserver){new ResizeObserver(send).observe(document.body)}window.addEventListener("load",send);setInterval(send,1000);send();
+})();
+</script>
+</body>
+</html>
