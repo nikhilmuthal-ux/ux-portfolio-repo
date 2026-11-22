@@ -774,5 +774,6 @@ function sync(){var k=fr.findIndex(function(f){return f.classList.contains('on')
 new MutationObserver(sync).observe(st,{subtree:true,attributes:true,attributeFilter:['class']});sync();
 })();
 </script>
+<script>/* image warm-up */(function(){function w(){var a=[].slice.call(document.querySelectorAll('img[loading="lazy"]')),i=0,n=0;function p(){while(n<3&&i<a.length){var m=a[i++];m.loading='eager';if(m.complete&&m.naturalWidth)continue;n++;var d=function(){n--;p()};m.addEventListener('load',d,{once:true});m.addEventListener('error',d,{once:true})}}p()}if(document.readyState==='complete')setTimeout(w,300);else addEventListener('load',function(){setTimeout(w,300)})})();</script>
 </body>
 </html>

@@ -939,6 +939,8 @@ h1{font-size:52px!important;line-height:1.05}
   .chapter h2,.ch h2{font-size:28px!important}
   .d2-pts li,.fl-h p,.mk-list p,.principles p,.out p:last-child,.out .rv p,.d2-cost,.fl2 li,.task-steps p,.task-card>p,.ov2 p{font-size:15px!important}
 }
+/* soft placeholder while a screen loads */
+.sheet-img,.fs-imgs,.d2-mat,.fc-m,.mat,.hs,.pf-img{background-color:#EFE9DF}
 
 html.in-embed nav.chapters{height:0!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;overflow:hidden!important;box-shadow:none!important}</style>
 </head>
@@ -1360,6 +1362,29 @@ document.querySelectorAll('.fp').forEach(function (fp) {
     var open = [].slice.call(document.querySelectorAll('.fp:not(.fold)'));
     var i = 0; (function next() { if (i >= open.length) return; loadFlow(open[i++]); setTimeout(next, 800); })();
   });
+})();
+/* Warm-up: after the page loads, fetch the remaining images in page order, a few at a time,
+   so screens are ready before the reader scrolls to them. */
+(function () {
+  function warm() {
+    var imgs = [].slice.call(document.querySelectorAll('img')).filter(function (im) {
+      var fp = im.closest('.fp'); return !(fp && fp.classList.contains('fold'));
+    });
+    var i = 0, active = 0, MAX = 3;
+    function pump() {
+      while (active < MAX && i < imgs.length) {
+        var im = imgs[i++];
+        if (im.getAttribute('data-src')) { im.src = im.getAttribute('data-src'); im.removeAttribute('data-src'); }
+        if (im.loading === 'lazy') im.loading = 'eager';
+        if (im.complete && im.naturalWidth) continue;
+        active++;
+        var done = function () { active--; pump(); };
+        im.addEventListener('load', done, { once: true }); im.addEventListener('error', done, { once: true });
+      }
+    }
+    pump();
+  }
+  if (document.readyState === 'complete') setTimeout(warm, 300); else window.addEventListener('load', function () { setTimeout(warm, 300); });
 })();
 </script>
 <script>
