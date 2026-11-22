@@ -374,7 +374,7 @@ p{margin:0}
 
 @media (max-width:900px){.wrap{padding-left:32px!important;padding-right:32px!important}}
 @media (max-width:680px){.wrap{padding-left:20px!important;padding-right:20px!important}.section{padding-top:88px!important}}
-</style>
+.glance{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}.glance p{margin:0;font-size:15px;line-height:1.5;color:var(--ink)}@media (max-width:760px){.glance{grid-template-columns:1fr;gap:18px}}</style>
 <script>(function(){var last=0;function send(){var el=document.body;if(!el)return;var h=Math.ceil(el.getBoundingClientRect().height);if(h>0&&h!==last){last=h;parent.postMessage({type:"embed-height",height:h},"*")}}function init(){if(window.ResizeObserver&&document.body){new ResizeObserver(send).observe(document.body)}send()}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init)}else{init()}window.addEventListener("load",send);setInterval(send,1000)})();</script>
 </head>
 <body>
@@ -389,6 +389,11 @@ p{margin:0}
       <div><div class="meta-k">Role</div><div class="meta-v">Product designer, end to end</div></div>
       <div><div class="meta-k">Platform</div><div class="meta-v">TIBCO Control Plane</div></div>
       <div><div class="meta-k">Status</div><div class="meta-v"><a href="#shipped" class="live">Live in TIBCO Platform</a></div></div>
+    </div>
+    <div class="glance">
+      <div><div class="meta-k">Problem</div><p>Operators muted alerts because everything looked urgent, and would not act on AI without proof.</p></div>
+      <div><div class="meta-k">What I did</div><p>Designed TESSA end to end: first-run setup, the chat, owner controls, and answers you can check.</p></div>
+      <div><div class="meta-k">Result</div><p>Shipped in TIBCO's AI Ops launch. Live in TIBCO Platform today.</p></div>
     </div>
   </div>
   <div class="wrap" style="margin-top:56px">
